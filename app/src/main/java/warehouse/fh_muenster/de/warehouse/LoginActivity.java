@@ -18,10 +18,17 @@ public class LoginActivity extends AppCompatActivity {
         login_btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                EditText password_text = (EditText) findViewById(R.id.password_txt);
+                EditText password_tet = (EditText) findViewById(R.id.password_txt);
                 EditText username_txt = (EditText) findViewById(R.id.name_txt);
 
+                Employee user = new Employee(username_txt.getText().toString(), password_tet.getText().toString());
+                if(user.login()){
+                    // @TODO Rollen Prüfung und Intant zu entsprechneder Activity
 
+                }
+                else{
+                    // @TODO Login fehlegeschlagen Info auf Login Activity anzeigen
+                }
 
             }
 
