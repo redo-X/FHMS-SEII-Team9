@@ -29,7 +29,6 @@ public class LoginActivity extends AppCompatActivity {
 
                 }
                 else{
-                    // @TODO Login fehlegeschlagen Info auf Login Activity anzeigen
                     Context context= getApplicationContext();
                     CharSequence text = "Login fehlgeschalgen";
                     int duration = Toast.LENGTH_SHORT;
