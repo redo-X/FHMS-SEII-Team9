@@ -9,4 +9,33 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="warehouse.fh_muenster.de.warehouse.CommissioningOverview">
 
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/table_layout">
+        <TableRow>
+            <TextView
+                android:text="Kommissionierung"
+                android:width="100dp"
+                android:layout_column="0"
+                android:layout_weight="1"
+                />
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:text="Artikel"
+                android:width="100dp"
+                android:layout_column="0"
+                android:layout_weight="0"
+                />
+            <TextView
+                android:text="Menge"
+                android:width="100dp"
+                android:layout_column="1"
+                android:layout_weight="0"
+                />
+        </TableRow>
+
+    </TableLayout>
 </RelativeLayout>
