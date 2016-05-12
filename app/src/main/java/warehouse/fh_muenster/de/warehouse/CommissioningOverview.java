@@ -2,6 +2,7 @@ package warehouse.fh_muenster.de.warehouse;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -14,7 +15,7 @@ public class CommissioningOverview extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_commissioning_overview);
 
-        int anzahlKommessionen = 5;
+        int anzahlKommessionen = 20;
 
         printTable(anzahlKommessionen);
 
@@ -30,15 +31,30 @@ public class CommissioningOverview extends AppCompatActivity {
             TableRow row = new TableRow(this);
             TextView kommessionSpalte = new TextView(this);
             TextView artikelSpalte = new TextView(this);
+            Button annehmen_btn = new Button(this);
 
             kommessionSpalte.setText("5145865");
             artikelSpalte.setText("6" + i);
+            annehmen_btn.setText("Annehmen");
 
             row.addView(kommessionSpalte);
             row.addView(artikelSpalte);
+            row.addView(annehmen_btn);
+
+            row = designRow(i,row);
 
             table.addView(row);
         }
+    }
+
+    private TableRow designRow(int i, TableRow row){
+        if(i%2 == 0){
+            row.setBackgroundColor(0x50CCCCCC);
+        }
+        else {
+            row.setBackgroundColor(0xAACCCCCC);
+        }
+        return row;
     }
 
 }

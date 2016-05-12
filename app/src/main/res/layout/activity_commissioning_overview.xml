@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,7 +11,14 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="warehouse.fh_muenster.de.warehouse.CommissioningOverview">
 
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scrollbars="none"
+        android:layout_weight="1">
+
     <TableLayout
+        android:stretchColumns="*"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
@@ -20,22 +29,32 @@
                 android:width="100dp"
                 android:layout_column="0"
                 android:layout_weight="1"
-                />
+                android:textSize="20dp" />
         </TableRow>
         <TableRow>
             <TextView
-                android:text="Kommission"
+                android:text="Kommissions Nr."
                 android:width="100dp"
                 android:layout_column="0"
                 android:layout_weight="0"
-                />
+            />
             <TextView
-                android:text="Artikel"
+                android:text="Artikel Anzahl"
+                android:width="100dp"
+                android:layout_column="1"
+                android:layout_weight="0"
+            />
+            <TextView
+                android:text="Annehmen"
                 android:width="100dp"
                 android:layout_column="1"
                 android:layout_weight="0"
                 />
+
+
         </TableRow>
 
     </TableLayout>
+</ScrollView>
+
 </RelativeLayout>
