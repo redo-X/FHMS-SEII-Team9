@@ -73,6 +73,7 @@ public class CommissioningOverview extends AppCompatActivity {
     private TableRow designRow(int i, TableRow row){
         if(i%2 == 0){
             row.setBackgroundColor(0x50CCCCCC);
+
         }
         else {
             row.setBackgroundColor(0xAACCCCCC);
@@ -93,15 +94,11 @@ public class CommissioningOverview extends AppCompatActivity {
         annehmen_btn.setId(i);
         annehmen_btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+                // Starten der ArtikelÜbersicht der Kommission, Übergabe der Kommissions nummer
                 Context context = view.getContext();
                 Intent i = new Intent(context, CommissionArtikel.class);
                 i.putExtra("id", annehmen_btn.getId());
                 startActivity(i);
-
-
-                /* Toast.makeText(view.getContext(),
-                        "Button clicked index = " + annehmen_btn.getId(), Toast.LENGTH_SHORT)
-                        .show();*/
             }
         });
         return annehmen_btn;

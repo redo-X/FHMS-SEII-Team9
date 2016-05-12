@@ -9,11 +9,44 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="warehouse.fh_muenster.de.warehouse.CommissionArtikel">
 
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView"
+
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/commission_id_label"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0.05"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:hint="Text" />
+    </ScrollView>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/test_txt"
-        android:layout_centerVertical="true"
+        android:id="@+id/commission_artikelAnzahl_label"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="33dp"
+        android:hint="Artikelanzahl" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="weiter"
+        android:id="@+id/weiter_btn"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
+
 </RelativeLayout>

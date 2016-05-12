@@ -12,8 +12,14 @@ public class CommissionArtikel extends AppCompatActivity {
         setContentView(R.layout.activity_commission_artikel);
 
         int id = getIntent().getExtras().getInt("id");
-        TextView textView = (TextView) findViewById(R.id.test_txt);
-        textView.setText("Kommission mit der Nummer: " + String.valueOf(id) + " ausgewählt");
+        TextView ueberschrift = (TextView) findViewById(R.id.commission_id_label);
+        TextView artikelanzahlLabel = (TextView) findViewById(R.id.commission_artikelAnzahl_label);
+
+        int artikelZaehler = 1;
+        int artikelGesamt = 8;
+
+        ueberschrift.setText("Kommission mit der Nummer: " + String.valueOf(id) + " ausgewählt\n");
+        artikelanzahlLabel.setText("Artikel " + artikelZaehler +  " von " + artikelGesamt);
 
 
     }
