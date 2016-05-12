@@ -92,6 +92,7 @@ public class LoginActivity extends AppCompatActivity {
                 //Nächste Activity aufrufen
                 Intent i = new Intent(context, CommissioningOverview.class);
                 startActivity(i);
+                finish();
             }
 
 
