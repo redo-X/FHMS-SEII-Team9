@@ -8,37 +8,47 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="warehouse.fh_muenster.de.warehouse.LoginActivity">
+
+
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/name_txt"
+        android:hint="Username"
+        android:layout_weight="0.26"
         android:layout_alignParentTop="true"
-        android:layout_alignLeft="@+id/password_txt"
-        android:layout_alignStart="@+id/password_txt"
-        android:layout_marginTop="104dp"
-        android:hint="Username" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="45dp" />
 
     <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:id="@+id/password_txt"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:hint="Passwort" />
-
-
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:id="@+id/password_txt"
+        android:hint="Passwort"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0.25"
+        android:layout_below="@+id/name_txt"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="72dp" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Login"
-        android:id="@+id/login_btn"
+            android:layout_width="66dp"
+            android:layout_height="wrap_content"
+            android:text="Login"
+            android:id="@+id/login_btn"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="76dp"
         android:layout_below="@+id/password_txt"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="58dp" />
+        android:layout_alignRight="@+id/password_txt"
+        android:layout_alignEnd="@+id/password_txt"
+        android:layout_alignLeft="@+id/password_txt"
+        android:layout_alignStart="@+id/password_txt" />
+
 
 </RelativeLayout>
