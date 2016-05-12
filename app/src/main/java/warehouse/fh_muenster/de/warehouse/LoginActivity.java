@@ -84,7 +84,7 @@ public class LoginActivity extends AppCompatActivity {
                 Log.i("Eingeloggt als: ",result.toString());
 
                 // Toast Anzeigen, dass der Login vorgang erfolgreich war
-                CharSequence text = "Eingeloggt als " + result.getUsername();
+                CharSequence text = getResources().getString(R.string.loginActivity_loginSuccess) +" " + result.getUsername();
                 int duration = Toast.LENGTH_SHORT;
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
@@ -100,7 +100,7 @@ public class LoginActivity extends AppCompatActivity {
 
             else {
                 // Toast Anzeigen, dass der Login vorgang fehlgeschlagen ist
-                CharSequence text = "Login fehlgeschalgen";
+                CharSequence text = getResources().getString(R.string.loginActivity_loginFail);
                 int duration = Toast.LENGTH_SHORT;
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();

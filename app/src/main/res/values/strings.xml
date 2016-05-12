@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Warehouse</string>
+    <string name="commissioningOverview_table_head_kommissionierungen">Kommissionierungen</string>
+    <string name="commissioningOverview_table_head_kommissions_nr">Kommissions Nr.</string>
+    <string name="commissioningOverview_table_head_artikelAnzahl">Artikel Anzahl</string>
+    <string name="commissioningOverview_table_head_annehmen">Annehmen</string>
+
+    <string name="loginActivity_loginSuccess">Eingeloggt als </string>
+    <string name="loginActivity_loginFail">Login fehlgeschalgen</string>
 </resources>

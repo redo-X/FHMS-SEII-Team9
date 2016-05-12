@@ -25,7 +25,7 @@
         android:id="@+id/table_layout">
         <TableRow>
             <TextView
-                android:text="Kommissionierungen"
+                android:text="@string/commissioningOverview_table_head_kommissionierungen"
                 android:width="100dp"
                 android:layout_column="0"
                 android:layout_weight="1"
@@ -33,19 +33,19 @@
         </TableRow>
         <TableRow>
             <TextView
-                android:text="Kommissions Nr."
+                android:text="@string/commissioningOverview_table_head_kommissions_nr"
                 android:width="100dp"
                 android:layout_column="0"
                 android:layout_weight="0"
             />
             <TextView
-                android:text="Artikel Anzahl"
+                android:text="@string/commissioningOverview_table_head_artikelAnzahl"
                 android:width="100dp"
                 android:layout_column="1"
                 android:layout_weight="0"
             />
             <TextView
-                android:text="Annehmen"
+                android:text="@string/commissioningOverview_table_head_annehmen"
                 android:width="100dp"
                 android:layout_column="1"
                 android:layout_weight="0"
