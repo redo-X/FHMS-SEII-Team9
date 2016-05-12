@@ -20,36 +20,26 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        // Click auf den Einloggen Button
         final Button login_btn = (Button) findViewById(R.id.login_btn);
         login_btn.setOnClickListener(new View.OnClickListener(){
             @Override
+
             public void onClick(View v) {
+                // Einlesen der Werte aus der LoginActivity
                 EditText password_tet = (EditText) findViewById(R.id.password_txt);
                 EditText username_txt = (EditText) findViewById(R.id.name_txt);
 
                 LoginTask login = new LoginTask(v.getContext());
-
+                // Ausführen des Login Vorganges
                 login.execute(username_txt.getText().toString(), password_tet.getText().toString());
 
-/*
-                if(employee != null){
-
-                }
-                else{
-                    Context context= getApplicationContext();
-                    CharSequence text = "Login fehlgeschalgen";
-                    int duration = Toast.LENGTH_SHORT;
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
-                }
-*/
             }
 
         });
 
     }
-
+    // Task um sich einzuloggen
     private class LoginTask extends AsyncTask<String, Integer, Employee> {
 
         private Context context;
@@ -83,15 +73,23 @@ public class LoginActivity extends AppCompatActivity {
 
         protected void onPostExecute(Employee result) {
             if (result != null) {
+                //erfolgreich eingeloggt
                 WarehouseApplication myapp = (WarehouseApplication) getApplication();
+                // Setzen des Employess im Zentralen Speicher
                 myapp.setEmployee(result);
                 Log.i("Eingeloggt als: ",result.toString());
+
+                // Toast Anzeigen, dass der Login vorgang erfolgreich war
+                CharSequence text = "Eingeloggt als " + result.getUsername();
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
             }
-            //erfolgreich eingeloggt
+
 
 
             else {
-                //Context context= getApplicationContext();
+                // Toast Anzeigen, dass der Login vorgang fehlgeschlagen ist
                 CharSequence text = "Login fehlgeschalgen";
                 int duration = Toast.LENGTH_SHORT;
                 Toast toast = Toast.makeText(context, text, duration);
