@@ -4,6 +4,7 @@
     <string name="commissioningOverview_table_head_kommissions_nr">Kommissions Nr.</string>
     <string name="commissioningOverview_table_head_artikelAnzahl">Artikel Anzahl</string>
     <string name="commissioningOverview_table_head_annehmen">Annehmen</string>
+    <string name="commissioningOverview_exit">Bitte drücken Sie erneut die Zurück Taste um die App zu beenden</string>
 
     <string name="loginActivity_loginSuccess">Eingeloggt als </string>
     <string name="loginActivity_loginFail">Login fehlgeschalgen</string>

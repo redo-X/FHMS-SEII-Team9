@@ -1,5 +1,8 @@
 package warehouse.fh_muenster.de.warehouse;
 
+import android.content.Context;
+import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -90,12 +93,40 @@ public class CommissioningOverview extends AppCompatActivity {
         annehmen_btn.setId(i);
         annehmen_btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Toast.makeText(view.getContext(),
+                Context context = view.getContext();
+                Intent i = new Intent(context, CommissionArtikel.class);
+                i.putExtra("id", annehmen_btn.getId());
+                startActivity(i);
+
+
+                /* Toast.makeText(view.getContext(),
                         "Button clicked index = " + annehmen_btn.getId(), Toast.LENGTH_SHORT)
-                        .show();
+                        .show();*/
             }
         });
         return annehmen_btn;
     }
+
+    boolean doubleBackToExitPressedOnce = false;
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, getResources().getString(R.string.commissioningOverview_exit), Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
+    }
+
 
 }
