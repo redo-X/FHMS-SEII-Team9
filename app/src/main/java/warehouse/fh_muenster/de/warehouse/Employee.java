@@ -18,4 +18,12 @@ public class Employee {
         this.username = username;
         this.password = password;
     }
+
+    public Employee() {
+    }
+
+    @Override
+    public String toString(){
+        return "Username: " + username + " Password: " + password;
+    }
 }

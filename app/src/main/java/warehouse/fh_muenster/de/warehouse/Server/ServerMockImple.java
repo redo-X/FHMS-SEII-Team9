@@ -1,5 +1,7 @@
 package warehouse.fh_muenster.de.warehouse.Server;
 
+import android.util.Log;
+
 import warehouse.fh_muenster.de.warehouse.Employee;
 
 /**
@@ -8,7 +10,7 @@ import warehouse.fh_muenster.de.warehouse.Employee;
 public class ServerMockImple implements ServerMockInterface {
     @Override
     public Employee login(String username, String password) {
-        if(username == "Bob" && password == "123"){
+        if(username.equals("Bob") && password.equals("123")){
             Employee user = new Employee("Bob", "123");
             return user;
         }
