@@ -21,6 +21,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
         // Click auf den Einloggen Button
         final Button login_btn = (Button) findViewById(R.id.login_btn);
         login_btn.setOnClickListener(new View.OnClickListener(){
@@ -28,8 +29,10 @@ public class LoginActivity extends AppCompatActivity {
 
             public void onClick(View v) {
                 // Einlesen der Werte aus der LoginActivity
+
                 EditText password_tet = (EditText) findViewById(R.id.password_txt);
                 EditText username_txt = (EditText) findViewById(R.id.name_txt);
+
 
                 LoginTask login = new LoginTask(v.getContext());
                 // Ausführen des Login Vorganges

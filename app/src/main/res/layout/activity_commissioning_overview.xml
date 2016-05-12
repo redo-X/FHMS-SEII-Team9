@@ -16,7 +16,7 @@
         android:id="@+id/table_layout">
         <TableRow>
             <TextView
-                android:text="Kommissionierung"
+                android:text="Kommissionierungen"
                 android:width="100dp"
                 android:layout_column="0"
                 android:layout_weight="1"
@@ -24,13 +24,13 @@
         </TableRow>
         <TableRow>
             <TextView
-                android:text="Artikel"
+                android:text="Kommission"
                 android:width="100dp"
                 android:layout_column="0"
                 android:layout_weight="0"
                 />
             <TextView
-                android:text="Menge"
+                android:text="Artikel"
                 android:width="100dp"
                 android:layout_column="1"
                 android:layout_weight="0"

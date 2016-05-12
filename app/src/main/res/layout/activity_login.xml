@@ -8,6 +8,17 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="warehouse.fh_muenster.de.warehouse.LoginActivity">
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/name_txt"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/password_txt"
+        android:layout_alignStart="@+id/password_txt"
+        android:layout_marginTop="104dp"
+        android:hint="Username" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -16,20 +27,11 @@
         android:ems="10"
         android:id="@+id/password_txt"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:hint="Passwort" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text="Username"
-        android:ems="10"
-        android:id="@+id/name_txt"
-        android:layout_alignParentTop="true"
-        android:layout_alignLeft="@+id/password_txt"
-        android:layout_alignStart="@+id/password_txt"
-        android:layout_marginTop="104dp" />
 
+    
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

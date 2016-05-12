@@ -14,29 +14,31 @@ public class CommissioningOverview extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_commissioning_overview);
 
-        TableLayout table = (TableLayout) findViewById(R.id.table_layout);
+        int anzahlKommessionen = 5;
 
-        for(int i = 0; i<=5;i++){
-            TableRow row = new TableRow(this);
-            TextView spalte1 = new TextView(this);
-            TextView spalte2 = new TextView(this);
-            TextView spalte3 = new TextView(this);
-
-            spalte1.setText("Zeile " + i);
-            spalte2.setText("Zeile " + i);
-            spalte3.setText("Zeile " + i);
-
-            row.addView(spalte1);
-            row.addView(spalte2);
-            row.addView(spalte3);
-            table.addView(row);
-        }
-
+        printTable(anzahlKommessionen);
 
     }
 
+    /**
+     * @param anzahlKommessionen
+     * Fügt der View dynamisch neue Zeilen hinzu
+     */
+    private void printTable(int anzahlKommessionen ){
+        TableLayout table = (TableLayout) findViewById(R.id.table_layout);
+        for(int i = 0; i <= anzahlKommessionen;i++){
+            TableRow row = new TableRow(this);
+            TextView kommessionSpalte = new TextView(this);
+            TextView artikelSpalte = new TextView(this);
 
+            kommessionSpalte.setText("5145865");
+            artikelSpalte.setText("6" + i);
 
+            row.addView(kommessionSpalte);
+            row.addView(artikelSpalte);
 
+            table.addView(row);
+        }
+    }
 
 }
