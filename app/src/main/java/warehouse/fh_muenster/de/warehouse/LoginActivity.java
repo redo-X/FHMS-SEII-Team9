@@ -1,6 +1,7 @@
 package warehouse.fh_muenster.de.warehouse;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -84,6 +85,10 @@ public class LoginActivity extends AppCompatActivity {
                 int duration = Toast.LENGTH_SHORT;
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
+
+                //Nächste Activity aufrufen
+                Intent i = new Intent(context, CommissioningOverview.class);
+                startActivity(i);
             }
 
 
