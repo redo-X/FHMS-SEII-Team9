@@ -6,9 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -44,13 +46,42 @@ public class CommissionArtikel extends AppCompatActivity {
                     finish();
                 }
                 else {
-
+                    // Setzen der neuen Überschrift
                     TextView artikelanzahlLabel = (TextView) findViewById(R.id.commission_artikelAnzahl_label);
-                    artikelZaehler++;
                     artikelanzahlLabel.setText("Artikel " + artikelZaehler + " von " + artikelGesamt);
+                    // Setzen der ganzen Zeilen
+                    TextView artikelCode = (TextView) findViewById(R.id.commission_artikel_artikel_code);
+                    artikelCode.setText("456");
 
-                    TextView a = (TextView) findViewById(R.id.commission_artikel_artikel_name);
-                    a.setText("asdfsdklasd");
+                    TextView artikelName = (TextView) findViewById(R.id.commission_artikel_artikel_name);
+                    artikelName.setText("asdfsdklasd");
+
+                    TextView lagerort = (TextView) findViewById(R.id.commission_artikel_artikel_storage);
+                    lagerort.setText("5");
+
+                    TextView lagerbestand = (TextView) findViewById(R.id.commission_artikel_artikel_soll);
+                    lagerbestand.setText("30");
+
+                    TextView kommissionsMenge = (TextView) findViewById(R.id.commission_artikel_artikel_commession);
+                    kommissionsMenge.setText("5");
+
+                    EditText kommissionierteMenge_txt = (EditText) findViewById(R.id.commission_artikel_artikel_commession_edit);
+                    int kommissionierteMenge = 0;
+                    try{
+                        //Wenn gültige Menge eingegben kann nächster Artikel aufgerufen werden
+                        kommissionierteMenge = Integer.valueOf(kommissionierteMenge_txt.getText().toString());
+                        //@TODO Prüfen ob kommissionierteMenge < zu kommissionierteMenge
+
+                        artikelZaehler++;
+                    }
+                    catch (Exception e){
+                        Context context = getApplicationContext();
+                        CharSequence text = "Eingegebene Menge ist nicht gültig";
+                        int duration = Toast.LENGTH_SHORT;
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+                    }
+
 
                     if(artikelZaehler >= artikelGesamt){
                         weiter_btn.setText("Kommession abschließen");
