@@ -8,26 +8,26 @@ import warehouse.fh_muenster.de.warehouse.Server.ServerMockImple;
 public class Employee {
 
 
-    private String username;
+    private int employeeNr;
     private String password;
 
     private ServerMockImple server;
 
 
-    public Employee(String username, String password) {
-        this.username = username;
+    public Employee(int employeeNr, String password) {
+        this.employeeNr = employeeNr;
         this.password = password;
     }
 
     public Employee() {
     }
 
-    public String getUsername() {
-        return username;
+    public int getEmployeeNr() {
+        return employeeNr;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setEmployeeNr(int employeeNr) {
+        this.employeeNr = employeeNr;
     }
 
     public String getPassword() {
@@ -40,6 +40,6 @@ public class Employee {
 
     @Override
     public String toString(){
-        return "Username: " + username + " Password: " + password;
+        return "EmployeeNr: " + employeeNr + " Password: " + password;
     }
 }

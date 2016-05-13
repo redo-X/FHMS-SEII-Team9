@@ -29,14 +29,14 @@ public class LoginActivity extends AppCompatActivity {
 
             public void onClick(View v) {
                 // Einlesen der Werte aus der LoginActivity
-
+                EditText mitarbiterNr_txt = (EditText) findViewById(R.id.mitarbeiterNr_txt);
                 EditText password_tet = (EditText) findViewById(R.id.password_txt);
-                EditText username_txt = (EditText) findViewById(R.id.mitarbeiterNr_txt);
+
 
 
                 LoginTask login = new LoginTask(v.getContext());
                 // Ausführen des Login Vorganges
-                login.execute(username_txt.getText().toString(), password_tet.getText().toString());
+                login.execute(mitarbiterNr_txt.getText().toString(), password_tet.getText().toString());
 
             }
 
@@ -58,7 +58,16 @@ public class LoginActivity extends AppCompatActivity {
             if (params.length != 2) {
                 return null;
             }
-            int employeeNr = Integer.valueOf(params[0]);
+
+            int employeeNr = 0;
+
+            // Zwangsmaßnahme das der Int wert nicht platzt
+            try {
+                employeeNr = Integer.valueOf(params[0]);
+            }
+            catch (Exception e){
+
+            }
             String password = params[1];
 
             //Log.i("Background Method Login","Username :" + username + " Password: " + password);
@@ -84,7 +93,7 @@ public class LoginActivity extends AppCompatActivity {
                 Log.i("Eingeloggt als: ",result.toString());
 
                 // Toast Anzeigen, dass der Login vorgang erfolgreich war
-                CharSequence text = getResources().getString(R.string.loginActivity_loginSuccess) +" " + result.getUsername();
+                CharSequence text = getResources().getString(R.string.loginActivity_loginSuccess) +" " + result.getEmployeeNr();
                 int duration = Toast.LENGTH_SHORT;
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();

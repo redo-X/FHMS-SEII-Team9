@@ -9,34 +9,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="warehouse.fh_muenster.de.warehouse.LoginActivity">
 
-
-    <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:ems="10"
-            android:id="@+id/password_txt"
-        android:hint="Passwort"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="0.25"
-        android:layout_marginTop="71dp"
-        android:layout_below="@+id/mitarbeiterNr_txt"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <Button
-            android:layout_width="66dp"
-            android:layout_height="wrap_content"
-            android:text="Login"
-            android:id="@+id/login_btn"
-        android:layout_gravity="bottom"
-        android:layout_marginTop="106dp"
-        android:layout_below="@+id/password_txt"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -47,8 +19,37 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:layout_marginTop="46dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/password_txt"
+        android:hint="Passwort"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="0.25"
+        android:layout_marginTop="122dp"
+        android:layout_below="@+id/mitarbeiterNr_txt"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+            android:layout_width="66dp"
+            android:layout_height="wrap_content"
+            android:text="Login"
+            android:id="@+id/login_btn"
+        android:layout_gravity="bottom"
+        android:layout_centerVertical="true"
         android:layout_alignRight="@+id/password_txt"
-        android:layout_alignEnd="@+id/password_txt" />
+        android:layout_alignEnd="@+id/password_txt"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
 
 
 </RelativeLayout>

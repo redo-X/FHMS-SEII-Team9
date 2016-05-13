@@ -11,7 +11,7 @@ public class ServerMockImple implements ServerMockInterface {
     @Override
     public Employee login(int employeeNr, String password) {
         if(employeeNr == 123 && password.equals("123")){
-            Employee user = new Employee("Bob", "123");
+            Employee user = new Employee(123, "123");
             return user;
         }
         else{
