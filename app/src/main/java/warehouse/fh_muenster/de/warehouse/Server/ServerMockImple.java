@@ -18,4 +18,9 @@ public class ServerMockImple implements ServerMockInterface {
             return null;
         }
     }
+
+    @Override
+    public void getAllCommissions() {
+
+    }
 }

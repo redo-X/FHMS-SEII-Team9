@@ -8,4 +8,7 @@ import warehouse.fh_muenster.de.warehouse.Employee;
 public interface ServerMockInterface {
 
     public Employee login(int employeeNr, String password);
+
+    public void getAllCommissions();
+
 }

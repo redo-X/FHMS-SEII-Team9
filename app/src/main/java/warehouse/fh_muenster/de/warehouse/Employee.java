@@ -8,8 +8,9 @@ import warehouse.fh_muenster.de.warehouse.Server.ServerMockImple;
 public class Employee {
 
 
-    private int employeeNr;
-    private String password;
+    private int     employeeNr;
+    private String  password;
+    private Role    role;
 
     private ServerMockImple server;
 
