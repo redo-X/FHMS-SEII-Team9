@@ -11,19 +11,6 @@
 
 
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/name_txt"
-        android:hint="Username"
-        android:layout_weight="0.26"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="45dp" />
-
-    <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
@@ -32,10 +19,10 @@
         android:hint="Passwort"
             android:layout_gravity="center_vertical"
             android:layout_weight="0.25"
-        android:layout_below="@+id/name_txt"
+        android:layout_marginTop="71dp"
+        android:layout_below="@+id/mitarbeiterNr_txt"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="72dp" />
+        android:layout_alignParentStart="true" />
 
     <Button
             android:layout_width="66dp"
@@ -43,12 +30,25 @@
             android:text="Login"
             android:id="@+id/login_btn"
         android:layout_gravity="bottom"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="106dp"
         android:layout_below="@+id/password_txt"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/mitarbeiterNr_txt"
+        android:hint="Mitarbeiternummer"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/password_txt"
-        android:layout_alignEnd="@+id/password_txt"
-        android:layout_alignLeft="@+id/password_txt"
-        android:layout_alignStart="@+id/password_txt" />
+        android:layout_alignEnd="@+id/password_txt" />
 
 
 </RelativeLayout>

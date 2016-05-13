@@ -31,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
                 // Einlesen der Werte aus der LoginActivity
 
                 EditText password_tet = (EditText) findViewById(R.id.password_txt);
-                EditText username_txt = (EditText) findViewById(R.id.name_txt);
+                EditText username_txt = (EditText) findViewById(R.id.mitarbeiterNr_txt);
 
 
                 LoginTask login = new LoginTask(v.getContext());
@@ -58,14 +58,14 @@ public class LoginActivity extends AppCompatActivity {
             if (params.length != 2) {
                 return null;
             }
-            String username = params[0];
+            int employeeNr = Integer.valueOf(params[0]);
             String password = params[1];
 
             //Log.i("Background Method Login","Username :" + username + " Password: " + password);
 
             ServerMockImple server = new ServerMockImple();
             Employee employee = new Employee();
-            employee = server.login(username, password);
+            employee = server.login(employeeNr, password);
             //Log.i("Employee",employee.toString());
             return employee;
 
