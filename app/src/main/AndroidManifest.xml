@@ -17,7 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".CommissioningOverview" />
-        <activity android:name=".CommissionArtikel"></activity>
+        <activity android:name=".CommissionArtikel" />
+        <activity android:name=".EmployeeCommissionActivity"></activity>
     </application>
 
 </manifest>

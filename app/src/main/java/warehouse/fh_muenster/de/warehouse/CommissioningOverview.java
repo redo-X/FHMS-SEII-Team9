@@ -22,7 +22,7 @@ public class CommissioningOverview extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_commissioning_overview);
 
-        int anzahlKommessionen = 20;
+        int anzahlKommessionen = 100;
 
         printTable(anzahlKommessionen);
 
@@ -34,7 +34,7 @@ public class CommissioningOverview extends AppCompatActivity {
      */
     private void printTable(int anzahlKommessionen ){
         TableLayout table = (TableLayout) findViewById(R.id.table_layout);
-        for(int i = 0; i <= anzahlKommessionen;i++){
+        for(int i = 0; i < anzahlKommessionen;i++){
 
             Random rand = new Random();
             int kommissionsNr = rand.nextInt(800000 - 10000) + 10000;
