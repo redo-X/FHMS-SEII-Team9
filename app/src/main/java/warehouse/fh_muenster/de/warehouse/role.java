@@ -21,4 +21,5 @@ public enum Role {
     public String toString() {
         return String.format("%s: %s", this.name(), String.valueOf(this.code));
     }
+    
 }
