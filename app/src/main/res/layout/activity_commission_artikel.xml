@@ -9,28 +9,15 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="warehouse.fh_muenster.de.warehouse.CommissionArtikel">
 
-    <ScrollView
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/scrollView"
-
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:id="@+id/commission_id_label"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.05"
+        android:hint="Text"
         android:layout_alignParentTop="true"
-        android:layout_alignParentBottom="true">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/commission_id_label"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="0.05"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:hint="Text" />
-    </ScrollView>
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -41,12 +28,132 @@
         android:layout_marginTop="33dp"
         android:hint="Artikelanzahl" />
 
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView"
+
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/commission_artikelAnzahl_label"
+        android:layout_above="@+id/weiter_btn">
+
+        <TableLayout
+            android:stretchColumns="*"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/commission_artikelAnzahl_label"
+            android:layout_above="@+id/weiter_btn"
+            android:id="@+id/table_layout_commission_artikel">
+            <TableRow>
+                <TextView
+                    android:text="Artikel Code:"
+                    android:width="100dp"
+                    android:layout_column="0"
+                    android:layout_weight="0"
+                    />
+                <TextView
+                    android:text="Blub"
+                    android:width="100dp"
+                    android:layout_column="0"
+                    android:layout_weight="0"
+                    android:id="@+id/commission_artikel_artikel_code"
+                    />
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:text="Artikel Name:"
+                    android:width="100dp"
+                    android:layout_column="0"
+                    android:layout_weight="0"
+                    />
+                <TextView
+                    android:text="Blub"
+                    android:width="100dp"
+                    android:layout_column="0"
+                    android:layout_weight="0"
+                    android:id="@+id/commission_artikel_artikel_name"
+                    />
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:text="Lagerort:"
+                    android:width="100dp"
+                    android:layout_column="0"
+                    android:layout_weight="0"
+                    />
+                <TextView
+                    android:text="Blub"
+                    android:width="100dp"
+                    android:layout_column="0"
+                    android:layout_weight="0"
+                    android:id="@+id/commission_artikel_artikel_storage"
+                    />
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:text="Soll Menge:"
+                    android:width="100dp"
+                    android:layout_column="0"
+                    android:layout_weight="0"
+                    />
+                <TextView
+                    android:text="Blub"
+                    android:width="100dp"
+                    android:layout_column="0"
+                    android:layout_weight="0"
+                    android:id="@+id/commission_artikel_artikel_soll"
+                    />
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:text="Kommessions Menge:"
+                    android:width="100dp"
+                    android:layout_column="0"
+                    android:layout_weight="0"
+                    />
+                <TextView
+                    android:text="Blub"
+                    android:width="100dp"
+                    android:layout_column="0"
+                    android:layout_weight="0"
+                    android:id="@+id/commission_artikel_artikel_commession"
+                    />
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:text="Kommissionierte Menge:"
+                    android:width="100dp"
+                    android:layout_column="0"
+                    android:layout_weight="0"
+                    />
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:ems="10"
+                    android:id="@+id/commission_artikel_artikel_commession_edit">
+                </EditText>
+
+            </TableRow>
+
+
+        </TableLayout>
+    </ScrollView>
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="weiter"
         android:id="@+id/weiter_btn"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/scrollView"
+        android:layout_alignEnd="@+id/scrollView" />
 
 </RelativeLayout>
