@@ -53,7 +53,7 @@ public class CommissionArtikel extends AppCompatActivity {
                     a.setText("asdfsdklasd");
 
                     if(artikelZaehler >= artikelGesamt){
-                        weiter_btn.setText("Kommession beenden");
+                        weiter_btn.setText("Kommession abschließen");
                     }
                 }
             }

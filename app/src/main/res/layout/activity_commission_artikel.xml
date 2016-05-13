@@ -48,43 +48,52 @@
             android:layout_alignParentEnd="true"
             android:layout_below="@+id/commission_artikelAnzahl_label"
             android:layout_above="@+id/weiter_btn"
+
             android:id="@+id/table_layout_commission_artikel">
-            <TableRow>
+            <TableRow
+                android:layout_marginBottom="10dp">
                 <TextView
                     android:text="Artikel Code:"
                     android:width="100dp"
                     android:layout_column="0"
                     android:layout_weight="0"
+
                     />
                 <TextView
                     android:text="Blub"
                     android:width="100dp"
                     android:layout_column="0"
                     android:layout_weight="0"
+
                     android:id="@+id/commission_artikel_artikel_code"
                     />
             </TableRow>
-            <TableRow>
+            <TableRow
+                android:layout_marginBottom="10dp">
                 <TextView
                     android:text="Artikel Name:"
                     android:width="100dp"
                     android:layout_column="0"
                     android:layout_weight="0"
+
                     />
                 <TextView
                     android:text="Blub"
                     android:width="100dp"
                     android:layout_column="0"
                     android:layout_weight="0"
+
                     android:id="@+id/commission_artikel_artikel_name"
                     />
             </TableRow>
-            <TableRow>
+            <TableRow
+                android:layout_marginBottom="10dp">
                 <TextView
                     android:text="Lagerort:"
                     android:width="100dp"
                     android:layout_column="0"
                     android:layout_weight="0"
+
                     />
                 <TextView
                     android:text="Blub"
@@ -94,7 +103,8 @@
                     android:id="@+id/commission_artikel_artikel_storage"
                     />
             </TableRow>
-            <TableRow>
+            <TableRow
+                android:layout_marginBottom="10dp">
                 <TextView
                     android:text="Soll Menge:"
                     android:width="100dp"
@@ -109,7 +119,8 @@
                     android:id="@+id/commission_artikel_artikel_soll"
                     />
             </TableRow>
-            <TableRow>
+            <TableRow
+                android:layout_marginBottom="10dp">
                 <TextView
                     android:text="Kommessions Menge:"
                     android:width="100dp"
@@ -125,17 +136,13 @@
                     />
             </TableRow>
             <TableRow>
-                <TextView
-                    android:text="Kommissionierte Menge:"
-                    android:width="100dp"
-                    android:layout_column="0"
-                    android:layout_weight="0"
-                    />
                 <EditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:inputType="number"
                     android:ems="10"
+                    android:hint="Kommissionierte Menge"
                     android:id="@+id/commission_artikel_artikel_commession_edit">
                 </EditText>
 
