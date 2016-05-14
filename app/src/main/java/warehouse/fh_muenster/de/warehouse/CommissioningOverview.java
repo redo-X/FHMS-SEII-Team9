@@ -109,15 +109,26 @@ public class CommissioningOverview extends AppCompatActivity {
             annehmen_btn.setText(R.string.commissioningOverview_table_head_annehmen);
         }
         annehmen_btn.setId(i);
-        annehmen_btn.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                // Starten der ArtikelÜbersicht der Kommission, Übergabe der Kommissions nummer
-                Context context = view.getContext();
-                Intent i = new Intent(context, CommissionArtikel.class);
-                i.putExtra("id", annehmen_btn.getId());
-                startActivity(i);
-            }
-        });
+        if(screen.equals("myCommission")) {
+            annehmen_btn.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View view) {
+                    // Starten der ArtikelÜbersicht der Kommission, Übergabe der Kommissions nummer
+
+                    Context context = view.getContext();
+                    Intent i = new Intent(context, CommissionArtikel.class);
+                    i.putExtra("id", annehmen_btn.getId());
+                    startActivity(i);
+                }
+            });
+        }
+        else{
+            annehmen_btn.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View view) {
+                    // Medlung das Kommission angenommen wurde
+                    Toast.makeText(getApplicationContext(), "Kommission mit id: " + annehmen_btn.getId() + " angenommen", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
         return annehmen_btn;
     }
 
