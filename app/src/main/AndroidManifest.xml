@@ -18,7 +18,7 @@
         </activity>
         <activity android:name=".CommissioningOverview" />
         <activity android:name=".CommissionArtikel" />
-        <activity android:name=".EmployeeCommissionActivity"></activity>
+        <activity android:name=".mockMenue"></activity>
     </application>
 
 </manifest>

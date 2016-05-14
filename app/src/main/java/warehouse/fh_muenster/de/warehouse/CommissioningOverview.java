@@ -26,6 +26,7 @@ public class CommissioningOverview extends AppCompatActivity {
 
         int anzahlKommessionen = 100;
         int anzahlEmployeeKommissionen = 5;
+
         // Wenn employee Kommissionen aufgerufen wird
         if(screen.equals("myCommission")){
             printTable(anzahlEmployeeKommissionen, screen);
@@ -34,8 +35,6 @@ public class CommissioningOverview extends AppCompatActivity {
         else{
             printTable(anzahlKommessionen, screen);
         }
-
-
     }
 
     /**

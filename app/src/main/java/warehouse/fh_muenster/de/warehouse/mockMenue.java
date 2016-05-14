@@ -1,0 +1,44 @@
+package warehouse.fh_muenster.de.warehouse;
+
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+
+public class mockMenue extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_mock_menue);
+
+        Button myCommission = (Button) findViewById(R.id.menu_myCommission);
+        Button commissionOverview = (Button) findViewById(R.id.menu_commissionOverview);
+
+
+        myCommission.setOnClickListener(new View.OnClickListener(){
+            @Override
+
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), CommissioningOverview.class);
+                i.putExtra("screen", "myCommission");
+                startActivity(i);
+            }
+
+        });
+
+        commissionOverview.setOnClickListener(new View.OnClickListener(){
+            @Override
+
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), CommissioningOverview.class);
+                i.putExtra("screen", "commissionOverview");
+                startActivity(i);
+
+            }
+
+        });
+    }
+}
