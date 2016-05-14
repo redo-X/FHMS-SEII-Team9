@@ -100,6 +100,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 //Nächste Activity aufrufen
                 Intent i = new Intent(context, CommissioningOverview.class);
+                i.putExtra("screen", "myCommission");
                 startActivity(i);
                 // Beim Klick auf den Back Button wird der Login Screen nicht mehr aufgerufen sondern die app beendet
                 finish();

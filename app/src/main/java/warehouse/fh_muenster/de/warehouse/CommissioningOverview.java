@@ -21,10 +21,20 @@ public class CommissioningOverview extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_commissioning_overview);
+        // Speichert welche Screen Variante aufgerufen werden soll
+        String screen = getIntent().getExtras().getString("screen");
 
         int anzahlKommessionen = 100;
+        int anzahlEmployeeKommissionen = 5;
+        // Wenn employee Kommissionen aufgerufen wird
+        if(screen.equals("myCommission")){
+            printTable(anzahlEmployeeKommissionen, screen);
+        }
+        // Wenn offene Kommissionen angezeigt werden
+        else{
+            printTable(anzahlKommessionen, screen);
+        }
 
-        printTable(anzahlKommessionen);
 
     }
 
@@ -32,8 +42,14 @@ public class CommissioningOverview extends AppCompatActivity {
      * @param anzahlKommessionen
      * Fügt der Tabelle dynamisch neue Zeilen hinzu
      */
-    private void printTable(int anzahlKommessionen ){
+    private void printTable(int anzahlKommessionen, String screen ){
         TableLayout table = (TableLayout) findViewById(R.id.table_layout);
+        // Setzte die Tabellen Überschrift
+        if(screen.equals("myCommission")){
+            TextView head = (TextView) findViewById(R.id.commissioningOverview_table_head);
+            head.setText("Meine Kommissionen");
+        }
+        // Für die Anzahl von Kommissionen erstelle die Tabelllen zeilen
         for(int i = 0; i < anzahlKommessionen;i++){
 
             Random rand = new Random();
@@ -45,7 +61,7 @@ public class CommissioningOverview extends AppCompatActivity {
             // Erzeugen der Spalten
             TextView kommessionSpalte = createTextView(String.valueOf(kommissionsNr));
             TextView artikelSpalte = createTextView(String.valueOf(menge));
-            Button annehmen_btn = createButton(kommissionsNr);
+            Button annehmen_btn = createButton(kommissionsNr, screen);
 
             //Hinzufügen der Spalten
             row.addView(kommessionSpalte);
@@ -66,14 +82,12 @@ public class CommissioningOverview extends AppCompatActivity {
     private TextView createTextView(String text){
         TextView spalte = new TextView(this);
         spalte.setText(text);
-
         return spalte;
     }
 
     private TableRow designRow(int i, TableRow row){
         if(i%2 == 0){
             row.setBackgroundColor(0x50CCCCCC);
-
         }
         else {
             row.setBackgroundColor(0xAACCCCCC);
@@ -87,10 +101,14 @@ public class CommissioningOverview extends AppCompatActivity {
      * @return annehmen Button
      * Erzeugt einen neuen Button mit OnClickListener
      */
-    private Button createButton(int i){
-
+    private Button createButton(int i, String screen){
         final Button annehmen_btn = new Button(this);
-        annehmen_btn.setText(R.string.commissioningOverview_table_head_annehmen);
+        if(screen.equals("myCommission")){
+            annehmen_btn.setText("Starten");
+        }
+        else{
+            annehmen_btn.setText(R.string.commissioningOverview_table_head_annehmen);
+        }
         annehmen_btn.setId(i);
         annehmen_btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {

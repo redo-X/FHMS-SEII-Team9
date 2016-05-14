@@ -29,7 +29,8 @@
                 android:width="100dp"
                 android:layout_column="0"
                 android:layout_weight="1"
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                android:id="@+id/commissioningOverview_table_head" />
         </TableRow>
         <TableRow>
             <TextView
