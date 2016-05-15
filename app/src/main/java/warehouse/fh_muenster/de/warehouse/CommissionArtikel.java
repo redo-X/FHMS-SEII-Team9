@@ -6,8 +6,11 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -20,6 +23,8 @@ import java.util.Random;
 public class CommissionArtikel extends AppCompatActivity {
     int artikelZaehler = 1;
     int artikelGesamt = 8;
+    private ListView mDrawerList;
+    private ArrayAdapter<String> mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +33,10 @@ public class CommissionArtikel extends AppCompatActivity {
 
         int id = getIntent().getExtras().getInt("id");
         final Button weiter_btn = (Button) findViewById(R.id.weiter_btn);
+
+        //Erstelle DrawerMenu
+        mDrawerList = (ListView) findViewById(R.id.navList);
+        addDrawerItems();
 
         TextView ueberschrift = (TextView) findViewById(R.id.commission_id_label);
         TextView artikelanzahlLabel = (TextView) findViewById(R.id.commission_artikelAnzahl_label);
@@ -72,6 +81,27 @@ public class CommissionArtikel extends AppCompatActivity {
         });
 
     }
+
+    /**
+     * Hilfsmethode für DrawerMenu
+     */
+    private void addDrawerItems() {
+        String[] MenuArray = {"Meine Kommissionen", "Offene Kommissionen", "LogOut"};
+        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, MenuArray);
+        mDrawerList = (ListView) findViewById(R.id.navList);
+        mDrawerList.setAdapter(mAdapter);
+
+        mDrawerList.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        String MenuArray = String.valueOf(parent.getItemAtPosition(position));
+                        Toast.makeText(CommissionArtikel.this, MenuArray, Toast.LENGTH_LONG).show();
+                    }
+                }
+        );
+    }
+
     private void setTableRows(){
         // Setzen der neuen Überschrift
         TextView artikelanzahlLabel = (TextView) findViewById(R.id.commission_artikelAnzahl_label);
