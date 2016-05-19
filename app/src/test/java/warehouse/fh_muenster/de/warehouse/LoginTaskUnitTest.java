@@ -18,15 +18,20 @@ public class LoginTaskUnitTest {
     public void loginIsCorrect() throws Exception {
         ServerMockImple server = new ServerMockImple();
         Employee employee = new Employee();
-        employee = server.login("Bob","123");
+        employee = server.login(123,"123");
         assertNotNull(employee);
     }
     @Test
     public void loginFailed() throws Exception {
         ServerMockImple server = new ServerMockImple();
         Employee employee = new Employee();
-        employee = server.login("Bobby","123");
+        employee = server.login(234,"123");
         assertNull(employee);
+    }
+
+    @Test
+    public void bla(){
+
     }
 
 }

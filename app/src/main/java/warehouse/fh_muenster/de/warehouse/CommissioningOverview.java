@@ -19,10 +19,16 @@ import android.widget.Toast;
 import java.util.List;
 import java.util.Random;
 
+import warehouse.fh_muenster.de.warehouse.Server.ServerMockImple;
+
 public class CommissioningOverview extends AppCompatActivity {
 
     private ListView mDrawerList;
     private ArrayAdapter<String> mAdapter;
+    private ServerMockImple server = new ServerMockImple();
+
+    private Commission commissionArray[];
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,11 +46,15 @@ public class CommissioningOverview extends AppCompatActivity {
 
         // Wenn employee Kommissionen aufgerufen wird
         if (screen.equals("myCommission")) {
-            printTable(anzahlEmployeeKommissionen, screen);
+            WarehouseApplication myApp = (WarehouseApplication) getApplication();
+            commissionArray = server.getCommissions(myApp.getEmployee());
+            printTable(commissionArray.length, screen);
         }
         // Wenn offene Kommissionen angezeigt werden
         else {
-            printTable(anzahlKommessionen, screen);
+
+            commissionArray = server.getFreeCommissions();
+            printTable(commissionArray.length, screen);
         }
     }
 
@@ -82,8 +92,8 @@ public class CommissioningOverview extends AppCompatActivity {
         for (int i = 0; i < anzahlKommessionen; i++) {
 
             Random rand = new Random();
-            int kommissionsNr = rand.nextInt(800000 - 10000) + 10000;
-            int menge = rand.nextInt(10 - 1) + 1;
+            int kommissionsNr = commissionArray[i].getId();
+            int menge = commissionArray[i].getArticleArray().length;
 
             TableRow row = new TableRow(this);
 
