@@ -44,15 +44,15 @@ public class CommissionArtikel extends AppCompatActivity {
         TextView ueberschrift = (TextView) findViewById(R.id.commission_id_label);
         TextView artikelanzahlLabel = (TextView) findViewById(R.id.commission_artikelAnzahl_label);
 
-        Log.i("BlaDub", String.valueOf(id));
 
         WarehouseApplication myApp = (WarehouseApplication) getApplication();
         this.commission = myApp.getPickerCommissionById(id);
         artikelGesamt = commission.getArticleArray().length;
 
-        setTableRows();
+
 
         ueberschrift.setText("Kommission mit der Nummer: " + String.valueOf(id) + " ausgewählt\n");
+        setTableRows();
         //artikelanzahlLabel.setText("Artikel " + artikelZaehler +  " von " + artikelGesamt);
 
 
@@ -76,6 +76,7 @@ public class CommissionArtikel extends AppCompatActivity {
                         }
                         artikelZaehler++;
                         setTableRows();
+                        kommissionierteMenge_txt.setText("");
                         //@TODO Prüfen ob kommissionierteMenge < zu kommissionierteMenge
                     }
                     catch (Exception e){
@@ -92,6 +93,8 @@ public class CommissionArtikel extends AppCompatActivity {
         });
 
     }
+
+
 
     /**
      * Hilfsmethode für DrawerMenu
