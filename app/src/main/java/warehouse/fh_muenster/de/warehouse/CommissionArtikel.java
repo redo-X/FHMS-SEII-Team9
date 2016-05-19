@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -26,6 +27,8 @@ public class CommissionArtikel extends AppCompatActivity {
     private ListView mDrawerList;
     private ArrayAdapter<String> mAdapter;
 
+    private Commission commission = new Commission();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,8 +44,16 @@ public class CommissionArtikel extends AppCompatActivity {
         TextView ueberschrift = (TextView) findViewById(R.id.commission_id_label);
         TextView artikelanzahlLabel = (TextView) findViewById(R.id.commission_artikelAnzahl_label);
 
+        Log.i("BlaDub", String.valueOf(id));
+
+        WarehouseApplication myApp = (WarehouseApplication) getApplication();
+        this.commission = myApp.getPickerCommissionById(id);
+        artikelGesamt = commission.getArticleArray().length;
+
+        setTableRows();
+
         ueberschrift.setText("Kommission mit der Nummer: " + String.valueOf(id) + " ausgewählt\n");
-        artikelanzahlLabel.setText("Artikel " + artikelZaehler +  " von " + artikelGesamt);
+        //artikelanzahlLabel.setText("Artikel " + artikelZaehler +  " von " + artikelGesamt);
 
 
         weiter_btn.setOnClickListener(new View.OnClickListener() {
@@ -103,15 +114,17 @@ public class CommissionArtikel extends AppCompatActivity {
     }
 
     private void setTableRows(){
+        Article artikelArray[];
+        artikelArray = commission.getArticleArray();
         // Setzen der neuen Überschrift
         TextView artikelanzahlLabel = (TextView) findViewById(R.id.commission_artikelAnzahl_label);
         artikelanzahlLabel.setText("Artikel " + artikelZaehler + " von " + artikelGesamt);
         // Setzen der ganzen Zeilen
         TextView artikelCode = (TextView) findViewById(R.id.commission_artikel_artikel_code);
-        artikelCode.setText("456");
+        artikelCode.setText(artikelArray[artikelZaehler-1].getCode());
 
         TextView artikelName = (TextView) findViewById(R.id.commission_artikel_artikel_name);
-        artikelName.setText("asdfsdklasd");
+        artikelName.setText(artikelArray[artikelZaehler-1].getName());
 
         TextView lagerort = (TextView) findViewById(R.id.commission_artikel_artikel_storage);
         lagerort.setText("5");

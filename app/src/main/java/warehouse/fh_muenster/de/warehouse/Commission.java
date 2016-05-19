@@ -9,6 +9,9 @@ public class Commission {
     private Article articleArray[];
     private int id;
 
+    public Commission() {
+    }
+
     public Commission(Employee picker, Article[] articleArray) {
         this.picker = picker;
         this.articleArray = articleArray;
@@ -25,6 +28,12 @@ public class Commission {
         this.articleArray = articleArray;
         this.id = id;
     }
+
+
+
+
+
+
 
     public Employee getPicker() {
         return picker;

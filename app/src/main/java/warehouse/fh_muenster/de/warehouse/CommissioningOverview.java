@@ -43,17 +43,20 @@ public class CommissioningOverview extends AppCompatActivity {
 
         int anzahlKommessionen = 100;
         int anzahlEmployeeKommissionen = 5;
+        WarehouseApplication myApp = (WarehouseApplication) getApplication();
+
 
         // Wenn employee Kommissionen aufgerufen wird
         if (screen.equals("myCommission")) {
-            WarehouseApplication myApp = (WarehouseApplication) getApplication();
+
             commissionArray = server.getCommissions(myApp.getEmployee());
+            myApp.setPickerCommissions(commissionArray);
             printTable(commissionArray.length, screen);
         }
         // Wenn offene Kommissionen angezeigt werden
         else {
-
             commissionArray = server.getFreeCommissions();
+            myApp.setOpenCommissions(commissionArray);
             printTable(commissionArray.length, screen);
         }
     }
