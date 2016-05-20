@@ -44,4 +44,20 @@ public class Employee {
     public String toString(){
         return "EmployeeNr: " + employeeNr + " Password: " + password;
     }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public int getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(int sessionId) {
+        this.sessionId = sessionId;
+    }
 }

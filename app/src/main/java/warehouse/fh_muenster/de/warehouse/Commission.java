@@ -1,5 +1,8 @@
 package warehouse.fh_muenster.de.warehouse;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * Created by Thomas on 19.05.2016.
  */
@@ -8,6 +11,8 @@ public class Commission {
     private Employee picker;
     private Article articleArray[];
     private int id;
+    // ID, Article
+    private Map<Integer,Article> articleList;
 
     public Commission() {
     }

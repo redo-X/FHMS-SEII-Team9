@@ -133,10 +133,13 @@ public class CommissionArtikel extends AppCompatActivity {
         lagerort.setText("5");
 
         TextView lagerbestand = (TextView) findViewById(R.id.commission_artikel_artikel_soll);
-        lagerbestand.setText("30");
+        String text = String.valueOf(artikelArray[artikelZaehler-1].getQuantityOnStock());
+        lagerbestand.setText(text);
+        
 
         TextView kommissionsMenge = (TextView) findViewById(R.id.commission_artikel_artikel_commession);
-        kommissionsMenge.setText("5");
+        text = String.valueOf(artikelArray[artikelZaehler-1].getQuantityOnCommit());
+        kommissionsMenge.setText(text);
     }
 
     private void showToast(String text){
