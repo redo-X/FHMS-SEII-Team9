@@ -11,6 +11,7 @@ public class Employee {
     private int     employeeNr;
     private String  password;
     private Role    role;
+    private int     sessionId;
 
     private ServerMockImple server;
 
