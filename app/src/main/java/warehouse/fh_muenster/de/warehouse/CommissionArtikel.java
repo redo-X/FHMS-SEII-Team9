@@ -19,6 +19,8 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class CommissionArtikel extends AppCompatActivity {
@@ -48,7 +50,8 @@ public class CommissionArtikel extends AppCompatActivity {
 
         WarehouseApplication myApp = (WarehouseApplication) getApplication();
         this.commission = myApp.getPickerCommissionById(id);
-        artikelGesamt = commission.getArticleArray().length;
+        artikelGesamt = commission.getArticleHashMap().size();
+        //artikelGesamt = commission.getArticleArray().length;
 
 
 
@@ -122,7 +125,11 @@ public class CommissionArtikel extends AppCompatActivity {
 
     private void setTableRows(){
         Article artikelArray[];
-        artikelArray = commission.getArticleArray();
+        artikelArray = mapToArray();
+        Log.i("sdlkfjlasdjf",String.valueOf(artikelArray.length));
+
+
+
         // Setzen der neuen Überschrift
         TextView artikelanzahlLabel = (TextView) findViewById(R.id.commission_artikelAnzahl_label);
         artikelanzahlLabel.setText("Artikel " + artikelZaehler + " von " + artikelGesamt);
@@ -134,10 +141,13 @@ public class CommissionArtikel extends AppCompatActivity {
         artikelName.setText(artikelArray[artikelZaehler-1].getName());
 
 
+
+
         TextView lagerort = (TextView) findViewById(R.id.commission_artikel_artikel_storage);
         String text = String.valueOf(artikelArray[artikelZaehler-1].getStorageLocation().getCode());
         lagerort.setText(text);
 
+        Log.i("sdlkfjlasdjf",String.valueOf(artikelZaehler));
         TextView lagerbestand = (TextView) findViewById(R.id.commission_artikel_artikel_soll);
         text = String.valueOf(artikelArray[artikelZaehler-1].getQuantityOnStock());
         lagerbestand.setText(text);
@@ -146,6 +156,17 @@ public class CommissionArtikel extends AppCompatActivity {
         TextView kommissionsMenge = (TextView) findViewById(R.id.commission_artikel_artikel_commession);
         text = String.valueOf(artikelArray[artikelZaehler-1].getQuantityOnCommit());
         kommissionsMenge.setText(text);
+
+    }
+
+    private Article[] mapToArray(){
+        Article articleArray[] = new Article[artikelGesamt];
+        int i = 0;
+        for(Map.Entry<Integer,Article> entry : commission.getArticleHashMap().entrySet()){
+            articleArray[i] = entry.getValue();
+            i++;
+        }
+        return articleArray;
     }
 
     private void showToast(String text){

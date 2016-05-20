@@ -2,9 +2,11 @@ package warehouse.fh_muenster.de.warehouse;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.DropBoxManager;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,6 +20,7 @@ import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import warehouse.fh_muenster.de.warehouse.Server.ServerMockImple;
@@ -42,29 +45,30 @@ public class CommissioningOverview extends AppCompatActivity {
         mDrawerList = (ListView) findViewById(R.id.navList);
         addDrawerItems();
 
-        int anzahlKommessionen = 100;
-        int anzahlEmployeeKommissionen = 5;
         WarehouseApplication myApp = (WarehouseApplication) getApplication();
 
 
         // Wenn employee Kommissionen aufgerufen wird
         if (screen.equals("myCommission")) {
-
-            commissionArray = server.getCommissions(myApp.getEmployee());
-            //commissionHashMap = server.getCommissions(myApp.getEmployee());
-            //myApp.setPickerCommissionsMap(commissionHashMap);
-            //printTable(commissionHashMap.size(), screen);
+            commissionHashMap = server.getCommissions(myApp.getEmployee());
+            myApp.setPickerCommissionsMap(commissionHashMap);
+            printTable(commissionHashMap.size(), screen);
+            /*commissionArray = server.getCommissions(myApp.getEmployee());
             myApp.setPickerCommissions(commissionArray);
             printTable(commissionArray.length, screen);
+            */
         }
         // Wenn offene Kommissionen angezeigt werden
         else {
+            /*
+            commissionHashMap = server.getCommissionss(myApp.getEmployee());
+            myApp.setOpenCommissionsMap(commissionHashMap);
+            printTable(commissionHashMap.size(), screen);
+            */
             commissionArray = server.getFreeCommissions();
-            //commissionHashMap = server.getCommissions(myApp.getEmployee());
-            //myApp.setOpenCommissionsMap(commissionHashMap);
-            //printTable(commissionHashMap.size(), screen);
             myApp.setOpenCommissions(commissionArray);
             printTable(commissionArray.length, screen);
+
         }
     }
 
@@ -98,7 +102,38 @@ public class CommissioningOverview extends AppCompatActivity {
             TextView head = (TextView) findViewById(R.id.commissioningOverview_table_head);
             head.setText("Meine Kommissionen");
         }
-        // Für die Anzahl von Kommissionen erstelle die Tabelllen zeilen
+
+        // Für die Anzahl von Kommissionen erstelle die Tabelllen zeilen mit HashMap
+        int i=0;
+        for(Map.Entry<Integer,Commission> entry : commissionHashMap.entrySet()){
+
+            int kommissionsNr = entry.getKey();
+            Commission commission = entry.getValue();
+            HashMap<Integer,Article> artikel = commission.getArticleHashMap();
+            int menge = artikel.size();
+
+            TableRow row = new TableRow(this);
+
+            // Erzeugen der Spalten
+            TextView kommessionSpalte = createTextView(String.valueOf(kommissionsNr));
+            TextView artikelSpalte = createTextView(String.valueOf(menge));
+            Button annehmen_btn = createButton(kommissionsNr, screen);
+
+            //Hinzufügen der Spalten
+            row.addView(kommessionSpalte);
+            row.addView(artikelSpalte);
+            row.addView(annehmen_btn);
+            row = designRow(i, row);
+            i++;
+            table.addView(row);
+
+        }
+
+
+
+
+/*
+        // Für die Anzahl von Kommissionen erstelle die Tabelllen zeilen mit Array
         for (int i = 0; i < anzahlKommessionen; i++) {
 
             Random rand = new Random();
@@ -120,6 +155,7 @@ public class CommissioningOverview extends AppCompatActivity {
 
             table.addView(row);
         }
+        */
     }
 
     /**

@@ -41,6 +41,14 @@ public class Commission {
         this.picker = picker;
     }
 
+    public HashMap<Integer, Article> getArticleHashMap() {
+        return articleHashMap;
+    }
+
+    public void setArticleHashMap(HashMap<Integer, Article> articleHashMap) {
+        this.articleHashMap = articleHashMap;
+    }
+
     public Employee getPicker() {
         return picker;
     }

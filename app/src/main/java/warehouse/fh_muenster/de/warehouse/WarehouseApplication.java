@@ -55,7 +55,7 @@ public class WarehouseApplication extends Application {
     public void setPickerCommissionsMap(HashMap<Integer, Commission> pickerCommissionsMap) {
         this.pickerCommissionsMap = pickerCommissionsMap;
     }
-
+    /*
     public Commission getPickerCommissionById(int id){
 
         for(int i = 0; i< pickerCommissions.length; i++){
@@ -65,4 +65,15 @@ public class WarehouseApplication extends Application {
         }
         return null;
     }
+*/
+    public Commission getPickerCommissionById(int id){
+
+        if(pickerCommissionsMap.containsKey(id)){
+            return pickerCommissionsMap.get(id);
+        }
+        else{
+            return null;
+        }
+    }
+
 }

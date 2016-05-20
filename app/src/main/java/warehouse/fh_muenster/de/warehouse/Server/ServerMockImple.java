@@ -55,7 +55,7 @@ public class ServerMockImple implements ServerMockInterface {
         }
         return commissionArray;
     }
-
+    /*
     @Override
     public Commission[] getCommissions(Employee picker) {
         Commission commissionArray[] = new Commission[5];
@@ -78,20 +78,24 @@ public class ServerMockImple implements ServerMockInterface {
         return commissionArray;
     }
 
-
-    public HashMap<Integer,Commission> getCommissionss(Employee picker){
+*/
+    public HashMap<Integer,Commission> getCommissions(Employee picker){
         HashMap<Integer,Commission> commissionMap = new HashMap<Integer, Commission>();
-        HashMap<Integer,Article> articleMap = new HashMap<Integer, Article>();
+
         Random rand = new Random();
         for(int i = 0; i< 6; i++){
+            HashMap<Integer,Article> articleMap = new HashMap<Integer, Article>();
             for(int j = 0; j< 5; j++){
-                int articelCode = rand.nextInt(800000 - 10000) + 10000;
+
+                int articelCode = 5000 + j + (i*1000);
+                StorageLocation location = new StorageLocation(String.valueOf(rand.nextInt(70-1)+1));
                 Article article = new Article(String.valueOf(articelCode), "Tolle Beschreibung des Artikels");
                 article.setQuantityOnStock(rand.nextInt(100 - 5) + 5);
                 article.setQuantityOnCommit(rand.nextInt(10 - 1) + 1);
+                article.setStorageLocation(location);
                 articleMap.put(articelCode, article);
             }
-            int kommissionCode = rand.nextInt(800000 - 10000) + 10000;
+            int kommissionCode = 10000 + i;
             Commission commission = new Commission(kommissionCode , articleMap, picker);
             commissionMap.put(kommissionCode,commission);
         }
