@@ -74,9 +74,12 @@ public class CommissionArtikel extends AppCompatActivity {
                         if(kommissionierteMenge < 1){
                             throw new Exception();
                         }
-                        artikelZaehler++;
-                        setTableRows();
-                        kommissionierteMenge_txt.setText("");
+
+                            artikelZaehler++;
+                            setTableRows();
+                            kommissionierteMenge_txt.setText("");
+
+
                         //@TODO Prüfen ob kommissionierteMenge < zu kommissionierteMenge
                     }
                     catch (Exception e){
@@ -135,7 +138,7 @@ public class CommissionArtikel extends AppCompatActivity {
         TextView lagerbestand = (TextView) findViewById(R.id.commission_artikel_artikel_soll);
         String text = String.valueOf(artikelArray[artikelZaehler-1].getQuantityOnStock());
         lagerbestand.setText(text);
-        
+
 
         TextView kommissionsMenge = (TextView) findViewById(R.id.commission_artikel_artikel_commession);
         text = String.valueOf(artikelArray[artikelZaehler-1].getQuantityOnCommit());
