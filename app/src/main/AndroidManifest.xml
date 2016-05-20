@@ -19,7 +19,8 @@
         <activity android:name=".CommissioningOverview" />
         <activity android:name=".CommissionArtikel" />
         <activity android:name=".mockMenue" />
-        <activity android:name=".Stock"></activity>
+        <activity android:name=".Stock" />
+        <activity android:name=".StockOut"></activity>
     </application>
 
 </manifest>

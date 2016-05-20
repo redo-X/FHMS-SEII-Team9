@@ -155,6 +155,17 @@
                 </EditText>
 
             </TableRow>
+            <TableRow
+                android:layout_marginTop="20dp">
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Fehlmenge melden"
+                    android:id="@+id/commission_artikel_fehlmengeMelden"
+                    />
+
+            </TableRow>
 
 
         </TableLayout>
