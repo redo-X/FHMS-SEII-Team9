@@ -11,8 +11,6 @@ public class Commission {
     private Employee picker;
     private Article articleArray[];
     private int id;
-    // ID, Article
-    private Map<Integer,Article> articleList;
 
     public Commission() {
     }
@@ -33,12 +31,6 @@ public class Commission {
         this.articleArray = articleArray;
         this.id = id;
     }
-
-
-
-
-
-
 
     public Employee getPicker() {
         return picker;

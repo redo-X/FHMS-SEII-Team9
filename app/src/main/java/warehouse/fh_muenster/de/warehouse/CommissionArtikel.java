@@ -132,11 +132,13 @@ public class CommissionArtikel extends AppCompatActivity {
         TextView artikelName = (TextView) findViewById(R.id.commission_artikel_artikel_name);
         artikelName.setText(artikelArray[artikelZaehler-1].getName());
 
+
         TextView lagerort = (TextView) findViewById(R.id.commission_artikel_artikel_storage);
-        lagerort.setText("5");
+        String text = String.valueOf(artikelArray[artikelZaehler-1].getStorageLocation().getCode());
+        lagerort.setText(text);
 
         TextView lagerbestand = (TextView) findViewById(R.id.commission_artikel_artikel_soll);
-        String text = String.valueOf(artikelArray[artikelZaehler-1].getQuantityOnStock());
+        text = String.valueOf(artikelArray[artikelZaehler-1].getQuantityOnStock());
         lagerbestand.setText(text);
 
 

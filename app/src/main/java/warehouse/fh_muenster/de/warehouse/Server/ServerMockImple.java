@@ -1,12 +1,18 @@
 package warehouse.fh_muenster.de.warehouse.Server;
 
+import android.support.annotation.NonNull;
 import android.util.Log;
 
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 
 import warehouse.fh_muenster.de.warehouse.Article;
 import warehouse.fh_muenster.de.warehouse.Commission;
 import warehouse.fh_muenster.de.warehouse.Employee;
+import warehouse.fh_muenster.de.warehouse.StorageLocation;
 
 /**
  * Created by Thomas on 10.05.2016.
@@ -56,9 +62,11 @@ public class ServerMockImple implements ServerMockInterface {
         for(int j = 0; j < 5; j++){
             for(int i = 0; i < 3; i++){
                 int articelCode = rand.nextInt(800000 - 10000) + 10000;
+                StorageLocation location = new StorageLocation(String.valueOf(rand.nextInt(70-1)+1));
                 Article article = new Article(String.valueOf(articelCode), "Tolle Beschreibung des Artikels");
                 article.setQuantityOnStock(rand.nextInt(100 - 5) + 5);
                 article.setQuantityOnCommit(rand.nextInt(10 - 1) + 1);
+                article.setStorageLocation(location);
                 articleArray[i] = article;
             }
             int kommissionCode = rand.nextInt(800000 - 10000) + 10000;
@@ -67,4 +75,25 @@ public class ServerMockImple implements ServerMockInterface {
         }
         return commissionArray;
     }
+
+/*
+    public HashMap<Integer,Commission> getCommissions(Employee picker){
+        HashMap<Integer,Commission> commissionMap = new HashMap<>();
+        HashMap<Integer,Article> articleMap = new HashMap<>();
+        Random rand = new Random();
+        for(int i = 0; i< 6; i++){
+            for(int j = 0; j< 5; j++){
+                int articelCode = rand.nextInt(800000 - 10000) + 10000;
+                Article article = new Article(String.valueOf(articelCode), "Tolle Beschreibung des Artikels");
+                article.setQuantityOnStock(rand.nextInt(100 - 5) + 5);
+                article.setQuantityOnCommit(rand.nextInt(10 - 1) + 1);
+                articleMap.put(articelCode, article);
+            }
+            int kommissionCode = rand.nextInt(800000 - 10000) + 10000;
+            Commission commission = new Commission(kommissionCode , articleMap, picker);
+            commissionMap.put(kommissionCode,commission);
+        }
+    return commissionMap;
+    }
+    */
 }
