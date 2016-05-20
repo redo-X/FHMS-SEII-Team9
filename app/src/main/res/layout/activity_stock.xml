@@ -21,8 +21,40 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="64dp" />
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" >
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true">
+                <TableRow>
+                    <TextView
+                        android:text="Artikel"
+                        android:width="100dp"
+                        android:layout_column="0"
+                        android:layout_weight="0"
+                        />
+                    <TextView
+                        android:text="Menge"
+                        android:width="100dp"
+                        android:layout_column="1"
+                        android:layout_weight="0"
+                        />
+                    <Button
+                        android:text="Ändern"
+                        android:width="100dp"
+                        android:layout_column="1"
+                        android:layout_weight="0"
+                        />
+                </TableRow>
+            </TableLayout>
+        </ScrollView>
 
     </RelativeLayout>
 
