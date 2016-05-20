@@ -3,6 +3,8 @@ package warehouse.fh_muenster.de.warehouse;
 import android.app.Application;
 import android.util.Log;
 
+import java.util.HashMap;
+
 /**
  * Created by Marco on 10.05.16.
  */
@@ -10,6 +12,9 @@ public class WarehouseApplication extends Application {
     private Employee employee;
     private Commission openCommissions[];
     private Commission pickerCommissions[];
+
+    private HashMap<Integer,Commission> openCommissionsMap;
+    private HashMap<Integer,Commission> pickerCommissionsMap;
 
     public Employee getEmployee(){
         return this.employee;
@@ -33,6 +38,22 @@ public class WarehouseApplication extends Application {
 
     public void setPickerCommissions(Commission[] pickerCommissions) {
         this.pickerCommissions = pickerCommissions;
+    }
+
+    public HashMap<Integer, Commission> getOpenCommissionsMap() {
+        return openCommissionsMap;
+    }
+
+    public void setOpenCommissionsMap(HashMap<Integer, Commission> openCommissionsMap) {
+        this.openCommissionsMap = openCommissionsMap;
+    }
+
+    public HashMap<Integer, Commission> getPickerCommissionsMap() {
+        return pickerCommissionsMap;
+    }
+
+    public void setPickerCommissionsMap(HashMap<Integer, Commission> pickerCommissionsMap) {
+        this.pickerCommissionsMap = pickerCommissionsMap;
     }
 
     public Commission getPickerCommissionById(int id){

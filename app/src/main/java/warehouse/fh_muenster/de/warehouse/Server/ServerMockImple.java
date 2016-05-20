@@ -12,6 +12,7 @@ import java.util.Set;
 import warehouse.fh_muenster.de.warehouse.Article;
 import warehouse.fh_muenster.de.warehouse.Commission;
 import warehouse.fh_muenster.de.warehouse.Employee;
+import warehouse.fh_muenster.de.warehouse.Role;
 import warehouse.fh_muenster.de.warehouse.StorageLocation;
 
 /**
@@ -22,6 +23,7 @@ public class ServerMockImple implements ServerMockInterface {
     public Employee login(int employeeNr, String password) {
         if(employeeNr == 123 && password.equals("123")){
             Employee user = new Employee(123, "123");
+            user.setRole(Role.Kommissionierer);
             return user;
         }
         else{
@@ -63,7 +65,7 @@ public class ServerMockImple implements ServerMockInterface {
             for(int i = 0; i < 3; i++){
                 int articelCode = rand.nextInt(800000 - 10000) + 10000;
                 StorageLocation location = new StorageLocation(String.valueOf(rand.nextInt(70-1)+1));
-                Article article = new Article(String.valueOf(articelCode), "Tolle Beschreibung des Artikels");
+                Article article = new Article(String.valueOf(articelCode), "Tolle Beschreibung des Artikels " + i);
                 article.setQuantityOnStock(rand.nextInt(100 - 5) + 5);
                 article.setQuantityOnCommit(rand.nextInt(10 - 1) + 1);
                 article.setStorageLocation(location);
@@ -76,10 +78,10 @@ public class ServerMockImple implements ServerMockInterface {
         return commissionArray;
     }
 
-/*
-    public HashMap<Integer,Commission> getCommissions(Employee picker){
-        HashMap<Integer,Commission> commissionMap = new HashMap<>();
-        HashMap<Integer,Article> articleMap = new HashMap<>();
+
+    public HashMap<Integer,Commission> getCommissionss(Employee picker){
+        HashMap<Integer,Commission> commissionMap = new HashMap<Integer, Commission>();
+        HashMap<Integer,Article> articleMap = new HashMap<Integer, Article>();
         Random rand = new Random();
         for(int i = 0; i< 6; i++){
             for(int j = 0; j< 5; j++){
@@ -95,5 +97,5 @@ public class ServerMockImple implements ServerMockInterface {
         }
     return commissionMap;
     }
-    */
+
 }

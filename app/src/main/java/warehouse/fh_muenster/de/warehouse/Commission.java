@@ -1,5 +1,6 @@
 package warehouse.fh_muenster.de.warehouse;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,6 +12,8 @@ public class Commission {
     private Employee picker;
     private Article articleArray[];
     private int id;
+
+    private HashMap<Integer, Article> articleHashMap;
 
     public Commission() {
     }
@@ -30,6 +33,12 @@ public class Commission {
         this.picker = picker;
         this.articleArray = articleArray;
         this.id = id;
+    }
+
+    public Commission(int id, HashMap<Integer, Article> articleHashMap, Employee picker) {
+        this.id = id;
+        this.articleHashMap = articleHashMap;
+        this.picker = picker;
     }
 
     public Employee getPicker() {

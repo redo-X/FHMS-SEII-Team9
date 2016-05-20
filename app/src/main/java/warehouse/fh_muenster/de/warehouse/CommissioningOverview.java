@@ -16,6 +16,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -28,7 +29,7 @@ public class CommissioningOverview extends AppCompatActivity {
     private ServerMockImple server = new ServerMockImple();
 
     private Commission commissionArray[];
-
+    private HashMap<Integer,Commission> commissionHashMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,12 +51,18 @@ public class CommissioningOverview extends AppCompatActivity {
         if (screen.equals("myCommission")) {
 
             commissionArray = server.getCommissions(myApp.getEmployee());
+            //commissionHashMap = server.getCommissions(myApp.getEmployee());
+            //myApp.setPickerCommissionsMap(commissionHashMap);
+            //printTable(commissionHashMap.size(), screen);
             myApp.setPickerCommissions(commissionArray);
             printTable(commissionArray.length, screen);
         }
         // Wenn offene Kommissionen angezeigt werden
         else {
             commissionArray = server.getFreeCommissions();
+            //commissionHashMap = server.getCommissions(myApp.getEmployee());
+            //myApp.setOpenCommissionsMap(commissionHashMap);
+            //printTable(commissionHashMap.size(), screen);
             myApp.setOpenCommissions(commissionArray);
             printTable(commissionArray.length, screen);
         }

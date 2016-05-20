@@ -29,9 +29,5 @@ public class LoginTaskUnitTest {
         assertNull(employee);
     }
 
-    @Test
-    public void bla(){
-
-    }
 
 }

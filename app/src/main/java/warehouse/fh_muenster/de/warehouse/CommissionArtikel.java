@@ -26,6 +26,7 @@ public class CommissionArtikel extends AppCompatActivity {
     int artikelGesamt = 8;
     private ListView mDrawerList;
     private ArrayAdapter<String> mAdapter;
+    private Article article;
 
     private Commission commission = new Commission();
 
