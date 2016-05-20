@@ -17,6 +17,14 @@ public class mockMenue extends AppCompatActivity {
         Button myCommission = (Button) findViewById(R.id.menu_myCommission);
         Button commissionOverview = (Button) findViewById(R.id.menu_commissionOverview);
 
+        WarehouseApplication myApp = (WarehouseApplication) getApplication();
+        Employee employee = myApp.getEmployee();
+
+        if(employee.getRole().equals(Role.Kommissionierer)){
+            Button lagerbestaende = (Button) findViewById(R.id.mockMenue_lager);
+            lagerbestaende.setVisibility(View.INVISIBLE);
+        }
+
 
         myCommission.setOnClickListener(new View.OnClickListener(){
             @Override

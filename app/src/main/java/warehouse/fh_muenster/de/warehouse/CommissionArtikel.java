@@ -39,6 +39,7 @@ public class CommissionArtikel extends AppCompatActivity {
 
         int id = getIntent().getExtras().getInt("id");
         final Button weiter_btn = (Button) findViewById(R.id.weiter_btn);
+        final Button fehlmenge_btn = (Button) findViewById(R.id.commission_artikel_fehlmengeMelden);
 
         //Erstelle DrawerMenu
         mDrawerList = (ListView) findViewById(R.id.navList);
@@ -93,6 +94,15 @@ public class CommissionArtikel extends AppCompatActivity {
                         artikelZaehler++;
                     }
                 }
+            }
+        });
+
+        fehlmenge_btn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Context context = view.getContext();
+                Intent i = new Intent(context, StockOut.class);
+                i.putExtra("id", article.getCode());
+                startActivity(i);
             }
         });
 

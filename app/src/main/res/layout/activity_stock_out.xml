@@ -9,4 +9,45 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="warehouse.fh_muenster.de.warehouse.StockOut">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Fehlmenge melden"
+        android:id="@+id/stock_out_header"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/stock_out_articelNr"
+        android:layout_below="@+id/stock_out_header"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/stock_out_istMenge_txt"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:hint="Vorhandene Menge (optional)" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Melden"
+        android:id="@+id/stock_out_melden_btn"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/stock_out_istMenge_txt"
+        android:layout_alignEnd="@+id/stock_out_istMenge_txt" />
 </RelativeLayout>

@@ -7,6 +7,7 @@ import warehouse.fh_muenster.de.warehouse.Server.ServerMockImple;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * To work on unit tests, switch the Test Artifact in the Build Variants view.
@@ -28,6 +29,12 @@ public class LoginTaskUnitTest {
         employee = server.login(234,"123");
         assertNull(employee);
     }
-
+    @Test
+    public void loginAsStock(){
+        ServerMockImple server = new ServerMockImple();
+        Employee employee = new Employee();
+        employee = server.login(234,"234");
+        assertTrue(employee.getRole().equals(Role.Lagerist));
+    }
 
 }

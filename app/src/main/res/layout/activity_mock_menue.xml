@@ -54,6 +54,29 @@
                 android:id="@+id/menu_commissionOverview"
                 />
 
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Lagerbestände"
+                android:id="@+id/mockMenue_lager"
+                android:layout_alignTop="@+id/scrollView2"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="105dp"
+                android:layout_alignRight="@+id/scrollView2"
+                android:layout_alignEnd="@+id/scrollView2" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Logout"
+                android:id="@+id/button2"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignRight="@+id/scrollView2"
+                android:layout_alignEnd="@+id/scrollView2" />
+
         </LinearLayout>
     </ScrollView>
 
