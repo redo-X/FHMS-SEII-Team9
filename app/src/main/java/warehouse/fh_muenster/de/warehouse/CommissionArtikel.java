@@ -78,18 +78,14 @@ public class CommissionArtikel extends AppCompatActivity {
                         if(kommissionierteMenge != article.getQuantityOnCommit() ){
                             throw new Exception();
                         }
-
                             artikelZaehler++;
                             setTableRows();
                             kommissionierteMenge_txt.setText("");
-
-
                         //@TODO Prüfen ob kommissionierteMenge < zu kommissionierteMenge
                     }
                     catch (Exception e){
                         // Keine Eingabe oder zu große Eingabe
                         showToast("Eingegebene Menge ist nicht gültig");
-
                     }
                     // Wenn Letzter Artikel Button beschriftung ändern
                     if(artikelZaehler >= artikelGesamt){
@@ -133,24 +129,23 @@ public class CommissionArtikel extends AppCompatActivity {
         artikelanzahlLabel.setText("Artikel " + artikelZaehler + " von " + artikelGesamt);
         // Setzen der ganzen Zeilen
         TextView artikelCode = (TextView) findViewById(R.id.commission_artikel_artikel_code);
-        artikelCode.setText(artikelArray[artikelZaehler-1].getCode());
+        artikelCode.setText(article.getCode());
 
         TextView artikelName = (TextView) findViewById(R.id.commission_artikel_artikel_name);
-        artikelName.setText(artikelArray[artikelZaehler-1].getName());
+        artikelName.setText(article.getName());
 
         TextView lagerort = (TextView) findViewById(R.id.commission_artikel_artikel_storage);
-        String text = String.valueOf(artikelArray[artikelZaehler-1].getStorageLocation().getCode());
+        String text = String.valueOf(article.getStorageLocation().getCode());
         lagerort.setText(text);
 
         TextView lagerbestand = (TextView) findViewById(R.id.commission_artikel_artikel_soll);
-        text = String.valueOf(artikelArray[artikelZaehler-1].getQuantityOnStock());
+        text = String.valueOf(article.getQuantityOnStock());
         lagerbestand.setText(text);
 
 
         TextView kommissionsMenge = (TextView) findViewById(R.id.commission_artikel_artikel_commession);
-        text = String.valueOf(artikelArray[artikelZaehler-1].getQuantityOnCommit());
+        text = String.valueOf(article.getQuantityOnCommit());
         kommissionsMenge.setText(text);
-
     }
 
     private Article[] mapToArray(){
