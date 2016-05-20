@@ -63,7 +63,7 @@ public class CommissionArtikel extends AppCompatActivity {
         weiter_btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 // Letzer Artikel, beenden der Activity und anzeigen von erfollgs meldung
-                if(artikelZaehler >= artikelGesamt){
+                if(artikelZaehler > artikelGesamt){
                     showToast("Kommission erfolgreich abgeschlossen");
                     finish();
                 }
@@ -75,7 +75,7 @@ public class CommissionArtikel extends AppCompatActivity {
                     try{
                         //Wenn gültige Menge eingegben kann nächster Artikel aufgerufen werden
                         kommissionierteMenge = Integer.valueOf(kommissionierteMenge_txt.getText().toString());
-                        if(kommissionierteMenge < 1){
+                        if(kommissionierteMenge != article.getQuantityOnCommit() ){
                             throw new Exception();
                         }
 
@@ -94,6 +94,7 @@ public class CommissionArtikel extends AppCompatActivity {
                     // Wenn Letzter Artikel Button beschriftung ändern
                     if(artikelZaehler >= artikelGesamt){
                         weiter_btn.setText("Kommession abschließen");
+                        artikelZaehler++;
                     }
                 }
             }
@@ -126,10 +127,7 @@ public class CommissionArtikel extends AppCompatActivity {
     private void setTableRows(){
         Article artikelArray[];
         artikelArray = mapToArray();
-        Log.i("sdlkfjlasdjf",String.valueOf(artikelArray.length));
-
-
-
+        article = artikelArray[artikelZaehler-1];
         // Setzen der neuen Überschrift
         TextView artikelanzahlLabel = (TextView) findViewById(R.id.commission_artikelAnzahl_label);
         artikelanzahlLabel.setText("Artikel " + artikelZaehler + " von " + artikelGesamt);
@@ -140,14 +138,10 @@ public class CommissionArtikel extends AppCompatActivity {
         TextView artikelName = (TextView) findViewById(R.id.commission_artikel_artikel_name);
         artikelName.setText(artikelArray[artikelZaehler-1].getName());
 
-
-
-
         TextView lagerort = (TextView) findViewById(R.id.commission_artikel_artikel_storage);
         String text = String.valueOf(artikelArray[artikelZaehler-1].getStorageLocation().getCode());
         lagerort.setText(text);
 
-        Log.i("sdlkfjlasdjf",String.valueOf(artikelZaehler));
         TextView lagerbestand = (TextView) findViewById(R.id.commission_artikel_artikel_soll);
         text = String.valueOf(artikelArray[artikelZaehler-1].getQuantityOnStock());
         lagerbestand.setText(text);
@@ -171,7 +165,6 @@ public class CommissionArtikel extends AppCompatActivity {
 
     private void showToast(String text){
         Context context = getApplicationContext();
-
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();

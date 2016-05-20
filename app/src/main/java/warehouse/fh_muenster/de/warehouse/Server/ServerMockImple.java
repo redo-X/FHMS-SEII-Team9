@@ -109,7 +109,7 @@ public class ServerMockImple implements ServerMockInterface {
         Random rand = new Random();
         for(int i = 0; i< 6; i++){
             HashMap<Integer,Article> articleMap = new HashMap<Integer, Article>();
-            for(int j = 0; j< 5; j++){
+            for(int j = 0; j< rand.nextInt(10-1)+1; j++){
 
                 int articelCode = 5000 + j + (i*1000);
                 StorageLocation location = new StorageLocation(String.valueOf(rand.nextInt(70-1)+1));

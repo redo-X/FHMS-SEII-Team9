@@ -30,14 +30,15 @@ public class CommissioningOverview extends AppCompatActivity {
     private ListView mDrawerList;
     private ArrayAdapter<String> mAdapter;
     private ServerMockImple server = new ServerMockImple();
-
     private Commission commissionArray[];
     private HashMap<Integer,Commission> commissionHashMap;
+    boolean doubleBackToExitPressedOnce = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_commissioning_overview);
+        WarehouseApplication myApp = (WarehouseApplication) getApplication();
         // Speichert welche Screen Variante aufgerufen werden soll
         String screen = getIntent().getExtras().getString("screen");
 
@@ -45,30 +46,17 @@ public class CommissioningOverview extends AppCompatActivity {
         mDrawerList = (ListView) findViewById(R.id.navList);
         addDrawerItems();
 
-        WarehouseApplication myApp = (WarehouseApplication) getApplication();
-
-
         // Wenn employee Kommissionen aufgerufen wird
         if (screen.equals("myCommission")) {
             commissionHashMap = server.getCommissions(myApp.getEmployee());
             myApp.setPickerCommissionsMap(commissionHashMap);
             printTable(commissionHashMap.size(), screen);
-            /*commissionArray = server.getCommissions(myApp.getEmployee());
-            myApp.setPickerCommissions(commissionArray);
-            printTable(commissionArray.length, screen);
-            */
         }
         // Wenn offene Kommissionen angezeigt werden
         else {
-
             commissionHashMap = server.getFreeCommissions();
             myApp.setOpenCommissionsMap(commissionHashMap);
             printTable(commissionHashMap.size(), screen);
-            /*
-            commissionArray = server.getFreeCommissions();
-            myApp.setOpenCommissions(commissionArray);
-            printTable(commissionArray.length, screen);
-            */
         }
     }
 
@@ -93,7 +81,7 @@ public class CommissioningOverview extends AppCompatActivity {
     }
 
     /**
-     * @param anzahlKommessionen Fügt der Tabelle dynamisch neue Zeilen hinzu
+     * Fügt der Tabelle dynamisch neue Zeilen hinzu
      */
     private void printTable(int anzahlKommessionen, String screen) {
         TableLayout table = (TableLayout) findViewById(R.id.table_layout);
@@ -126,40 +114,12 @@ public class CommissioningOverview extends AppCompatActivity {
             row = designRow(i, row);
             i++;
             table.addView(row);
-
         }
 
-
-
-
-/*
-        // Für die Anzahl von Kommissionen erstelle die Tabelllen zeilen mit Array
-        for (int i = 0; i < anzahlKommessionen; i++) {
-
-            Random rand = new Random();
-            int kommissionsNr = commissionArray[i].getId();
-            int menge = commissionArray[i].getArticleArray().length;
-
-            TableRow row = new TableRow(this);
-
-            // Erzeugen der Spalten
-            TextView kommessionSpalte = createTextView(String.valueOf(kommissionsNr));
-            TextView artikelSpalte = createTextView(String.valueOf(menge));
-            Button annehmen_btn = createButton(kommissionsNr, screen);
-
-            //Hinzufügen der Spalten
-            row.addView(kommessionSpalte);
-            row.addView(artikelSpalte);
-            row.addView(annehmen_btn);
-            row = designRow(i, row);
-
-            table.addView(row);
-        }
-        */
     }
 
     /**
-     * Erteugt die Benötigten TextView´s für die Tabelle
+     * Erzeugt die Benötigten TextView´s für die Tabelle
      *
      * @param text
      * @return
@@ -169,7 +129,7 @@ public class CommissioningOverview extends AppCompatActivity {
         spalte.setText(text);
         return spalte;
     }
-
+    // Färbt die Zeilen der Tabelle ein
     private TableRow designRow(int i, TableRow row) {
         if (i % 2 == 0) {
             row.setBackgroundColor(0x50CCCCCC);
@@ -193,10 +153,10 @@ public class CommissioningOverview extends AppCompatActivity {
         }
         annehmen_btn.setId(i);
         if (screen.equals("myCommission")) {
+            //Erzeugt den StartenButton Listener
             annehmen_btn.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View view) {
                     // Starten der ArtikelÜbersicht der Kommission, Übergabe der Kommissions nummer
-
                     Context context = view.getContext();
                     Intent i = new Intent(context, CommissionArtikel.class);
                     i.putExtra("id", annehmen_btn.getId());
@@ -204,6 +164,7 @@ public class CommissioningOverview extends AppCompatActivity {
                 }
             });
         } else {
+            //erzeugt den Annehmen Listener
             annehmen_btn.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View view) {
                     // Medlung das Kommission angenommen wurde
@@ -214,7 +175,6 @@ public class CommissioningOverview extends AppCompatActivity {
         return annehmen_btn;
     }
 
-    boolean doubleBackToExitPressedOnce = false;
 
     @Override
     public void onBackPressed() {
