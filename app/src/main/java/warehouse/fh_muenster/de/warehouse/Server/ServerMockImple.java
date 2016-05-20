@@ -1,5 +1,6 @@
 package warehouse.fh_muenster.de.warehouse.Server;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -35,7 +36,7 @@ public class ServerMockImple implements ServerMockInterface {
     public void getAllCommissions() {
 
     }
-
+/*
     @Override
     public Commission[] getFreeCommissions() {
 
@@ -55,6 +56,29 @@ public class ServerMockImple implements ServerMockInterface {
         }
         return commissionArray;
     }
+  */
+
+    public HashMap<Integer, Commission> getFreeCommissions() {
+        HashMap<Integer,Commission> commissionMap = new HashMap<Integer, Commission>();
+
+        Random rand = new Random();
+        for(int i = 0; i< 10; i++){
+            HashMap<Integer,Article> articleMap = new HashMap<Integer, Article>();
+            for(int j = 0; j< rand.nextInt(10-1)+1; j++){
+
+                int articelCode = 5000 + j + (i*1000);
+                StorageLocation location = new StorageLocation(String.valueOf(rand.nextInt(70-1)+1));
+                Article article = new Article(String.valueOf(articelCode), "Tolle Beschreibung des Artikels");
+                articleMap.put(articelCode, article);
+            }
+            int kommissionCode = 10000 + i;
+            Commission commission = new Commission(kommissionCode , articleMap);
+            commissionMap.put(kommissionCode,commission);
+        }
+        return commissionMap;
+    }
+
+
     /*
     @Override
     public Commission[] getCommissions(Employee picker) {

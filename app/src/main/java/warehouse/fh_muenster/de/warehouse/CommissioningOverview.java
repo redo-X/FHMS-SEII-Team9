@@ -60,15 +60,15 @@ public class CommissioningOverview extends AppCompatActivity {
         }
         // Wenn offene Kommissionen angezeigt werden
         else {
-            /*
-            commissionHashMap = server.getCommissionss(myApp.getEmployee());
+
+            commissionHashMap = server.getFreeCommissions();
             myApp.setOpenCommissionsMap(commissionHashMap);
             printTable(commissionHashMap.size(), screen);
-            */
+            /*
             commissionArray = server.getFreeCommissions();
             myApp.setOpenCommissions(commissionArray);
             printTable(commissionArray.length, screen);
-
+            */
         }
     }
 

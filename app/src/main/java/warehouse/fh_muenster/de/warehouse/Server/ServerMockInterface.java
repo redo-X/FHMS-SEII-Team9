@@ -14,7 +14,7 @@ public interface ServerMockInterface {
 
     public void getAllCommissions();
 
-    public Commission[] getFreeCommissions();
+    public HashMap<Integer,Commission> getFreeCommissions();
 
     public HashMap<Integer,Commission> getCommissions(Employee picker);
 

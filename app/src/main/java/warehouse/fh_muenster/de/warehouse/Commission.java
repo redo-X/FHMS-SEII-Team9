@@ -29,6 +29,11 @@ public class Commission {
         this.picker = null;
     }
 
+    public Commission(int id, HashMap<Integer, Article> articleHashMap) {
+        this.id = id;
+        this.articleHashMap = articleHashMap;
+    }
+
     public Commission(int id, Article[] articleArray, Employee picker) {
         this.picker = picker;
         this.articleArray = articleArray;
