@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Handler;
+import android.support.annotation.BoolRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -49,7 +50,7 @@ public class CommissioningOverview extends AppCompatActivity {
         // Wenn employee Kommissionen aufgerufen wird
         if (screen.equals("myCommission")) {
             //myApp.setPickerCommissionsMap(server.getCommissions(myApp.getEmployee()));
-            CommissionTask commissionTask = new CommissionTask(myApp);
+            CommissionTask commissionTask = new CommissionTask(myApp, true);
             commissionTask.execute(myApp.getEmployee());
 
             //Log.i("BackgroundTask: ", String.valueOf(myApp.getPickerCommissionsMap().size()));
@@ -60,7 +61,9 @@ public class CommissioningOverview extends AppCompatActivity {
         else {
             myApp.setOpenCommissionsMap(server.getFreeCommissions());
                         Log.i("Anzahl Kommissionen: ","myApp.getOpenCommissionsMap().size()");
-            printTable(myApp.getOpenCommissionsMap().size(), screen);
+            CommissionTask commissionTask = new CommissionTask(myApp, false);
+            commissionTask.execute(myApp.getEmployee());
+            //printTable(myApp.getOpenCommissionsMap().size(), screen);
 
         }
     }
@@ -226,19 +229,18 @@ public class CommissioningOverview extends AppCompatActivity {
 
     private class CommissionTask extends AsyncTask<Employee, Integer, HashMap<Integer,Commission>> {
         WarehouseApplication myApp;
-
         ProgressDialog dialog;
+        Boolean isPicker;
 
-
-        public CommissionTask(WarehouseApplication myApp) {
+        public CommissionTask(WarehouseApplication myApp, boolean isPicker) {
             this.myApp = myApp;
+            this.isPicker = isPicker;
         }
 
         protected void onPreExecute() {
             super.onPreExecute();
-
             dialog = ProgressDialog.show(CommissioningOverview.this, "Bitte warten",
-                    "Ihre Kommissionen werden geladen", true);
+                    "Kommissionen werden geladen", true);
         }
 
         @Override
@@ -247,10 +249,17 @@ public class CommissioningOverview extends AppCompatActivity {
                 return null;
             }
             Employee employee = params[0];
-            ServerMockImple server = new ServerMockImple();
+            if(isPicker == false){
+                ServerMockImple server = new ServerMockImple();
+                HashMap<Integer,Commission> commissionHashMap = server.getFreeCommissions();
+                return commissionHashMap;
+            }
+            else{
+                ServerMockImple server = new ServerMockImple();
+                HashMap<Integer,Commission> commissionHashMap = server.getCommissions(employee);
+                return commissionHashMap;
+            }
 
-            HashMap<Integer,Commission> commissionHashMap = server.getCommissions(employee);
-            return commissionHashMap;
         }
 
         protected void onProgessUpdate(Integer... values) {
@@ -259,10 +268,16 @@ public class CommissioningOverview extends AppCompatActivity {
         @Override
         protected void onPostExecute(HashMap<Integer,Commission> result) {
             if (result != null) {
-                myApp.setPickerCommissionsMap(result);
+                if(isPicker == false){
+                    myApp.setOpenCommissionsMap(result);
+                    printTable(myApp.getOpenCommissionsMap().size(), screen);
+                }
+                else {
+                    myApp.setPickerCommissionsMap(result);
+                    printTable(myApp.getPickerCommissionsMap().size(), screen);
+                }
 
                 dialog.dismiss();
-                printTable(myApp.getPickerCommissionsMap().size(), screen);
             }
             else {
 

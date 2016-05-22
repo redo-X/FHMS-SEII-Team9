@@ -52,6 +52,11 @@ public class ServerMockImple implements ServerMockInterface {
             Commission commission = new Commission(kommissionCode , positionCount);
             commissionMap.put(kommissionCode,commission);
         }
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return commissionMap;
     }
 
