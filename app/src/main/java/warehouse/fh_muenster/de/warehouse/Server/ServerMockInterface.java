@@ -2,6 +2,7 @@ package warehouse.fh_muenster.de.warehouse.Server;
 
 import java.util.HashMap;
 
+import warehouse.fh_muenster.de.warehouse.Article;
 import warehouse.fh_muenster.de.warehouse.Commission;
 import warehouse.fh_muenster.de.warehouse.Employee;
 
@@ -12,7 +13,9 @@ public interface ServerMockInterface {
 
     public Employee login(int employeeNr, String password);
 
-    public void getPositionToCommission(int id);
+    //public void getPositionToCommission(int id);
+
+    public HashMap<Integer, Article> getPositionToCommission(int id);
 
     public HashMap<Integer,Commission> getFreeCommissions();
 

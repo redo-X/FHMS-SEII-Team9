@@ -23,6 +23,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import warehouse.fh_muenster.de.warehouse.Server.ServerMockImple;
+
 public class CommissionArtikel extends AppCompatActivity {
     int artikelZaehler = 1;
     int artikelGesamt = 8;
@@ -49,8 +51,11 @@ public class CommissionArtikel extends AppCompatActivity {
         TextView artikelanzahlLabel = (TextView) findViewById(R.id.commission_artikelAnzahl_label);
 
 
-        WarehouseApplication myApp = (WarehouseApplication) getApplication();
+        ServerMockImple server = new ServerMockImple();
+
+        final WarehouseApplication myApp = (WarehouseApplication) getApplication();
         this.commission = myApp.getPickerCommissionById(id);
+        commission.setArticleHashMap(server.getPositionToCommission(commission.getId()));
         artikelGesamt = commission.getArticleHashMap().size();
         //artikelGesamt = commission.getArticleArray().length;
 
@@ -66,6 +71,7 @@ public class CommissionArtikel extends AppCompatActivity {
                 // Letzer Artikel, beenden der Activity und anzeigen von erfollgs meldung
                 if(artikelZaehler > artikelGesamt){
                     showToast("Kommission erfolgreich abgeschlossen");
+                    myApp.getPickerCommissionsMap().remove(commission.getId());
                     finish();
                 }
                 else {

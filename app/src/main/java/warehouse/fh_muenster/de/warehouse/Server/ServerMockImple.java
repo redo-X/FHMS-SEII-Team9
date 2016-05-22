@@ -86,7 +86,7 @@ public class ServerMockImple implements ServerMockInterface {
     }
 
     @Override
-    public void getPositionToCommission(int id) {
+    public HashMap<Integer, Article> getPositionToCommission(int id) {
         Commission commission = null;
         HashMap<Integer,Article> articleHashMap = new HashMap<>();
         Random rand = new Random();
@@ -99,6 +99,7 @@ public class ServerMockImple implements ServerMockInterface {
             article.setStorageLocation(location);
             articleHashMap.put(articelCode, article);
         }
-        commission.setArticleHashMap(articleHashMap);
+        //commission.setArticleHashMap(articleHashMap);
+        return  articleHashMap;
     }
 }

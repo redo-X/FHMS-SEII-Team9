@@ -49,16 +49,14 @@ public class CommissioningOverview extends AppCompatActivity {
 
         // Wenn employee Kommissionen aufgerufen wird
         if (screen.equals("myCommission")) {
-            //CommissionTask commissionTask = new CommissionTask(myApp, true);
-            //commissionTask.execute(myApp.getEmployee());
+
             printTable(myApp.getPickerCommissionsMap().size(),screen);
 
 
         }
         // Wenn offene Kommissionen angezeigt werden
         else {
-            //CommissionTask commissionTask = new CommissionTask(myApp, false);
-            //commissionTask.execute(myApp.getEmployee());
+
             printTable(myApp.getOpenCommissionsMap().size(),screen);
         }
     }
@@ -126,7 +124,7 @@ public class CommissioningOverview extends AppCompatActivity {
 
     }
 
-
+    // Löscht alle zeilen aus der Tabelle
     private void removeTableRows(int rows){
         TableLayout table = (TableLayout) findViewById(R.id.table_layout);
         for(int i = 0; i< rows; i++){
@@ -190,7 +188,6 @@ public class CommissioningOverview extends AppCompatActivity {
                     myApp.addCommissionToPicker(commission.getId());
                     removeTableRows(myApp.getOpenCommissionsMap().size());
                     myApp.removeCommissionFromOpen(commission.getId());
-
                     printTable(myApp.getOpenCommissionsMap().size(), screen);
                     Toast.makeText(getApplicationContext(), "Kommission mit id: " + commission.getId() + " angenommen", Toast.LENGTH_SHORT).show();
                 }
@@ -219,7 +216,7 @@ public class CommissioningOverview extends AppCompatActivity {
         }, 2000);
     }
 
-
+/*
     private class CommissionTask extends AsyncTask<Employee, Integer, HashMap<Integer,Commission>> {
         WarehouseApplication myApp;
         ProgressDialog dialog;
@@ -277,6 +274,6 @@ public class CommissioningOverview extends AppCompatActivity {
         }
     }
 
-
+*/
 
 }
