@@ -49,7 +49,6 @@ public class LoginActivity extends AppCompatActivity {
         private Context context;
 
         public LoginTask(Context context) {
-
             this.context = context;
         }
 
@@ -70,8 +69,6 @@ public class LoginActivity extends AppCompatActivity {
             }
             String password = params[1];
 
-            //Log.i("Background Method Login","Username :" + username + " Password: " + password);
-
             ServerMockImple server = new ServerMockImple();
             Employee employee = new Employee();
             employee = server.login(employeeNr, password);
@@ -79,11 +76,9 @@ public class LoginActivity extends AppCompatActivity {
             return employee;
 
         }
-
         protected void onProgessUpdate(Integer... values) {
             //wird in diesem Beispiel nicht verwendet
         }
-
         protected void onPostExecute(Employee result) {
             if (result != null) {
                 //erfolgreich eingeloggt
@@ -107,9 +102,6 @@ public class LoginActivity extends AppCompatActivity {
                 // Beim Klick auf den Back Button wird der Login Screen nicht mehr aufgerufen sondern die app beendet
                 finish();
             }
-
-
-
             else {
                 // Toast Anzeigen, dass der Login vorgang fehlgeschlagen ist
                 CharSequence text = getResources().getString(R.string.loginActivity_loginFail);

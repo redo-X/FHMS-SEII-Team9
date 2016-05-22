@@ -9,10 +9,7 @@ import java.util.HashMap;
  * Created by Marco on 10.05.16.
  */
 public class WarehouseApplication extends Application {
-    private Employee employee;
-    private Commission openCommissions[];
-    private Commission pickerCommissions[];
-
+    private Employee                    employee;
     private HashMap<Integer,Commission> openCommissionsMap;
     private HashMap<Integer,Commission> pickerCommissionsMap;
 
@@ -24,21 +21,6 @@ public class WarehouseApplication extends Application {
         this.employee = employee;
     }
 
-    public Commission[] getOpenCommissions() {
-        return openCommissions;
-    }
-
-    public void setOpenCommissions(Commission[] openCommissions) {
-        this.openCommissions = openCommissions;
-    }
-
-    public Commission[] getPickerCommissions() {
-        return pickerCommissions;
-    }
-
-    public void setPickerCommissions(Commission[] pickerCommissions) {
-        this.pickerCommissions = pickerCommissions;
-    }
 
     public HashMap<Integer, Commission> getOpenCommissionsMap() {
         return openCommissionsMap;
@@ -55,17 +37,7 @@ public class WarehouseApplication extends Application {
     public void setPickerCommissionsMap(HashMap<Integer, Commission> pickerCommissionsMap) {
         this.pickerCommissionsMap = pickerCommissionsMap;
     }
-    /*
-    public Commission getPickerCommissionById(int id){
 
-        for(int i = 0; i< pickerCommissions.length; i++){
-            if(id == pickerCommissions[i].getId()){
-                return pickerCommissions[i];
-            }
-        }
-        return null;
-    }
-*/
     public Commission getPickerCommissionById(int id){
 
         if(pickerCommissionsMap.containsKey(id)){
@@ -74,6 +46,14 @@ public class WarehouseApplication extends Application {
         else{
             return null;
         }
+    }
+    public void addCommissionToPicker(int id){
+        Commission commission = this.openCommissionsMap.get(id);
+        this.pickerCommissionsMap.put(id,commission);
+    }
+    public void removeCommissionFromOpen(int id){
+        Log.i("CommissionId: ", String.valueOf(id));
+        this.openCommissionsMap.remove(id);
     }
 
 }
