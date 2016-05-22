@@ -31,7 +31,7 @@ public class CommissionArtikel extends AppCompatActivity {
     private ListView mDrawerList;
     private ArrayAdapter<String> mAdapter;
     private Article article;
-
+    WarehouseApplication myApp;
     private Commission commission = new Commission();
 
     @Override
@@ -53,7 +53,7 @@ public class CommissionArtikel extends AppCompatActivity {
 
         ServerMockImple server = new ServerMockImple();
 
-        final WarehouseApplication myApp = (WarehouseApplication) getApplication();
+        myApp = (WarehouseApplication) getApplication();
         this.commission = myApp.getPickerCommissionById(id);
         commission.setArticleHashMap(server.getPositionToCommission(commission.getId()));
         artikelGesamt = commission.getArticleHashMap().size();

@@ -35,6 +35,19 @@ public class CommissioningOverview extends AppCompatActivity {
     boolean doubleBackToExitPressedOnce = false;
     WarehouseApplication myApp;
 
+
+
+    // Wenn Activity wieder in Vordergrund kommt
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Erstelle die Tabelle neu
+        removeTableRows();
+        printTable(myApp.getPickerCommissionsMap().size(),screen);
+    }
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +62,6 @@ public class CommissioningOverview extends AppCompatActivity {
 
         // Wenn employee Kommissionen aufgerufen wird
         if (screen.equals("myCommission")) {
-
             printTable(myApp.getPickerCommissionsMap().size(),screen);
 
 
@@ -125,8 +137,9 @@ public class CommissioningOverview extends AppCompatActivity {
     }
 
     // Löscht alle zeilen aus der Tabelle
-    private void removeTableRows(int rows){
+    private void removeTableRows(){
         TableLayout table = (TableLayout) findViewById(R.id.table_layout);
+         int rows = table.getChildCount() - 2;
         for(int i = 0; i< rows; i++){
             table.removeViewAt(2);
         }
@@ -175,6 +188,7 @@ public class CommissioningOverview extends AppCompatActivity {
                     Intent i = new Intent(context, CommissionArtikel.class);
                     i.putExtra("id", annehmen_btn.getId());
                     startActivity(i);
+
                 }
             });
         } else {
@@ -186,7 +200,7 @@ public class CommissioningOverview extends AppCompatActivity {
                     // Prüfen ob Kommission noch frei
                     WarehouseApplication myApp = (WarehouseApplication) getApplication();
                     myApp.addCommissionToPicker(commission.getId());
-                    removeTableRows(myApp.getOpenCommissionsMap().size());
+                    removeTableRows();
                     myApp.removeCommissionFromOpen(commission.getId());
                     printTable(myApp.getOpenCommissionsMap().size(), screen);
                     Toast.makeText(getApplicationContext(), "Kommission mit id: " + commission.getId() + " angenommen", Toast.LENGTH_SHORT).show();
