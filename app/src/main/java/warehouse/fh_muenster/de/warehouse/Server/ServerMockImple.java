@@ -15,6 +15,7 @@ import warehouse.fh_muenster.de.warehouse.Commission;
 import warehouse.fh_muenster.de.warehouse.Employee;
 import warehouse.fh_muenster.de.warehouse.Role;
 import warehouse.fh_muenster.de.warehouse.StorageLocation;
+import warehouse.fh_muenster.de.warehouse.WarehouseApplication;
 
 /**
  * Created by Thomas on 10.05.2016.
@@ -37,10 +38,6 @@ public class ServerMockImple implements ServerMockInterface {
         }
     }
 
-    @Override
-    public void getAllCommissions() {
-
-    }
 
     public HashMap<Integer, Commission> getFreeCommissions() {
         HashMap<Integer,Commission> commissionMap = new HashMap<Integer, Commission>();
@@ -53,7 +50,7 @@ public class ServerMockImple implements ServerMockInterface {
             commissionMap.put(kommissionCode,commission);
         }
         try {
-            Thread.sleep(3000);
+            Thread.sleep(300);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -65,27 +62,43 @@ public class ServerMockImple implements ServerMockInterface {
 
         Random rand = new Random();
         for(int i = 0; i< 6; i++){
-            HashMap<Integer,Article> articleMap = new HashMap<Integer, Article>();
-            for(int j = 0; j< rand.nextInt(10-1)+1; j++){
-
-                int articelCode = 5000 + j + (i*1000);
-                StorageLocation location = new StorageLocation(String.valueOf(rand.nextInt(70-1)+1));
-                Article article = new Article(String.valueOf(articelCode), "Tolle Beschreibung des Artikels");
-                article.setQuantityOnStock(rand.nextInt(100 - 5) + 5);
+            //HashMap<Integer,Article> articleMap = new HashMap<Integer, Article>();
+            //for(int j = 0; j< rand.nextInt(10-1)+1; j++){
+              //  int articelCode = 5000 + j + (i*1000);
+                //StorageLocation location = new StorageLocation(String.valueOf(rand.nextInt(70-1)+1));
+                //Article article = new Article(String.valueOf(articelCode), "Tolle Beschreibung des Artikels");
+                /*article.setQuantityOnStock(rand.nextInt(100 - 5) + 5);
                 article.setQuantityOnCommit(rand.nextInt(10 - 1) + 1);
                 article.setStorageLocation(location);
-                articleMap.put(articelCode, article);
-            }
+                articleMap.put(articelCode, article);*/
+            //}
             int kommissionCode = 100 + i;
-            Commission commission = new Commission(kommissionCode , articleMap, picker);
+            int positionCount = rand.nextInt(10-1)+1;
+            Commission commission = new Commission(kommissionCode , positionCount);
             commissionMap.put(kommissionCode,commission);
         }
         try {
-            Thread.sleep(5000);
+            Thread.sleep(500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     return commissionMap;
     }
 
+    @Override
+    public void getPositionToCommission(int id) {
+        Commission commission = null;
+        HashMap<Integer,Article> articleHashMap = new HashMap<>();
+        Random rand = new Random();
+        for(int j = 0; j< rand.nextInt(10-1)+1; j++){
+          int articelCode = 5000 + j + (j*1000);
+            StorageLocation location = new StorageLocation(String.valueOf(rand.nextInt(70-1)+1));
+            Article article = new Article(String.valueOf(articelCode), "Tolle Beschreibung des Artikels");
+            article.setQuantityOnStock(rand.nextInt(100 - 5) + 5);
+            article.setQuantityOnCommit(rand.nextInt(10 - 1) + 1);
+            article.setStorageLocation(location);
+            articleHashMap.put(articelCode, article);
+        }
+        commission.setArticleHashMap(articleHashMap);
+    }
 }

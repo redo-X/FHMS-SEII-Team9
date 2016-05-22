@@ -49,22 +49,17 @@ public class CommissioningOverview extends AppCompatActivity {
 
         // Wenn employee Kommissionen aufgerufen wird
         if (screen.equals("myCommission")) {
-            //myApp.setPickerCommissionsMap(server.getCommissions(myApp.getEmployee()));
-            CommissionTask commissionTask = new CommissionTask(myApp, true);
-            commissionTask.execute(myApp.getEmployee());
+            //CommissionTask commissionTask = new CommissionTask(myApp, true);
+            //commissionTask.execute(myApp.getEmployee());
+            printTable(myApp.getPickerCommissionsMap().size(),screen);
 
-            //Log.i("BackgroundTask: ", String.valueOf(myApp.getPickerCommissionsMap().size()));
 
-            //printTable(myApp.getPickerCommissionsMap().size(), screen);
         }
         // Wenn offene Kommissionen angezeigt werden
         else {
-            myApp.setOpenCommissionsMap(server.getFreeCommissions());
-                        Log.i("Anzahl Kommissionen: ","myApp.getOpenCommissionsMap().size()");
-            CommissionTask commissionTask = new CommissionTask(myApp, false);
-            commissionTask.execute(myApp.getEmployee());
-            //printTable(myApp.getOpenCommissionsMap().size(), screen);
-
+            //CommissionTask commissionTask = new CommissionTask(myApp, false);
+            //commissionTask.execute(myApp.getEmployee());
+            printTable(myApp.getOpenCommissionsMap().size(),screen);
         }
     }
 
@@ -112,9 +107,7 @@ public class CommissioningOverview extends AppCompatActivity {
 
             HashMap<Integer,Article> artikel = commission.getArticleHashMap();
             int menge = commission.getPositionCount();
-            if(screen.equals("myCommission")){
-                menge = artikel.size();
-            }
+
             TableRow row = new TableRow(this);
 
             // Erzeugen der Spalten
@@ -242,7 +235,6 @@ public class CommissioningOverview extends AppCompatActivity {
             dialog = ProgressDialog.show(CommissioningOverview.this, "Bitte warten",
                     "Kommissionen werden geladen", true);
         }
-
         @Override
         protected HashMap<Integer,Commission> doInBackground(Employee... params) {
             if (params.length != 1) {

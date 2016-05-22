@@ -12,7 +12,7 @@ public interface ServerMockInterface {
 
     public Employee login(int employeeNr, String password);
 
-    public void getAllCommissions();
+    public void getPositionToCommission(int id);
 
     public HashMap<Integer,Commission> getFreeCommissions();
 
