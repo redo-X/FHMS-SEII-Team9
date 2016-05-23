@@ -79,9 +79,11 @@ public class CommissionArtikel extends AppCompatActivity {
                         if(kommissionierteMenge != article.getQuantityOnCommit() ){
                             throw new Exception();
                         }
-                            artikelZaehler++;
-                            setTableRows();
-                            kommissionierteMenge_txt.setText("");
+                        artikelZaehler++;
+                        double progress = artikelGesamt / artikelZaehler;
+                        commission.setProgress(progress);
+                        setTableRows();
+                        kommissionierteMenge_txt.setText("");
                         //@TODO Prüfen ob kommissionierteMenge < zu kommissionierteMenge
                     }
                     catch (Exception e){

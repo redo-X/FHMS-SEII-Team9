@@ -133,7 +133,6 @@ public class CommissioningOverview extends AppCompatActivity {
             i++;
             table.addView(row);
         }
-
     }
 
     // Löscht alle zeilen aus der Tabelle

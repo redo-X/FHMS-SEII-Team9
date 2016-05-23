@@ -10,12 +10,10 @@ import java.util.Map;
 public class Commission {
 
     private Employee                    picker;
-
     private int                         id,
                                         positionCount;
-
     private HashMap<Integer, Article>   articleHashMap;
-
+    private double                      progress;
 
 
     public Commission() {
@@ -63,5 +61,13 @@ public class Commission {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public double getProgress() {
+        return progress;
+    }
+
+    public void setProgress(double progress) {
+        this.progress = progress;
     }
 }
