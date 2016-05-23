@@ -107,4 +107,18 @@ public class ServerMockImple implements ServerMockInterface {
         //commission.setArticleHashMap(articleHashMap);
         return  articleHashMap;
     }
+
+    public HashMap<Integer, Article> getAllArticle () {
+        HashMap<Integer, Article> aHashMap = new HashMap<>();
+        Random rand = new Random();
+        for(int j = 0; j< 20; j++){
+            int articelCode = 5000 + j + (j*1000);
+            StorageLocation location = new StorageLocation(String.valueOf(rand.nextInt(70-1)+1));
+            Article article = new Article(String.valueOf(articelCode), "Tolle Beschreibung des Artikels");
+            article.setQuantityOnStock(rand.nextInt(100 - 5) + 5);
+            article.setStorageLocation(location);
+            aHashMap.put(articelCode, article);
+        }
+        return aHashMap;
+    }
 }

@@ -8,4 +8,9 @@
 
     <string name="loginActivity_loginSuccess">Eingeloggt als </string>
     <string name="loginActivity_loginFail">Login fehlgeschalgen</string>
+
+    <string name="stock_table_head_ueberschrift">Bestandskontrolle</string>
+    <string name="stock_table_head_artikel">Artikel</string>
+    <string name="stock_table_head_menge">Menge</string>
+    <string name="stock_table_head_aendern">Ändern</string>
 </resources>
