@@ -16,6 +16,7 @@ public class mockMenue extends AppCompatActivity {
 
         Button myCommission = (Button) findViewById(R.id.menu_myCommission);
         Button commissionOverview = (Button) findViewById(R.id.menu_commissionOverview);
+        Button stock = (Button) findViewById(R.id.mockMenue_lager);
 
         WarehouseApplication myApp = (WarehouseApplication) getApplication();
         Employee employee = myApp.getEmployee();
@@ -47,6 +48,15 @@ public class mockMenue extends AppCompatActivity {
 
             }
 
+        });
+
+        stock.setOnClickListener(new View.OnClickListener(){
+            @Override
+
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), Stock.class);
+                startActivity(i);
+            }
         });
     }
 }
