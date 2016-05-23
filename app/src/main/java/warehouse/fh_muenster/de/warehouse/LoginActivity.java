@@ -19,7 +19,7 @@ import warehouse.fh_muenster.de.warehouse.Server.ServerMockImple;
 
 
 public class LoginActivity extends AppCompatActivity {
-
+    ProgressDialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +53,13 @@ public class LoginActivity extends AppCompatActivity {
         public LoginTask(Context context, WarehouseApplication myApp) {
             this.context = context;
             this.myApp = myApp;
+        }
+
+
+        protected void onPreExecute() {
+            super.onPreExecute();
+            dialog = ProgressDialog.show(LoginActivity.this, "Bitte warten",
+                    "Daten werden geladen", true);
         }
 
         protected Employee doInBackground(String... params) {
@@ -111,17 +118,18 @@ public class LoginActivity extends AppCompatActivity {
     }
     private class CommissionTask extends AsyncTask<Employee, Integer, HashMap<Integer,Commission>> {
         WarehouseApplication myApp;
-        ProgressDialog dialog;
+        //ProgressDialog dialog;
 
         public CommissionTask(WarehouseApplication myApp) {
             this.myApp = myApp;
         }
-
+/*
         protected void onPreExecute() {
             super.onPreExecute();
             dialog = ProgressDialog.show(LoginActivity.this, "Bitte warten",
                     "Daten werden geladen", true);
         }
+        */
         @Override
         protected HashMap<Integer,Commission> doInBackground(Employee... params) {
             if (params.length != 1) {

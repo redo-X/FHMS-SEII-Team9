@@ -26,6 +26,11 @@ public class ServerMockImple implements ServerMockInterface {
         if(employeeNr == 123 && password.equals("123")){
             Employee user = new Employee(123, "123");
             user.setRole(Role.Kommissionierer);
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             return user;
         }
         else if(employeeNr == 234 && password.equals("234")){
