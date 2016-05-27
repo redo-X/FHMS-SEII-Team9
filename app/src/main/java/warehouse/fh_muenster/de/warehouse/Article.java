@@ -7,7 +7,8 @@ public class Article {
 private String              code,
                             name;
     private int             quantityOnStock,
-                            quantityOnCommit;
+                            quantityOnCommit,
+                            quantitiyCommited;
     private StorageLocation storageLocation;
 
 
@@ -45,6 +46,14 @@ private String              code,
 
     public int getQuantityOnCommit() {
         return quantityOnCommit;
+    }
+
+    public int getQuantitiyCommited() {
+        return quantitiyCommited;
+    }
+
+    public void setQuantitiyCommited(int quantitiyCommited) {
+        this.quantitiyCommited = quantitiyCommited;
     }
 
     public void setQuantityOnCommit(int quantityOnCommit) {

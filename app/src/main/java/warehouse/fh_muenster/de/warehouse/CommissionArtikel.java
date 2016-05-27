@@ -79,6 +79,7 @@ public class CommissionArtikel extends AppCompatActivity {
                         if(kommissionierteMenge != article.getQuantityOnCommit() ){
                             throw new Exception();
                         }
+                        article.setQuantitiyCommited(kommissionierteMenge);
                         artikelZaehler++;
                         double progress = artikelGesamt / artikelZaehler;
                         commission.setProgress(progress);
