@@ -2,7 +2,9 @@ package warehouse.fh_muenster.de.warehouse;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Handler;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -62,10 +64,12 @@ public class CommissionArtikel extends AppCompatActivity {
 
         weiter_btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+                Vibrator v = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
                 // Letzer Artikel, beenden der Activity und anzeigen von erfollgs meldung
                 if(artikelZaehler > artikelGesamt){
                     showToast("Kommission erfolgreich abgeschlossen");
                     myApp.getPickerCommissionsMap().remove(commission.getId());
+                    v.vibrate(50);
                     finish();
                 }
                 else {
@@ -85,6 +89,8 @@ public class CommissionArtikel extends AppCompatActivity {
                         commission.setProgress(progress);
                         setTableRows();
                         kommissionierteMenge_txt.setText("");
+
+                        v.vibrate(50);
                         //@TODO Prüfen ob kommissionierteMenge < zu kommissionierteMenge
                     }
                     catch (Exception e){
@@ -161,4 +167,28 @@ public class CommissionArtikel extends AppCompatActivity {
     public void onBackPressed() {
         showToast("Kommission kann nicht abgebrochen werden");
     }
+
+    private class progressUpdateTask extends AsyncTask<Integer, Integer, Boolean> {
+        @Override
+        protected Boolean doInBackground(Integer... params) {
+            if (params.length != 1) {
+                return null;
+            }
+            int istMenge = params[0];
+            // Nachricht zusammen bauen und losschicken
+
+            return true;
+        }
+
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            if (result != null) {
+
+            }
+            else {
+            }
+        }
+    }
+
 }
