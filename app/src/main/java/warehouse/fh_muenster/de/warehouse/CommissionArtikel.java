@@ -30,6 +30,7 @@ import warehouse.fh_muenster.de.warehouse.Server.ServerMockImple;
 public class CommissionArtikel extends AppCompatActivity {
     int artikelZaehler = 1;
     int artikelGesamt = 8;
+    int committedArticle = 0;
     private Article article;
     WarehouseApplication myApp;
     private Commission commission = new Commission();
@@ -45,10 +46,8 @@ public class CommissionArtikel extends AppCompatActivity {
 
         TextView ueberschrift = (TextView) findViewById(R.id.commission_id_label);
         TextView artikelanzahlLabel = (TextView) findViewById(R.id.commission_artikelAnzahl_label);
-
-
         ServerMockImple server = new ServerMockImple();
-
+        
         myApp = (WarehouseApplication) getApplication();
         this.commission = myApp.getPickerCommissionById(id);
         commission.setArticleHashMap(server.getPositionToCommission(commission.getId()));
@@ -64,7 +63,6 @@ public class CommissionArtikel extends AppCompatActivity {
 
         weiter_btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-
                 EditText kommissionierteMenge_txt = (EditText) findViewById(R.id.commission_artikel_artikel_commession_edit);
                 String kommissionierteMengeString = kommissionierteMenge_txt.getText().toString();
                 try{
@@ -72,16 +70,26 @@ public class CommissionArtikel extends AppCompatActivity {
                     int kommissionierteMenge = Integer.valueOf(kommissionierteMengeString);
                     // Wenn menge passend oder 0
                     if(kommissionierteMenge == article.getQuantityOnCommit() || kommissionierteMenge == 0){
+                        if(kommissionierteMenge != 0){
+                            committedArticle++;
+                        }
                         article.setQuantitiyCommited(kommissionierteMenge);
                         if(artikelZaehler != artikelGesamt){
                             setNextArticle(kommissionierteMenge_txt);
                             v.vibrate(50);
                         }
                         else{
+                            double progress = committedArticle / artikelGesamt;
+                            if(progress == 1){
+                                myApp.getPickerCommissionsMap().remove(commission.getId());
+                            }
                             showToast("Kommission beendet!");
                             v.vibrate(50);
                             finish();
                         }
+                        double progress = committedArticle / artikelGesamt;
+                        commission.setProgress(progress);
+                        Log.i("CommissionProgress", String.valueOf(progress));
                     }
                     else{
                         throw new IllegalArgumentException();
@@ -93,9 +101,6 @@ public class CommissionArtikel extends AppCompatActivity {
                 catch (IllegalArgumentException ie){
                     showToast("Zu kommissionierende Mengen stimmen nicht überein");
                 }
-
-
-
                /* Vibrator v = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
                 // Letzer Artikel, beenden der Activity und anzeigen von erfollgs meldung
                 if(artikelZaehler > artikelGesamt){
@@ -153,6 +158,7 @@ public class CommissionArtikel extends AppCompatActivity {
         artikelZaehler++;
         kommissionierteMenge_txt.setText("");
         setTableRows();
+
     }
 
     private void setTableRows(){
