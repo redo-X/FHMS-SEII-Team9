@@ -64,7 +64,39 @@ public class CommissionArtikel extends AppCompatActivity {
 
         weiter_btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Vibrator v = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
+
+                EditText kommissionierteMenge_txt = (EditText) findViewById(R.id.commission_artikel_artikel_commession_edit);
+                String kommissionierteMengeString = kommissionierteMenge_txt.getText().toString();
+                try{
+                    Vibrator v = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
+                    int kommissionierteMenge = Integer.valueOf(kommissionierteMengeString);
+                    // Wenn menge passend oder 0
+                    if(kommissionierteMenge == article.getQuantityOnCommit() || kommissionierteMenge == 0){
+                        article.setQuantitiyCommited(kommissionierteMenge);
+                        if(artikelZaehler != artikelGesamt){
+                            setNextArticle(kommissionierteMenge_txt);
+                            v.vibrate(50);
+                        }
+                        else{
+                            showToast("Kommission beendet!");
+                            v.vibrate(50);
+                            finish();
+                        }
+                    }
+                    else{
+                        throw new IllegalArgumentException();
+                    }
+                }
+                catch (NumberFormatException e){
+                    showToast("Eingegebene Menge ist nicht gültig");
+                }
+                catch (IllegalArgumentException ie){
+                    showToast("Zu kommissionierende Mengen stimmen nicht überein");
+                }
+
+
+
+               /* Vibrator v = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
                 // Letzer Artikel, beenden der Activity und anzeigen von erfollgs meldung
                 if(artikelZaehler > artikelGesamt){
                     showToast("Kommission erfolgreich abgeschlossen");
@@ -103,7 +135,7 @@ public class CommissionArtikel extends AppCompatActivity {
                         artikelZaehler++;
                     }
                 }
-            }
+           */ }
         });
 
         fehlmenge_btn.setOnClickListener(new View.OnClickListener() {
@@ -115,6 +147,12 @@ public class CommissionArtikel extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void setNextArticle(EditText kommissionierteMenge_txt){
+        artikelZaehler++;
+        kommissionierteMenge_txt.setText("");
+        setTableRows();
     }
 
     private void setTableRows(){
