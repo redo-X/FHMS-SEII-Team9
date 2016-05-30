@@ -3,7 +3,8 @@
     package="warehouse.fh_muenster.de.warehouse">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
+
     <application
         android:name=".WarehouseApplication"
         android:allowBackup="true"
@@ -22,7 +23,8 @@
         <activity android:name=".CommissionArtikel" />
         <activity android:name=".mockMenue" />
         <activity android:name=".Stock" />
-        <activity android:name=".StockOut"></activity>
+        <activity android:name=".StockOut" />
+        <activity android:name=".StockAmendment"></activity>
     </application>
 
 </manifest>
