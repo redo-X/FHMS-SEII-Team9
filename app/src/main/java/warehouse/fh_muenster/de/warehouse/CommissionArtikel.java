@@ -90,6 +90,8 @@ public class CommissionArtikel extends AppCompatActivity {
                         double progress = committedArticle / artikelGesamt;
                         commission.setProgress(progress);
                         Log.i("CommissionProgress", String.valueOf(progress));
+                        ProgressUpdateTask updateTask = new ProgressUpdateTask(article.getCode(),commission.getId());
+                        updateTask.execute(kommissionierteMenge);
                     }
                     else{
                         throw new IllegalArgumentException();
@@ -100,47 +102,7 @@ public class CommissionArtikel extends AppCompatActivity {
                 }
                 catch (IllegalArgumentException ie){
                     showToast("Zu kommissionierende Mengen stimmen nicht überein");
-                }
-               /* Vibrator v = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
-                // Letzer Artikel, beenden der Activity und anzeigen von erfollgs meldung
-                if(artikelZaehler > artikelGesamt){
-                    showToast("Kommission erfolgreich abgeschlossen");
-                    myApp.getPickerCommissionsMap().remove(commission.getId());
-                    v.vibrate(50);
-                    finish();
-                }
-                else {
-                    // Noch mehere Artikel zu Kommissionieren
-                    // Einlesen der zu Kommissionierten Menge
-                    EditText kommissionierteMenge_txt = (EditText) findViewById(R.id.commission_artikel_artikel_commession_edit);
-                    int kommissionierteMenge = 0;
-                    try{
-                        //Wenn gültige Menge eingegben kann nächster Artikel aufgerufen werden
-                        kommissionierteMenge = Integer.valueOf(kommissionierteMenge_txt.getText().toString());
-                        if(kommissionierteMenge != article.getQuantityOnCommit() ){
-                            throw new Exception();
-                        }
-                        article.setQuantitiyCommited(kommissionierteMenge);
-                        artikelZaehler++;
-                        double progress = artikelGesamt / artikelZaehler;
-                        commission.setProgress(progress);
-                        setTableRows();
-                        kommissionierteMenge_txt.setText("");
-
-                        v.vibrate(50);
-                        //@TODO Prüfen ob kommissionierteMenge < zu kommissionierteMenge
-                    }
-                    catch (Exception e){
-                        // Keine Eingabe oder zu große Eingabe
-                        showToast("Eingegebene Menge ist nicht gültig");
-                    }
-                    // Wenn Letzter Artikel Button beschriftung ändern
-                    if(artikelZaehler >= artikelGesamt){
-                        weiter_btn.setText("Kommession abschließen");
-                        artikelZaehler++;
-                    }
-                }
-           */ }
+                } }
         });
 
         fehlmenge_btn.setOnClickListener(new View.OnClickListener() {
@@ -212,7 +174,15 @@ public class CommissionArtikel extends AppCompatActivity {
         showToast("Kommission kann nicht abgebrochen werden");
     }
 
-    private class progressUpdateTask extends AsyncTask<Integer, Integer, Boolean> {
+    private class ProgressUpdateTask extends AsyncTask<Integer, Integer, Boolean> {
+        private String articleCode;
+        private int commissionId;
+
+        public ProgressUpdateTask(String articleCode, int commissionId) {
+            this.articleCode = articleCode;
+            this.commissionId = commissionId;
+        }
+
         @Override
         protected Boolean doInBackground(Integer... params) {
             if (params.length != 1) {
