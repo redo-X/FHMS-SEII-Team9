@@ -16,4 +16,5 @@
 
     <string name="drawer_geoeffnet">Menü öffnen</string>
     <string name="drawer_geschlossen">Menü geschlossen</string>
+    <string name="action_settings">Settings</string>
 </resources>

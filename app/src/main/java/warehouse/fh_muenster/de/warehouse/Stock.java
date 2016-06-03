@@ -23,10 +23,9 @@ public class Stock extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stock);
 
-        Button stockA = (Button) findViewById(R.id.testButtonStockA);
-
         printTable();
 
+        Button stockA = (Button) findViewById(R.id.testButtonStockA);
         stockA.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
