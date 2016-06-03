@@ -13,4 +13,7 @@
     <string name="stock_table_head_artikel">Artikel</string>
     <string name="stock_table_head_menge">Menge</string>
     <string name="stock_table_head_aendern">Ändern</string>
+
+    <string name="drawer_geoeffnet">Menü öffnen</string>
+    <string name="drawer_geschlossen">Menü geschlossen</string>
 </resources>
