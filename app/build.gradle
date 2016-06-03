@@ -38,5 +38,5 @@ dependencies {
     androidTestCompile 'com.android.support.test.espresso:espresso-intents:2.2'
     // add this for webview testing support
     androidTestCompile 'com.android.support.test.espresso:espresso-web:2.2'
-    compile files('libs/ksoap2-android-assembly-3.4.0-jar-with-dependencies.jar')
+    compile files('libs/ksoap2-android-assembly-3.6.1-jar-with-dependencies.jar')
 }

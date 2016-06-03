@@ -16,6 +16,7 @@ import android.widget.Toast;
 import java.util.HashMap;
 
 import warehouse.fh_muenster.de.warehouse.Server.ServerMockImple;
+import warehouse.fh_muenster.de.warehouse.Server.WebService;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -75,6 +76,9 @@ public class LoginActivity extends AppCompatActivity {
 
             }
             String password = params[1];
+
+            WebService.LoginRequest(employeeNr,password);
+
             ServerMockImple server = new ServerMockImple();
             Employee employee = new Employee();
             employee = server.login(employeeNr, password);
