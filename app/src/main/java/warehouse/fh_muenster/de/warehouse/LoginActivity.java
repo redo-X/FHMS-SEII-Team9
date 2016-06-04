@@ -76,13 +76,11 @@ public class LoginActivity extends AppCompatActivity {
 
             }
             String password = params[1];
-
-            WebService.LoginRequest(employeeNr,password);
+            Employee employee = new Employee();
+            employee = WebService.LoginRequest(employeeNr,password);
 
             ServerMockImple server = new ServerMockImple();
-            Employee employee = new Employee();
             employee = server.login(employeeNr, password);
-            //Log.i("Employee",employee.toString());
             return employee;
 
         }

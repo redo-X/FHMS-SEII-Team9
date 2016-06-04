@@ -10,6 +10,7 @@ import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
 import warehouse.fh_muenster.de.warehouse.Employee;
+import warehouse.fh_muenster.de.warehouse.Role;
 
 /**
  * Created by futur on 03.06.2016.
@@ -20,7 +21,7 @@ public class WebService {
     //Webservice URL - WSDL File location
     private static String URL = "";
 
-    public static String LoginRequest(int employeeNr, String password) {
+    public static Employee LoginRequest(int employeeNr, String password) {
 
         String methodName = "LoginRequest";
         String soap_action = NAMESPACE + methodName;
@@ -40,27 +41,36 @@ public class WebService {
         request.addProperty(piPassword);
 
 
-
-
         SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
         envelope.setOutputSoapObject(request);
-        Log.i("InternetLog: ", request.toString());
+        Log.i("WebService Request: ", request.toString());
         HttpTransportSE andoridHttpTransport = new HttpTransportSE(URL);
         try {
             andoridHttpTransport.call(soap_action, envelope);
             SoapPrimitive responce = (SoapPrimitive)envelope.getResponse();
+            Log.i("WebService Responce: ", responce.toString());
             int elementCount = responce.getAttributeCount();
             if(elementCount > 0){
                 int role = (Integer) responce.getAttribute(0);
                 int sessionId = (Integer) responce.getAttribute(0);
-                Log.i("LoginRequest", String.valueOf(role));
+
+                Employee employee = new Employee();
+                employee.setEmployeeNr(employeeNr);
+                employee.setSessionId(sessionId);
+                if(role == 1){
+                    employee.setRole(Role.Lagerist);
+                }
+                else{
+                    employee.setRole(Role.Kommissionierer);
+                }
+                return employee;
             }
         }
         catch (Exception e){
-            Log.i("Internet ", "No Connecion");
+            Log.i("WebService ", "No Connecion");
         }
 
-        return  "";
+        return null;
     }
 
 
