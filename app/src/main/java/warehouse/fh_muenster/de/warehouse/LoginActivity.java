@@ -77,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
             }
             String password = params[1];
             Employee employee = new Employee();
-            employee = WebService.LoginRequest(employeeNr,password);
+            employee = WebService.loginRequest(employeeNr,password);
 
             ServerMockImple server = new ServerMockImple();
             employee = server.login(employeeNr, password);

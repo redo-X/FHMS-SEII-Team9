@@ -21,7 +21,7 @@ public class WebService {
     //Webservice URL - WSDL File location
     private static String URL = "";
 
-    public static Employee LoginRequest(int employeeNr, String password) {
+    public static Employee loginRequest(int employeeNr, String password) {
 
         String methodName = "LoginRequest";
         String soap_action = NAMESPACE + methodName;
@@ -73,5 +73,38 @@ public class WebService {
         return null;
     }
 
+
+    public static Boolean logoutRequest(int sessionId) {
+
+        String methodName = "LogoutRequest";
+        String soap_action = NAMESPACE + methodName;
+
+        SoapObject request = new SoapObject(NAMESPACE, methodName);
+
+        PropertyInfo piSessionId = new PropertyInfo();
+        piSessionId.setName("sessionId");
+        piSessionId.setValue(sessionId);
+        piSessionId.setType(Integer.class);
+        request.addProperty(piSessionId);
+
+        SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+        envelope.setOutputSoapObject(request);
+        Log.i("WebService Request: ", request.toString());
+        HttpTransportSE andoridHttpTransport = new HttpTransportSE(URL);
+        try {
+            andoridHttpTransport.call(soap_action, envelope);
+            SoapPrimitive responce = (SoapPrimitive)envelope.getResponse();
+            Log.i("WebService Responce: ", responce.toString());
+            int elementCount = responce.getAttributeCount();
+            if(elementCount > 0){
+
+            }
+        }
+        catch (Exception e){
+            Log.i("WebService ", "No Connecion");
+        }
+
+        return null;
+    }
 
 }

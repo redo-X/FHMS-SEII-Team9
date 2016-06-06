@@ -38,12 +38,7 @@ public class LoginActivityEspressoTest {
 
     @Test
     public void isLoginErfolgreich() {
-        onView(withId((R.id.name_txt)))
-                .perform(typeText("Bob"), closeSoftKeyboard());
-        onView(withId((R.id.password_txt)))
-                .perform(typeText("123"), closeSoftKeyboard());
-        onView(withId(R.id.login_btn)).perform(click());
 
-        //onView(withText("")).inRoot(withDecorView(not(is(getActivity().getWindow.getDecorView())))).check(matches(isDisplayed()));
+
     }
 }
