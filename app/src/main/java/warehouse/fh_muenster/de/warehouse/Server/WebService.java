@@ -17,9 +17,9 @@ import warehouse.fh_muenster.de.warehouse.Role;
  */
 public class WebService {
     //Namespace of the Webservice - can be found in WSDL
-    private static String NAMESPACE = "";
+    private static String NAMESPACE = "http://localhost";
     //Webservice URL - WSDL File location
-    private static String URL = "";
+    private static String URL = "http://localhost";
 
     public static Employee loginRequest(int employeeNr, String password) {
 
@@ -45,6 +45,7 @@ public class WebService {
         envelope.setOutputSoapObject(request);
         Log.i("WebService Request: ", request.toString());
         HttpTransportSE andoridHttpTransport = new HttpTransportSE(URL);
+
         try {
             andoridHttpTransport.call(soap_action, envelope);
             SoapPrimitive responce = (SoapPrimitive)envelope.getResponse();
@@ -68,6 +69,7 @@ public class WebService {
         }
         catch (Exception e){
             Log.i("WebService ", "No Connecion");
+            Log.e("WebError" , e.toString());
         }
 
         return null;
