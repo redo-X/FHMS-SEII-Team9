@@ -1,5 +1,7 @@
 package warehouse.fh_muenster.de.warehouse.Server;
 
+import android.util.Log;
+
 import org.ksoap2.HeaderProperty;
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.SoapFault;
@@ -8,8 +10,6 @@ import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -19,9 +19,9 @@ import warehouse.fh_muenster.de.warehouse.Employee;
 import warehouse.fh_muenster.de.warehouse.Role;
 
 /**
- * Created by futur on 08.06.2016.
+ * Created by Thomas on 08.06.2016.
  */
-public class Server implements ServerMockInterface{
+public class Server implements ServerMockInterface {
     /**
      * Namespace is the targetNamespace in the WSDL.
      */
@@ -39,25 +39,38 @@ public class Server implements ServerMockInterface{
         String METHOD_NAME = "login";
         SoapObject response = null;
         try {
-            response = executeSoapAction(METHOD_NAME, employeeNr, password);
-            int sessionId = Integer.parseInt(response.getPrimitivePropertySafelyAsString("sessionId"));
-            int role = Integer.parseInt(response.getPrimitivePropertySafelyAsString("role"));
-            if (sessionId != 0) {
+           response = executeSoapAction(METHOD_NAME, employeeNr, password);
 
-                result = new Employee(employeeNr, password);
-                if(role == 0){
-                    result.setRole(Role.Kommissionierer);
+            if (response != null) {
+                int sessionId = Integer.parseInt(response.getPrimitivePropertySafelyAsString("sessionId"));
+                int role = Integer.parseInt(response.getPrimitivePropertySafelyAsString("role"));
+                if (sessionId != 0) {
+                    result = new Employee(employeeNr,sessionId);
+                    if (role == 0) {
+                        result.setRole(Role.Kommissionierer);
+                    } else if (role == 1) {
+                        result.setRole(Role.Lagerist);
+                    }
+                    return result;
+                } else {
+                    return null;
                 }
-                else if(role == 1){
-                    result.setRole(Role.Lagerist);
-                }
-                return result;
-            }
-            else {
-                return null;
             }
         } catch (SoapFault e) {
             return null;
+        }
+        return null;
+    }
+
+
+    public void logout(int sessionId){
+        String METHOD_NAME = "logout";
+        SoapObject response = null;
+        try {
+            response = executeSoapAction(METHOD_NAME, sessionId);
+        }
+        catch (SoapFault e) {
+
         }
     }
 
@@ -79,6 +92,17 @@ public class Server implements ServerMockInterface{
         catch (SoapFault e) {
             //throw new NoSessionException(e.getMessage());
             return null;
+        }
+    }
+
+    public void updateQuantityOnCommissionPosition(int commissionId, String articleCode, int quantity){
+        String METHOD_NAME = "logout";
+        SoapObject response = null;
+        try {
+            response = executeSoapAction(METHOD_NAME, commissionId, articleCode, quantity);
+        }
+        catch (SoapFault e) {
+
         }
     }
 
@@ -105,7 +129,6 @@ public class Server implements ServerMockInterface{
         for (int i=0; i<args.length; i++) {
             request.addProperty("arg" + i, args[i]);
         }
-
 	    /* Next create a SOAP envelop. Use the SoapSerializationEnvelope class, which extends the SoapEnvelop class, with support for SOAP
 	     * Serialization format, which represents the structure of a SOAP serialized message. The main advantage of SOAP serialization is portability.
 	     * The constant SoapEnvelope.VER11 indicates SOAP Version 1.1, which is default for a JAX-WS webservice endpoint under JBoss.
@@ -130,6 +153,7 @@ public class Server implements ServerMockInterface{
 	        /* Get the web service response using the getResponse method of the SoapSerializationEnvelope object.
 	         * The result has to be cast to SoapPrimitive, the class used to encapsulate primitive types, or to SoapObject.
 	         */
+
             result = envelope.getResponse();
 
             if (result instanceof SoapFault) {
@@ -137,10 +161,12 @@ public class Server implements ServerMockInterface{
             }
         }
         catch (SoapFault e) {
+            Log.i("Server: " , e.getMessage());
             e.printStackTrace();
             throw e;
         }
         catch (Exception e) {
+            Log.i("Server: " , e.getMessage());
             e.printStackTrace();
         }
 

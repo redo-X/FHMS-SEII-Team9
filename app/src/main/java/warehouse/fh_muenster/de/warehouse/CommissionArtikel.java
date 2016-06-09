@@ -25,6 +25,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import warehouse.fh_muenster.de.warehouse.Server.Server;
 import warehouse.fh_muenster.de.warehouse.Server.ServerMockImple;
 
 public class CommissionArtikel extends AppCompatActivity {
@@ -89,7 +90,6 @@ public class CommissionArtikel extends AppCompatActivity {
                         }
                         double progress = committedArticle / artikelGesamt;
                         commission.setProgress(progress);
-                        Log.i("CommissionProgress", String.valueOf(progress));
                         ProgressUpdateTask updateTask = new ProgressUpdateTask(article.getCode(),commission.getId());
                         updateTask.execute(kommissionierteMenge);
                     }
@@ -189,7 +189,8 @@ public class CommissionArtikel extends AppCompatActivity {
                 return null;
             }
             int istMenge = params[0];
-            // Nachricht zusammen bauen und losschicken
+            Server server = new Server();
+            server.updateQuantityOnCommissionPosition(commissionId,articleCode,istMenge);
 
             return true;
         }
