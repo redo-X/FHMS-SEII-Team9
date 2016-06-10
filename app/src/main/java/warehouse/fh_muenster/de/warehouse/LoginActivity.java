@@ -80,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
             Employee employee = new Employee();
             //employee = WebService.loginRequest(employeeNr,password);
             Server servers = new Server();
-            //servers.login(employeeNr,password);
+            //employee = servers.login(employeeNr,password);
 
             ServerMockImple server = new ServerMockImple();
             employee = server.login(employeeNr, password);

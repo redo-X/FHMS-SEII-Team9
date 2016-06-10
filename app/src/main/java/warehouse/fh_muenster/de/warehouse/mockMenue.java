@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class mockMenue extends AppCompatActivity {
 
@@ -17,6 +18,8 @@ public class mockMenue extends AppCompatActivity {
         Button myCommission = (Button) findViewById(R.id.menu_myCommission);
         Button commissionOverview = (Button) findViewById(R.id.menu_commissionOverview);
         Button stock = (Button) findViewById(R.id.mockMenue_lager);
+        Button logout = (Button) findViewById(R.id.logout_btn);
+        Button scanner = (Button) findViewById(R.id.mock_scan_btn);
 
         WarehouseApplication myApp = (WarehouseApplication) getApplication();
         Employee employee = myApp.getEmployee();
@@ -57,6 +60,41 @@ public class mockMenue extends AppCompatActivity {
                 Intent i = new Intent(getApplicationContext(), Stock.class);
                 startActivity(i);
             }
+        });
+
+        scanner.setOnClickListener(new View.OnClickListener(){
+            @Override
+
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), Scanner.class);
+                startActivity(i);
+            }
+        });
+
+        logout.setOnClickListener(new View.OnClickListener(){
+            @Override
+
+            public void onClick(View v) {
+
+                WarehouseApplication myApp = (WarehouseApplication) getApplication();
+                LogoutTask logoutTask = new LogoutTask();
+                logoutTask.execute(myApp.getEmployee().getSessionId());
+
+                myApp.setOpenCommissionsMap(null);
+                myApp.setPickerCommissionsMap(null);
+                myApp.setEmployee(null);
+
+                CharSequence text = "Logout";
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(mockMenue.this, text, duration);
+                toast.show();
+                /*
+                Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(i);
+                */
+                finish();
+            }
+
         });
     }
 }

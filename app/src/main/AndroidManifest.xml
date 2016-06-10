@@ -24,7 +24,8 @@
         <activity android:name=".mockMenue" />
         <activity android:name=".Stock" />
         <activity android:name=".StockOut" />
-        <activity android:name=".StockAmendment"></activity>
+        <activity android:name=".StockAmendment" />
+        <activity android:name=".Scanner"></activity>
     </application>
 
 </manifest>
