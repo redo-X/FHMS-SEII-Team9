@@ -21,6 +21,11 @@ public class Employee {
         this.password = password;
     }
 
+    public Employee(int employeeNr,  int sessionId) {
+        this.employeeNr = employeeNr;
+        this.sessionId = sessionId;
+    }
+
     public Employee() {
     }
 

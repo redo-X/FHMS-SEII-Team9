@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import java.util.HashMap;
 
+import warehouse.fh_muenster.de.warehouse.Server.Server;
 import warehouse.fh_muenster.de.warehouse.Server.ServerMockImple;
 import warehouse.fh_muenster.de.warehouse.Server.WebService;
 
@@ -77,7 +78,9 @@ public class LoginActivity extends AppCompatActivity {
             }
             String password = params[1];
             Employee employee = new Employee();
-            employee = WebService.loginRequest(employeeNr,password);
+            //employee = WebService.loginRequest(employeeNr,password);
+            Server servers = new Server();
+            //servers.login(employeeNr,password);
 
             ServerMockImple server = new ServerMockImple();
             employee = server.login(employeeNr, password);
@@ -90,12 +93,7 @@ public class LoginActivity extends AppCompatActivity {
                 WarehouseApplication myapp = (WarehouseApplication) getApplication();
                 // Setzen des Employess im Zentralen Speicher
                 myapp.setEmployee(result);
-                Log.i("Eingeloggt als: ",result.toString());
-                // Toast Anzeigen, dass der Login vorgang erfolgreich war
-                /*CharSequence text = getResources().getString(R.string.loginActivity_loginSuccess) +" " + result.getEmployeeNr();
-                int duration = Toast.LENGTH_SHORT;
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();*/
+
                 /*
                 //Nächste Activity aufrufen
                 //@TODO andern Intent wieder Starten wenn richtiges Menü da ist
@@ -149,9 +147,6 @@ public class LoginActivity extends AppCompatActivity {
             return commissionHashMap;
         }
 
-        protected void onProgessUpdate(Integer... values) {
-            //wird in diesem Beispiel nicht verwendet
-        }
         @Override
         protected void onPostExecute(HashMap<Integer,Commission> result) {
             if (result != null) {
