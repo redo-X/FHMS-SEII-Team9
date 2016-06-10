@@ -22,6 +22,10 @@ android {
     }
 }
 
+repositories {
+    jcenter()
+}
+
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
@@ -40,4 +44,7 @@ dependencies {
     // add this for webview testing support
     androidTestCompile 'com.android.support.test.espresso:espresso-web:2.2'
     compile files('libs/ksoap2-android-assembly-3.6.1-jar-with-dependencies.jar')
+
+    compile 'com.journeyapps:zxing-android-embedded:3.3.0@aar'
+    compile 'com.google.zxing:core:3.2.1'
 }

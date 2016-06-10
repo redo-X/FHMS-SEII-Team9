@@ -3,6 +3,7 @@ package warehouse.fh_muenster.de.warehouse;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,12 +23,40 @@ import warehouse.fh_muenster.de.warehouse.Server.WebService;
 
 public class LoginActivity extends AppCompatActivity {
     ProgressDialog dialog;
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == 1){
+            if(resultCode == RESULT_OK){
+
+                EditText mitarbiterNr_txt = (EditText) findViewById(R.id.mitarbeiterNr_txt);
+                String code =  data.getExtras().getString("code");
+                mitarbiterNr_txt.setText(code);
+
+
+            }
+
+        }
+
+
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
         // Click auf den Einloggen Button
+        final Button scann = (Button) findViewById(R.id.loginScann_btn);
+        scann.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), Scanner.class);
+                startActivityForResult(i, 1);
+            }
+
+        });
+
         final Button login_btn = (Button) findViewById(R.id.login_btn);
         login_btn.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -36,6 +65,9 @@ public class LoginActivity extends AppCompatActivity {
                 // Einlesen der Werte aus der LoginActivity
                 EditText mitarbiterNr_txt = (EditText) findViewById(R.id.mitarbeiterNr_txt);
                 EditText password_tet = (EditText) findViewById(R.id.password_txt);
+
+
+
                 WarehouseApplication myApp = (WarehouseApplication) getApplication();
 
                 LoginTask login = new LoginTask(v.getContext(), myApp);
