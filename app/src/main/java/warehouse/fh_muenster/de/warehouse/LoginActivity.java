@@ -24,22 +24,17 @@ import warehouse.fh_muenster.de.warehouse.Server.WebService;
 public class LoginActivity extends AppCompatActivity {
     ProgressDialog dialog;
 
+    // Get Code from Scanner
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == 1){
             if(resultCode == RESULT_OK){
-
                 EditText mitarbiterNr_txt = (EditText) findViewById(R.id.mitarbeiterNr_txt);
                 String code =  data.getExtras().getString("code");
                 mitarbiterNr_txt.setText(code);
-
-
+                Scanner.setRun(0);
             }
-
         }
-
-
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +83,6 @@ public class LoginActivity extends AppCompatActivity {
             this.context = context;
             this.myApp = myApp;
         }
-
 
         protected void onPreExecute() {
             super.onPreExecute();

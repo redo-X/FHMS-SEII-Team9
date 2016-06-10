@@ -25,20 +25,24 @@ public class Server implements ServerMockInterface {
     /**
      * Namespace is the targetNamespace in the WSDL.
      */
-    private static final String NAMESPACE = "http://onlinebanking.xbank.de/";
+    private static final String NAMESPACE = "http://integration.warehouse.de/";
 
     /**
      * The WSDL URL.
      */
-    private static final String URL = "http://10.0.2.2:8080/xbank/XbankOnlineIntegration";
+    private static final String URL = "http://10.70.28.97:8080/WarehouseService-ejb-1.0.0/SessionManagementIntegration";
 
 
     @Override
     public Employee login(int employeeNr, String password) {
         Employee result = null;
-        String METHOD_NAME = "login";
+        String METHOD_NAME = "Login";
         SoapObject response = null;
         try {
+            LoginRequest request = new LoginRequest();
+            request.setEmployeeNr(employeeNr);
+            request.setPassword(password);
+
            response = executeSoapAction(METHOD_NAME, employeeNr, password);
 
             if (response != null) {
@@ -46,11 +50,7 @@ public class Server implements ServerMockInterface {
                 int role = Integer.parseInt(response.getPrimitivePropertySafelyAsString("role"));
                 if (sessionId != 0) {
                     result = new Employee(employeeNr,sessionId);
-                    if (role == 0) {
-                        result.setRole(Role.Kommissionierer);
-                    } else if (role == 1) {
-                        result.setRole(Role.Lagerist);
-                    }
+                    result.setRole(Role.fromInt(role));
                     return result;
                 } else {
                     return null;
@@ -147,8 +147,8 @@ public class Server implements ServerMockInterface {
 	        /* Make the soap call using the SOAP_ACTION and the soap envelop. */
             List<HeaderProperty> reqHeaders = null;
 
-            @SuppressWarnings({"unused", "unchecked"})
-            List<HeaderProperty> respHeaders = androidHttpTransport.call("", envelope, reqHeaders);
+
+            List resp = androidHttpTransport.call("", envelope, reqHeaders);
 
 	        /* Get the web service response using the getResponse method of the SoapSerializationEnvelope object.
 	         * The result has to be cast to SoapPrimitive, the class used to encapsulate primitive types, or to SoapObject.

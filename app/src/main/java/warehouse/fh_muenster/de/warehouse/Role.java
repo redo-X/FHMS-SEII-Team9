@@ -17,6 +17,17 @@ public enum Role {
         return code;
     }
 
+    public static Role fromInt(int code) {
+        switch (code) {
+            case 2:
+                return Kommissionierer;
+            case 1:
+                return Lagerist;
+            default:
+                return Kommissionierer;
+        }
+    }
+
     public String toString() {
         return String.format("%s: %s", this.name(), String.valueOf(this.code));
     }
