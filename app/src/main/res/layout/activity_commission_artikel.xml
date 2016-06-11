@@ -38,8 +38,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/commission_artikelAnzahl_label"
-        android:layout_above="@+id/weiter_btn">
+        android:layout_below="@+id/commission_artikelAnzahl_label">
 
         <TableLayout
             android:stretchColumns="*"
@@ -111,7 +110,7 @@
                     android:width="100dp"
                     android:layout_column="0"
                     android:layout_weight="0"
-                    />
+                    android:id="@+id/comission_articel_soll_menge_label" />
                 <TextView
                     android:text="Blub"
                     android:width="100dp"
@@ -127,7 +126,7 @@
                     android:width="100dp"
                     android:layout_column="0"
                     android:layout_weight="0"
-                    />
+                    android:id="@+id/commission_artikel_artikel_commession_label" />
                 <TextView
                     android:text="Blub"
                     android:width="100dp"
@@ -174,5 +173,16 @@
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/scrollView"
         android:layout_alignEnd="@+id/scrollView" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Scan"
+        android:id="@+id/commission_articel_scann_btn"
+        android:layout_above="@+id/weiter_btn"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/weiter_btn"
+        android:layout_alignEnd="@+id/weiter_btn" />
 
 </RelativeLayout>

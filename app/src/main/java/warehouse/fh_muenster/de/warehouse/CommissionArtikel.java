@@ -2,6 +2,8 @@ package warehouse.fh_muenster.de.warehouse;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Vibrator;
@@ -32,9 +34,37 @@ public class CommissionArtikel extends AppCompatActivity {
     int artikelZaehler = 1;
     int artikelGesamt = 8;
     int committedArticle = 0;
+    boolean scann = false;
+    String code = "";
     private Article article;
     WarehouseApplication myApp;
     private Commission commission = new Commission();
+
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == 1){
+            if(resultCode == RESULT_OK){
+                String code =  data.getExtras().getString("code");
+                this.code = code;
+                Scanner.setRun(0);
+
+                if(article.getCode().equals(code)){
+                    scann = true;
+                    setTableRowsVvisible();
+                }
+                else{
+                    showToast("Artikel stimmen nicht überein");
+                }
+            }
+        }
+    }
+
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        disableOrientationChangeInRunningConfig();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +74,7 @@ public class CommissionArtikel extends AppCompatActivity {
         int id = getIntent().getExtras().getInt("id");
         final Button weiter_btn = (Button) findViewById(R.id.weiter_btn);
         final Button fehlmenge_btn = (Button) findViewById(R.id.commission_artikel_fehlmengeMelden);
+        final Button scan_btn = (Button) findViewById(R.id.commission_articel_scann_btn);
 
         TextView ueberschrift = (TextView) findViewById(R.id.commission_id_label);
         TextView artikelanzahlLabel = (TextView) findViewById(R.id.commission_artikelAnzahl_label);
@@ -54,12 +85,21 @@ public class CommissionArtikel extends AppCompatActivity {
         commission.setArticleHashMap(server.getPositionToCommission(commission.getId()));
         artikelGesamt = commission.getArticleHashMap().size();
         //artikelGesamt = commission.getArticleArray().length;
-
+        setTableRowsInvisible();
 
 
         ueberschrift.setText("Kommission mit der Nummer: " + String.valueOf(id) + " ausgewählt\n");
         setTableRows();
         //artikelanzahlLabel.setText("Artikel " + artikelZaehler +  " von " + artikelGesamt);
+
+        scan_btn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), Scanner.class);
+                startActivityForResult(i, 1);
+            }
+
+        });
 
 
         weiter_btn.setOnClickListener(new View.OnClickListener() {
@@ -92,6 +132,7 @@ public class CommissionArtikel extends AppCompatActivity {
                         commission.setProgress(progress);
                         ProgressUpdateTask updateTask = new ProgressUpdateTask(article.getCode(),commission.getId());
                         updateTask.execute(kommissionierteMenge);
+                        setTableRowsInvisible();
                     }
                     else{
                         throw new IllegalArgumentException();
@@ -120,7 +161,6 @@ public class CommissionArtikel extends AppCompatActivity {
         artikelZaehler++;
         kommissionierteMenge_txt.setText("");
         setTableRows();
-
     }
 
     private void setTableRows(){
@@ -149,6 +189,55 @@ public class CommissionArtikel extends AppCompatActivity {
         TextView kommissionsMenge = (TextView) findViewById(R.id.commission_artikel_artikel_commession);
         text = String.valueOf(article.getQuantityOnCommit());
         kommissionsMenge.setText(text);
+
+
+    }
+
+    private void setTableRowsInvisible(){
+        TextView artikelanzahlLabel = (TextView) findViewById(R.id.commission_artikelAnzahl_label);
+        TextView lagerbestand = (TextView) findViewById(R.id.commission_artikel_artikel_soll);
+        TextView kommissionsMenge = (TextView) findViewById(R.id.commission_artikel_artikel_commession);
+        TextView sollMengeLabel = (TextView) findViewById(R.id.comission_articel_soll_menge_label);
+        TextView kommissionsmenge = (TextView) findViewById(R.id.commission_artikel_artikel_commession_label);
+        EditText kommissionierteMengePicker = (EditText) findViewById(R.id.commission_artikel_artikel_commession_edit);
+        Button fehlmenge = (Button) findViewById(R.id.commission_artikel_fehlmengeMelden);
+        Button weiter = (Button) findViewById(R.id.weiter_btn);
+        Button scan  = (Button) findViewById(R.id.commission_articel_scann_btn);
+
+        //artikelanzahlLabel.setVisibility(View.INVISIBLE);
+        lagerbestand.setVisibility(View.INVISIBLE);
+        kommissionsMenge.setVisibility(View.INVISIBLE);
+        sollMengeLabel.setVisibility(View.INVISIBLE);
+        kommissionsmenge.setVisibility(View.INVISIBLE);
+        kommissionierteMengePicker.setVisibility(View.INVISIBLE);
+        fehlmenge.setVisibility(View.INVISIBLE);
+        weiter.setVisibility(View.INVISIBLE);
+        scan.setVisibility(View.VISIBLE);
+
+    }
+
+    private void setTableRowsVvisible(){
+        TextView artikelanzahlLabel = (TextView) findViewById(R.id.commission_artikelAnzahl_label);
+        TextView lagerbestand = (TextView) findViewById(R.id.commission_artikel_artikel_soll);
+        TextView kommissionsMenge = (TextView) findViewById(R.id.commission_artikel_artikel_commession);
+        TextView sollMengeLabel = (TextView) findViewById(R.id.comission_articel_soll_menge_label);
+        TextView kommissionsmenge = (TextView) findViewById(R.id.commission_artikel_artikel_commession_label);
+        EditText kommissionierteMengePicker = (EditText) findViewById(R.id.commission_artikel_artikel_commession_edit);
+        Button fehlmenge = (Button) findViewById(R.id.commission_artikel_fehlmengeMelden);
+        Button weiter = (Button) findViewById(R.id.weiter_btn);
+        Button scan  = (Button) findViewById(R.id.commission_articel_scann_btn);
+
+
+        artikelanzahlLabel.setVisibility(View.VISIBLE);
+        lagerbestand.setVisibility(View.VISIBLE);
+        kommissionsMenge.setVisibility(View.VISIBLE);
+        sollMengeLabel.setVisibility(View.VISIBLE);
+        kommissionsmenge.setVisibility(View.VISIBLE);
+        kommissionierteMengePicker.setVisibility(View.VISIBLE);
+        fehlmenge.setVisibility(View.VISIBLE);
+        weiter.setVisibility(View.VISIBLE);
+        scan.setVisibility(View.INVISIBLE);
+
     }
 
     private Article[] mapToArray(){
@@ -166,6 +255,13 @@ public class CommissionArtikel extends AppCompatActivity {
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
+    }
+
+
+    private void disableOrientationChangeInRunningConfig() {
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        } else setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 
     // Verhindern das durch zurück Button kommission abgebrochen wird
