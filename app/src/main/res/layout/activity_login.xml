@@ -20,8 +20,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="46dp"
-        android:layout_toLeftOf="@+id/loginScann_btn"
-        android:layout_toStartOf="@+id/loginScann_btn" />
+        android:layout_alignRight="@+id/login_btn" />
 
 
     <EditText
@@ -51,12 +50,11 @@
         android:layout_alignRight="@+id/password_txt"
         android:layout_alignEnd="@+id/password_txt" />
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
+    <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="scann"
         android:id="@+id/loginScann_btn"
+        android:src="@android:drawable/ic_menu_camera"
         android:layout_alignTop="@+id/mitarbeiterNr_txt"
         android:layout_alignRight="@+id/password_txt"
         android:layout_alignEnd="@+id/password_txt" />

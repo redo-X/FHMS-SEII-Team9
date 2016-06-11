@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -74,7 +75,7 @@ public class CommissionArtikel extends AppCompatActivity {
         int id = getIntent().getExtras().getInt("id");
         final Button weiter_btn = (Button) findViewById(R.id.weiter_btn);
         final Button fehlmenge_btn = (Button) findViewById(R.id.commission_artikel_fehlmengeMelden);
-        final Button scan_btn = (Button) findViewById(R.id.commission_articel_scann_btn);
+        final ImageButton scan_btn = (ImageButton) findViewById(R.id.commission_articel_scann_btn);
 
         TextView ueberschrift = (TextView) findViewById(R.id.commission_id_label);
         TextView artikelanzahlLabel = (TextView) findViewById(R.id.commission_artikelAnzahl_label);
@@ -202,7 +203,7 @@ public class CommissionArtikel extends AppCompatActivity {
         EditText kommissionierteMengePicker = (EditText) findViewById(R.id.commission_artikel_artikel_commession_edit);
         Button fehlmenge = (Button) findViewById(R.id.commission_artikel_fehlmengeMelden);
         Button weiter = (Button) findViewById(R.id.weiter_btn);
-        Button scan  = (Button) findViewById(R.id.commission_articel_scann_btn);
+        ImageButton scan  = (ImageButton) findViewById(R.id.commission_articel_scann_btn);
 
         //artikelanzahlLabel.setVisibility(View.INVISIBLE);
         lagerbestand.setVisibility(View.INVISIBLE);
@@ -225,7 +226,7 @@ public class CommissionArtikel extends AppCompatActivity {
         EditText kommissionierteMengePicker = (EditText) findViewById(R.id.commission_artikel_artikel_commession_edit);
         Button fehlmenge = (Button) findViewById(R.id.commission_artikel_fehlmengeMelden);
         Button weiter = (Button) findViewById(R.id.weiter_btn);
-        Button scan  = (Button) findViewById(R.id.commission_articel_scann_btn);
+        ImageButton scan  = (ImageButton) findViewById(R.id.commission_articel_scann_btn);
 
 
         artikelanzahlLabel.setVisibility(View.VISIBLE);

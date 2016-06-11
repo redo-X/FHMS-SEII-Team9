@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         // Click auf den Einloggen Button
-        final Button scann = (Button) findViewById(R.id.loginScann_btn);
+        final ImageButton scann = (ImageButton) findViewById(R.id.loginScann_btn);
         scann.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {

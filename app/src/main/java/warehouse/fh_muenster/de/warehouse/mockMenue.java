@@ -19,7 +19,6 @@ public class mockMenue extends AppCompatActivity {
         Button commissionOverview = (Button) findViewById(R.id.menu_commissionOverview);
         Button stock = (Button) findViewById(R.id.mockMenue_lager);
         Button logout = (Button) findViewById(R.id.logout_btn);
-        Button scanner = (Button) findViewById(R.id.mock_scan_btn);
 
         WarehouseApplication myApp = (WarehouseApplication) getApplication();
         Employee employee = myApp.getEmployee();
@@ -62,14 +61,7 @@ public class mockMenue extends AppCompatActivity {
             }
         });
 
-        scanner.setOnClickListener(new View.OnClickListener(){
-            @Override
 
-            public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), Scanner.class);
-                startActivity(i);
-            }
-        });
 
         logout.setOnClickListener(new View.OnClickListener(){
             @Override

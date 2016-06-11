@@ -174,12 +174,12 @@
         android:layout_alignRight="@+id/scrollView"
         android:layout_alignEnd="@+id/scrollView" />
 
-    <Button
+    <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Scan"
         android:id="@+id/commission_articel_scann_btn"
         android:layout_above="@+id/weiter_btn"
+        android:src="@android:drawable/ic_menu_camera"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/weiter_btn"

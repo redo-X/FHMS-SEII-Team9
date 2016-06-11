@@ -80,13 +80,4 @@
         </LinearLayout>
     </ScrollView>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Scanner"
-        android:id="@+id/mock_scan_btn"
-        android:layout_alignBottom="@+id/scrollView2"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="218dp" />
-
 </RelativeLayout>
