@@ -17,4 +17,5 @@
     <string name="drawer_open">Menü öffnen</string>
     <string name="drawer_close">Menü schließen</string>
     <string name="drawer_title">Zurück</string>
+    <string name="action_settings">Einstellungen</string>
 </resources>
