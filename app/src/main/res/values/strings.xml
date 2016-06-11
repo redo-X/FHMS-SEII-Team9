@@ -7,14 +7,14 @@
     <string name="commissioningOverview_exit">Bitte drücken Sie erneut die Zurück Taste um die App zu beenden</string>
 
     <string name="loginActivity_loginSuccess">Eingeloggt als </string>
-    <string name="loginActivity_loginFail">Login fehlgeschalgen</string>
+    <string name="loginActivity_loginFail">Login fehlgeschlagen</string>
 
-    <string name="stock_table_head_ueberschrift">Bestandskontrolle</string>
-    <string name="stock_table_head_artikel">Artikel</string>
-    <string name="stock_table_head_menge">Menge</string>
-    <string name="stock_table_head_aendern">Ändern</string>
+    <string name="stock_table_head_headline">Bestandskontrolle</string>
+    <string name="stock_table_head_article">Artikel</string>
+    <string name="stock_table_head_amount">Menge</string>
+    <string name="stock_table_head_alter">Ändern</string>
 
-    <string name="drawer_geoeffnet">Menü öffnen</string>
-    <string name="drawer_geschlossen">Menü geschlossen</string>
-    <string name="action_settings">Einstellungen</string>
+    <string name="drawer_open">Menü öffnen</string>
+    <string name="drawer_close">Menü schließen</string>
+    <string name="drawer_title">Zurück</string>
 </resources>

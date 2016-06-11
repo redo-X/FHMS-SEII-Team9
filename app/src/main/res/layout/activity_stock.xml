@@ -37,7 +37,7 @@
                 android:id="@+id/stock_table_layout">
                 <TableRow>
                     <TextView
-                    android:text="@string/stock_table_head_ueberschrift"
+                    android:text="@string/stock_table_head_headline"
                     android:width="100dp"
                     android:layout_column="0"
                     android:layout_weight="1"
@@ -45,19 +45,19 @@
                 </TableRow>
                 <TableRow>
                     <TextView
-                        android:text="@string/stock_table_head_artikel"
+                        android:text="@string/stock_table_head_article"
                         android:width="100dp"
                         android:layout_column="0"
                         android:layout_weight="0"
                         />
                     <TextView
-                        android:text="@string/stock_table_head_menge"
+                        android:text="@string/stock_table_head_amount"
                         android:width="100dp"
                         android:layout_column="1"
                         android:layout_weight="0"
                         />
                     <TextView
-                        android:text="@string/stock_table_head_aendern"
+                        android:text="@string/stock_table_head_alter"
                         android:width="100dp"
                         android:layout_column="1"
                         android:layout_weight="0"

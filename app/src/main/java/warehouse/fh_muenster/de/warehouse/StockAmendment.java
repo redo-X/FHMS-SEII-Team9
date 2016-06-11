@@ -5,7 +5,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -41,7 +40,7 @@ public class StockAmendment extends AppCompatActivity {
     }
 
     private void addDrawerItems() {
-        String[] MenuArray = {"Meine Kommissionen", "Offene Kommissionen", "LogOut"};
+        String[] MenuArray = {"Meine Kommissionen", "Offene Kommissionen", "Lagerbestände", "Logout"};
         mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, MenuArray);
         mListLayout = (ListView) findViewById(R.id.navList);
         mListLayout.setAdapter(mAdapter);
@@ -58,11 +57,11 @@ public class StockAmendment extends AppCompatActivity {
     }
 
     private void setupDrawer() {
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_geoeffnet, R.string.drawer_geschlossen) {
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close) {
 
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
-                getSupportActionBar().setTitle("Navigation");
+                getSupportActionBar().setTitle(R.string.drawer_title);
                 invalidateOptionsMenu();
             }
 
@@ -88,19 +87,9 @@ public class StockAmendment extends AppCompatActivity {
         super.onConfigurationChanged(newConfig);
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
         if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
