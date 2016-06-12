@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -40,8 +41,17 @@ public class StockAmendment extends AppCompatActivity {
     }
 
     private void addDrawerItems() {
-        String[] MenuArray = {"Meine Kommissionen", "Offene Kommissionen", "Lagerbestände", "Logout"};
-        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, MenuArray);
+        WarehouseApplication myApp = (WarehouseApplication) getApplication();
+        Employee employee = myApp.getEmployee();
+
+        if (employee.getRole().equals(Role.Kommissionierer)) {
+            String[] menuArray = {"Meine Kommissionen", "Offene Kommissionen", "Logout"};
+            mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, menuArray);
+        } else {
+            String[] menuArray = {"Meine Kommissionen", "Offene Kommissionen", "Lagerbestände", "Logout"};
+            mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, menuArray);
+        }
+
         mListLayout = (ListView) findViewById(R.id.navList);
         mListLayout.setAdapter(mAdapter);
 
@@ -90,10 +100,6 @@ public class StockAmendment extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (mDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+        return mDrawerToggle.onOptionsItemSelected(item);
     }
 }
