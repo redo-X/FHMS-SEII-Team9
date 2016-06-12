@@ -1,26 +1,18 @@
 package warehouse.fh_muenster.de.warehouse.Server;
 
-import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.util.Log;
-
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
-import java.util.Set;
 
 import warehouse.fh_muenster.de.warehouse.Article;
 import warehouse.fh_muenster.de.warehouse.Commission;
 import warehouse.fh_muenster.de.warehouse.Employee;
 import warehouse.fh_muenster.de.warehouse.Role;
 import warehouse.fh_muenster.de.warehouse.StorageLocation;
-import warehouse.fh_muenster.de.warehouse.WarehouseApplication;
 
 /**
  * Created by Thomas on 10.05.2016.
  */
-public class ServerMockImple implements ServerMockInterface {
+public class ServerMockImple implements ServerInterface {
     @Override
     public Employee login(int employeeNr, String password) {
         if(employeeNr == 123 && password.equals("123")){
@@ -41,6 +33,11 @@ public class ServerMockImple implements ServerMockInterface {
         else{
             return null;
         }
+    }
+
+    @Override
+    public void logout(int sessionId) {
+
     }
 
 

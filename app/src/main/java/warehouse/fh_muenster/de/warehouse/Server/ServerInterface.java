@@ -9,9 +9,11 @@ import warehouse.fh_muenster.de.warehouse.Employee;
 /**
  * Created by Thomas on 10.05.2016.
  */
-public interface ServerMockInterface {
+public interface ServerInterface {
 
     public Employee login(int employeeNr, String password);
+
+    public void logout(int sessionId);
 
     //public void getPositionToCommission(int id);
 

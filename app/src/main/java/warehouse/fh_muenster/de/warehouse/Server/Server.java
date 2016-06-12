@@ -21,7 +21,7 @@ import warehouse.fh_muenster.de.warehouse.Role;
 /**
  * Created by Thomas on 08.06.2016.
  */
-public class Server implements ServerMockInterface {
+public class Server implements ServerInterface {
     /**
      * Namespace is the targetNamespace in the WSDL.
      */
