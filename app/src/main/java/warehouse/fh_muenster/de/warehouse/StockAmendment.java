@@ -11,13 +11,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.List;
 
 public class StockAmendment extends AppCompatActivity {
-
-    WarehouseApplication myApp = (WarehouseApplication) getApplication();
-    Employee employee = myApp.getEmployee();
 
     private ListView mListLayout;
     private ArrayAdapter<String> mAdapter;
@@ -42,6 +40,9 @@ public class StockAmendment extends AppCompatActivity {
     }
 
     private void addDrawerItems() {
+        WarehouseApplication myApp = (WarehouseApplication) getApplication();
+        Employee employee = myApp.getEmployee();
+        
         if (employee.getRole().equals(Role.Kommissionierer)) {
             String[] menuArray = {"Meine Kommissionen", "Offene Kommissionen", "Logout"};
             mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, menuArray);
