@@ -1,5 +1,6 @@
 package warehouse.fh_muenster.de.warehouse;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -9,9 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -22,7 +21,6 @@ public class StockAmendment extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
     private String mActivityTitle;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +40,7 @@ public class StockAmendment extends AppCompatActivity {
 
     private void addDrawerItems() {
         WarehouseApplication myApp = (WarehouseApplication) getApplication();
-        Employee employee = myApp.getEmployee();
+        final Employee employee = myApp.getEmployee();
 
         if (employee.getRole().equals(Role.Kommissionierer)) {
             String[] menuArray = {"Meine Kommissionen", "Offene Kommissionen", "Logout"};
@@ -59,8 +57,32 @@ public class StockAmendment extends AppCompatActivity {
                 new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        String MenuArray = String.valueOf(parent.getItemAtPosition(position));
-                        Toast.makeText(StockAmendment.this, MenuArray, Toast.LENGTH_LONG).show();
+                        switch (position) {
+                            case 0:
+                                Intent newActivity0 = new Intent(getApplicationContext(), CommissioningOverview.class);
+                                newActivity0.putExtra("screen", "myCommission");
+                                StockAmendment.this.startActivity(newActivity0);
+                                break;
+                            case 1:
+                                Intent newActivity1 = new Intent(getApplicationContext(), CommissioningOverview.class);
+                                newActivity1.putExtra("screen", "commissionOverview");
+                                StockAmendment.this.startActivity(newActivity1);
+                                break;
+                            case 2:
+                                if (employee.getRole().equals(Role.Kommissionierer)) {
+                                    Intent newActivity2 = new Intent(getApplicationContext(), LoginActivity.class);
+                                    StockAmendment.this.startActivity(newActivity2);
+                                    break;
+                                } else {
+                                    Intent newActivity2 = new Intent(getApplicationContext(), Stock.class);
+                                    StockAmendment.this.startActivity(newActivity2);
+                                    break;
+                                }
+                            case 3:
+                                Intent newActivity3 = new Intent(getApplicationContext(), LoginActivity.class);
+                                StockAmendment.this.startActivity(newActivity3);
+                                break;
+                        }
                     }
                 }
         );
