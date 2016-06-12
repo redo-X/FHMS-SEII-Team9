@@ -91,10 +91,13 @@ public class ServerMockImple implements ServerInterface {
     public HashMap<Integer, Article> getPositionToCommission(int id) {
         Commission commission = null;
         HashMap<Integer,Article> articleHashMap = new HashMap<>();
-        String code = "3662168005845";
+        //String code = "3662168005845";
+        String[] codes = {"3662168005845","4035300705214","4052400035317"};
         Random rand = new Random();
         for(int j = 0; j< rand.nextInt(10-1)+1; j++){
-          int articelCode = 5000 + j + (j*1000);
+           int articelCode = 5000 + j + (j*1000);
+            int codeRand = rand.nextInt(3-0);
+            String code = codes[codeRand];
             StorageLocation location = new StorageLocation(String.valueOf(rand.nextInt(70-1)+1));
             Article article = new Article(code/*String.valueOf(articelCode)*/, "Tolle Beschreibung des Artikels" + j);
             article.setQuantityOnStock(rand.nextInt(100 - 5) + 5);
