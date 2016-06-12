@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -41,8 +40,8 @@ public class StockAmendment extends AppCompatActivity {
 
     private void addDrawerItems() {
         WarehouseApplication myApp = (WarehouseApplication) getApplication();
-        Employee employee = myApp.getEmployee();
-        
+        final Employee employee = myApp.getEmployee();
+
         if (employee.getRole().equals(Role.Kommissionierer)) {
             String[] menuArray = {"Meine Kommissionen", "Offene Kommissionen", "Logout"};
             mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, menuArray);
@@ -70,9 +69,15 @@ public class StockAmendment extends AppCompatActivity {
                                 StockAmendment.this.startActivity(newActivity1);
                                 break;
                             case 2:
-                                Intent newActivity2 = new Intent(getApplicationContext(), Stock.class);
-                                StockAmendment.this.startActivity(newActivity2);
-                                break;
+                                if (employee.getRole().equals(Role.Kommissionierer)) {
+                                    Intent newActivity2 = new Intent(getApplicationContext(), LoginActivity.class);
+                                    StockAmendment.this.startActivity(newActivity2);
+                                    break;
+                                } else {
+                                    Intent newActivity2 = new Intent(getApplicationContext(), Stock.class);
+                                    StockAmendment.this.startActivity(newActivity2);
+                                    break;
+                                }
                             case 3:
                                 Intent newActivity3 = new Intent(getApplicationContext(), LoginActivity.class);
                                 StockAmendment.this.startActivity(newActivity3);
