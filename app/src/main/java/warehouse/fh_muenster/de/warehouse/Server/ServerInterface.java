@@ -11,8 +11,20 @@ import warehouse.fh_muenster.de.warehouse.Employee;
  */
 public interface ServerInterface {
 
+    /**
+     * Send a Login Request to the Server.
+     * If login successful a Employee returns.
+     * Else a null Object returns
+     * @param  employeeNr
+     * @param password
+     * @return a Employee
+     */
     public Employee login(int employeeNr, String password);
 
+    /**
+     * Send a Logout request to the Server
+     * @param sessionId
+     */
     public void logout(int sessionId);
 
     //public void getPositionToCommission(int id);

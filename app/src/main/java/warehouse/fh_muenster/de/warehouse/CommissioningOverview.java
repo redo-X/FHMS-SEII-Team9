@@ -30,7 +30,6 @@ public class CommissioningOverview extends AppCompatActivity {
     private ListView mDrawerList;
     private ArrayAdapter<String> mAdapter;
     private ServerMockImple server = new ServerMockImple();
-    //private HashMap<Integer,Commission> commissionHashMap;
     String  screen;
     boolean doubleBackToExitPressedOnce = false;
     WarehouseApplication myApp;
@@ -41,7 +40,7 @@ public class CommissioningOverview extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-        // Erstelle die Tabelle neu
+        // Create new Table
         removeTableRows();
         printTable(myApp.getPickerCommissionsMap().size(),screen);
     }

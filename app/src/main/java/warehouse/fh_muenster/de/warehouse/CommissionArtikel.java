@@ -5,28 +5,17 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.AsyncTask;
-import android.os.Handler;
 import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ListView;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 import warehouse.fh_muenster.de.warehouse.Server.Server;
 import warehouse.fh_muenster.de.warehouse.Server.ServerMockImple;
@@ -42,6 +31,12 @@ public class CommissionArtikel extends AppCompatActivity {
     private Commission commission = new Commission();
 
 
+    /**
+     * run if the Scanner returns a value
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == 1){
             if(resultCode == RESULT_OK){
@@ -51,10 +46,11 @@ public class CommissionArtikel extends AppCompatActivity {
 
                 if(article.getCode().equals(code)){
                     scann = true;
-                    setTableRowsVvisible();
+                    setTableRowsVisible();
                 }
                 else{
                     showToast("Artikel stimmen nicht überein");
+                    Scanner.setRun(0);
                 }
             }
         }
@@ -80,19 +76,20 @@ public class CommissionArtikel extends AppCompatActivity {
         TextView ueberschrift = (TextView) findViewById(R.id.commission_id_label);
         TextView artikelanzahlLabel = (TextView) findViewById(R.id.commission_artikelAnzahl_label);
         ServerMockImple server = new ServerMockImple();
-        
+        // set PickerCommission with global saved data.
         myApp = (WarehouseApplication) getApplication();
         this.commission = myApp.getPickerCommissionById(id);
         commission.setArticleHashMap(server.getPositionToCommission(commission.getId()));
         artikelGesamt = commission.getArticleHashMap().size();
-        //artikelGesamt = commission.getArticleArray().length;
-        setTableRowsInvisible();
 
+        // Set the unused Table Rows invisible
+        setTableRowsInvisible();
 
         ueberschrift.setText("Kommission mit der Nummer: " + String.valueOf(id) + " ausgewählt\n");
         setTableRows();
         //artikelanzahlLabel.setText("Artikel " + artikelZaehler +  " von " + artikelGesamt);
 
+        // Starts the Scanner
         scan_btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -105,12 +102,13 @@ public class CommissionArtikel extends AppCompatActivity {
 
         weiter_btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+                // Get the commission quantity of the picker
                 EditText kommissionierteMenge_txt = (EditText) findViewById(R.id.commission_artikel_artikel_commession_edit);
                 String kommissionierteMengeString = kommissionierteMenge_txt.getText().toString();
                 try{
                     Vibrator v = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
                     int kommissionierteMenge = Integer.valueOf(kommissionierteMengeString);
-                    // Wenn menge passend oder 0
+                    // if quantity 0 or the exact quantity to commit
                     if(kommissionierteMenge == article.getQuantityOnCommit() || kommissionierteMenge == 0){
                         if(kommissionierteMenge != 0){
                             committedArticle++;
@@ -217,7 +215,7 @@ public class CommissionArtikel extends AppCompatActivity {
 
     }
 
-    private void setTableRowsVvisible(){
+    private void setTableRowsVisible(){
         TextView artikelanzahlLabel = (TextView) findViewById(R.id.commission_artikelAnzahl_label);
         TextView lagerbestand = (TextView) findViewById(R.id.commission_artikel_artikel_soll);
         TextView kommissionsMenge = (TextView) findViewById(R.id.commission_artikel_artikel_commession);
