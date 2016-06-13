@@ -182,9 +182,6 @@ public class Stock extends AppCompatActivity {
                                     finish();
                                     break;
                                 } else {
-                                    //Intent newActivity2 = new Intent(getApplicationContext(), Stock.class);
-                                    //newActivity2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    //Stock.this.startActivity(newActivity2);
                                     break;
                                 }
                             case 3:

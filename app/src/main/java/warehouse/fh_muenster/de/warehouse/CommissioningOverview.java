@@ -275,6 +275,9 @@ public class CommissioningOverview extends AppCompatActivity {
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         switch (position) {
                             case 0:
+                                if (screen.equals("myCommission")) {
+                                    break;
+                                }
                                 Intent newActivity0 = new Intent(getApplicationContext(), CommissioningOverview.class);
                                 newActivity0.putExtra("screen", "myCommission");
                                 newActivity0.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -282,6 +285,9 @@ public class CommissioningOverview extends AppCompatActivity {
                                 finish();
                                 break;
                             case 1:
+                                if (screen.equals("commissionOverview")) {
+                                    break;
+                                }
                                 Intent newActivity1 = new Intent(getApplicationContext(), CommissioningOverview.class);
                                 newActivity1.putExtra("screen", "commissionOverview");
                                 newActivity1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
