@@ -24,7 +24,8 @@ import warehouse.fh_muenster.de.warehouse.Server.WebService;
 
 public class LoginActivity extends AppCompatActivity {
     ProgressDialog dialog;
-
+    //ServerMockImple server = new ServerMockImple();
+    Server server = new Server();
     // Get Code from Scanner
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == 1){
@@ -103,11 +104,6 @@ public class LoginActivity extends AppCompatActivity {
             }
             String password = params[1];
             Employee employee = new Employee();
-            //employee = WebService.loginRequest(employeeNr,password);
-            Server servers = new Server();
-            //employee = servers.login(employeeNr,password);
-
-            ServerMockImple server = new ServerMockImple();
             employee = server.login(employeeNr, password);
             return employee;
 
@@ -119,27 +115,12 @@ public class LoginActivity extends AppCompatActivity {
                 // Setzen des Employess im Zentralen Speicher
                 myapp.setEmployee(result);
 
-                /*
-                //Nächste Activity aufrufen
-                //@TODO andern Intent wieder Starten wenn richtiges Menü da ist
-                //Intent i = new Intent(context, CommissioningOverview.class);
-                //i.putExtra("screen", "myCommission");
-                Intent i = new Intent(context, mockMenue.class);
-                startActivity(i);
-                // Beim Klick auf den Back Button wird der Login Screen nicht mehr aufgerufen sondern die app beendet
-                finish();
-                */
                 CommissionTask commissionTask = new CommissionTask(myApp);
                 commissionTask.execute(myApp.getEmployee());
             }
             else {
                 // Toast Anzeigen, dass der Login vorgang fehlgeschlagen ist
-                /*
-                CharSequence text = getResources().getString(R.string.loginActivity_loginFail);
-                int duration = Toast.LENGTH_SHORT;
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
-                */
+
                 Helper.showToast(getResources().getString(R.string.loginActivity_loginFail), getApplicationContext());
                 dialog.dismiss();
             }
@@ -152,13 +133,7 @@ public class LoginActivity extends AppCompatActivity {
         public CommissionTask(WarehouseApplication myApp) {
             this.myApp = myApp;
         }
-/*
-        protected void onPreExecute() {
-            super.onPreExecute();
-            dialog = ProgressDialog.show(LoginActivity.this, "Bitte warten",
-                    "Daten werden geladen", true);
-        }
-        */
+
         @Override
         protected HashMap<Integer,Commission> doInBackground(Employee... params) {
             if (params.length != 1) {
@@ -169,7 +144,7 @@ public class LoginActivity extends AppCompatActivity {
             ServerMockImple server = new ServerMockImple();
             HashMap<Integer,Commission> commissionHashMap = server.getFreeCommissions();
             myApp.setOpenCommissionsMap(commissionHashMap);
-
+            //ServerMockImple server = new ServerMockImple();
             commissionHashMap = server.getCommissions(employee);
             myApp.setPickerCommissionsMap(commissionHashMap);
             return commissionHashMap;
@@ -179,14 +154,11 @@ public class LoginActivity extends AppCompatActivity {
         protected void onPostExecute(HashMap<Integer,Commission> result) {
             if (result != null) {
                 dialog.dismiss();
-                /*
-                CharSequence text = getResources().getString(R.string.loginActivity_loginSuccess) +" " + myApp.getEmployee().getEmployeeNr();
-                int duration = Toast.LENGTH_SHORT;
-                Toast toast = Toast.makeText(LoginActivity.this, text, duration);
-                toast.show();
-                */
+
                 Helper.showToast(getResources().getString(R.string.loginActivity_loginSuccess) +" " + myApp.getEmployee().getEmployeeNr(), getApplicationContext());
-                Intent i = new Intent(LoginActivity.this, mockMenue.class);
+
+                Intent i = new Intent(getApplicationContext(), CommissioningOverview.class);
+                i.putExtra("screen", "myCommission");
                 startActivity(i);
                 // Beim Klick auf den Back Button wird der Login Screen nicht mehr aufgerufen sondern die app beendet
                 finish();

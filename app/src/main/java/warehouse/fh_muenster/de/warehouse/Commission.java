@@ -11,7 +11,9 @@ public class Commission {
 
     private Employee                    picker;
     private int                         id,
-                                        positionCount;
+                                        positionCount,
+                                        orderDateAsUnixTimestamp,
+                                        dueDateAsUnixTimestamp;
     private HashMap<Integer, Article>   articleHashMap;
     private double                      progress;
 
@@ -69,5 +71,21 @@ public class Commission {
 
     public void setProgress(double progress) {
         this.progress = progress;
+    }
+
+    public int getOrderDateAsUnixTimestamp() {
+        return orderDateAsUnixTimestamp;
+    }
+
+    public void setOrderDateAsUnixTimestamp(int orderDateAsUnixTimestamp) {
+        this.orderDateAsUnixTimestamp = orderDateAsUnixTimestamp;
+    }
+
+    public int getDueDateAsUnixTimestamp() {
+        return dueDateAsUnixTimestamp;
+    }
+
+    public void setDueDateAsUnixTimestamp(int dueDateAsUnixTimestamp) {
+        this.dueDateAsUnixTimestamp = dueDateAsUnixTimestamp;
     }
 }

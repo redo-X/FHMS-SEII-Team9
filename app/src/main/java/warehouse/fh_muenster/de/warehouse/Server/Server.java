@@ -30,20 +30,22 @@ public class Server implements ServerInterface {
     /**
      * The WSDL URL.
      */
-    private static final String URL = "http://10.70.28.97:8080/WarehouseService-ejb-1.0.0/SessionManagementIntegration";
+    private static final String SESSION_URL = "http://10.70.28.97:8080/WarehouseService-ejb-1.0.0/SessionManagementIntegration";
+    private static final String COMMISSION_URL = "http://10.70.28.97:8080/WarehouseService-ejb-1.0.0/CommissionServiceIntegration";
+    private static final String ARTICLE_URL = "http://10.70.28.97:8080/WarehouseService-ejb-1.0.0/ArticleManagementIntegration";
 
 
     @Override
     public Employee login(int employeeNr, String password) {
         Employee result = null;
-        String METHOD_NAME = "Login";
+        String METHOD_NAME = "login";
         SoapObject response = null;
         try {
             LoginRequest request = new LoginRequest();
             request.setEmployeeNr(employeeNr);
             request.setPassword(password);
 
-           response = executeSoapAction(METHOD_NAME, employeeNr, password);
+           response = executeSoapAction(SESSION_URL,METHOD_NAME, employeeNr, password);
 
             if (response != null) {
                 int sessionId = Integer.parseInt(response.getPrimitivePropertySafelyAsString("sessionId"));
@@ -67,7 +69,7 @@ public class Server implements ServerInterface {
         String METHOD_NAME = "logout";
         SoapObject response = null;
         try {
-            response = executeSoapAction(METHOD_NAME, sessionId);
+            response = executeSoapAction(SESSION_URL,METHOD_NAME, sessionId);
         }
         catch (SoapFault e) {
 
@@ -79,7 +81,8 @@ public class Server implements ServerInterface {
         HashMap<Integer, Article> result = new HashMap<>();
         String METHOD_NAME = "getPositionToCommission";
         try {
-            SoapObject response = executeSoapAction(METHOD_NAME, id);
+            String url = "";
+            SoapObject response = executeSoapAction(url, METHOD_NAME, id);
             for (int i=1; i<response.getPropertyCount(); i++) {
                 SoapObject soapAccountEntry = (SoapObject) response.getProperty(i);
                 SoapPrimitive soapAccountNr = (SoapPrimitive) soapAccountEntry.getProperty("id");
@@ -99,7 +102,7 @@ public class Server implements ServerInterface {
         String METHOD_NAME = "logout";
         SoapObject response = null;
         try {
-            response = executeSoapAction(METHOD_NAME, commissionId, articleCode, quantity);
+            response = executeSoapAction(COMMISSION_URL,METHOD_NAME, commissionId, articleCode, quantity);
         }
         catch (SoapFault e) {
 
@@ -108,7 +111,29 @@ public class Server implements ServerInterface {
 
     @Override
     public HashMap<Integer, Commission> getFreeCommissions() {
-        return null;
+        HashMap<Integer, Commission> result = new HashMap<>();
+        String METHOD_NAME = "getPendingCommissionsWithoutPicker";
+        try {
+            SoapObject response = executeSoapAction(COMMISSION_URL,METHOD_NAME);
+            for (int i=1; i<response.getPropertyCount(); i++) {
+                SoapObject soapAccountEntry = (SoapObject) response.getProperty(i);
+                SoapPrimitive soapCommissionId = (SoapPrimitive) soapAccountEntry.getProperty("commissionId");
+                SoapPrimitive soapPositionCount = (SoapPrimitive) soapAccountEntry.getProperty("positionCount");
+
+                int id = Integer.valueOf(soapCommissionId.getValue().toString());
+                int count = Integer.valueOf(soapPositionCount.getValue().toString());
+                Commission commission = new Commission(id, count);
+                result.put(commission.getId(), commission);
+            }
+            //return result;
+        }
+        catch (SoapFault e) {
+            //throw new NoSessionException(e.getMessage());
+            Log.i("SoapMessage:", e.getMessage());
+            Log.i("SoapMessage:", e.getStackTrace().toString());
+
+        }
+        return result;
     }
 
     @Override
@@ -116,7 +141,7 @@ public class Server implements ServerInterface {
         return null;
     }
 
-    private SoapObject executeSoapAction(String methodName, Object... args) throws SoapFault {
+    private SoapObject executeSoapAction(String url, String methodName, Object... args) throws SoapFault {
 
         Object result = null;
 
@@ -141,7 +166,7 @@ public class Server implements ServerInterface {
 	    /* Create a org.ksoap2.transport.HttpTransportSE object that represents a J2SE based HttpTransport layer. HttpTransportSE extends
 	     * the org.ksoap2.transport.Transport class, which encapsulates the serialization and deserialization of SOAP messages.
 	     */
-        HttpTransportSE androidHttpTransport = new HttpTransportSE(URL);
+        HttpTransportSE androidHttpTransport = new HttpTransportSE(url);
 
         try {
 	        /* Make the soap call using the SOAP_ACTION and the soap envelop. */

@@ -41,7 +41,7 @@ public class LoginTest {
             onView(withId(R.id.password_txt))
                     .perform(typeText("123"), closeSoftKeyboard());
             onView(withId(R.id.login_btn)).perform(click());
-            intended(hasComponent(mockMenue.class.getName()));
+            intended(hasComponent(CommissioningOverview.class.getName()));
         }
         catch (Exception e){
             e.printStackTrace();
@@ -72,7 +72,7 @@ public class LoginTest {
     public void testScanner(){
         try {
             Intents.init();
-            onView(withId(R.id.scanner_scan_btn)).perform(click());
+            onView(withId(R.id.loginScann_btn)).perform(click());
             intended(hasComponent(Scanner.class.getName()));
         }
         catch (Exception e){

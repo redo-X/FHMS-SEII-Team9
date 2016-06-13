@@ -24,12 +24,15 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@id/scan_format" />
 
-    <Button
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/scanner_scan_btn"
-        android:layout_marginTop="277dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Es liegt ein Fehler mit dem Scanner vor. Bitte schließen Sie die app und starten sie erneut."
+        android:id="@+id/textView2"
+        android:layout_marginTop="269dp"
+        android:layout_below="@+id/scan_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
 </RelativeLayout>
