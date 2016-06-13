@@ -24,8 +24,8 @@ import warehouse.fh_muenster.de.warehouse.Server.WebService;
 
 public class LoginActivity extends AppCompatActivity {
     ProgressDialog dialog;
-    //ServerMockImple server = new ServerMockImple();
-    Server server = new Server();
+    ServerMockImple server = new ServerMockImple();
+    //Server server = new Server();
     // Get Code from Scanner
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == 1){
