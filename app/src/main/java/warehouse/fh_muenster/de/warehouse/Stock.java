@@ -119,7 +119,6 @@ public class Stock extends AppCompatActivity {
     //Drawer Menu
     private void addDrawerItems() {
         final WarehouseApplication myApp = (WarehouseApplication) getApplication();
-        final Employee employee = myApp.getEmployee();
 
         String[] menuArray = {"Meine Kommissionen", "Offene Kommissionen", "Lagerbestände", "Logout"};
         mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, menuArray) {
