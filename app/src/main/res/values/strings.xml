@@ -17,5 +17,9 @@
     <string name="drawer_open">Menü öffnen</string>
     <string name="drawer_close">Menü schließen</string>
     <string name="drawer_title">Zurück</string>
+    <string name="drawer_commission">Meine Kommissionen</string>
+    <string name="drawer_commission_overview">Offene Kommissionen</string>
+    <string name="drawer_stock">Lagerbestände</string>
+    <string name="drawer_logout">Logout</string>
     <string name="action_settings">Einstellungen</string>
 </resources>
