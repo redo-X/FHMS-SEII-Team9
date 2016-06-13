@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -92,36 +93,54 @@ public class StockAmendment extends AppCompatActivity {
                                 newActivity0.putExtra("screen", "myCommission");
                                 newActivity0.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 StockAmendment.this.startActivity(newActivity0);
+                                finish();
                                 break;
                             case 1:
                                 Intent newActivity1 = new Intent(getApplicationContext(), CommissioningOverview.class);
                                 newActivity1.putExtra("screen", "commissionOverview");
                                 newActivity1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 StockAmendment.this.startActivity(newActivity1);
+                                finish();
                                 break;
                             case 2:
                                 if (employee.getRole().equals(Role.Kommissionierer)) {
+                                    LogoutTask logoutTask = new LogoutTask();
+                                    logoutTask.execute(myApp.getEmployee().getSessionId());
+
+                                    myApp.setOpenCommissionsMap(null);
+                                    myApp.setPickerCommissionsMap(null);
+                                    myApp.setEmployee(null);
+
+                                    Helper.showToast("Logout", getApplicationContext());
+
                                     Intent newActivity2 = new Intent(getApplicationContext(), LoginActivity.class);
                                     newActivity2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                     StockAmendment.this.startActivity(newActivity2);
+                                    finish();
                                     break;
                                 } else {
                                     Intent newActivity2 = new Intent(getApplicationContext(), Stock.class);
                                     newActivity2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                     StockAmendment.this.startActivity(newActivity2);
+                                    finish();
                                     break;
                                 }
                             case 3:
+                                LogoutTask logoutTask = new LogoutTask();
+                                logoutTask.execute(myApp.getEmployee().getSessionId());
+
                                 myApp.setOpenCommissionsMap(null);
                                 myApp.setPickerCommissionsMap(null);
                                 myApp.setEmployee(null);
 
+                                Helper.showToast("Logout", getApplicationContext());
+
                                 Intent newActivity3 = new Intent(getApplicationContext(), LoginActivity.class);
                                 newActivity3.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 StockAmendment.this.startActivity(newActivity3);
+                                finish();
                                 break;
                         }
-                        finish();
                     }
                 }
         );
