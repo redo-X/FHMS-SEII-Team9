@@ -27,13 +27,10 @@ import warehouse.fh_muenster.de.warehouse.Server.ServerMockImple;
 
 public class CommissioningOverview extends AppCompatActivity {
 
-    private ListView mDrawerList;
-    private ArrayAdapter<String> mAdapter;
     private ServerMockImple server = new ServerMockImple();
     String  screen;
     boolean doubleBackToExitPressedOnce = false;
     WarehouseApplication myApp;
-
 
 
     // Wenn Activity wieder in Vordergrund kommt
@@ -46,7 +43,6 @@ public class CommissioningOverview extends AppCompatActivity {
     }
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,14 +51,10 @@ public class CommissioningOverview extends AppCompatActivity {
         myApp = (WarehouseApplication) getApplication();
         // Speichert welche Screen Variante aufgerufen werden soll
          screen = getIntent().getExtras().getString("screen");
-        //Erstelle DrawerMenu
-        mDrawerList = (ListView) findViewById(R.id.navList);
-        addDrawerItems();
 
         // Wenn employee Kommissionen aufgerufen wird
         if (screen.equals("myCommission")) {
             printTable(myApp.getPickerCommissionsMap().size(),screen);
-
 
         }
         // Wenn offene Kommissionen angezeigt werden
@@ -70,26 +62,6 @@ public class CommissioningOverview extends AppCompatActivity {
 
             printTable(myApp.getOpenCommissionsMap().size(),screen);
         }
-    }
-
-    /**
-     * Hilfsmethode für DrawerMenu
-     */
-    private void addDrawerItems() {
-        String[] MenuArray = {"Meine Kommissionen", "Offene Kommissionen", "LogOut"};
-        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, MenuArray);
-        mDrawerList = (ListView) findViewById(R.id.navList);
-        mDrawerList.setAdapter(mAdapter);
-
-        mDrawerList.setOnItemClickListener(
-                new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        String MenuArray = String.valueOf(parent.getItemAtPosition(position));
-                        Toast.makeText(CommissioningOverview.this, MenuArray, Toast.LENGTH_LONG).show();
-                    }
-                }
-        );
     }
 
     /**
