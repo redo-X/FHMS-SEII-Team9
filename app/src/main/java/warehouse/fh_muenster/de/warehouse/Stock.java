@@ -32,6 +32,7 @@ public class Stock extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
     private String mActivityTitle;
+    boolean finishActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -146,15 +147,16 @@ public class Stock extends AppCompatActivity {
                                 Intent newActivity0 = new Intent(getApplicationContext(), CommissioningOverview.class);
                                 newActivity0.putExtra("screen", "myCommission");
                                 startActivity(newActivity0);
-                                finish();
+                                finishActivity = true;
                                 break;
                             case 1:
                                 Intent newActivity1 = new Intent(getApplicationContext(), CommissioningOverview.class);
                                 newActivity1.putExtra("screen", "commissionOverview");
                                 startActivity(newActivity1);
-                                finish();
+                                finishActivity = true;
                                 break;
                             case 2:
+                                finishActivity = false;
                                 break;
                             case 3:
                                 LogoutTask logoutTask = new LogoutTask();
@@ -168,8 +170,11 @@ public class Stock extends AppCompatActivity {
 
                                 Intent newActivity3 = new Intent(getApplicationContext(), LoginActivity.class);
                                 startActivity(newActivity3);
-                                finish();
+                                finishActivity = true;
                                 break;
+                        }
+                        if (finishActivity == true) {
+                            finish();
                         }
                     }
                 }
