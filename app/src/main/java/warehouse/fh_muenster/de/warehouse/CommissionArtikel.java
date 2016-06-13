@@ -54,7 +54,9 @@ public class CommissionArtikel extends AppCompatActivity {
                     Scanner.setRun(0);
                 }
             }
+            Scanner.setRun(0);
         }
+        Scanner.setRun(0);
     }
 
 
