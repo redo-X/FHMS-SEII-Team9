@@ -240,7 +240,7 @@ public class CommissioningOverview extends AppCompatActivity {
                     }
 
                     if(text.getText().toString().equals("Offene Kommissionen") && (screen.equals("commissionOverview"))) {
-                        text.setTextColor(Color.parseColor("BDBDBD"));
+                        text.setTextColor(Color.parseColor("#BDBDBD"));
                     }
                     return view;
                 }
@@ -259,7 +259,7 @@ public class CommissioningOverview extends AppCompatActivity {
                     }
 
                     if(text.getText().toString().equals("Offene Kommissionen") && (screen.equals("commissionOverview"))){
-                        text.setTextColor(Color.parseColor("BDBDBD"));
+                        text.setTextColor(Color.parseColor("#BDBDBD"));
                     }
 
                     return view;
