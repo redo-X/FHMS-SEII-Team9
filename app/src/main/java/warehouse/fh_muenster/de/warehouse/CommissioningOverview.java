@@ -235,11 +235,11 @@ public class CommissioningOverview extends AppCompatActivity {
                     TextView text = (TextView) view.findViewById(android.R.id.text1);
                     text.setTextColor(Color.BLUE);
 
-                    if(text.getText().toString().equals("Meine Kommissionen") && (screen.equals("myCommission"))){
+                    if (text.getText().toString().equals("Meine Kommissionen") && (screen.equals("myCommission"))) {
                         text.setTextColor(Color.parseColor("#BDBDBD"));
                     }
 
-                    if(text.getText().toString().equals("Offene Kommissionen") && (screen.equals("commissionOverview"))) {
+                    if (text.getText().toString().equals("Offene Kommissionen") && (screen.equals("commissionOverview"))) {
                         text.setTextColor(Color.parseColor("#BDBDBD"));
                     }
                     return view;
@@ -254,14 +254,13 @@ public class CommissioningOverview extends AppCompatActivity {
                     TextView text = (TextView) view.findViewById(android.R.id.text1);
                     text.setTextColor(Color.BLUE);
 
-                    if(text.getText().toString().equals("Meine Kommissionen") && (screen.equals("myCommission"))){
+                    if (text.getText().toString().equals("Meine Kommissionen") && (screen.equals("myCommission"))) {
                         text.setTextColor(Color.parseColor("#BDBDBD"));
                     }
 
-                    if(text.getText().toString().equals("Offene Kommissionen") && (screen.equals("commissionOverview"))){
+                    if (text.getText().toString().equals("Offene Kommissionen") && (screen.equals("commissionOverview"))) {
                         text.setTextColor(Color.parseColor("#BDBDBD"));
                     }
-
                     return view;
                 }
             };
