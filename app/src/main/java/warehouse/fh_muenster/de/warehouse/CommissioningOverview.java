@@ -42,6 +42,7 @@ public class CommissioningOverview extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
     private String mActivityTitle;
+    private boolean finishActivity;
 
     // Wenn Activity wieder in Vordergrund kommt
     @Override
@@ -276,23 +277,25 @@ public class CommissioningOverview extends AppCompatActivity {
                         switch (position) {
                             case 0:
                                 if (screen.equals("myCommission")) {
+                                    finishActivity = false;
                                     break;
                                 }
                                 Intent newActivity0 = new Intent(getApplicationContext(), CommissioningOverview.class);
                                 newActivity0.putExtra("screen", "myCommission");
                                 newActivity0.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 CommissioningOverview.this.startActivity(newActivity0);
-                                finish();
+                                finishActivity = true;
                                 break;
                             case 1:
                                 if (screen.equals("commissionOverview")) {
+                                    finishActivity = false;
                                     break;
                                 }
                                 Intent newActivity1 = new Intent(getApplicationContext(), CommissioningOverview.class);
                                 newActivity1.putExtra("screen", "commissionOverview");
                                 newActivity1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 CommissioningOverview.this.startActivity(newActivity1);
-                                finish();
+                                finishActivity = true;
                                 break;
                             case 2:
                                 if (employee.getRole().equals(Role.Kommissionierer)) {
@@ -308,13 +311,13 @@ public class CommissioningOverview extends AppCompatActivity {
                                     Intent newActivity2 = new Intent(getApplicationContext(), LoginActivity.class);
                                     newActivity2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                     CommissioningOverview.this.startActivity(newActivity2);
-                                    finish();
+                                    finishActivity = true;
                                     break;
                                 } else {
                                     Intent newActivity2 = new Intent(getApplicationContext(), Stock.class);
                                     newActivity2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                     CommissioningOverview.this.startActivity(newActivity2);
-                                    finish();
+                                    finishActivity = true;
                                     break;
                                 }
                             case 3:
@@ -330,8 +333,11 @@ public class CommissioningOverview extends AppCompatActivity {
                                 Intent newActivity3 = new Intent(getApplicationContext(), LoginActivity.class);
                                 newActivity3.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 CommissioningOverview.this.startActivity(newActivity3);
-                                finish();
+                                finishActivity = true;
                                 break;
+                        }
+                        if (finishActivity) {
+                            finish();
                         }
                     }
                 }

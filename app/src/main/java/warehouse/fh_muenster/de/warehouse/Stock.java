@@ -173,7 +173,7 @@ public class Stock extends AppCompatActivity {
                                 finishActivity = true;
                                 break;
                         }
-                        if (finishActivity == true) {
+                        if (finishActivity) {
                             finish();
                         }
                     }
