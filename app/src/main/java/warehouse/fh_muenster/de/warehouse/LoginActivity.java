@@ -34,7 +34,9 @@ public class LoginActivity extends AppCompatActivity {
                 mitarbiterNr_txt.setText(code);
                 Scanner.setRun(0);
             }
+            Scanner.run = 0;
         }
+        Scanner.run = 0;
     }
 
     @Override
@@ -61,11 +63,7 @@ public class LoginActivity extends AppCompatActivity {
                 // Einlesen der Werte aus der LoginActivity
                 EditText mitarbiterNr_txt = (EditText) findViewById(R.id.mitarbeiterNr_txt);
                 EditText password_tet = (EditText) findViewById(R.id.password_txt);
-
-
-
                 WarehouseApplication myApp = (WarehouseApplication) getApplication();
-
                 LoginTask login = new LoginTask(v.getContext(), myApp);
                 // Ausführen des Login Vorganges
                 login.execute(mitarbiterNr_txt.getText().toString(), password_tet.getText().toString());
@@ -136,10 +134,13 @@ public class LoginActivity extends AppCompatActivity {
             }
             else {
                 // Toast Anzeigen, dass der Login vorgang fehlgeschlagen ist
+                /*
                 CharSequence text = getResources().getString(R.string.loginActivity_loginFail);
                 int duration = Toast.LENGTH_SHORT;
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
+                */
+                Helper.showToast(getResources().getString(R.string.loginActivity_loginFail), getApplicationContext());
                 dialog.dismiss();
             }
         }
@@ -178,10 +179,13 @@ public class LoginActivity extends AppCompatActivity {
         protected void onPostExecute(HashMap<Integer,Commission> result) {
             if (result != null) {
                 dialog.dismiss();
+                /*
                 CharSequence text = getResources().getString(R.string.loginActivity_loginSuccess) +" " + myApp.getEmployee().getEmployeeNr();
                 int duration = Toast.LENGTH_SHORT;
                 Toast toast = Toast.makeText(LoginActivity.this, text, duration);
                 toast.show();
+                */
+                Helper.showToast(getResources().getString(R.string.loginActivity_loginSuccess) +" " + myApp.getEmployee().getEmployeeNr(), getApplicationContext());
                 Intent i = new Intent(LoginActivity.this, mockMenue.class);
                 startActivity(i);
                 // Beim Klick auf den Back Button wird der Login Screen nicht mehr aufgerufen sondern die app beendet
