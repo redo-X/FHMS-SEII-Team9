@@ -49,7 +49,8 @@ public class CommissionArtikel extends AppCompatActivity {
                     setTableRowsVisible();
                 }
                 else{
-                    showToast("Artikel stimmen nicht überein");
+                    Helper.showToast("Artikel stimmen nicht überein", getApplicationContext());
+                    //showToast("Artikel stimmen nicht überein");
                     Scanner.setRun(0);
                 }
             }
@@ -123,7 +124,7 @@ public class CommissionArtikel extends AppCompatActivity {
                             if(progress == 1){
                                 myApp.getPickerCommissionsMap().remove(commission.getId());
                             }
-                            showToast("Kommission beendet!");
+                            Helper.showToast("Kommission beendet!",getApplicationContext());
                             v.vibrate(50);
                             finish();
                         }
@@ -138,10 +139,10 @@ public class CommissionArtikel extends AppCompatActivity {
                     }
                 }
                 catch (NumberFormatException e){
-                    showToast("Eingegebene Menge ist nicht gültig");
+                    Helper.showToast("Eingegebene Menge ist nicht gültig", getApplicationContext());
                 }
                 catch (IllegalArgumentException ie){
-                    showToast("Zu kommissionierende Mengen stimmen nicht überein");
+                    Helper.showToast("Zu kommissionierende Mengen stimmen nicht überein", getApplicationContext());
                 } }
         });
 
@@ -248,14 +249,14 @@ public class CommissionArtikel extends AppCompatActivity {
         }
         return articleArray;
     }
-
+/*
     private void showToast(String text){
         Context context = getApplicationContext();
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
     }
-
+*/
 
     private void disableOrientationChangeInRunningConfig() {
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -266,7 +267,7 @@ public class CommissionArtikel extends AppCompatActivity {
     // Verhindern das durch zurück Button kommission abgebrochen wird
     @Override
     public void onBackPressed() {
-        showToast("Kommission kann nicht abgebrochen werden");
+        Helper.showToast("Kommission kann nicht abgebrochen werden",getApplicationContext());
     }
 
     private class ProgressUpdateTask extends AsyncTask<Integer, Integer, Boolean> {

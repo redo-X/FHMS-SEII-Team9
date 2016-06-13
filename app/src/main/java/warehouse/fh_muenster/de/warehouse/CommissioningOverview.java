@@ -173,7 +173,8 @@ public class CommissioningOverview extends AppCompatActivity {
                     removeTableRows();
                     myApp.removeCommissionFromOpen(commission.getId());
                     printTable(myApp.getOpenCommissionsMap().size(), screen);
-                    Toast.makeText(getApplicationContext(), "Kommission mit id: " + commission.getId() + " angenommen", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), "Kommission mit id: " + commission.getId() + " angenommen", Toast.LENGTH_SHORT).show();
+                    Helper.showToast("Kommission mit id: " + commission.getId() + " angenommen", getApplicationContext());
                 }
             });
         }
@@ -189,7 +190,8 @@ public class CommissioningOverview extends AppCompatActivity {
         }
 
         this.doubleBackToExitPressedOnce = true;
-        Toast.makeText(this, getResources().getString(R.string.commissioningOverview_exit), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, getResources().getString(R.string.commissioningOverview_exit), Toast.LENGTH_SHORT).show();
+        Helper.showToast(getResources().getString(R.string.commissioningOverview_exit), getApplicationContext());
 
         new Handler().postDelayed(new Runnable() {
 
