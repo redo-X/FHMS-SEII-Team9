@@ -1,16 +1,23 @@
 <resources>
     <string name="app_name">Warehouse</string>
+
     <string name="commissioningOverview_table_head_kommissionierungen">Kommissionierungen</string>
     <string name="commissioningOverview_table_head_kommissions_nr">Kommissions Nr.</string>
     <string name="commissioningOverview_table_head_artikelAnzahl">Artikel Anzahl</string>
     <string name="commissioningOverview_table_head_annehmen">Annehmen</string>
-    <string name="commissioningOverview_exit">Bitte drücken Sie erneut die Zurück Taste um die App zu beenden</string>
+    <string name="commissioningOverview_head">Meine Kommissionen</string>
+    <string name="commissioningOverview_button_start">Starten</string>
+    <string name="commissioningOverview_button_accept">Annehmen</string>
 
-    <string name="loginActivity_loginSuccess">Eingeloggt als </string>
-    <string name="loginActivity_loginFail">Login fehlgeschlagen</string>
+    <string name="commissionArtikel_headline1">Kommission mit der Nummer:</string>
+    <string name="commissionArtikel_headline2">ausgewählt</string>
+    <string name="commissionArtikel_positionOverall1">Artikel</string>
+    <string name="commissionArtikel_positionOverall2">von</string>
+
+    <string name="stockOut_setItem">Artikel Code:</string>
 
     <string name="stock_table_head_headline">Bestandskontrolle</string>
-    <string name="stock_table_head_article">Artikel</string>
+    <string name="stock_table_head_item">Artikel</string>
     <string name="stock_table_head_amount">Menge</string>
     <string name="stock_table_head_alter">Ändern</string>
 
@@ -22,4 +29,22 @@
     <string name="drawer_stock">Lagerbestände</string>
     <string name="drawer_logout">Logout</string>
     <string name="action_settings">Einstellungen</string>
+
+    <string name="toast_logout">Logout</string>
+    <string name="toast_exit">Bitte drücken Sie erneut die Zurück Taste um die App zu beenden</string>
+    <string name="toast_commissionExitNotAllowed">Kommission kann nicht abgebrochen werden</string>
+    <string name="toast_wrongInput">Ungültige Eingabe</string>
+
+    <string name="toast_loginActivity_loginSuccess">Eingeloggt als</string>
+    <string name="toast_loginActivity_loginFail">Login fehlgeschlagen</string>
+    <string name="toast_commissioningOverview_accept1">Kommission mit id: </string>
+    <string name="toast_commissioningOverview_accept2">angenommen</string>
+    <string name="toast_commissionArtikel_wrongItem">Artikel stimmen nicht überein</string>
+    <string name="toast_commissionArtikel_end">Kommission beendet!</string>
+    <string name="toast_commissionArtikel_wrongInput">Eingegebene Menge ist nicht gültig</string>
+    <string name="toast_commissionArtikel_wrongQuantity">Zu kommissionierende Mengen stimmen nicht überein</string>
+    <string name="toast_stockOut_success">Fehlmenge gemeldet</string>
+
+    <string name="dialog_wait">Bitte warten</string>
+    <string name="dialog_load">Daten werden geladen</string>
 </resources>

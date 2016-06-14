@@ -45,7 +45,7 @@
                 </TableRow>
                 <TableRow>
                     <TextView
-                        android:text="@string/stock_table_head_article"
+                        android:text="@string/stock_table_head_item"
                         android:width="100dp"
                         android:layout_column="0"
                         android:layout_weight="0"

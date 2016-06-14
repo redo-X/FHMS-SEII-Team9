@@ -49,7 +49,7 @@ public class CommissionArtikel extends AppCompatActivity {
                     setTableRowsVisible();
                 }
                 else{
-                    Helper.showToast("Artikel stimmen nicht überein", getApplicationContext());
+                    Helper.showToast(getResources().getString(R.string.toast_commissionArtikel_wrongItem), getApplicationContext());
                     //showToast("Artikel stimmen nicht überein");
                     Scanner.setRun(0);
                 }
@@ -88,7 +88,8 @@ public class CommissionArtikel extends AppCompatActivity {
         // Set the unused Table Rows invisible
         setTableRowsInvisible();
 
-        ueberschrift.setText("Kommission mit der Nummer: " + String.valueOf(id) + " ausgewählt\n");
+        ueberschrift.setText(getResources().getString(R.string.commissionArtikel_headline1) + " " + String.valueOf(id) + " " +
+                getResources().getString(R.string.commissionArtikel_headline2));
         setTableRows();
         //artikelanzahlLabel.setText("Artikel " + artikelZaehler +  " von " + artikelGesamt);
 
@@ -126,7 +127,7 @@ public class CommissionArtikel extends AppCompatActivity {
                             if(progress == 1){
                                 myApp.getPickerCommissionsMap().remove(commission.getId());
                             }
-                            Helper.showToast("Kommission beendet!",getApplicationContext());
+                            Helper.showToast(getResources().getString(R.string.toast_commissionArtikel_end),getApplicationContext());
                             v.vibrate(50);
                             finish();
                         }
@@ -141,10 +142,10 @@ public class CommissionArtikel extends AppCompatActivity {
                     }
                 }
                 catch (NumberFormatException e){
-                    Helper.showToast("Eingegebene Menge ist nicht gültig", getApplicationContext());
+                    Helper.showToast(getResources().getString(R.string.toast_commissionArtikel_wrongInput), getApplicationContext());
                 }
                 catch (IllegalArgumentException ie){
-                    Helper.showToast("Zu kommissionierende Mengen stimmen nicht überein", getApplicationContext());
+                    Helper.showToast(getResources().getString(R.string.toast_commissionArtikel_wrongQuantity), getApplicationContext());
                 } }
         });
 
@@ -171,7 +172,8 @@ public class CommissionArtikel extends AppCompatActivity {
         article = artikelArray[artikelZaehler-1];
         // Setzen der neuen Überschrift
         TextView artikelanzahlLabel = (TextView) findViewById(R.id.commission_artikelAnzahl_label);
-        artikelanzahlLabel.setText("Artikel " + artikelZaehler + " von " + artikelGesamt);
+        artikelanzahlLabel.setText(getResources().getString(R.string.commissionArtikel_positionOverall1) + " " + artikelZaehler + " " +
+                getResources().getString(R.string.commissionArtikel_positionOverall2) + " " + artikelGesamt);
         // Setzen der ganzen Zeilen
         TextView artikelCode = (TextView) findViewById(R.id.commission_artikel_artikel_code);
         artikelCode.setText(article.getCode());
@@ -269,7 +271,7 @@ public class CommissionArtikel extends AppCompatActivity {
     // Verhindern das durch zurück Button kommission abgebrochen wird
     @Override
     public void onBackPressed() {
-        Helper.showToast("Kommission kann nicht abgebrochen werden",getApplicationContext());
+        Helper.showToast(getResources().getString(R.string.toast_commissionExitNotAllowed),getApplicationContext());
     }
 
     private class ProgressUpdateTask extends AsyncTask<Integer, Integer, Boolean> {

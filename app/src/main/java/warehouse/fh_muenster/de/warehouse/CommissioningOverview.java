@@ -94,7 +94,7 @@ public class CommissioningOverview extends AppCompatActivity {
         commissionHashMap = myApp.getOpenCommissionsMap();
         if (screen.equals("myCommission")) {
             TextView head = (TextView) findViewById(R.id.commissioningOverview_table_head);
-            head.setText("Meine Kommissionen");
+            head.setText(R.string.commissioningOverview_head);
             commissionHashMap = myApp.getPickerCommissionsMap();
         }
 
@@ -164,9 +164,9 @@ public class CommissioningOverview extends AppCompatActivity {
     private Button createButton(int i, final String screen) {
         final Button annehmen_btn = new Button(this);
         if (screen.equals("myCommission")) {
-            annehmen_btn.setText("Starten");
+            annehmen_btn.setText(R.string.commissioningOverview_button_start);
         } else {
-            annehmen_btn.setText(R.string.commissioningOverview_table_head_annehmen);
+            annehmen_btn.setText(R.string.commissioningOverview_button_accept);
         }
         annehmen_btn.setId(i);
         if (screen.equals("myCommission")) {
@@ -193,8 +193,10 @@ public class CommissioningOverview extends AppCompatActivity {
                     removeTableRows();
                     myApp.removeCommissionFromOpen(commission.getId());
                     printTable(myApp.getOpenCommissionsMap().size(), screen);
-                    //Toast.makeText(getApplicationContext(), "Kommission mit id: " + commission.getId() + " angenommen", Toast.LENGTH_SHORT).show();
-                    Helper.showToast("Kommission mit id: " + commission.getId() + " angenommen", getApplicationContext());
+                    //Toast.makeText(getApplicationContext(), getResources().getString(R.string.toast_commissioningOverview_accept1) + " " +
+                    // commission.getId() + " " + getResources().getString(R.string.toast_commissioningOverview_accept2), Toast.LENGTH_SHORT).show();
+                    Helper.showToast(getResources().getString(R.string.toast_commissioningOverview_accept1) + " " + commission.getId() + " " +
+                            getResources().getString(R.string.toast_commissioningOverview_accept2), getApplicationContext());
                 }
             });
         }
@@ -210,8 +212,8 @@ public class CommissioningOverview extends AppCompatActivity {
         }
 
         this.doubleBackToExitPressedOnce = true;
-        //Toast.makeText(this, getResources().getString(R.string.commissioningOverview_exit), Toast.LENGTH_SHORT).show();
-        Helper.showToast(getResources().getString(R.string.commissioningOverview_exit), getApplicationContext());
+        //Toast.makeText(getResources().getString(R.string.toast_exit), Toast.LENGTH_SHORT).show();
+        Helper.showToast(getResources().getString(R.string.toast_exit), getApplicationContext());
 
         new Handler().postDelayed(new Runnable() {
 
@@ -228,7 +230,8 @@ public class CommissioningOverview extends AppCompatActivity {
         final Employee employee = myApp.getEmployee();
 
         if (employee.getRole().equals(Role.Kommissionierer)) {
-            String[] menuArray = {"Meine Kommissionen", "Offene Kommissionen", "Logout"};
+            String[] menuArray = {getResources().getString(R.string.drawer_commission), getResources().getString(R.string.drawer_commission_overview),
+                    getResources().getString(R.string.drawer_logout)};
             mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, menuArray) {
                 @Override
                 public View getView(int position, View convertView, ViewGroup parent) {
@@ -236,18 +239,19 @@ public class CommissioningOverview extends AppCompatActivity {
                     TextView text = (TextView) view.findViewById(android.R.id.text1);
                     text.setTextColor(Color.BLUE);
 
-                    if (text.getText().toString().equals("Meine Kommissionen") && (screen.equals("myCommission"))) {
+                    if (text.getText().toString().equals(R.string.drawer_commission) && (screen.equals("myCommission"))) {
                         text.setTextColor(Color.parseColor("#BDBDBD"));
                     }
 
-                    if (text.getText().toString().equals("Offene Kommissionen") && (screen.equals("commissionOverview"))) {
+                    if (text.getText().toString().equals(R.string.drawer_commission_overview) && (screen.equals("commissionOverview"))) {
                         text.setTextColor(Color.parseColor("#BDBDBD"));
                     }
                     return view;
                 }
             };
         } else {
-            String[] menuArray = {"Meine Kommissionen", "Offene Kommissionen", "Lagerbestände", "Logout"};
+            String[] menuArray = {getResources().getString(R.string.drawer_commission), getResources().getString(R.string.drawer_commission_overview),
+                    getResources().getString(R.string.drawer_stock), getResources().getString(R.string.drawer_logout)};
             mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, menuArray) {
                 @Override
                 public View getView(int position, View convertView, ViewGroup parent) {
@@ -255,11 +259,11 @@ public class CommissioningOverview extends AppCompatActivity {
                     TextView text = (TextView) view.findViewById(android.R.id.text1);
                     text.setTextColor(Color.BLUE);
 
-                    if (text.getText().toString().equals("Meine Kommissionen") && (screen.equals("myCommission"))) {
+                    if (text.getText().toString().equals(R.string.drawer_commission) && (screen.equals("myCommission"))) {
                         text.setTextColor(Color.parseColor("#BDBDBD"));
                     }
 
-                    if (text.getText().toString().equals("Offene Kommissionen") && (screen.equals("commissionOverview"))) {
+                    if (text.getText().toString().equals(R.string.drawer_commission_overview) && (screen.equals("commissionOverview"))) {
                         text.setTextColor(Color.parseColor("#BDBDBD"));
                     }
                     return view;
@@ -306,7 +310,7 @@ public class CommissioningOverview extends AppCompatActivity {
                                     myApp.setPickerCommissionsMap(null);
                                     myApp.setEmployee(null);
 
-                                    Helper.showToast("Logout", getApplicationContext());
+                                    Helper.showToast(getResources().getString(R.string.toast_logout), getApplicationContext());
 
                                     Intent newActivity2 = new Intent(getApplicationContext(), LoginActivity.class);
                                     newActivity2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -328,7 +332,7 @@ public class CommissioningOverview extends AppCompatActivity {
                                 myApp.setPickerCommissionsMap(null);
                                 myApp.setEmployee(null);
 
-                                Helper.showToast("Logout", getApplicationContext());
+                                Helper.showToast(getResources().getString(R.string.toast_logout), getApplicationContext());
 
                                 Intent newActivity3 = new Intent(getApplicationContext(), LoginActivity.class);
                                 newActivity3.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

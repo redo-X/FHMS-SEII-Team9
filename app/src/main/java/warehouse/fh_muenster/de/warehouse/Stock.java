@@ -110,7 +110,7 @@ public class Stock extends AppCompatActivity {
     private Button createButton(int i) {
         final Button aendernbutton = new Button(this);
 
-        aendernbutton.setText("Ändern");
+        aendernbutton.setText(R.string.stock_table_head_alter);
 
         aendernbutton.setId(i);
 
@@ -121,14 +121,15 @@ public class Stock extends AppCompatActivity {
     private void addDrawerItems() {
         final WarehouseApplication myApp = (WarehouseApplication) getApplication();
 
-        String[] menuArray = {"Meine Kommissionen", "Offene Kommissionen", "Lagerbestände", "Logout"};
+        String[] menuArray = {getResources().getString(R.string.drawer_commission), getResources().getString(R.string.drawer_commission_overview),
+                getResources().getString(R.string.drawer_stock), getResources().getString(R.string.drawer_logout)};
         mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, menuArray) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
                 TextView text = (TextView) view.findViewById(android.R.id.text1);
                 text.setTextColor(Color.BLUE);
-                if (text.getText().toString().equals("Lagerbestände")) {
+                if (text.getText().toString().equals(getResources().getString(R.string.drawer_stock))) {
                     text.setTextColor(Color.parseColor("#BDBDBD"));
                 }
                 return view;
@@ -166,7 +167,7 @@ public class Stock extends AppCompatActivity {
                                 myApp.setPickerCommissionsMap(null);
                                 myApp.setEmployee(null);
 
-                                Helper.showToast("Logout", getApplicationContext());
+                                Helper.showToast(getResources().getString(R.string.toast_logout), getApplicationContext());
 
                                 Intent newActivity3 = new Intent(getApplicationContext(), LoginActivity.class);
                                 startActivity(newActivity3);

@@ -25,14 +25,14 @@ public class StockOut extends AppCompatActivity {
                 EditText input = (EditText) findViewById(R.id.stock_out_istMenge_txt);
                 try{
                     int istMenge = Integer.valueOf(input.getText().toString());
-                    Toast.makeText(getApplicationContext(), "Fehlmenge gemeldet", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), getResources().getString(R.string.toast_stockOut_success), Toast.LENGTH_SHORT).show();
                     StockOutTask task = new StockOutTask();
                     task.execute(istMenge);
                     finish();
                 }
                 catch (Exception e){
                     input.setText("");
-                    Toast.makeText(getApplicationContext(), "Ungültige Eingabe", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), getResources().getString(R.string.toast_wrongInput), Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -41,6 +41,6 @@ public class StockOut extends AppCompatActivity {
     // Setzt die Article Id
     private void setArticleCode(String articleId){
         TextView articleNr_lbl = (TextView) findViewById(R.id.stock_out_articelNr);
-        articleNr_lbl.setText("Artikel Code: " + articleId);
+        articleNr_lbl.setText(getResources().getString(R.string.stockOut_setItem) + " " + articleId);
     }
 }

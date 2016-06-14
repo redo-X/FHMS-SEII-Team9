@@ -86,8 +86,8 @@ public class LoginActivity extends AppCompatActivity {
 
         protected void onPreExecute() {
             super.onPreExecute();
-            dialog = ProgressDialog.show(LoginActivity.this, "Bitte warten",
-                    "Daten werden geladen", true);
+            dialog = ProgressDialog.show(LoginActivity.this, getResources().getString(R.string.dialog_wait),
+                    getResources().getString(R.string.dialog_load), true);
         }
 
         protected Employee doInBackground(String... params) {
@@ -121,7 +121,7 @@ public class LoginActivity extends AppCompatActivity {
             else {
                 // Toast Anzeigen, dass der Login vorgang fehlgeschlagen ist
 
-                Helper.showToast(getResources().getString(R.string.loginActivity_loginFail), getApplicationContext());
+                Helper.showToast(getResources().getString(R.string.toast_loginActivity_loginFail), getApplicationContext());
                 dialog.dismiss();
             }
         }
@@ -155,7 +155,7 @@ public class LoginActivity extends AppCompatActivity {
             if (result != null) {
                 dialog.dismiss();
 
-                Helper.showToast(getResources().getString(R.string.loginActivity_loginSuccess) +" " + myApp.getEmployee().getEmployeeNr(), getApplicationContext());
+                Helper.showToast(getResources().getString(R.string.toast_loginActivity_loginSuccess) + " " + myApp.getEmployee().getEmployeeNr(), getApplicationContext());
 
                 Intent i = new Intent(getApplicationContext(), CommissioningOverview.class);
                 i.putExtra("screen", "myCommission");
