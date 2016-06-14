@@ -41,15 +41,6 @@ public class Stock extends AppCompatActivity {
 
         printTable();
 
-        Button stockA = (Button) findViewById(R.id.testButtonStockA);
-        stockA.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), StockAmendment.class);
-                startActivity(i);
-            }
-        });
-
         //Drawer Menu
         mListLayout = (ListView) findViewById(R.id.navList);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -110,7 +101,7 @@ public class Stock extends AppCompatActivity {
     private Button createButton(int i) {
         final Button aendernbutton = new Button(this);
 
-        aendernbutton.setText(R.string.stock_table_head_alter);
+        aendernbutton.setText(getResources().getString(R.string.stock_table_head_alter));
 
         aendernbutton.setId(i);
 

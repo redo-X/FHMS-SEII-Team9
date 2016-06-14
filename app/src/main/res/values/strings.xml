@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">Warehouse</string>
 
+    <string name="loginActivity_personnelId">Mitarbeiternummer</string>
+    <string name="loginActivity_password">Passwort</string>
+    <string name="loginActivity_button_login">Login</string>
+
     <string name="commissioningOverview_table_head_kommissionierungen">Kommissionierungen</string>
     <string name="commissioningOverview_table_head_kommissions_nr">Kommissions Nr.</string>
     <string name="commissioningOverview_table_head_artikelAnzahl">Artikel Anzahl</string>
@@ -9,17 +13,32 @@
     <string name="commissioningOverview_button_start">Starten</string>
     <string name="commissioningOverview_button_accept">Annehmen</string>
 
+    <string name="commissionArtikel_table_head_input">Blub</string>
+    <string name="commissionArtikel_table_head_Quantity">Artikelmenge</string>
+    <string name="commissionArtikel_table_head_itemCode">Artikel Code:</string>
+    <string name="commissionArtikel_table_head_itemName">Artikel Name:</string>
+    <string name="commissionArtikel_table_head_stockLocation">Lagerort:</string>
+    <string name="commissionArtikel_table_head_targetQuantity">Soll Menge:</string>
+    <string name="commissionArtikel_table_head_commissionQuantity">Kommissionsmenge:</string>
+    <string name="commissionArtikel_table_head_commissionedQuantity">Kommissionierte Menge</string>
+    <string name="commissionArtikel_table_head_underage">Fehlmenge melden</string>
+    <string name="commissionArtikel_table_head_forward">weiter</string>
     <string name="commissionArtikel_headline1">Kommission mit der Nummer:</string>
     <string name="commissionArtikel_headline2">ausgewählt</string>
     <string name="commissionArtikel_positionOverall1">Artikel</string>
     <string name="commissionArtikel_positionOverall2">von</string>
 
     <string name="stockOut_setItem">Artikel Code:</string>
+    <string name="stockOut_table_head_underage">Fehlmenge melden</string>
+    <string name="stockOut_table_head_optional">Vorhandene Menge (optional)</string>
+    <string name="stockOut_button_report">Melden</string>
 
     <string name="stock_table_head_headline">Bestandskontrolle</string>
     <string name="stock_table_head_item">Artikel</string>
     <string name="stock_table_head_amount">Menge</string>
     <string name="stock_table_head_alter">Ändern</string>
+
+    <string name="scanner_fail">Es liegt ein Fehler mit dem Scanner vor. Bitte schließen Sie die app und starten sie erneut.</string>
 
     <string name="drawer_open">Menü öffnen</string>
     <string name="drawer_close">Menü schließen</string>

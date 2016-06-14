@@ -94,7 +94,7 @@ public class CommissioningOverview extends AppCompatActivity {
         commissionHashMap = myApp.getOpenCommissionsMap();
         if (screen.equals("myCommission")) {
             TextView head = (TextView) findViewById(R.id.commissioningOverview_table_head);
-            head.setText(R.string.commissioningOverview_head);
+            head.setText(getResources().getString(R.string.commissioningOverview_head));
             commissionHashMap = myApp.getPickerCommissionsMap();
         }
 
@@ -164,9 +164,9 @@ public class CommissioningOverview extends AppCompatActivity {
     private Button createButton(int i, final String screen) {
         final Button annehmen_btn = new Button(this);
         if (screen.equals("myCommission")) {
-            annehmen_btn.setText(R.string.commissioningOverview_button_start);
+            annehmen_btn.setText(getResources().getString(R.string.commissioningOverview_button_start));
         } else {
-            annehmen_btn.setText(R.string.commissioningOverview_button_accept);
+            annehmen_btn.setText(getResources().getString(R.string.commissioningOverview_button_accept));
         }
         annehmen_btn.setId(i);
         if (screen.equals("myCommission")) {
@@ -239,11 +239,11 @@ public class CommissioningOverview extends AppCompatActivity {
                     TextView text = (TextView) view.findViewById(android.R.id.text1);
                     text.setTextColor(Color.BLUE);
 
-                    if (text.getText().toString().equals(R.string.drawer_commission) && (screen.equals("myCommission"))) {
+                    if (text.getText().toString().equals(getResources().getString(R.string.drawer_commission)) && (screen.equals("myCommission"))) {
                         text.setTextColor(Color.parseColor("#BDBDBD"));
                     }
 
-                    if (text.getText().toString().equals(R.string.drawer_commission_overview) && (screen.equals("commissionOverview"))) {
+                    if (text.getText().toString().equals(getResources().getString(R.string.drawer_commission_overview)) && (screen.equals("commissionOverview"))) {
                         text.setTextColor(Color.parseColor("#BDBDBD"));
                     }
                     return view;
@@ -259,11 +259,11 @@ public class CommissioningOverview extends AppCompatActivity {
                     TextView text = (TextView) view.findViewById(android.R.id.text1);
                     text.setTextColor(Color.BLUE);
 
-                    if (text.getText().toString().equals(R.string.drawer_commission) && (screen.equals("myCommission"))) {
+                    if (text.getText().toString().equals(getResources().getString(R.string.drawer_commission)) && (screen.equals("myCommission"))) {
                         text.setTextColor(Color.parseColor("#BDBDBD"));
                     }
 
-                    if (text.getText().toString().equals(R.string.drawer_commission_overview) && (screen.equals("commissionOverview"))) {
+                    if (text.getText().toString().equals(getResources().getString(R.string.drawer_commission_overview)) && (screen.equals("commissionOverview"))) {
                         text.setTextColor(Color.parseColor("#BDBDBD"));
                     }
                     return view;

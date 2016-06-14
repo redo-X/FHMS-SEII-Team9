@@ -28,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Es liegt ein Fehler mit dem Scanner vor. Bitte schließen Sie die app und starten sie erneut."
+        android:text="@string/scanner_fail"
         android:id="@+id/textView2"
         android:layout_marginTop="269dp"
         android:layout_below="@+id/scan_content"

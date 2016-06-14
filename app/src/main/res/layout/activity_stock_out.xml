@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Fehlmenge melden"
+        android:text="@string/stockOut_table_head_underage"
         android:id="@+id/stock_out_header"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
@@ -38,12 +38,12 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:hint="Vorhandene Menge (optional)" />
+        android:hint="@string/stockOut_table_head_optional" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Melden"
+        android:text="@string/stockOut_button_report"
         android:id="@+id/stock_out_melden_btn"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
