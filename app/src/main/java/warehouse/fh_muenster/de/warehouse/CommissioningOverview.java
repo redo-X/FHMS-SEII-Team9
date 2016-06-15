@@ -228,54 +228,44 @@ public class CommissioningOverview extends AppCompatActivity {
     private void addDrawerItems() {
         final WarehouseApplication myApp = (WarehouseApplication) getApplication();
         final Employee employee = myApp.getEmployee();
+        String[] menuArray;
 
         if (employee.getRole().equals(Role.Kommissionierer)) {
-            String[] menuArray = {getResources().getString(R.string.drawer_commission), getResources().getString(R.string.drawer_commission_overview),
+            menuArray = new String[]{getResources().getString(R.string.drawer_commission), getResources().getString(R.string.drawer_commission_overview),
                     getResources().getString(R.string.drawer_logout)};
-            mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, menuArray) {
-                @Override
-                public View getView(int position, View convertView, ViewGroup parent) {
-                    View view = super.getView(position, convertView, parent);
-                    TextView text = (TextView) view.findViewById(android.R.id.text1);
-                    text.setTextColor(Color.BLUE);
-
-                    if (text.getText().toString().equals(getResources().getString(R.string.drawer_commission)) && (screen.equals("myCommission"))) {
-                        text.setTextColor(Color.parseColor("#BDBDBD"));
-                    }
-
-                    if (text.getText().toString().equals(getResources().getString(R.string.drawer_commission_overview)) && (screen.equals("commissionOverview"))) {
-                        text.setTextColor(Color.parseColor("#BDBDBD"));
-                    }
-                    return view;
-                }
-            };
         } else {
-            String[] menuArray = {getResources().getString(R.string.drawer_commission), getResources().getString(R.string.drawer_commission_overview),
+            menuArray = new String[]{getResources().getString(R.string.drawer_commission), getResources().getString(R.string.drawer_commission_overview),
                     getResources().getString(R.string.drawer_stock), getResources().getString(R.string.drawer_logout)};
-            mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, menuArray) {
-                @Override
-                public View getView(int position, View convertView, ViewGroup parent) {
-                    View view = super.getView(position, convertView, parent);
-                    TextView text = (TextView) view.findViewById(android.R.id.text1);
-                    text.setTextColor(Color.BLUE);
-
-                    if (text.getText().toString().equals(getResources().getString(R.string.drawer_commission)) && (screen.equals("myCommission"))) {
-                        text.setTextColor(Color.parseColor("#BDBDBD"));
-                    }
-
-                    if (text.getText().toString().equals(getResources().getString(R.string.drawer_commission_overview)) && (screen.equals("commissionOverview"))) {
-                        text.setTextColor(Color.parseColor("#BDBDBD"));
-                    }
-                    return view;
-                }
-            };
         }
 
-        mListLayout = (ListView) findViewById(R.id.navList);
+        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, menuArray) {
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                View view = super.getView(position, convertView, parent);
+                TextView text = (TextView) view.findViewById(android.R.id.text1);
+                text.setTextColor(Color.BLUE);
+
+                if (text.getText().toString().equals(getResources().getString(R.string.drawer_commission)) && (screen.equals("myCommission"))) {
+                    text.setTextColor(Color.parseColor("#BDBDBD"));
+                }
+
+                if (text.getText().toString().equals(getResources().getString(R.string.drawer_commission_overview)) && (screen.equals("commissionOverview"))) {
+                    text.setTextColor(Color.parseColor("#BDBDBD"));
+                }
+                return view;
+            }
+        };
+
+        mListLayout = (ListView)
+
+                findViewById(R.id.navList);
+
         mListLayout.setAdapter(mAdapter);
 
         mListLayout.setOnItemClickListener(
-                new AdapterView.OnItemClickListener() {
+                new AdapterView.OnItemClickListener()
+
+                {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         switch (position) {
@@ -345,6 +335,7 @@ public class CommissioningOverview extends AppCompatActivity {
                         }
                     }
                 }
+
         );
     }
 

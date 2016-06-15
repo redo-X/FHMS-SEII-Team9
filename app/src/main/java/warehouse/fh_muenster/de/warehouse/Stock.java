@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.os.Handler;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -27,6 +28,7 @@ import warehouse.fh_muenster.de.warehouse.Server.ServerMockImple;
 
 public class Stock extends AppCompatActivity {
 
+    boolean doubleBackToExitPressedOnce = false;
     private ListView mListLayout;
     private ArrayAdapter<String> mAdapter;
     private DrawerLayout mDrawerLayout;
@@ -106,6 +108,24 @@ public class Stock extends AppCompatActivity {
         aendernbutton.setId(i);
 
         return aendernbutton;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Helper.showToast(getResources().getString(R.string.toast_exit), getApplicationContext());
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce = false;
+            }
+        }, 2000);
     }
 
     //Drawer Menu

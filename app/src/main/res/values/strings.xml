@@ -38,7 +38,7 @@
     <string name="stock_table_head_amount">Menge</string>
     <string name="stock_table_head_alter">Ändern</string>
 
-    <string name="scanner_fail">Es liegt ein Fehler mit dem Scanner vor. Bitte schließen Sie die app und starten sie erneut.</string>
+    <string name="scanner_fail">Es liegt ein Fehler mit dem Scanner vor. Bitte schließen Sie die App und starten sie erneut.</string>
 
     <string name="drawer_open">Menü öffnen</string>
     <string name="drawer_close">Menü schließen</string>

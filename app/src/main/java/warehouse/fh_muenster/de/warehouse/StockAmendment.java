@@ -41,6 +41,13 @@ public class StockAmendment extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent newActivity = new Intent(getApplicationContext(), Stock.class);
+        StockAmendment.this.startActivity(newActivity);
+        finish();
+    }
+
     //Drawer Menu
     private void addDrawerItems() {
         final WarehouseApplication myApp = (WarehouseApplication) getApplication();
