@@ -43,6 +43,15 @@ public class Stock extends AppCompatActivity {
 
         printTable();
 
+        Button stockA = (Button) findViewById(R.id.testButtonStockA);
+        stockA.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), StockAmendment.class);
+                startActivity(i);
+            }
+        });
+
         //Drawer Menu
         mListLayout = (ListView) findViewById(R.id.navList);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);

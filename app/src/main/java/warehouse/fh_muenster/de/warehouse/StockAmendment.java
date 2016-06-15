@@ -46,6 +46,7 @@ public class StockAmendment extends AppCompatActivity {
         Intent newActivity = new Intent(getApplicationContext(), Stock.class);
         StockAmendment.this.startActivity(newActivity);
         finish();
+        //newActivity0.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     }
 
     //Drawer Menu

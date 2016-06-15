@@ -244,11 +244,9 @@ public class CommissioningOverview extends AppCompatActivity {
                 View view = super.getView(position, convertView, parent);
                 TextView text = (TextView) view.findViewById(android.R.id.text1);
                 text.setTextColor(Color.BLUE);
-
                 if (text.getText().toString().equals(getResources().getString(R.string.drawer_commission)) && (screen.equals("myCommission"))) {
                     text.setTextColor(Color.parseColor("#BDBDBD"));
                 }
-
                 if (text.getText().toString().equals(getResources().getString(R.string.drawer_commission_overview)) && (screen.equals("commissionOverview"))) {
                     text.setTextColor(Color.parseColor("#BDBDBD"));
                 }
@@ -256,16 +254,11 @@ public class CommissioningOverview extends AppCompatActivity {
             }
         };
 
-        mListLayout = (ListView)
-
-                findViewById(R.id.navList);
-
+        mListLayout = (ListView) findViewById(R.id.navList);
         mListLayout.setAdapter(mAdapter);
 
         mListLayout.setOnItemClickListener(
-                new AdapterView.OnItemClickListener()
-
-                {
+                new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         switch (position) {
@@ -276,7 +269,6 @@ public class CommissioningOverview extends AppCompatActivity {
                                 }
                                 Intent newActivity0 = new Intent(getApplicationContext(), CommissioningOverview.class);
                                 newActivity0.putExtra("screen", "myCommission");
-                                newActivity0.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 CommissioningOverview.this.startActivity(newActivity0);
                                 finishActivity = true;
                                 break;
@@ -287,7 +279,6 @@ public class CommissioningOverview extends AppCompatActivity {
                                 }
                                 Intent newActivity1 = new Intent(getApplicationContext(), CommissioningOverview.class);
                                 newActivity1.putExtra("screen", "commissionOverview");
-                                newActivity1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 CommissioningOverview.this.startActivity(newActivity1);
                                 finishActivity = true;
                                 break;
@@ -303,13 +294,11 @@ public class CommissioningOverview extends AppCompatActivity {
                                     Helper.showToast(getResources().getString(R.string.toast_logout), getApplicationContext());
 
                                     Intent newActivity2 = new Intent(getApplicationContext(), LoginActivity.class);
-                                    newActivity2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                     CommissioningOverview.this.startActivity(newActivity2);
                                     finishActivity = true;
                                     break;
                                 } else {
                                     Intent newActivity2 = new Intent(getApplicationContext(), Stock.class);
-                                    newActivity2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                     CommissioningOverview.this.startActivity(newActivity2);
                                     finishActivity = true;
                                     break;
@@ -325,7 +314,6 @@ public class CommissioningOverview extends AppCompatActivity {
                                 Helper.showToast(getResources().getString(R.string.toast_logout), getApplicationContext());
 
                                 Intent newActivity3 = new Intent(getApplicationContext(), LoginActivity.class);
-                                newActivity3.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 CommissioningOverview.this.startActivity(newActivity3);
                                 finishActivity = true;
                                 break;
