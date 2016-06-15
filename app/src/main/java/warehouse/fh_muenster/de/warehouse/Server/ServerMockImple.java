@@ -87,7 +87,6 @@ public class ServerMockImple implements ServerInterface {
     return commissionMap;
     }
 
-    @Override
     public HashMap<Integer, Article> getPositionToCommission(int id) {
         Commission commission = null;
         HashMap<Integer,Article> articleHashMap = new HashMap<>();

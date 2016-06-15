@@ -29,7 +29,7 @@ public interface ServerInterface {
 
     //public void getPositionToCommission(int id);
 
-    public HashMap<Integer, Article> getPositionToCommission(int id);
+    //public HashMap<Integer, Article> getPositionToCommission(int id);
 
     public HashMap<Integer,Commission> getFreeCommissions();
 

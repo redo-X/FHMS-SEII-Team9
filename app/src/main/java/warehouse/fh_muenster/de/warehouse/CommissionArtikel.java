@@ -1,5 +1,6 @@
 package warehouse.fh_muenster.de.warehouse;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -15,6 +16,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import warehouse.fh_muenster.de.warehouse.Server.Server;
@@ -29,6 +31,7 @@ public class CommissionArtikel extends AppCompatActivity {
     private Article article;
     WarehouseApplication myApp;
     private Commission commission = new Commission();
+    private int id;
 
 
     /**
@@ -71,18 +74,24 @@ public class CommissionArtikel extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_commission_artikel);
 
-        int id = getIntent().getExtras().getInt("id");
+        id = getIntent().getExtras().getInt("id");
         final Button weiter_btn = (Button) findViewById(R.id.weiter_btn);
         final Button fehlmenge_btn = (Button) findViewById(R.id.commission_artikel_fehlmengeMelden);
         final ImageButton scan_btn = (ImageButton) findViewById(R.id.commission_articel_scann_btn);
 
         TextView ueberschrift = (TextView) findViewById(R.id.commission_id_label);
         TextView artikelanzahlLabel = (TextView) findViewById(R.id.commission_artikelAnzahl_label);
-        ServerMockImple server = new ServerMockImple();
+        //ServerMockImple server = new ServerMockImple();
+        Server server = new Server();
         // set PickerCommission with global saved data.
         myApp = (WarehouseApplication) getApplication();
         this.commission = myApp.getPickerCommissionById(id);
-        commission.setArticleHashMap(server.getPositionToCommission(commission.getId()));
+        //commission.setArticleHashMap(server.getPositionToCommission(commission.getId()));
+        //getPositiontoCommissionTask task = new getPositiontoCommissionTask(commission.getId());
+        //task.execute();
+
+/*
+
         artikelGesamt = commission.getArticleHashMap().size();
 
         // Set the unused Table Rows invisible
@@ -92,6 +101,8 @@ public class CommissionArtikel extends AppCompatActivity {
                 getResources().getString(R.string.commissionArtikel_headline2));
         setTableRows();
         //artikelanzahlLabel.setText("Artikel " + artikelZaehler +  " von " + artikelGesamt);
+
+*/
 
         // Starts the Scanner
         scan_btn.setOnClickListener(new View.OnClickListener(){
@@ -157,7 +168,8 @@ public class CommissionArtikel extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
+        getPositiontoCommissionTask task = new getPositiontoCommissionTask(commission.getId());
+        task.execute();
     }
 
     private void setNextArticle(EditText kommissionierteMenge_txt){
@@ -247,7 +259,7 @@ public class CommissionArtikel extends AppCompatActivity {
     private Article[] mapToArray(){
         Article articleArray[] = new Article[artikelGesamt];
         int i = 0;
-        for(Map.Entry<Integer,Article> entry : commission.getArticleHashMap().entrySet()){
+        for(Map.Entry<String,Article> entry : commission.getArticleHashMap().entrySet()){
             articleArray[i] = entry.getValue();
             i++;
         }
@@ -300,6 +312,54 @@ public class CommissionArtikel extends AppCompatActivity {
         protected void onPostExecute(Boolean result) {
             if (result != null) {
 
+            }
+            else {
+            }
+        }
+    }
+
+    private class getPositiontoCommissionTask extends AsyncTask<Integer, Integer, HashMap<String, Article>> {
+        ProgressDialog dialog;
+
+        private int commissionId;
+        private HashMap<String, Article> map;
+        public getPositiontoCommissionTask(int commissionId) {
+            this.commissionId = commissionId;
+        }
+
+        protected void onPreExecute() {
+            super.onPreExecute();
+            dialog = ProgressDialog.show(CommissionArtikel.this, getResources().getString(R.string.dialog_wait),
+                    getResources().getString(R.string.dialog_load), true);
+        }
+
+        @Override
+        protected HashMap<String, Article> doInBackground(Integer... params) {
+            if (params.length != 0) {
+                return null;
+            }
+            Server server = new Server();
+            map = server.getPositionToCommission(commissionId);
+            server.startCommission(commissionId);
+            return map;
+        }
+
+
+        @Override
+        protected void onPostExecute(HashMap<String, Article> result) {
+            if (result != null) {
+                //WarehouseApplication myapp = (WarehouseApplication) getApplication();
+                commission.setArticleHashMap(result);
+                artikelGesamt = commission.getArticleHashMap().size();
+                // Set the unused Table Rows invisible
+                setTableRowsInvisible();
+                TextView ueberschrift = (TextView) findViewById(R.id.commission_id_label);
+                ueberschrift.setText(getResources().getString(R.string.commissionArtikel_headline1) + " " + String.valueOf(id) + " " +
+                        getResources().getString(R.string.commissionArtikel_headline2));
+                setTableRows();
+                //artikelanzahlLabel.setText("Artikel " + artikelZaehler +  " von " + artikelGesamt);
+
+                dialog.dismiss();
             }
             else {
             }

@@ -105,7 +105,7 @@ public class CommissioningOverview extends AppCompatActivity {
             int kommissionsNr = entry.getKey();
             Commission commission = entry.getValue();
 
-            HashMap<Integer, Article> artikel = commission.getArticleHashMap();
+            HashMap<String, Article> artikel = commission.getArticleHashMap();
             int menge = commission.getPositionCount();
 
             TableRow row = new TableRow(this);

@@ -24,8 +24,8 @@ import warehouse.fh_muenster.de.warehouse.Server.WebService;
 
 public class LoginActivity extends AppCompatActivity {
     ProgressDialog dialog;
-    ServerMockImple server = new ServerMockImple();
-    //Server server = new Server();
+    //ServerMockImple server = new ServerMockImple();
+    Server server = new Server();
     // Get Code from Scanner
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == 1){
@@ -141,7 +141,7 @@ public class LoginActivity extends AppCompatActivity {
             }
             Employee employee = params[0];
 
-            ServerMockImple server = new ServerMockImple();
+            //ServerMockImple server = new ServerMockImple();
             HashMap<Integer,Commission> commissionHashMap = server.getFreeCommissions();
             myApp.setOpenCommissionsMap(commissionHashMap);
             //ServerMockImple server = new ServerMockImple();

@@ -8,7 +8,8 @@ private String              code,
                             name;
     private int             quantityOnStock,
                             quantityOnCommit,
-                            quantitiyCommited;
+                            quantitiyCommited,
+                            positionCommissionId;
     private StorageLocation storageLocation;
 
 
@@ -18,6 +19,13 @@ private String              code,
     public Article(String code, String name) {
         this.code = code;
         this.name = name;
+    }
+
+    public Article(String code, String name, int quantityOnStock, int quantityOnCommit) {
+        this.code = code;
+        this.name = name;
+        this.quantityOnStock = quantityOnStock;
+        this.quantityOnCommit = quantityOnCommit;
     }
 
     public String getCode() {
@@ -50,6 +58,14 @@ private String              code,
 
     public int getQuantitiyCommited() {
         return quantitiyCommited;
+    }
+
+    public int getPositionCommissionId() {
+        return positionCommissionId;
+    }
+
+    public void setPositionCommissionId(int positionCommissionId) {
+        this.positionCommissionId = positionCommissionId;
     }
 
     public void setQuantitiyCommited(int quantitiyCommited) {
