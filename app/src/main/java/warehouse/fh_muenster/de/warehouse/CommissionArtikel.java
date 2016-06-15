@@ -82,7 +82,7 @@ public class CommissionArtikel extends AppCompatActivity {
         TextView ueberschrift = (TextView) findViewById(R.id.commission_id_label);
         TextView artikelanzahlLabel = (TextView) findViewById(R.id.commission_artikelAnzahl_label);
         //ServerMockImple server = new ServerMockImple();
-        Server server = new Server();
+        final Server server = new Server();
         // set PickerCommission with global saved data.
         myApp = (WarehouseApplication) getApplication();
         this.commission = myApp.getPickerCommissionById(id);
@@ -140,12 +140,14 @@ public class CommissionArtikel extends AppCompatActivity {
                             }
                             Helper.showToast(getResources().getString(R.string.toast_commissionArtikel_end),getApplicationContext());
                             v.vibrate(50);
+                            ProgressUpdateTask updateTask = new ProgressUpdateTask();
+                            updateTask.execute(0);
                             finish();
                         }
                         double progress = committedArticle / artikelGesamt;
                         commission.setProgress(progress);
-                        ProgressUpdateTask updateTask = new ProgressUpdateTask(article.getCode(),commission.getId());
-                        updateTask.execute(kommissionierteMenge);
+                        ProgressUpdateTask updateTask = new ProgressUpdateTask();
+                        updateTask.execute(article.getPositionCommissionId(),kommissionierteMenge);
                         setTableRowsInvisible();
                     }
                     else{
@@ -287,24 +289,27 @@ public class CommissionArtikel extends AppCompatActivity {
     }
 
     private class ProgressUpdateTask extends AsyncTask<Integer, Integer, Boolean> {
-        private String articleCode;
-        private int commissionId;
-
-        public ProgressUpdateTask(String articleCode, int commissionId) {
-            this.articleCode = articleCode;
-            this.commissionId = commissionId;
-        }
 
         @Override
         protected Boolean doInBackground(Integer... params) {
-            if (params.length != 1) {
+            if(params.length == 2){
+                int commissionPositionId = params[0];
+                int istMenge = params[1];
+                Server server = new Server();
+                server.updateQuantityOnCommissionPosition(commissionPositionId,istMenge);
+                return true;
+            }
+            else if(params.length == 1){
+                if(params[0] == 0){
+                    Server server = new Server();
+                    server.endCommission(commission.getId());
+                    return true;
+                }
+            }
+            else{
                 return null;
             }
-            int istMenge = params[0];
-            Server server = new Server();
-            server.updateQuantityOnCommissionPosition(commissionId,articleCode,istMenge);
-
-            return true;
+            return null;
         }
 
 
@@ -348,7 +353,6 @@ public class CommissionArtikel extends AppCompatActivity {
         @Override
         protected void onPostExecute(HashMap<String, Article> result) {
             if (result != null) {
-                //WarehouseApplication myapp = (WarehouseApplication) getApplication();
                 commission.setArticleHashMap(result);
                 artikelGesamt = commission.getArticleHashMap().size();
                 // Set the unused Table Rows invisible

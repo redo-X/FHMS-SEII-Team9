@@ -134,11 +134,11 @@ public class Server implements ServerInterface {
     }
 
 
-    public void updateQuantityOnCommissionPosition(int commissionId, String articleCode, int quantity){
-        String METHOD_NAME = "logout";
+    public void updateQuantityOnCommissionPosition(int commissionPositionId, int quantity){
+        String METHOD_NAME = "updatePickedQuantity";
         SoapObject response = null;
         try {
-            response = executeSoapAction(COMMISSION_URL,METHOD_NAME, commissionId, articleCode, quantity);
+            response = executeSoapAction(COMMISSION_URL,METHOD_NAME, commissionPositionId, quantity);
         }
         catch (SoapFault e) {
 
