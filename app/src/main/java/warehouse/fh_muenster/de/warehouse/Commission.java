@@ -14,7 +14,7 @@ public class Commission {
                                         positionCount,
                                         orderDateAsUnixTimestamp,
                                         dueDateAsUnixTimestamp;
-    private HashMap<String, Article>   articleHashMap;
+    private HashMap<Integer, Article>   articleHashMap;
     private double                      progress;
 
 
@@ -27,17 +27,17 @@ public class Commission {
     }
 
 
-    public Commission(int id, HashMap<String, Article> articleHashMap, Employee picker) {
+    public Commission(int id, HashMap<Integer, Article> articleHashMap, Employee picker) {
         this.id = id;
         this.articleHashMap = articleHashMap;
         this.picker = picker;
     }
 
-    public HashMap<String, Article> getArticleHashMap() {
+    public HashMap<Integer, Article> getArticleHashMap() {
         return articleHashMap;
     }
 
-    public void setArticleHashMap(HashMap<String, Article> articleHashMap) {
+    public void setArticleHashMap(HashMap<Integer, Article> articleHashMap) {
         this.articleHashMap = articleHashMap;
     }
 

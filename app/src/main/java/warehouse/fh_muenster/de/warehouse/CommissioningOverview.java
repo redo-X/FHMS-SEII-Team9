@@ -105,7 +105,7 @@ public class CommissioningOverview extends AppCompatActivity {
             int kommissionsNr = entry.getKey();
             Commission commission = entry.getValue();
 
-            HashMap<String, Article> artikel = commission.getArticleHashMap();
+            HashMap<Integer, Article> artikel = commission.getArticleHashMap();
             int menge = commission.getPositionCount();
 
             TableRow row = new TableRow(this);
@@ -190,6 +190,8 @@ public class CommissioningOverview extends AppCompatActivity {
                     // Prüfen ob Kommission noch frei
                     WarehouseApplication myApp = (WarehouseApplication) getApplication();
                     myApp.addCommissionToPicker(commission.getId());
+                    AllocateCommissionTask allocateCommissionTask = new AllocateCommissionTask();
+                    allocateCommissionTask.execute(commission.getId(), myApp.getEmployee().getEmployeeNr());
                     removeTableRows();
                     myApp.removeCommissionFromOpen(commission.getId());
                     printTable(myApp.getOpenCommissionsMap().size(), screen);

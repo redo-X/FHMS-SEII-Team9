@@ -17,6 +17,7 @@ public class StockOut extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stock_out);
         String articleId = getIntent().getExtras().getString("id");
+        final int commissionPositionId = getIntent().getExtras().getInt("commissionPositionId");
         setArticleCode(articleId);
 
         Button melden_btn = (Button) findViewById(R.id.stock_out_melden_btn);
@@ -27,7 +28,9 @@ public class StockOut extends AppCompatActivity {
                     int istMenge = Integer.valueOf(input.getText().toString());
                     Toast.makeText(getApplicationContext(), getResources().getString(R.string.toast_stockOut_success), Toast.LENGTH_SHORT).show();
                     StockOutTask task = new StockOutTask();
-                    task.execute(istMenge);
+                    WarehouseApplication myapp = (WarehouseApplication) getApplication();
+                    int sessionId = myapp.getEmployee().getSessionId();
+                    task.execute(commissionPositionId,sessionId,istMenge);
                     finish();
                 }
                 catch (Exception e){

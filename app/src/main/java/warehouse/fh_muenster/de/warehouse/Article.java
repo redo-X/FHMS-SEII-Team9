@@ -4,12 +4,12 @@ package warehouse.fh_muenster.de.warehouse;
  * Created by Thomas on 09.05.2016.
  */
 public class Article {
-private String              code,
-                            name;
-    private int             quantityOnStock,
-                            quantityOnCommit,
-                            quantitiyCommited,
-                            positionCommissionId;
+    private String code,
+            name;
+    private int quantityOnStock,
+            quantityOnCommit,
+            quantitiyCommited,
+            positionCommissionId;
     private StorageLocation storageLocation;
 
 
@@ -21,11 +21,12 @@ private String              code,
         this.name = name;
     }
 
-    public Article(String code, String name, int quantityOnStock, int quantityOnCommit) {
+    public Article(String code, String name, int quantityOnStock, int quantityOnCommit, int positionCommissionId) {
         this.code = code;
         this.name = name;
         this.quantityOnStock = quantityOnStock;
         this.quantityOnCommit = quantityOnCommit;
+        this.positionCommissionId = positionCommissionId;
     }
 
     public String getCode() {
@@ -82,5 +83,9 @@ private String              code,
 
     public void setStorageLocation(StorageLocation storageLocation) {
         this.storageLocation = storageLocation;
+    }
+
+    public String toString() {
+        return "Code: " + this.code + " Name: " + name + " positionId: " + positionCommissionId + " commit: " + quantityOnCommit;
     }
 }

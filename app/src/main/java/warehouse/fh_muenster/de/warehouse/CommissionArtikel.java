@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -130,6 +131,8 @@ public class CommissionArtikel extends AppCompatActivity {
                         }
                         article.setQuantitiyCommited(kommissionierteMenge);
                         if(artikelZaehler != artikelGesamt){
+                            ProgressUpdateTask updateTask = new ProgressUpdateTask();
+                            updateTask.execute(article.getPositionCommissionId(),kommissionierteMenge);
                             setNextArticle(kommissionierteMenge_txt);
                             v.vibrate(50);
                         }
@@ -141,13 +144,16 @@ public class CommissionArtikel extends AppCompatActivity {
                             Helper.showToast(getResources().getString(R.string.toast_commissionArtikel_end),getApplicationContext());
                             v.vibrate(50);
                             ProgressUpdateTask updateTask = new ProgressUpdateTask();
-                            updateTask.execute(0);
+                            updateTask.execute(article.getPositionCommissionId(),kommissionierteMenge);
+                            //updateTask.execute(0);
+                            EndCommissionTask endCommissionTask = new EndCommissionTask();
+                            endCommissionTask.execute(0);
                             finish();
                         }
                         double progress = committedArticle / artikelGesamt;
                         commission.setProgress(progress);
                         ProgressUpdateTask updateTask = new ProgressUpdateTask();
-                        updateTask.execute(article.getPositionCommissionId(),kommissionierteMenge);
+                        //updateTask.execute(article.getPositionCommissionId(),kommissionierteMenge);
                         setTableRowsInvisible();
                     }
                     else{
@@ -167,6 +173,7 @@ public class CommissionArtikel extends AppCompatActivity {
                 Context context = view.getContext();
                 Intent i = new Intent(context, StockOut.class);
                 i.putExtra("id", article.getCode());
+                i.putExtra("commissionPositionId", article.getPositionCommissionId());
                 startActivity(i);
             }
         });
@@ -261,8 +268,9 @@ public class CommissionArtikel extends AppCompatActivity {
     private Article[] mapToArray(){
         Article articleArray[] = new Article[artikelGesamt];
         int i = 0;
-        for(Map.Entry<String,Article> entry : commission.getArticleHashMap().entrySet()){
+        for(Map.Entry<Integer,Article> entry : commission.getArticleHashMap().entrySet()){
             articleArray[i] = entry.getValue();
+            Log.i("Article: ", entry.getValue().toString());
             i++;
         }
         return articleArray;
@@ -295,6 +303,9 @@ public class CommissionArtikel extends AppCompatActivity {
             if(params.length == 2){
                 int commissionPositionId = params[0];
                 int istMenge = params[1];
+
+                //Log.i("CommissionId", String.valueOf(commissionPositionId));
+
                 Server server = new Server();
                 server.updateQuantityOnCommissionPosition(commissionPositionId,istMenge);
                 return true;
@@ -323,11 +334,11 @@ public class CommissionArtikel extends AppCompatActivity {
         }
     }
 
-    private class getPositiontoCommissionTask extends AsyncTask<Integer, Integer, HashMap<String, Article>> {
+    private class getPositiontoCommissionTask extends AsyncTask<Integer, Integer, HashMap<Integer, Article>> {
         ProgressDialog dialog;
 
         private int commissionId;
-        private HashMap<String, Article> map;
+        private HashMap<Integer, Article> map;
         public getPositiontoCommissionTask(int commissionId) {
             this.commissionId = commissionId;
         }
@@ -339,7 +350,7 @@ public class CommissionArtikel extends AppCompatActivity {
         }
 
         @Override
-        protected HashMap<String, Article> doInBackground(Integer... params) {
+        protected HashMap<Integer, Article> doInBackground(Integer... params) {
             if (params.length != 0) {
                 return null;
             }
@@ -351,7 +362,7 @@ public class CommissionArtikel extends AppCompatActivity {
 
 
         @Override
-        protected void onPostExecute(HashMap<String, Article> result) {
+        protected void onPostExecute(HashMap<Integer, Article> result) {
             if (result != null) {
                 commission.setArticleHashMap(result);
                 artikelGesamt = commission.getArticleHashMap().size();
@@ -370,4 +381,29 @@ public class CommissionArtikel extends AppCompatActivity {
         }
     }
 
+    private class EndCommissionTask extends AsyncTask<Integer, Integer, Boolean> {
+
+        @Override
+        protected Boolean doInBackground(Integer... params) {
+
+            if (params.length == 1) {
+                if (params[0] == 0) {
+                    Server server = new Server();
+                    server.endCommission(commission.getId());
+                    return true;
+                }
+            } else {
+                return null;
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            if (result != null) {
+
+            } else {
+            }
+        }
+    }
 }

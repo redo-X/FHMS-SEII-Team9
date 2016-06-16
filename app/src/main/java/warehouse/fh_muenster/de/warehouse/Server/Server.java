@@ -77,8 +77,8 @@ public class Server implements ServerInterface {
         }
     }
 
-    public HashMap<String, Article> getPositionToCommission(int id) {
-        HashMap<String, Article> result = new HashMap<>();
+    public HashMap<Integer, Article> getPositionToCommission(int id) {
+        HashMap<Integer, Article> result = new HashMap<>();
         String METHOD_NAME = "getPendingCommissionPositionsByCommissionId";
         try {
             SoapObject response = executeSoapAction(COMMISSION_URL, METHOD_NAME, id);
@@ -98,10 +98,10 @@ public class Server implements ServerInterface {
                 int quantityOnStock = Integer.valueOf(soapQuantityOnStock.getValue().toString());
                 int commissionPositionId = Integer.valueOf(soapCommissionPositionId.getValue().toString());
 
-                Article article = new Article(articleCode,articleName,quantityOnStock,quantityToCommit);
+                Article article = new Article(articleCode,articleName,quantityOnStock,quantityToCommit, commissionPositionId);
                 article.setStorageLocation(new StorageLocation(storageLocation));
-                article.setPositionCommissionId(commissionPositionId);
-                result.put(articleCode,article);
+                //article.setPositionCommissionId(commissionPositionId);
+                result.put(commissionPositionId,article);
             }
         }
         catch (SoapFault e) {
@@ -139,6 +139,28 @@ public class Server implements ServerInterface {
         SoapObject response = null;
         try {
             response = executeSoapAction(COMMISSION_URL,METHOD_NAME, commissionPositionId, quantity);
+        }
+        catch (SoapFault e) {
+
+        }
+    }
+
+    public void commitCommissionMessage(int sessionId, int commissionPositionId, int differenceQuantity, String note){
+        String METHOD_NAME = "commitCommissionMessage";
+        SoapObject response = null;
+        try {
+            response = executeSoapAction(COMMISSION_URL,METHOD_NAME, sessionId, commissionPositionId, differenceQuantity, note);
+        }
+        catch (SoapFault e) {
+
+        }
+    }
+
+    public void allocateCommission(int commissionId, int employeeId){
+        String METHOD_NAME = "allocateCommission";
+        SoapObject response = null;
+        try {
+            response = executeSoapAction(COMMISSION_URL,METHOD_NAME, commissionId, employeeId);
         }
         catch (SoapFault e) {
 
