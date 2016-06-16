@@ -1,6 +1,7 @@
 package warehouse.fh_muenster.de.warehouse;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.Intent;
 import android.support.test.espresso.intent.Intents;
 import android.support.test.rule.ActivityTestRule;
@@ -12,6 +13,7 @@ import static android.support.test.espresso.intent.Intents.intended;
 
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -25,6 +27,9 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
  * <a href="http://d.android.com/tools/testing/testing_android.html">Testing Fundamentals</a>
  */
 public class LoginTest {
+
+    private Context mockContext;
+
     @Rule
     public ActivityTestRule<LoginActivity> mActivityRule = new ActivityTestRule<>(
             LoginActivity.class);
