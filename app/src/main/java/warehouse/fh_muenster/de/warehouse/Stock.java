@@ -1,9 +1,11 @@
 package warehouse.fh_muenster.de.warehouse;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -24,24 +26,30 @@ import android.widget.Toast;
 import java.util.HashMap;
 import java.util.Map;
 
+import warehouse.fh_muenster.de.warehouse.Server.Server;
 import warehouse.fh_muenster.de.warehouse.Server.ServerMockImple;
 
 public class Stock extends AppCompatActivity {
 
-    boolean doubleBackToExitPressedOnce = false;
+    private boolean doubleBackToExitPressedOnce = false;
+    private HashMap<String, Article> hm;
     private ListView mListLayout;
     private ArrayAdapter<String> mAdapter;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
     private String mActivityTitle;
-    boolean finishActivity;
+    private boolean finishActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stock);
 
-        printTable();
+        WarehouseApplication myApp = (WarehouseApplication) getApplication();
+        StockAllItemsTask stockAllItemsTask = new StockAllItemsTask();
+        stockAllItemsTask.execute(myApp.getEmployee().getSessionId());
+
+
 
         Button stockA = (Button) findViewById(R.id.testButtonStockA);
         stockA.setOnClickListener(new View.OnClickListener() {
@@ -60,19 +68,56 @@ public class Stock extends AppCompatActivity {
         setupDrawer();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+
+
+    }
+
+    private class StockAllItemsTask extends AsyncTask<Integer, Integer, HashMap<String, Article>> {
+        ProgressDialog dialog;
+        HashMap<String, Article> hm2;
+        protected void onPreExecute() {
+            super.onPreExecute();
+            dialog = ProgressDialog.show(Stock.this, getResources().getString(R.string.dialog_wait),
+                    getResources().getString(R.string.dialog_article), true);
+        }
+
+        @Override
+        protected HashMap<String, Article> doInBackground(Integer... params) {
+            if (params.length != 1) {
+                return null;
+            }
+
+            int id = params[0];
+            Server server = new Server();
+            hm2 = server.getArticles(id);
+            return hm2;
+        }
+
+        @Override
+        protected void onPostExecute(HashMap<String, Article> result) {
+            if (result != null) {
+                hm = result;
+                dialog.dismiss();
+                printTable();
+            } else {
+
+            }
+        }
     }
 
     private void printTable() {
         TableLayout table = (TableLayout) findViewById(R.id.stock_table_layout);
 
         // Setzte die Tabellen Überschrift
-        HashMap<Integer, Article> hm = new HashMap<Integer, Article>();
-        ServerMockImple server = new ServerMockImple();
-        hm = server.getAllArticle();
+        //HashMap<Integer, Article> hm = new HashMap<Integer, Article>();
+        //ServerMockImple server = new ServerMockImple();
+        //hm = server.getAllArticle();
+
+
 
         int i = 0;
-        for (Map.Entry<Integer, Article> entry : hm.entrySet()) {
-            int articleNr = entry.getKey();
+        for (Map.Entry<String, Article> entry : hm.entrySet()) {
+            String articleNr = entry.getKey();
 
             Article article = entry.getValue();
 
@@ -109,12 +154,19 @@ public class Stock extends AppCompatActivity {
         return row;
     }
 
-    private Button createButton(int i) {
+    private Button createButton(final String i) {
         final Button aendernbutton = new Button(this);
 
         aendernbutton.setText(getResources().getString(R.string.stock_table_head_alter));
 
-        aendernbutton.setId(i);
+        aendernbutton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Context context = view.getContext();
+                Intent intent = new Intent(context, StockAmendment.class);
+                intent.putExtra("id", i);
+                startActivity(intent);
+            }
+        });
 
         return aendernbutton;
     }

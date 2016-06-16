@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +22,7 @@ import java.util.List;
 
 public class StockAmendment extends AppCompatActivity {
 
+    private int id;
     private ListView mListLayout;
     private ArrayAdapter<String> mAdapter;
     private DrawerLayout mDrawerLayout;
@@ -30,6 +33,17 @@ public class StockAmendment extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stock_amendment);
+
+        id = getIntent().getExtras().getInt("id");
+        final Button alter_button = (Button) findViewById(R.id.button_alter);
+
+        alter_button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                EditText neueMenge_txt = (EditText) findViewById(R.id.quantity_txt);
+                String neueMengeString = neueMenge_txt.getText().toString();
+
+            }
+        });
 
         //Drawer Menu
         mListLayout = (ListView) findViewById(R.id.navList);
@@ -46,7 +60,6 @@ public class StockAmendment extends AppCompatActivity {
         Intent newActivity = new Intent(getApplicationContext(), Stock.class);
         StockAmendment.this.startActivity(newActivity);
         finish();
-        //newActivity0.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     }
 
     //Drawer Menu
@@ -64,7 +77,6 @@ public class StockAmendment extends AppCompatActivity {
                 return view;
             }
         };
-
 
         mListLayout = (ListView) findViewById(R.id.navList);
         mListLayout.setAdapter(mAdapter);
