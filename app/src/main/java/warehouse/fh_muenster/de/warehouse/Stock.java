@@ -185,6 +185,17 @@ public class Stock extends AppCompatActivity {
             @Override
             public void run() {
                 doubleBackToExitPressedOnce = false;
+
+                WarehouseApplication myApp = (WarehouseApplication) getApplication();
+
+                LogoutTask logoutTask = new LogoutTask();
+                logoutTask.execute(myApp.getEmployee().getSessionId());
+
+                myApp.setOpenCommissionsMap(null);
+                myApp.setPickerCommissionsMap(null);
+                myApp.setEmployee(null);
+
+                Helper.showToast(getResources().getString(R.string.toast_logout), getApplicationContext());
             }
         }, 2000);
     }
