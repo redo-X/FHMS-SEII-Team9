@@ -167,6 +167,17 @@ public class Server implements ServerInterface {
         }
     }
 
+    public void commitStock(String artikelCode, int menge){
+        String METHOD_NAME = "updateQuantityOnStockOfArticle";
+        SoapObject response = null;
+        try {
+            response = executeSoapAction(ARTICLE_URL,METHOD_NAME, artikelCode, menge);
+        }
+        catch (SoapFault e) {
+
+        }
+    }
+
     @Override
     public HashMap<Integer, Commission> getFreeCommissions() {
         HashMap<Integer, Commission> result = new HashMap<>();

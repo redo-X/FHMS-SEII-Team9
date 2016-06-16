@@ -22,7 +22,7 @@ import java.util.List;
 
 public class StockAmendment extends AppCompatActivity {
 
-    private int id;
+    private String id;
     private ListView mListLayout;
     private ArrayAdapter<String> mAdapter;
     private DrawerLayout mDrawerLayout;
@@ -34,13 +34,21 @@ public class StockAmendment extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stock_amendment);
 
-        id = getIntent().getExtras().getInt("id");
+        id = getIntent().getExtras().getString("id");
         final Button alter_button = (Button) findViewById(R.id.button_alter);
 
         alter_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 EditText neueMenge_txt = (EditText) findViewById(R.id.quantity_txt);
                 String neueMengeString = neueMenge_txt.getText().toString();
+                try {
+                    int menge = Integer.valueOf(neueMengeString);
+                    StockAmendmentTask stockAmendmentTask = new StockAmendmentTask();
+                    stockAmendmentTask.execute(id, String.valueOf(menge));
+                }
+                catch (NumberFormatException e){
+                    Helper.showToast(getResources().getString(R.string.toast_commissionArtikel_wrongInput), getApplicationContext());
+                }
 
             }
         });
