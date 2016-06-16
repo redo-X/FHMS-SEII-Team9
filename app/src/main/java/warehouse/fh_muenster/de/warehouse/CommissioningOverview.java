@@ -13,6 +13,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,6 +45,7 @@ public class CommissioningOverview extends AppCompatActivity {
     private ActionBarDrawerToggle mDrawerToggle;
     private String mActivityTitle;
     private boolean finishActivity;
+
 
     // Wenn Activity wieder in Vordergrund kommt
     @Override
@@ -210,6 +213,15 @@ public class CommissioningOverview extends AppCompatActivity {
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
             super.onBackPressed();
+
+            LogoutTask logoutTask = new LogoutTask();
+            logoutTask.execute(myApp.getEmployee().getSessionId());
+
+            myApp.setOpenCommissionsMap(null);
+            myApp.setPickerCommissionsMap(null);
+            myApp.setEmployee(null);
+
+            Helper.showToast(getResources().getString(R.string.toast_logout), getApplicationContext());
             return;
         }
 
@@ -222,14 +234,6 @@ public class CommissioningOverview extends AppCompatActivity {
             @Override
             public void run() {
                 doubleBackToExitPressedOnce = false;
-                LogoutTask logoutTask = new LogoutTask();
-                logoutTask.execute(myApp.getEmployee().getSessionId());
-
-                myApp.setOpenCommissionsMap(null);
-                myApp.setPickerCommissionsMap(null);
-                myApp.setEmployee(null);
-
-                Helper.showToast(getResources().getString(R.string.toast_logout), getApplicationContext());
             }
         }, 2000);
     }
@@ -377,6 +381,7 @@ public class CommissioningOverview extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         return mDrawerToggle.onOptionsItemSelected(item);
     }
+
 
 /*
     private class CommissionTask extends AsyncTask<Employee, Integer, HashMap<Integer,Commission>> {

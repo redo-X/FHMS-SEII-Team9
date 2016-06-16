@@ -8,5 +8,11 @@ tools:context=".LoginActivity">
     android:orderInCategory="100"
     app:showAsAction="never"/>
 
+    <item android:id="@+id/airport_menuRefresh"
+        android:icon="@mipmap/ic_launcher"
+        android:title="refresh"
+        android:alphabeticShortcut="r"
+        android:orderInCategory="1"
+        />
 
 </menu>
