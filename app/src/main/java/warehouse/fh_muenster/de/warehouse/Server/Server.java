@@ -167,6 +167,17 @@ public class Server implements ServerInterface {
         }
     }
 
+    public void commitStock(String artikelCode, int menge){
+        String METHOD_NAME = "updateQuantityOnStockOfArticle";
+        SoapObject response = null;
+        try {
+            response = executeSoapAction(ARTICLE_URL,METHOD_NAME, artikelCode, menge);
+        }
+        catch (SoapFault e) {
+
+        }
+    }
+
     @Override
     public HashMap<Integer, Commission> getFreeCommissions() {
         HashMap<Integer, Commission> result = new HashMap<>();
@@ -220,6 +231,41 @@ public class Server implements ServerInterface {
         }
         return result;
     }
+
+
+    public HashMap<String, Article> getArticles(int sessionId) {
+        HashMap<String, Article> result = new HashMap<>();
+        String METHOD_NAME = "getArticles";
+        try {
+            SoapObject response = executeSoapAction(ARTICLE_URL,METHOD_NAME, sessionId);
+            for (int i=1; i<response.getPropertyCount(); i++) {
+                SoapObject soapAccountEntry = (SoapObject) response.getProperty(i);
+                SoapPrimitive soapCode = (SoapPrimitive) soapAccountEntry.getProperty("code");
+                SoapPrimitive soapName = (SoapPrimitive) soapAccountEntry.getProperty("name");
+                SoapPrimitive soapQuantityOnStock = (SoapPrimitive) soapAccountEntry.getProperty("quantityOnStock");
+                SoapPrimitive soapStorageLocation = (SoapPrimitive) soapAccountEntry.getProperty("storageLocation");
+
+                String code = soapCode.getValue().toString();
+                String name = soapName.getValue().toString();
+                int quantityOnStock = Integer.valueOf(soapQuantityOnStock.getValue().toString());
+                String storageLocation = soapStorageLocation.getValue().toString();
+                Article article = new Article(code, name);
+                article.setQuantityOnStock(quantityOnStock);
+                article.setStorageLocation(new StorageLocation(storageLocation));
+
+                result.put(code, article);
+            }
+            //return result;
+        }
+        catch (SoapFault e) {
+            //throw new NoSessionException(e.getMessage());
+            //Log.i("SoapMessage:", e.getMessage());
+            //Log.i("SoapMessage:", e.getStackTrace().toString());
+
+        }
+        return result;
+    }
+
 
     private SoapObject executeSoapAction(String url, String methodName, Object... args) throws SoapFault {
 
