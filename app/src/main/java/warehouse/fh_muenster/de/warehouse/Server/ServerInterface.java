@@ -34,19 +34,19 @@ public interface ServerInterface {
      * @param id Id der Kommission
      * @return HashMap mit allen Articeln die zur Kommission gehören
      */
-    public HashMap<Integer, Article> getPositionToCommission(int id);
+    public HashMap<Integer, Article> getPositionToCommission(int sessionId, int id);
 
     /**
      *Übersendet die Kommissions Id an den Server um die Kommission zu starten.
      * @param commissionId Id der zu startenden Kommission
      */
-    public void startCommission(int commissionId);
+    public void startCommission(int sessionId, int commissionId);
 
     /**
      *Übersendet die Kommissions Id an den Server um die Kommission zu beenden.
      * @param commissionId Id der zu beenden Kommission
      */
-    public void endCommission(int commissionId);
+    public void endCommission(int sessionId, int commissionId);
 
     /**
      * Aktualisiert die Kommissionierte menge. Sendet die Kommissionierte positionid
@@ -54,7 +54,7 @@ public interface ServerInterface {
      * @param commissionPositionId Position des Artikles
      * @param quantity Kommissionierte Menge
      */
-    public void updateQuantityOnCommissionPosition(int commissionPositionId, int quantity);
+    public void updateQuantityOnCommissionPosition(int sessionId, int commissionPositionId, int quantity);
 
     /**
      * Sendet eine Fehlmenge an den Server. Es wird die Session id des Mitarbiters, die kommissions
@@ -72,21 +72,21 @@ public interface ServerInterface {
      * @param commissionId Id der Kommission
      * @param employeeId Mitarbeiter Nummer
      */
-    public void allocateCommission(int commissionId, int employeeId);
+    public void allocateCommission(int sessionId, int commissionId, int employeeId);
 
     /**
      * Ändert den Lagerbestand. Es wird der zu ändernde articleCode und die zu änderne Menge übergeben
      * @param artikelCode Code es Artikels
      * @param menge Zu ändernde Menge
      */
-    public void commitStock(String artikelCode, int menge);
+    public void commitStock(int sessionId, String artikelCode, int menge);
 
     /**
      * Holt alle Freien Kommissionen.
      * Liefert eine HashMap mit der KommissionsId als Schlüssel und der Kommission als Wert.
      * @return HashMap mit allen freien Kommissionen
      */
-    public HashMap<Integer, Commission> getFreeCommissions();
+    public HashMap<Integer, Commission> getFreeCommissions(int sessionId);
 
     /**
      * Holt alle Kommissionen die zu einem Mitarbiter gehören.
@@ -94,7 +94,7 @@ public interface ServerInterface {
      * @param picker Mitarbeiter objekt
      * @return HashMap mit allen Kommission die zum Mitarbiter gehören
      */
-    public HashMap<Integer, Commission> getCommissions(Employee picker);
+    public HashMap<Integer, Commission> getCommissions(int sessionId, Employee picker);
 
     /**
      * Liefert eine HashMap die alle Artikle enthält. Schlüssel ist der Artikle Code und der Wert ist der Article

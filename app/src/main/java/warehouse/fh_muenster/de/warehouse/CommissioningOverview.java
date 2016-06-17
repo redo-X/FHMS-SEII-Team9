@@ -206,7 +206,7 @@ public class CommissioningOverview extends AppCompatActivity {
                     WarehouseApplication myApp = (WarehouseApplication) getApplication();
                     myApp.addCommissionToPicker(commission.getId());
                     AllocateCommissionTask allocateCommissionTask = new AllocateCommissionTask();
-                    allocateCommissionTask.execute(commission.getId(), myApp.getEmployee().getEmployeeNr());
+                    allocateCommissionTask.execute(commission.getId(), myApp.getEmployee().getEmployeeNr(),myApp.getEmployee().getSessionId());
                     removeTableRows();
                     myApp.removeCommissionFromOpen(commission.getId());
                     printTable(myApp.getOpenCommissionsMap().size(), screen);
@@ -412,21 +412,21 @@ public class CommissioningOverview extends AppCompatActivity {
                 if(Config.isMock()){
                     ServerMockImple server = new ServerMockImple();
                     if(screen.equals("commissionOverview")){
-                        myApp.setOpenCommissionsMap(server.getFreeCommissions());
+                        myApp.setOpenCommissionsMap(server.getFreeCommissions(myApp.getEmployee().getSessionId()));
                     }
                     else{
-                        myApp.setPickerCommissionsMap(server.getCommissions(myApp.getEmployee()));
+                        myApp.setPickerCommissionsMap(server.getCommissions(myApp.getEmployee().getSessionId(),myApp.getEmployee()));
                     }
                 }
                 else{
                     Log.i("CommissionTask:" , "Server");
                     Server server = new Server();
                     if(screen.equals("commissionOverview")){
-                        myApp.setOpenCommissionsMap(server.getFreeCommissions());
+                        myApp.setOpenCommissionsMap(server.getFreeCommissions(myApp.getEmployee().getSessionId()));
                     }
                     else{
                         Log.i("CommissionTask:" , "Commissionen");
-                        myApp.setPickerCommissionsMap(server.getCommissions(myApp.getEmployee()));
+                        myApp.setPickerCommissionsMap(server.getCommissions(myApp.getEmployee().getSessionId(),myApp.getEmployee()));
                     }
                 }
                 return true;

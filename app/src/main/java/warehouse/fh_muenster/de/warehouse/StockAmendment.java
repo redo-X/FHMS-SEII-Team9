@@ -60,7 +60,8 @@ public class StockAmendment extends AppCompatActivity {
                 try {
                     int menge = Integer.valueOf(neueMengeString);
                     StockAmendmentTask stockAmendmentTask = new StockAmendmentTask();
-                    stockAmendmentTask.execute(id, String.valueOf(menge));
+                    WarehouseApplication myApp = (WarehouseApplication) getApplication();
+                    stockAmendmentTask.execute(id, String.valueOf(menge),String.valueOf(myApp.getEmployee().getSessionId()));
                 } catch (NumberFormatException e) {
                     Helper.showToast(getResources().getString(R.string.toast_commissionArtikel_wrongInput), getApplicationContext());
                 }

@@ -295,11 +295,11 @@ public class CommissionArtikel extends AppCompatActivity {
 
                 if(Config.isMock()){
                     ServerMockImple server = new ServerMockImple();
-                    server.updateQuantityOnCommissionPosition(commissionPositionId,istMenge);
+                    server.updateQuantityOnCommissionPosition(myApp.getEmployee().getSessionId(),commissionPositionId,istMenge);
                 }
                 else {
                     Server server = new Server();
-                    server.updateQuantityOnCommissionPosition(commissionPositionId,istMenge);
+                    server.updateQuantityOnCommissionPosition(myApp.getEmployee().getSessionId(),commissionPositionId,istMenge);
                 }
 
 
@@ -312,7 +312,7 @@ public class CommissionArtikel extends AppCompatActivity {
                     }
                     else{
                         Server server = new Server();
-                        server.endCommission(commission.getId());
+                        server.endCommission(myApp.getEmployee().getSessionId(),commission.getId());
                     }
 
 
@@ -367,13 +367,13 @@ public class CommissionArtikel extends AppCompatActivity {
 
             if(Config.isMock()){
                 ServerMockImple server = new ServerMockImple();
-                map = server.getPositionToCommission(commissionId);
-                server.startCommission(commissionId);
+                map = server.getPositionToCommission(myApp.getEmployee().getSessionId(),commissionId);
+                server.startCommission(myApp.getEmployee().getSessionId(),commissionId);
             }
             else{
                 Server server = new Server();
-                map = server.getPositionToCommission(commissionId);
-                server.startCommission(commissionId);
+                map = server.getPositionToCommission(myApp.getEmployee().getSessionId(),commissionId);
+                server.startCommission(myApp.getEmployee().getSessionId(),commissionId);
             }
 
             return map;
@@ -409,11 +409,11 @@ public class CommissionArtikel extends AppCompatActivity {
                 if (params[0] == 0) {
                     if(Config.isMock()){
                         ServerMockImple server = new ServerMockImple();
-                        server.endCommission(commission.getId());
+                        server.endCommission(myApp.getEmployee().getSessionId(),commission.getId());
                     }
                     else{
                         Server server = new Server();
-                        server.endCommission(commission.getId());
+                        server.endCommission(myApp.getEmployee().getSessionId(),commission.getId());
                     }
                     return true;
                 }

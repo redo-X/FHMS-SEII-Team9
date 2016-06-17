@@ -78,7 +78,7 @@ public class Server implements ServerInterface {
     }
 
     @Override
-    public HashMap<Integer, Article> getPositionToCommission(int id) {
+    public HashMap<Integer, Article> getPositionToCommission(int sessionId, int id) {
         HashMap<Integer, Article> result = new HashMap<>();
         String METHOD_NAME = "getPendingCommissionPositionsByCommissionId";
         try {
@@ -113,7 +113,7 @@ public class Server implements ServerInterface {
     }
 
     @Override
-    public void startCommission(int commissionId){
+    public void startCommission(int sessionId, int commissionId){
         String METHOD_NAME = "updateStartOfCommission";
         SoapObject response = null;
         try {
@@ -125,7 +125,7 @@ public class Server implements ServerInterface {
     }
 
     @Override
-    public void endCommission(int commissionId){
+    public void endCommission(int sessionId, int commissionId){
         String METHOD_NAME = "updateFinishOfCommission";
         SoapObject response = null;
         try {
@@ -137,7 +137,7 @@ public class Server implements ServerInterface {
     }
 
     @Override
-    public void updateQuantityOnCommissionPosition(int commissionPositionId, int quantity){
+    public void updateQuantityOnCommissionPosition(int sessionId, int commissionPositionId, int quantity){
         String METHOD_NAME = "updatePickedQuantity";
         SoapObject response = null;
         try {
@@ -161,7 +161,7 @@ public class Server implements ServerInterface {
     }
 
     @Override
-    public void allocateCommission(int commissionId, int employeeId){
+    public void allocateCommission(int sessionId, int commissionId, int employeeId){
         String METHOD_NAME = "allocateCommission";
         SoapObject response = null;
         try {
@@ -173,7 +173,7 @@ public class Server implements ServerInterface {
     }
 
     @Override
-    public void commitStock(String artikelCode, int menge){
+    public void commitStock(int sessionId, String artikelCode, int menge){
         String METHOD_NAME = "updateQuantityOnStockOfArticle";
         SoapObject response = null;
         try {
@@ -185,7 +185,7 @@ public class Server implements ServerInterface {
     }
 
     @Override
-    public HashMap<Integer, Commission> getFreeCommissions() {
+    public HashMap<Integer, Commission> getFreeCommissions(int sessionId) {
         HashMap<Integer, Commission> result = new HashMap<>();
         String METHOD_NAME = "getPendingCommissionsWithoutPicker";
         try {
@@ -212,7 +212,7 @@ public class Server implements ServerInterface {
     }
 
     @Override
-    public HashMap<Integer, Commission> getCommissions(Employee picker) {
+    public HashMap<Integer, Commission> getCommissions(int sessionId, Employee picker) {
         HashMap<Integer, Commission> result = new HashMap<>();
         String METHOD_NAME = "getPendingCommissionsByPickerId";
         try {

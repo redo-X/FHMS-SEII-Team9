@@ -17,9 +17,10 @@ class AllocateCommissionTask extends AsyncTask<Integer, Integer, Boolean> {
         }
         int commissionId = params[0];
         int employeeNr = params[1];
+        int sessionId = params[2];
 
         Server server = new Server();
-        server.allocateCommission(commissionId, employeeNr);
+        server.allocateCommission(sessionId,commissionId, employeeNr);
 
 
         return true;

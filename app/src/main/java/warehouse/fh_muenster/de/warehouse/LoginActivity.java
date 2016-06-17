@@ -152,11 +152,11 @@ public class LoginActivity extends AppCompatActivity {
             HashMap<Integer,Commission> commissionHashMap = new HashMap<>();
             if(Config.isMock()){
                 ServerMockImple server = new ServerMockImple();
-                commissionHashMap = server.getFreeCommissions();
+                commissionHashMap = server.getFreeCommissions(myApp.getEmployee().getSessionId());
             }
             else{
                 Server server = new Server();
-                commissionHashMap = server.getFreeCommissions();
+                commissionHashMap = server.getFreeCommissions(myApp.getEmployee().getSessionId());
             }
 
 
@@ -164,11 +164,11 @@ public class LoginActivity extends AppCompatActivity {
             //ServerMockImple server = new ServerMockImple();
             if(Config.isMock()){
                 ServerMockImple server = new ServerMockImple();
-                commissionHashMap = server.getCommissions(employee);
+                commissionHashMap = server.getCommissions(myApp.getEmployee().getSessionId(),employee);
             }
             else{
                 Server server = new Server();
-                commissionHashMap = server.getCommissions(employee);
+                commissionHashMap = server.getCommissions(myApp.getEmployee().getSessionId(),employee);
             }
 
             myApp.setPickerCommissionsMap(commissionHashMap);

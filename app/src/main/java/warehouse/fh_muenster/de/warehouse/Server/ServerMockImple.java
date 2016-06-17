@@ -18,11 +18,7 @@ public class ServerMockImple implements ServerInterface {
         if(employeeNr == 1 && password.equals("geheim")){
             Employee user = new Employee(1, "geheim");
             user.setRole(Role.Kommissionierer);
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+
             return user;
         }
         else if(employeeNr == 2 && password.equals("geheim")){
@@ -41,7 +37,7 @@ public class ServerMockImple implements ServerInterface {
     }
 
     @Override
-    public HashMap<Integer, Commission> getFreeCommissions() {
+    public HashMap<Integer, Commission> getFreeCommissions(int sessionId) {
         HashMap<Integer,Commission> commissionMap = new HashMap<Integer, Commission>();
 
         Random rand = new Random();
@@ -51,18 +47,14 @@ public class ServerMockImple implements ServerInterface {
             Commission commission = new Commission(kommissionCode , positionCount);
             commissionMap.put(kommissionCode,commission);
         }
-        try {
-            Thread.sleep(300);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
         Commission commission = new Commission(90001,1);
         commissionMap.put(commission.getId(),commission);
         return commissionMap;
     }
 
     @Override
-    public HashMap<Integer,Commission> getCommissions(Employee picker){
+    public HashMap<Integer,Commission> getCommissions(int sessionId, Employee picker){
         HashMap<Integer,Commission> commissionMap = new HashMap<Integer, Commission>();
 
         Random rand = new Random();
@@ -95,7 +87,7 @@ public class ServerMockImple implements ServerInterface {
 
 
     @Override
-    public HashMap<Integer, Article> getPositionToCommission(int id) {
+    public HashMap<Integer, Article> getPositionToCommission(int sessionId, int id) {
         Commission commission = null;
         HashMap<Integer,Article> articleHashMap = new HashMap<>();
         //String code = "3662168005845";
@@ -126,17 +118,17 @@ public class ServerMockImple implements ServerInterface {
     }
 
     @Override
-    public void startCommission(int commissionId) {
+    public void startCommission(int sessionId, int commissionId) {
 
     }
 
     @Override
-    public void endCommission(int commissionId) {
+    public void endCommission(int sessionId, int commissionId) {
 
     }
 
     @Override
-    public void updateQuantityOnCommissionPosition(int commissionPositionId, int quantity) {
+    public void updateQuantityOnCommissionPosition(int sessionId, int commissionPositionId, int quantity) {
 
     }
 
@@ -146,12 +138,12 @@ public class ServerMockImple implements ServerInterface {
     }
 
     @Override
-    public void allocateCommission(int commissionId, int employeeId) {
+    public void allocateCommission(int sessionId, int commissionId, int employeeId) {
 
     }
 
     @Override
-    public void commitStock(String artikelCode, int menge) {
+    public void commitStock(int sessionId, String artikelCode, int menge) {
 
     }
     @Override
@@ -166,6 +158,11 @@ public class ServerMockImple implements ServerInterface {
             article.setStorageLocation(location);
             aHashMap.put(String.valueOf(articelCode), article);
         }
+        Article article = new Article("T-A", "Tolle Beschreibung des Artikels");
+        article.setQuantityOnStock(100);
+        article.setQuantityOnCommit(20);
+        article.setStorageLocation(new StorageLocation("Lager5"));
+        aHashMap.put(article.getCode(),article);
         return aHashMap;
     }
 }
