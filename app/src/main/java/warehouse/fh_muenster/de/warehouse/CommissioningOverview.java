@@ -31,13 +31,14 @@ import android.widget.Toast;
 import java.util.HashMap;
 import java.util.Map;
 
+import warehouse.fh_muenster.de.warehouse.Server.Config;
 import warehouse.fh_muenster.de.warehouse.Server.Server;
 import warehouse.fh_muenster.de.warehouse.Server.ServerMockImple;
 
 
 public class CommissioningOverview extends AppCompatActivity {
 
-    private ServerMockImple server = new ServerMockImple();
+
     String screen;
     boolean doubleBackToExitPressedOnce = false;
     WarehouseApplication myApp;
@@ -406,13 +407,27 @@ public class CommissioningOverview extends AppCompatActivity {
         @Override
         protected Boolean doInBackground(Integer... params) {
             if (params.length != 1) {
-                Server server = new Server();
-                if(screen.equals("")){
-                    myApp.setOpenCommissionsMap(server.getFreeCommissions());
+                //Server server = new Server();
+                if(Config.isMock()){
+                    ServerMockImple server = new ServerMockImple();
+                    if(screen.equals("")){
+                        myApp.setOpenCommissionsMap(server.getFreeCommissions());
+                    }
+                    else{
+                        myApp.setPickerCommissionsMap(server.getCommissions(myApp.getEmployee()));
+                    }
                 }
                 else{
-                    myApp.setPickerCommissionsMap(server.getCommissions(myApp.getEmployee()));
+                    Server server = new Server();
+                    if(screen.equals("")){
+                        myApp.setOpenCommissionsMap(server.getFreeCommissions());
+                    }
+                    else{
+                        myApp.setPickerCommissionsMap(server.getCommissions(myApp.getEmployee()));
+                    }
                 }
+
+
                 return true;
             }
             return null;

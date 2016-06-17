@@ -40,7 +40,7 @@ public class ServerMockImple implements ServerInterface {
 
     }
 
-
+    @Override
     public HashMap<Integer, Commission> getFreeCommissions() {
         HashMap<Integer,Commission> commissionMap = new HashMap<Integer, Commission>();
 
@@ -59,6 +59,7 @@ public class ServerMockImple implements ServerInterface {
         return commissionMap;
     }
 
+    @Override
     public HashMap<Integer,Commission> getCommissions(Employee picker){
         HashMap<Integer,Commission> commissionMap = new HashMap<Integer, Commission>();
 
@@ -87,11 +88,8 @@ public class ServerMockImple implements ServerInterface {
     return commissionMap;
     }
 
-    @Override
-    public HashMap<String, Article> getArticles(int sessionId) {
-        return null;
-    }
 
+    @Override
     public HashMap<Integer, Article> getPositionToCommission(int id) {
         Commission commission = null;
         HashMap<Integer,Article> articleHashMap = new HashMap<>();
@@ -142,8 +140,8 @@ public class ServerMockImple implements ServerInterface {
     public void commitStock(String artikelCode, int menge) {
 
     }
-
-    public HashMap<String, Article> getAllArticle () {
+    @Override
+    public HashMap<String, Article> getArticles(int sessionId) {
         HashMap<String, Article> aHashMap = new HashMap<>();
         Random rand = new Random();
         for(int j = 0; j< 20; j++){

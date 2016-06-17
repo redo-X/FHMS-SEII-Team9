@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import java.util.HashMap;
 
+import warehouse.fh_muenster.de.warehouse.Server.Config;
 import warehouse.fh_muenster.de.warehouse.Server.Server;
 import warehouse.fh_muenster.de.warehouse.Server.ServerMockImple;
 import warehouse.fh_muenster.de.warehouse.Server.WebService;
@@ -24,7 +25,7 @@ import warehouse.fh_muenster.de.warehouse.Server.WebService;
 
 public class LoginActivity extends AppCompatActivity {
     ProgressDialog dialog;
-    //ServerMockImple server = new ServerMockImple();
+
     Server server = new Server();
     // Get Code from Scanner
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -104,7 +105,15 @@ public class LoginActivity extends AppCompatActivity {
             }
             String password = params[1];
             Employee employee = new Employee();
-            employee = server.login(employeeNr, password);
+            if(Config.isMock()){
+                ServerMockImple server = new ServerMockImple();
+                employee = server.login(employeeNr, password);
+            }
+            else{
+                Server server = new Server();
+                employee = server.login(employeeNr, password);
+            }
+
             return employee;
 
         }
@@ -140,12 +149,28 @@ public class LoginActivity extends AppCompatActivity {
                 return null;
             }
             Employee employee = params[0];
+            HashMap<Integer,Commission> commissionHashMap = new HashMap<>();
+            if(Config.isMock()){
+                ServerMockImple server = new ServerMockImple();
+                commissionHashMap = server.getFreeCommissions();
+            }
+            else{
+                Server server = new Server();
+                commissionHashMap = server.getFreeCommissions();
+            }
 
-            //ServerMockImple server = new ServerMockImple();
-            HashMap<Integer,Commission> commissionHashMap = server.getFreeCommissions();
+
             myApp.setOpenCommissionsMap(commissionHashMap);
             //ServerMockImple server = new ServerMockImple();
-            commissionHashMap = server.getCommissions(employee);
+            if(Config.isMock()){
+                ServerMockImple server = new ServerMockImple();
+                commissionHashMap = server.getCommissions(employee);
+            }
+            else{
+                Server server = new Server();
+                commissionHashMap = server.getCommissions(employee);
+            }
+
             myApp.setPickerCommissionsMap(commissionHashMap);
             return commissionHashMap;
         }

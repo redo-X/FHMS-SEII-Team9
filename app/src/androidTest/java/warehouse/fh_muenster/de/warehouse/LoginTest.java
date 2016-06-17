@@ -11,9 +11,12 @@ import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.intent.Intents.intended;
 
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import warehouse.fh_muenster.de.warehouse.Server.Config;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -37,14 +40,19 @@ public class LoginTest {
     /**
      * Checks if the Login is successful
      */
+    @Before
+    public void setMock(){
+        Config.setIsMock(true);
+    }
+
     @Test
     public void testLogin(){
         try {
             Intents.init();
             onView(withId(R.id.mitarbeiterNr_txt))
-                    .perform(typeText("123"), closeSoftKeyboard());
+                    .perform(typeText("1"), closeSoftKeyboard());
             onView(withId(R.id.password_txt))
-                    .perform(typeText("123"), closeSoftKeyboard());
+                    .perform(typeText("geheim"), closeSoftKeyboard());
             onView(withId(R.id.login_btn)).perform(click());
             intended(hasComponent(CommissioningOverview.class.getName()));
         }

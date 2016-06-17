@@ -20,6 +20,7 @@ import android.widget.Toast;
 import java.util.HashMap;
 import java.util.Map;
 
+import warehouse.fh_muenster.de.warehouse.Server.Config;
 import warehouse.fh_muenster.de.warehouse.Server.Server;
 import warehouse.fh_muenster.de.warehouse.Server.ServerMockImple;
 
@@ -82,28 +83,11 @@ public class CommissionArtikel extends AppCompatActivity {
 
         TextView ueberschrift = (TextView) findViewById(R.id.commission_id_label);
         TextView artikelanzahlLabel = (TextView) findViewById(R.id.commission_artikelAnzahl_label);
-        //ServerMockImple server = new ServerMockImple();
-        final Server server = new Server();
+
+        //final Server server = new Server();
         // set PickerCommission with global saved data.
         myApp = (WarehouseApplication) getApplication();
         this.commission = myApp.getPickerCommissionById(id);
-        //commission.setArticleHashMap(server.getPositionToCommission(commission.getId()));
-        //getPositiontoCommissionTask task = new getPositiontoCommissionTask(commission.getId());
-        //task.execute();
-
-/*
-
-        artikelGesamt = commission.getArticleHashMap().size();
-
-        // Set the unused Table Rows invisible
-        setTableRowsInvisible();
-
-        ueberschrift.setText(getResources().getString(R.string.commissionArtikel_headline1) + " " + String.valueOf(id) + " " +
-                getResources().getString(R.string.commissionArtikel_headline2));
-        setTableRows();
-        //artikelanzahlLabel.setText("Artikel " + artikelZaehler +  " von " + artikelGesamt);
-
-*/
 
         // Starts the Scanner
         scan_btn.setOnClickListener(new View.OnClickListener(){
@@ -131,8 +115,8 @@ public class CommissionArtikel extends AppCompatActivity {
                             committedArticle++;
                         }
                         article.setQuantitiyCommited(kommissionierteMenge);
-                        //if(artikelZaehler != artikelGesamt){
-                        if(Article.isLastArticle(artikelGesamt, artikelZaehler)){
+                        if(artikelZaehler != artikelGesamt){
+                        //if(Article.isLastArticle(artikelGesamt, artikelZaehler)){
                             ProgressUpdateTask updateTask = new ProgressUpdateTask();
                             updateTask.execute(article.getPositionCommissionId(),kommissionierteMenge);
                             setNextArticle(kommissionierteMenge_txt);
@@ -179,6 +163,7 @@ public class CommissionArtikel extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
         getPositiontoCommissionTask task = new getPositiontoCommissionTask(commission.getId());
         task.execute();
     }
@@ -302,20 +287,35 @@ public class CommissionArtikel extends AppCompatActivity {
 
         @Override
         protected Boolean doInBackground(Integer... params) {
+
+
             if(params.length == 2){
                 int commissionPositionId = params[0];
                 int istMenge = params[1];
 
-                //Log.i("CommissionId", String.valueOf(commissionPositionId));
+                if(Config.isMock()){
+                    ServerMockImple server = new ServerMockImple();
+                    server.updateQuantityOnCommissionPosition(commissionPositionId,istMenge);
+                }
+                else {
+                    Server server = new Server();
+                    server.updateQuantityOnCommissionPosition(commissionPositionId,istMenge);
+                }
 
-                Server server = new Server();
-                server.updateQuantityOnCommissionPosition(commissionPositionId,istMenge);
+
                 return true;
             }
             else if(params.length == 1){
                 if(params[0] == 0){
-                    Server server = new Server();
-                    server.endCommission(commission.getId());
+                    if(Config.isMock()){
+                        ServerMockImple server = new ServerMockImple();
+                    }
+                    else{
+                        Server server = new Server();
+                        server.endCommission(commission.getId());
+                    }
+
+
                     return true;
                 }
             }
@@ -324,6 +324,14 @@ public class CommissionArtikel extends AppCompatActivity {
             }
             return null;
         }
+        /*
+        if(Config.isMock()){
+                        ServerMockImple server = new ServerMockImple();
+                    }
+                    else{
+                        Server server = new Server();
+                    }
+         */
 
 
         @Override
@@ -356,9 +364,18 @@ public class CommissionArtikel extends AppCompatActivity {
             if (params.length != 0) {
                 return null;
             }
-            Server server = new Server();
-            map = server.getPositionToCommission(commissionId);
-            server.startCommission(commissionId);
+
+            if(Config.isMock()){
+                ServerMockImple server = new ServerMockImple();
+                map = server.getPositionToCommission(commissionId);
+                server.startCommission(commissionId);
+            }
+            else{
+                Server server = new Server();
+                map = server.getPositionToCommission(commissionId);
+                server.startCommission(commissionId);
+            }
+
             return map;
         }
 
@@ -390,8 +407,14 @@ public class CommissionArtikel extends AppCompatActivity {
 
             if (params.length == 1) {
                 if (params[0] == 0) {
-                    Server server = new Server();
-                    server.endCommission(commission.getId());
+                    if(Config.isMock()){
+                        ServerMockImple server = new ServerMockImple();
+                        server.endCommission(commission.getId());
+                    }
+                    else{
+                        Server server = new Server();
+                        server.endCommission(commission.getId());
+                    }
                     return true;
                 }
             } else {
