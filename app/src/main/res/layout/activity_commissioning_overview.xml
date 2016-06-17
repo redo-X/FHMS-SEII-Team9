@@ -21,7 +21,9 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:scrollbars="none"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:id="@+id/scrollView3"
+        android:layout_above="@+id/commission_overview_refresh">
 
     <TableLayout
         android:stretchColumns="*"
@@ -62,7 +64,20 @@
         </TableRow>
 
     </TableLayout>
+
 </ScrollView>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/commission_overview_refresh"
+        android:layout_alignParentBottom="true"
+        android:src="@mipmap/refresh"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
 
 </RelativeLayout>
 
