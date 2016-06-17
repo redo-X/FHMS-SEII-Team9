@@ -19,7 +19,7 @@ public class LoginTaskUnitTest {
     public void loginIsCorrect() throws Exception {
         ServerMockImple server = new ServerMockImple();
         Employee employee = new Employee();
-        employee = server.login(123,"123");
+        employee = server.login(1,"geheim");
         assertNotNull(employee);
     }
     @Test
@@ -33,7 +33,7 @@ public class LoginTaskUnitTest {
     public void loginAsStock(){
         ServerMockImple server = new ServerMockImple();
         Employee employee = new Employee();
-        employee = server.login(234,"234");
+        employee = server.login(2,"geheim");
         assertTrue(employee.getRole().equals(Role.Lagerist));
     }
 
