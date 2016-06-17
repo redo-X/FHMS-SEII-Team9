@@ -57,6 +57,9 @@ public class EspressoPickerTest {
     }
 
     @Test
+    /**
+     * Testet ob der Login erfolgreich durchgeführt werden kann
+     */
     public void testLogin(){
         try {
             Intents.init();
@@ -76,7 +79,7 @@ public class EspressoPickerTest {
     }
 
     /**
-     * Checks if the Login Fail with wrong user data
+     * Testet ob der Login mit falschen benutzerdaten fehlschlägt
      */
     @Test
     public void testLoginFail(){
@@ -90,7 +93,7 @@ public class EspressoPickerTest {
 
 
     /**
-     * Checks if the Scanner start by clicking the Scanner Button
+     * Testet ob die Scanner Activity startet
      */
     @Test
     public void testScanner(){
@@ -108,6 +111,9 @@ public class EspressoPickerTest {
     }
 
     @Test
+    /**
+     * Testet ob eine Kommission mit der Id 90000 gestartet wird
+     */
     public void testStartCommission(){
         try {
             Intents.init();
@@ -128,6 +134,9 @@ public class EspressoPickerTest {
     }
 
     @Test
+    /**
+     * Testet ob durch das Menü die offenen Kommissionen angzeigt werden können
+     */
     public void testOpenCommissions(){
         try {
             Intents.init();
@@ -148,6 +157,9 @@ public class EspressoPickerTest {
         }
     }
     @Test
+    /**
+     * Testet ob der Logout über das Menü funktionoert
+     */
     public void testLogout(){
         try {
 
@@ -170,6 +182,9 @@ public class EspressoPickerTest {
     }
 
     @Test
+    /**
+     * Testet ob eine kommission komplett durchgeführt werden kann
+     */
     public void testStartCommissionFinished(){
         try {
             Intents.init();
@@ -193,6 +208,9 @@ public class EspressoPickerTest {
         }
     }
     @Test
+    /**
+     * Testet ob eine Kommission angenommen werden kann
+     */
     public void testAcceptCommission(){
             onView(withId(R.id.mitarbeiterNr_txt))
                     .perform(typeText("1"), closeSoftKeyboard());
@@ -207,6 +225,9 @@ public class EspressoPickerTest {
     }
 
     @Test
+    /**
+     * Testet ob eine Fehlmenge übsendert werden kann
+     */
     public void testStockOut(){
         try {
             Intents.init();

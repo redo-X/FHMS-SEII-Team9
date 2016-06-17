@@ -94,6 +94,7 @@ public class Server implements ServerInterface {
                 SoapPrimitive soapResultCode = (SoapPrimitive) soapAccountEntry.getProperty("resultCode");
                 SoapPrimitive soapResultMessage = (SoapPrimitive) soapAccountEntry.getProperty("resultMessage");
 
+
                 String articleCode = soapArticleCode.getValue().toString();
                 String articleName = soapArticleName.getValue().toString();
                 String storageLocation = soapStorageLocation.getValue().toString();
