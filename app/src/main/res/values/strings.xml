@@ -39,6 +39,9 @@
     <string name="stock_table_head_alter">Ändern</string>
 
     <string name="stockAmendment_button_alter">Ändern</string>
+    <string name="stockAmendment_text_headline">Menge ändern für Artikel</string>
+    <string name="stockAmendment_text_storageLocation">Lagerort</string>
+    <string name="stockAmendment_text_quantity">Menge</string>
 
     <string name="scanner_fail">Es liegt ein Fehler mit dem Scanner vor. Bitte schließen Sie die App und starten sie erneut.</string>
 

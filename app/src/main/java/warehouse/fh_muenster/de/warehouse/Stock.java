@@ -65,6 +65,7 @@ public class Stock extends AppCompatActivity {
     private class StockAllItemsTask extends AsyncTask<Integer, Integer, HashMap<String, Article>> {
         ProgressDialog dialog;
         HashMap<String, Article> hm2;
+
         protected void onPreExecute() {
             super.onPreExecute();
             dialog = ProgressDialog.show(Stock.this, getResources().getString(R.string.dialog_wait),
@@ -78,11 +79,10 @@ public class Stock extends AppCompatActivity {
             }
 
             int id = params[0];
-            if(Config.isMock()){
+            if (Config.isMock()) {
                 ServerMockImple server = new ServerMockImple();
                 hm2 = server.getArticles(id);
-            }
-            else{
+            } else {
                 Server server = new Server();
                 hm2 = server.getArticles(id);
             }
@@ -94,6 +94,8 @@ public class Stock extends AppCompatActivity {
         protected void onPostExecute(HashMap<String, Article> result) {
             if (result != null) {
                 hm = result;
+                WarehouseApplication myApp = (WarehouseApplication) getApplication();
+                myApp.setArticleMap(hm);
                 dialog.dismiss();
                 printTable();
             } else {
@@ -109,7 +111,6 @@ public class Stock extends AppCompatActivity {
         //HashMap<Integer, Article> hm = new HashMap<Integer, Article>();
         //ServerMockImple server = new ServerMockImple();
         //hm = server.getAllArticle();
-
 
 
         int i = 0;
@@ -158,12 +159,14 @@ public class Stock extends AppCompatActivity {
 
         aendernbutton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+                WarehouseApplication myApp = (WarehouseApplication) getApplication();
                 Context context = view.getContext();
                 Intent intent = new Intent(context, StockAmendment.class);
                 intent.putExtra("id", i);
-                intent.putExtra("Lagerort", i);
-                intent.putExtra("Menge", i);
+                intent.putExtra("storageLocation", myApp.getArticleMap().get(i).getStorageLocation().toString());
+                intent.putExtra("quantity", String.valueOf(myApp.getArticleMap().get(i).getQuantityOnStock()));
                 startActivity(intent);
+                finish();
             }
         });
 

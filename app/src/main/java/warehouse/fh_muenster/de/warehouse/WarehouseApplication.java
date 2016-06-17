@@ -9,18 +9,18 @@ import java.util.HashMap;
  * Created by Marco on 10.05.16.
  */
 public class WarehouseApplication extends Application {
-    private Employee                    employee;
-    private HashMap<Integer,Commission> openCommissionsMap;
-    private HashMap<Integer,Commission> pickerCommissionsMap;
+    private Employee employee;
+    private HashMap<Integer, Commission> openCommissionsMap;
+    private HashMap<Integer, Commission> pickerCommissionsMap;
+    private HashMap<String, Article> articleMap;
 
-    public Employee getEmployee(){
+    public Employee getEmployee() {
         return this.employee;
     }
 
-    public void setEmployee(Employee employee){
+    public void setEmployee(Employee employee) {
         this.employee = employee;
     }
-
 
     public HashMap<Integer, Commission> getOpenCommissionsMap() {
         return openCommissionsMap;
@@ -38,22 +38,30 @@ public class WarehouseApplication extends Application {
         this.pickerCommissionsMap = pickerCommissionsMap;
     }
 
-    public Commission getPickerCommissionById(int id){
+    public Commission getPickerCommissionById(int id) {
 
-        if(pickerCommissionsMap.containsKey(id)){
+        if (pickerCommissionsMap.containsKey(id)) {
             return pickerCommissionsMap.get(id);
-        }
-        else{
+        } else {
             return null;
         }
     }
-    public void addCommissionToPicker(int id){
+
+    public void addCommissionToPicker(int id) {
         Commission commission = this.openCommissionsMap.get(id);
-        this.pickerCommissionsMap.put(id,commission);
+        this.pickerCommissionsMap.put(id, commission);
     }
-    public void removeCommissionFromOpen(int id){
+
+    public void removeCommissionFromOpen(int id) {
         Log.i("CommissionId: ", String.valueOf(id));
         this.openCommissionsMap.remove(id);
     }
 
+    public HashMap<String, Article> getArticleMap() {
+        return articleMap;
+    }
+
+    public void setArticleMap(HashMap<String, Article> articleMap) {
+        this.articleMap = articleMap;
+    }
 }

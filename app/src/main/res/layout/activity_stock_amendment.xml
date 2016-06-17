@@ -41,8 +41,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Menge ändern für Artikel _"
-            android:id="@+id/textView3"
+            android:text="@string/stockAmendment_text_headline"
+            android:id="@+id/headline_txt"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true" />
 
@@ -50,9 +50,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Lagerort"
+            android:text="@string/stockAmendment_text_storageLocation"
             android:id="@+id/lagerort_txt"
-            android:layout_below="@+id/textView3"
+            android:layout_below="@+id/headline_txt"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
@@ -60,7 +60,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Aktuelle Menge"
+            android:text="@string/stockAmendment_text_quantity"
             android:id="@+id/menge_txt"
             android:layout_below="@+id/lagerort_txt"
             android:layout_alignParentLeft="true"
@@ -71,8 +71,8 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="0"
-            android:id="@+id/textView6"
-            android:layout_below="@+id/textView3"
+            android:id="@+id/input_storageLocation"
+            android:layout_below="@+id/headline_txt"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
 
@@ -81,8 +81,8 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="0"
-            android:id="@+id/textView7"
-            android:layout_below="@+id/lagerort_txt"
+            android:id="@+id/input_quantity"
+            android:layout_below="@+id/input_storageLocation"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
 
