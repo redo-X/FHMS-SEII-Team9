@@ -63,14 +63,6 @@
                         android:layout_weight="0"
                         />
                 </TableRow>
-                <TableRow>
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="Stock Ändern"
-                        android:id="@+id/testButtonStockA"
-                        />
-                </TableRow>
             </TableLayout>
         </ScrollView>
 
