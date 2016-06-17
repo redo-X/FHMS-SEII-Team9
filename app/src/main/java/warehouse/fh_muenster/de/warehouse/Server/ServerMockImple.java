@@ -87,6 +87,11 @@ public class ServerMockImple implements ServerInterface {
     return commissionMap;
     }
 
+    @Override
+    public HashMap<String, Article> getArticles(int sessionId) {
+        return null;
+    }
+
     public HashMap<Integer, Article> getPositionToCommission(int id) {
         Commission commission = null;
         HashMap<Integer,Article> articleHashMap = new HashMap<>();
@@ -106,6 +111,36 @@ public class ServerMockImple implements ServerInterface {
         }
         //commission.setArticleHashMap(articleHashMap);
         return  articleHashMap;
+    }
+
+    @Override
+    public void startCommission(int commissionId) {
+
+    }
+
+    @Override
+    public void endCommission(int commissionId) {
+
+    }
+
+    @Override
+    public void updateQuantityOnCommissionPosition(int commissionPositionId, int quantity) {
+
+    }
+
+    @Override
+    public void commitCommissionMessage(int sessionId, int commissionPositionId, int differenceQuantity, String note) {
+
+    }
+
+    @Override
+    public void allocateCommission(int commissionId, int employeeId) {
+
+    }
+
+    @Override
+    public void commitStock(String artikelCode, int menge) {
+
     }
 
     public HashMap<Integer, Article> getAllArticle () {

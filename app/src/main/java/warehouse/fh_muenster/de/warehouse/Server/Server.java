@@ -65,7 +65,7 @@ public class Server implements ServerInterface {
         return null;
     }
 
-
+    @Override
     public void logout(int sessionId){
         String METHOD_NAME = "logout";
         SoapObject response = null;
@@ -77,6 +77,7 @@ public class Server implements ServerInterface {
         }
     }
 
+    @Override
     public HashMap<Integer, Article> getPositionToCommission(int id) {
         HashMap<Integer, Article> result = new HashMap<>();
         String METHOD_NAME = "getPendingCommissionPositionsByCommissionId";
@@ -111,6 +112,7 @@ public class Server implements ServerInterface {
         return result;
     }
 
+    @Override
     public void startCommission(int commissionId){
         String METHOD_NAME = "updateStartOfCommission";
         SoapObject response = null;
@@ -122,6 +124,7 @@ public class Server implements ServerInterface {
         }
     }
 
+    @Override
     public void endCommission(int commissionId){
         String METHOD_NAME = "updateFinishOfCommission";
         SoapObject response = null;
@@ -133,7 +136,7 @@ public class Server implements ServerInterface {
         }
     }
 
-
+    @Override
     public void updateQuantityOnCommissionPosition(int commissionPositionId, int quantity){
         String METHOD_NAME = "updatePickedQuantity";
         SoapObject response = null;
@@ -145,6 +148,7 @@ public class Server implements ServerInterface {
         }
     }
 
+    @Override
     public void commitCommissionMessage(int sessionId, int commissionPositionId, int differenceQuantity, String note){
         String METHOD_NAME = "commitCommissionMessage";
         SoapObject response = null;
@@ -156,6 +160,7 @@ public class Server implements ServerInterface {
         }
     }
 
+    @Override
     public void allocateCommission(int commissionId, int employeeId){
         String METHOD_NAME = "allocateCommission";
         SoapObject response = null;
@@ -167,6 +172,7 @@ public class Server implements ServerInterface {
         }
     }
 
+    @Override
     public void commitStock(String artikelCode, int menge){
         String METHOD_NAME = "updateQuantityOnStockOfArticle";
         SoapObject response = null;
@@ -232,7 +238,7 @@ public class Server implements ServerInterface {
         return result;
     }
 
-
+    @Override
     public HashMap<String, Article> getArticles(int sessionId) {
         HashMap<String, Article> result = new HashMap<>();
         String METHOD_NAME = "getArticles";

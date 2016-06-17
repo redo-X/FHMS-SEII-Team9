@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -30,6 +31,7 @@ import android.widget.Toast;
 import java.util.HashMap;
 import java.util.Map;
 
+import warehouse.fh_muenster.de.warehouse.Server.Server;
 import warehouse.fh_muenster.de.warehouse.Server.ServerMockImple;
 
 
@@ -84,6 +86,14 @@ public class CommissioningOverview extends AppCompatActivity {
         setupDrawer();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+
+        ImageButton refresh = (ImageButton) findViewById(R.id.commission_overview_refresh);
+        refresh.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+
+            }
+        });
+
     }
 
     /**
@@ -383,16 +393,10 @@ public class CommissioningOverview extends AppCompatActivity {
     }
 
 
-/*
-    private class CommissionTask extends AsyncTask<Employee, Integer, HashMap<Integer,Commission>> {
-        WarehouseApplication myApp;
-        ProgressDialog dialog;
-        Boolean isPicker;
 
-        public CommissionTask(WarehouseApplication myApp, boolean isPicker) {
-            this.myApp = myApp;
-            this.isPicker = isPicker;
-        }
+    private class CommissionTask extends AsyncTask<Integer, Integer, Boolean> {
+
+        ProgressDialog dialog;
 
         protected void onPreExecute() {
             super.onPreExecute();
@@ -400,39 +404,34 @@ public class CommissioningOverview extends AppCompatActivity {
                     "Kommissionen werden geladen", true);
         }
         @Override
-        protected HashMap<Integer,Commission> doInBackground(Employee... params) {
+        protected Boolean doInBackground(Integer... params) {
             if (params.length != 1) {
-                return null;
+                Server server = new Server();
+                if(screen.equals("")){
+                    myApp.setOpenCommissionsMap(server.getFreeCommissions());
+                }
+                else{
+                    myApp.setPickerCommissionsMap(server.getCommissions(myApp.getEmployee()));
+                }
+                return true;
             }
-            Employee employee = params[0];
-            if(isPicker == false){
-                ServerMockImple server = new ServerMockImple();
-                HashMap<Integer,Commission> commissionHashMap = server.getFreeCommissions();
-                return commissionHashMap;
-            }
-            else{
-                ServerMockImple server = new ServerMockImple();
-                HashMap<Integer,Commission> commissionHashMap = server.getCommissions(employee);
-                return commissionHashMap;
-            }
-
+            return null;
         }
 
-        protected void onProgessUpdate(Integer... values) {
-            //wird in diesem Beispiel nicht verwendet
-        }
+
         @Override
-        protected void onPostExecute(HashMap<Integer,Commission> result) {
+        protected void onPostExecute(Boolean result) {
             if (result != null) {
-                if(isPicker == false){
-                    myApp.setOpenCommissionsMap(result);
+                if (screen.equals("myCommission")) {
+                    removeTableRows();
+                    printTable(myApp.getPickerCommissionsMap().size(), screen);
+
+                }
+                // Wenn offene Kommissionen angezeigt werden
+                else {
+                    removeTableRows();
                     printTable(myApp.getOpenCommissionsMap().size(), screen);
                 }
-                else {
-                    myApp.setPickerCommissionsMap(result);
-                    printTable(myApp.getPickerCommissionsMap().size(), screen);
-                }
-
                 dialog.dismiss();
             }
             else {
@@ -441,6 +440,6 @@ public class CommissioningOverview extends AppCompatActivity {
         }
     }
 
-*/
+
 
 }
