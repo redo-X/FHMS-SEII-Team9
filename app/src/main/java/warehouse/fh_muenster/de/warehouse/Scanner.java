@@ -20,7 +20,7 @@ public class Scanner extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scanner);
         if(run == 0){
-            if(Config.isMock()){
+            if(Config.isMockScanner()){
                 Intent output = new Intent();
                 String code = "T-A";
                 output.putExtra("code", code);

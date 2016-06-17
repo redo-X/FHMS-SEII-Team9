@@ -53,6 +53,7 @@ public class EspressoPickerTest {
     @Before
     public void setMock(){
         Config.setIsMock(true);
+        Config.setIsMockScanner(true);
     }
 
     @Test

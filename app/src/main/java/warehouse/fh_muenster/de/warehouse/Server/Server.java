@@ -91,6 +91,8 @@ public class Server implements ServerInterface {
                 SoapPrimitive soapQuantityToCommit = (SoapPrimitive) soapAccountEntry.getProperty("quantityToCommit");
                 SoapPrimitive soapQuantityOnStock = (SoapPrimitive) soapAccountEntry.getProperty("quantityOnStock");
                 SoapPrimitive soapCommissionPositionId = (SoapPrimitive) soapAccountEntry.getProperty("commissionPositionId");
+                SoapPrimitive soapResultCode = (SoapPrimitive) soapAccountEntry.getProperty("resultCode");
+                SoapPrimitive soapResultMessage = (SoapPrimitive) soapAccountEntry.getProperty("resultMessage");
 
                 String articleCode = soapArticleCode.getValue().toString();
                 String articleName = soapArticleName.getValue().toString();
@@ -98,6 +100,8 @@ public class Server implements ServerInterface {
                 int quantityToCommit = Integer.valueOf(soapQuantityToCommit.getValue().toString());
                 int quantityOnStock = Integer.valueOf(soapQuantityOnStock.getValue().toString());
                 int commissionPositionId = Integer.valueOf(soapCommissionPositionId.getValue().toString());
+                int resultCode = Integer.valueOf(soapResultCode.getValue().toString());
+                String resultMessage = soapResultMessage.getValue().toString();
 
                 Article article = new Article(articleCode,articleName,quantityOnStock,quantityToCommit, commissionPositionId);
                 article.setStorageLocation(new StorageLocation(storageLocation));
@@ -194,9 +198,13 @@ public class Server implements ServerInterface {
                 SoapObject soapAccountEntry = (SoapObject) response.getProperty(i);
                 SoapPrimitive soapCommissionId = (SoapPrimitive) soapAccountEntry.getProperty("commissionId");
                 SoapPrimitive soapPositionCount = (SoapPrimitive) soapAccountEntry.getProperty("positionCount");
+                SoapPrimitive soapResultCode = (SoapPrimitive) soapAccountEntry.getProperty("resultCode");
+                SoapPrimitive soapResultMessage = (SoapPrimitive) soapAccountEntry.getProperty("resultMessage");
 
                 int id = Integer.valueOf(soapCommissionId.getValue().toString());
                 int count = Integer.valueOf(soapPositionCount.getValue().toString());
+                int resultCode = Integer.valueOf(soapResultCode.getValue().toString());
+                String resultMessage = soapResultMessage.getValue().toString();
                 Commission commission = new Commission(id, count);
                 result.put(commission.getId(), commission);
             }
@@ -221,9 +229,13 @@ public class Server implements ServerInterface {
                 SoapObject soapAccountEntry = (SoapObject) response.getProperty(i);
                 SoapPrimitive soapCommissionId = (SoapPrimitive) soapAccountEntry.getProperty("commissionId");
                 SoapPrimitive soapPositionCount = (SoapPrimitive) soapAccountEntry.getProperty("positionCount");
+                SoapPrimitive soapResultCode = (SoapPrimitive) soapAccountEntry.getProperty("resultCode");
+                SoapPrimitive soapResultMessage = (SoapPrimitive) soapAccountEntry.getProperty("resultMessage");
 
                 int id = Integer.valueOf(soapCommissionId.getValue().toString());
                 int count = Integer.valueOf(soapPositionCount.getValue().toString());
+                int resultCode = Integer.valueOf(soapResultCode.getValue().toString());
+                String resultMessage = soapResultMessage.getValue().toString();
                 Commission commission = new Commission(id, count);
                 result.put(commission.getId(), commission);
             }
@@ -250,10 +262,14 @@ public class Server implements ServerInterface {
                 SoapPrimitive soapName = (SoapPrimitive) soapAccountEntry.getProperty("name");
                 SoapPrimitive soapQuantityOnStock = (SoapPrimitive) soapAccountEntry.getProperty("quantityOnStock");
                 SoapPrimitive soapStorageLocation = (SoapPrimitive) soapAccountEntry.getProperty("storageLocation");
+                SoapPrimitive soapResultCode = (SoapPrimitive) soapAccountEntry.getProperty("resultCode");
+                SoapPrimitive soapResultMessage = (SoapPrimitive) soapAccountEntry.getProperty("resultMessage");
 
                 String code = soapCode.getValue().toString();
                 String name = soapName.getValue().toString();
                 int quantityOnStock = Integer.valueOf(soapQuantityOnStock.getValue().toString());
+                int resultCode = Integer.valueOf(soapResultCode.getValue().toString());
+                String resultMessage = soapResultMessage.getValue().toString();
                 String storageLocation = soapStorageLocation.getValue().toString();
                 Article article = new Article(code, name);
                 article.setQuantityOnStock(quantityOnStock);
@@ -330,5 +346,14 @@ public class Server implements ServerInterface {
         return (SoapObject) result;
     }
 
+
+    public static void errorCode(int resultCode){
+        if(resultCode == 400){
+
+        }
+        else if(resultCode == 401){
+
+        }
+    }
 
 }
