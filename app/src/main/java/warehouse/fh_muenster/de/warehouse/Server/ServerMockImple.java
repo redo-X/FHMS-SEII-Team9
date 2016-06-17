@@ -15,8 +15,8 @@ import warehouse.fh_muenster.de.warehouse.StorageLocation;
 public class ServerMockImple implements ServerInterface {
     @Override
     public Employee login(int employeeNr, String password) {
-        if(employeeNr == 123 && password.equals("123")){
-            Employee user = new Employee(123, "123");
+        if(employeeNr == 1 && password.equals("geheim")){
+            Employee user = new Employee(1, "geheim");
             user.setRole(Role.Kommissionierer);
             try {
                 Thread.sleep(500);
@@ -25,8 +25,8 @@ public class ServerMockImple implements ServerInterface {
             }
             return user;
         }
-        else if(employeeNr == 234 && password.equals("234")){
-            Employee user = new Employee(234, "234");
+        else if(employeeNr == 2 && password.equals("geheim")){
+            Employee user = new Employee(2, "geheim");
             user.setRole(Role.Lagerist);
             return user;
         }
@@ -143,8 +143,8 @@ public class ServerMockImple implements ServerInterface {
 
     }
 
-    public HashMap<Integer, Article> getAllArticle () {
-        HashMap<Integer, Article> aHashMap = new HashMap<>();
+    public HashMap<String, Article> getAllArticle () {
+        HashMap<String, Article> aHashMap = new HashMap<>();
         Random rand = new Random();
         for(int j = 0; j< 20; j++){
             int articelCode = 5000 + j + (j*1000);
@@ -152,7 +152,7 @@ public class ServerMockImple implements ServerInterface {
             Article article = new Article(String.valueOf(articelCode), "Tolle Beschreibung des Artikels");
             article.setQuantityOnStock(rand.nextInt(100 - 5) + 5);
             article.setStorageLocation(location);
-            aHashMap.put(articelCode, article);
+            aHashMap.put(String.valueOf(articelCode), article);
         }
         return aHashMap;
     }

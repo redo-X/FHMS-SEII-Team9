@@ -12,6 +12,34 @@ public class Article {
             positionCommissionId;
     private StorageLocation storageLocation;
 
+    /**
+     * Prüft ob der Letzte Article der Kommission erreicht wurde
+     * @param allArticleCount Gesamtanzahl aller Artikle der Kommission
+     * @param currentArticleCount Aktuelle Artikle position
+     * @return true wenn letzer Article sonst false
+     */
+    public static boolean isLastArticle(int allArticleCount, int currentArticleCount){
+        boolean islastArticle = false;
+        if(allArticleCount == currentArticleCount){
+            islastArticle = true;
+        }
+        return islastArticle;
+    }
+
+    /**
+     * Prüft ob die Kommissionierte menge der zu Kommissionierenden Menge entspricht oder 0
+     * @param quantitiyCommited Kommisionierte menge
+     * @return true wenn 0 oder menge passend Kommissioniert sonst false
+     */
+    public boolean isCommissionQuantityOkay(int quantitiyCommited){
+        boolean okay = false;
+        if(quantitiyCommited == this.quantityOnCommit || quantitiyCommited == 0){
+            okay = true;
+        }
+        return okay;
+    }
+
+
 
     public Article() {
     }

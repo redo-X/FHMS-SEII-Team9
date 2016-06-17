@@ -125,12 +125,14 @@ public class CommissionArtikel extends AppCompatActivity {
                     Vibrator v = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
                     int kommissionierteMenge = Integer.valueOf(kommissionierteMengeString);
                     // if quantity 0 or the exact quantity to commit
-                    if(kommissionierteMenge == article.getQuantityOnCommit() || kommissionierteMenge == 0){
+                    //if(kommissionierteMenge == article.getQuantityOnCommit() || kommissionierteMenge == 0){
+                    if(article.isCommissionQuantityOkay(kommissionierteMenge)){
                         if(kommissionierteMenge != 0){
                             committedArticle++;
                         }
                         article.setQuantitiyCommited(kommissionierteMenge);
-                        if(artikelZaehler != artikelGesamt){
+                        //if(artikelZaehler != artikelGesamt){
+                        if(Article.isLastArticle(artikelGesamt, artikelZaehler)){
                             ProgressUpdateTask updateTask = new ProgressUpdateTask();
                             updateTask.execute(article.getPositionCommissionId(),kommissionierteMenge);
                             setNextArticle(kommissionierteMenge_txt);
