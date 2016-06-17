@@ -23,6 +23,8 @@ import java.util.List;
 public class StockAmendment extends AppCompatActivity {
 
     private String id;
+    private String lagerort;
+    private String menge;
     private ListView mListLayout;
     private ArrayAdapter<String> mAdapter;
     private DrawerLayout mDrawerLayout;
@@ -34,7 +36,18 @@ public class StockAmendment extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stock_amendment);
 
+        //@TODO TextView
+
         id = getIntent().getExtras().getString("id");
+        lagerort = getIntent().getExtras().getString("Lagerort");
+        menge = getIntent().getExtras().getString("Menge");
+
+        TextView lagerortView = (TextView) findViewById(R.id.menge_txt);
+        lagerortView.setText(menge);
+
+        TextView mengeView = (TextView) findViewById(R.id.menge_txt);
+        mengeView.setText(menge);
+
         final Button alter_button = (Button) findViewById(R.id.button_alter);
 
         alter_button.setOnClickListener(new View.OnClickListener() {

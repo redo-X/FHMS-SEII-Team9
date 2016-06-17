@@ -153,6 +153,8 @@ public class Stock extends AppCompatActivity {
                 Context context = view.getContext();
                 Intent intent = new Intent(context, StockAmendment.class);
                 intent.putExtra("id", i);
+                intent.putExtra("Lagerort", i);
+                intent.putExtra("Menge", i);
                 startActivity(intent);
             }
         });
