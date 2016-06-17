@@ -3,6 +3,7 @@ package warehouse.fh_muenster.de.warehouse;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.os.Handler;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -22,9 +23,10 @@ import java.util.List;
 
 public class StockAmendment extends AppCompatActivity {
 
+    private boolean doubleBackToExitPressedOnce = false;
     private String id;
-    private String lagerort;
-    private String menge;
+    private String storageLocation;
+    private String quantity;
     private ListView mListLayout;
     private ArrayAdapter<String> mAdapter;
     private DrawerLayout mDrawerLayout;
@@ -36,17 +38,18 @@ public class StockAmendment extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stock_amendment);
 
-        //@TODO TextView
-
         id = getIntent().getExtras().getString("id");
-        lagerort = getIntent().getExtras().getString("Lagerort");
-        menge = getIntent().getExtras().getString("Menge");
+        storageLocation = getIntent().getExtras().getString("storageLocation");
+        quantity = getIntent().getExtras().getString("quantity");
 
-        TextView lagerortView = (TextView) findViewById(R.id.menge_txt);
-        lagerortView.setText(menge);
+        TextView HeadlineView = (TextView) findViewById(R.id.headline_txt);
+        HeadlineView.setText(getResources().getString(R.string.stockAmendment_text_headline) + " " + id);
 
-        TextView mengeView = (TextView) findViewById(R.id.menge_txt);
-        mengeView.setText(menge);
+        TextView lagerortView = (TextView) findViewById(R.id.input_storageLocation);
+        lagerortView.setText(storageLocation);
+
+        TextView mengeView = (TextView) findViewById(R.id.input_quantity);
+        mengeView.setText(quantity);
 
         final Button alter_button = (Button) findViewById(R.id.button_alter);
 
@@ -58,8 +61,7 @@ public class StockAmendment extends AppCompatActivity {
                     int menge = Integer.valueOf(neueMengeString);
                     StockAmendmentTask stockAmendmentTask = new StockAmendmentTask();
                     stockAmendmentTask.execute(id, String.valueOf(menge));
-                }
-                catch (NumberFormatException e){
+                } catch (NumberFormatException e) {
                     Helper.showToast(getResources().getString(R.string.toast_commissionArtikel_wrongInput), getApplicationContext());
                 }
 
@@ -76,11 +78,40 @@ public class StockAmendment extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
     }
 
+    //@Override
+    //public void onBackPressed() {
+    //    Intent newActivity = new Intent(getApplicationContext(), Stock.class);
+    //    StockAmendment.this.startActivity(newActivity);
+    //     finish();
+    //}
+
     @Override
     public void onBackPressed() {
-        Intent newActivity = new Intent(getApplicationContext(), Stock.class);
-        StockAmendment.this.startActivity(newActivity);
-        finish();
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Helper.showToast(getResources().getString(R.string.toast_exit), getApplicationContext());
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce = false;
+
+                WarehouseApplication myApp = (WarehouseApplication) getApplication();
+
+                LogoutTask logoutTask = new LogoutTask();
+                logoutTask.execute(myApp.getEmployee().getSessionId());
+
+                myApp.setOpenCommissionsMap(null);
+                myApp.setPickerCommissionsMap(null);
+                myApp.setEmployee(null);
+
+                Helper.showToast(getResources().getString(R.string.toast_logout), getApplicationContext());
+            }
+        }, 2000);
     }
 
     //Drawer Menu

@@ -20,48 +20,51 @@
             android:id="@+id/scrollView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" >
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true">
 
             <TableLayout
+                android:id="@+id/stock_table_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:stretchColumns="*"
-                android:id="@+id/stock_table_layout">
+                android:stretchColumns="*">
+
                 <TableRow>
+
                     <TextView
-                    android:text="@string/stock_table_head_headline"
-                    android:width="100dp"
-                    android:layout_column="0"
-                    android:layout_weight="1"
-                    android:textSize="20sp"/>
-                </TableRow>
-                <TableRow>
-                    <TextView
-                        android:text="@string/stock_table_head_item"
+                        android:layout_column="0"
+                        android:layout_weight="1"
                         android:width="100dp"
+                        android:text="@string/stock_table_head_headline"
+                        android:textSize="20sp" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
                         android:layout_column="0"
                         android:layout_weight="0"
-                        />
-                    <TextView
-                        android:text="@string/stock_table_head_amount"
                         android:width="100dp"
+                        android:text="@string/stock_table_head_item" />
+
+                    <TextView
                         android:layout_column="1"
                         android:layout_weight="0"
-                        />
-                    <TextView
-                        android:text="@string/stock_table_head_alter"
                         android:width="100dp"
+                        android:text="@string/stock_table_head_amount" />
+
+                    <TextView
                         android:layout_column="1"
                         android:layout_weight="0"
-                        />
+                        android:width="100dp"
+                        android:text="@string/stock_table_head_alter" />
                 </TableRow>
             </TableLayout>
         </ScrollView>

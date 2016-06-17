@@ -29,4 +29,8 @@ public class StorageLocation {
     public void setStockArticles(Map<Integer, Article> stockArticles) {
         this.stockArticles = stockArticles;
     }
+
+    public String toString() {
+        return code;
+    }
 }

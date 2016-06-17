@@ -11,151 +11,153 @@
     tools:context="warehouse.fh_muenster.de.warehouse.CommissionArtikel">
 
     <TextView
+        android:id="@+id/commission_id_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/commission_id_label"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
         android:layout_weight="0.05"
         android:hint="Text"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:textColor="#454545" />
 
     <TextView
+        android:id="@+id/commission_artikelAnzahl_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/commission_artikelAnzahl_label"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="33dp"
         android:hint="@string/commissionArtikel_table_head_Quantity" />
 
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/scrollView"
 
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/commission_artikelAnzahl_label">
 
         <TableLayout
-            android:stretchColumns="*"
+            android:id="@+id/table_layout_commission_artikel"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@+id/commission_artikelAnzahl_label"
             android:layout_above="@+id/weiter_btn"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/commission_artikelAnzahl_label"
 
-            android:id="@+id/table_layout_commission_artikel">
-            <TableRow
-                android:layout_marginBottom="10dp">
+            android:stretchColumns="*">
+
+            <TableRow android:layout_marginBottom="10dp">
+
                 <TextView
-                    android:text="@string/commissionArtikel_table_head_itemCode"
-                    android:width="100dp"
                     android:layout_column="0"
                     android:layout_weight="0"
-
-                    />
-                <TextView
-                    android:text="@string/commissionArtikel_table_head_input"
                     android:width="100dp"
-                    android:layout_column="0"
-                    android:layout_weight="0"
+                    android:text="@string/commissionArtikel_table_head_itemCode" />
 
+                <TextView
                     android:id="@+id/commission_artikel_artikel_code"
-                    />
+                    android:layout_column="0"
+                    android:layout_weight="0"
+                    android:width="100dp"
+
+                    android:text="@string/commissionArtikel_table_head_input" />
             </TableRow>
-            <TableRow
-                android:layout_marginBottom="10dp">
+
+            <TableRow android:layout_marginBottom="10dp">
+
                 <TextView
-                    android:text="@string/commissionArtikel_table_head_itemName"
-                    android:width="100dp"
                     android:layout_column="0"
                     android:layout_weight="0"
-
-                    />
-                <TextView
-                    android:text="@string/commissionArtikel_table_head_input"
                     android:width="100dp"
-                    android:layout_column="0"
-                    android:layout_weight="0"
+                    android:text="@string/commissionArtikel_table_head_itemName" />
 
+                <TextView
                     android:id="@+id/commission_artikel_artikel_name"
-                    />
-            </TableRow>
-            <TableRow
-                android:layout_marginBottom="10dp">
-                <TextView
-                    android:text="@string/commissionArtikel_table_head_stockLocation"
-                    android:width="100dp"
                     android:layout_column="0"
                     android:layout_weight="0"
+                    android:width="100dp"
 
-                    />
+                    android:text="@string/commissionArtikel_table_head_input" />
+            </TableRow>
+
+            <TableRow android:layout_marginBottom="10dp">
+
                 <TextView
-                    android:text="@string/commissionArtikel_table_head_input"
-                    android:width="100dp"
                     android:layout_column="0"
                     android:layout_weight="0"
+                    android:width="100dp"
+                    android:text="@string/commissionArtikel_table_head_stockLocation" />
+
+                <TextView
                     android:id="@+id/commission_artikel_artikel_storage"
-                    />
+                    android:layout_column="0"
+                    android:layout_weight="0"
+                    android:width="100dp"
+                    android:text="@string/commissionArtikel_table_head_input" />
             </TableRow>
-            <TableRow
-                android:layout_marginBottom="10dp">
+
+            <TableRow android:layout_marginBottom="10dp">
+
                 <TextView
-                    android:text="@string/commissionArtikel_table_head_targetQuantity"
-                    android:width="100dp"
+                    android:id="@+id/comission_articel_soll_menge_label"
                     android:layout_column="0"
                     android:layout_weight="0"
-                    android:id="@+id/comission_articel_soll_menge_label" />
-                <TextView
-                    android:text="@string/commissionArtikel_table_head_input"
                     android:width="100dp"
-                    android:layout_column="0"
-                    android:layout_weight="0"
+                    android:text="@string/commissionArtikel_table_head_targetQuantity" />
+
+                <TextView
                     android:id="@+id/commission_artikel_artikel_soll"
-                    />
+                    android:layout_column="0"
+                    android:layout_weight="0"
+                    android:width="100dp"
+                    android:text="@string/commissionArtikel_table_head_input" />
             </TableRow>
-            <TableRow
-                android:layout_marginBottom="10dp">
+
+            <TableRow android:layout_marginBottom="10dp">
+
                 <TextView
-                    android:text="@string/commissionArtikel_table_head_commissionQuantity"
-                    android:width="100dp"
+                    android:id="@+id/commission_artikel_artikel_commession_label"
                     android:layout_column="0"
                     android:layout_weight="0"
-                    android:id="@+id/commission_artikel_artikel_commession_label" />
-                <TextView
-                    android:text="@string/commissionArtikel_table_head_input"
                     android:width="100dp"
-                    android:layout_column="0"
-                    android:layout_weight="0"
+                    android:text="@string/commissionArtikel_table_head_commissionQuantity" />
+
+                <TextView
                     android:id="@+id/commission_artikel_artikel_commession"
-                    />
+                    android:layout_column="0"
+                    android:layout_weight="0"
+                    android:width="100dp"
+                    android:text="@string/commissionArtikel_table_head_input"
+                    android:textColor="#000000" />
             </TableRow>
+
             <TableRow>
+
                 <EditText
+                    android:id="@+id/commission_artikel_artikel_commession_edit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:inputType="number"
                     android:ems="10"
                     android:hint="@string/commissionArtikel_table_head_commissionedQuantity"
-                    android:id="@+id/commission_artikel_artikel_commession_edit">
-                </EditText>
+                    android:inputType="number"></EditText>
 
             </TableRow>
-            <TableRow
-                android:layout_marginTop="20dp">
+
+            <TableRow android:layout_marginTop="20dp">
+
                 <Button
+                    android:id="@+id/commission_artikel_fehlmengeMelden"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/commissionArtikel_table_head_underage"
-                    android:id="@+id/commission_artikel_fehlmengeMelden"
-                    />
+                    android:text="@string/commissionArtikel_table_head_underage" />
 
             </TableRow>
 
@@ -164,25 +166,25 @@
     </ScrollView>
 
     <Button
+        android:id="@+id/weiter_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/commissionArtikel_table_head_forward"
-        android:id="@+id/weiter_btn"
+        android:layout_alignEnd="@+id/scrollView"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/scrollView"
-        android:layout_alignEnd="@+id/scrollView" />
+        android:text="@string/commissionArtikel_table_head_forward" />
 
     <ImageButton
+        android:id="@+id/commission_articel_scann_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/commission_articel_scann_btn"
         android:layout_above="@+id/weiter_btn"
-        android:src="@android:drawable/ic_menu_camera"
+        android:layout_alignEnd="@+id/weiter_btn"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/weiter_btn"
-        android:layout_alignEnd="@+id/weiter_btn" />
+        android:src="@android:drawable/ic_menu_camera" />
 
 </RelativeLayout>
