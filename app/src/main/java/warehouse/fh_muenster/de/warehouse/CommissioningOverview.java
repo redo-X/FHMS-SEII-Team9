@@ -91,7 +91,8 @@ public class CommissioningOverview extends AppCompatActivity {
         ImageButton refresh = (ImageButton) findViewById(R.id.commission_overview_refresh);
         refresh.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-
+                CommissionTask commissionTask = new CommissionTask();
+                commissionTask.execute(screen);
             }
         });
 
@@ -395,7 +396,7 @@ public class CommissioningOverview extends AppCompatActivity {
 
 
 
-    private class CommissionTask extends AsyncTask<Integer, Integer, Boolean> {
+    private class CommissionTask extends AsyncTask<String, Integer, Boolean> {
 
         ProgressDialog dialog;
 
@@ -405,12 +406,12 @@ public class CommissioningOverview extends AppCompatActivity {
                     "Kommissionen werden geladen", true);
         }
         @Override
-        protected Boolean doInBackground(Integer... params) {
-            if (params.length != 1) {
+        protected Boolean doInBackground(String... params) {
+            if (params.length == 1) {
                 //Server server = new Server();
                 if(Config.isMock()){
                     ServerMockImple server = new ServerMockImple();
-                    if(screen.equals("")){
+                    if(screen.equals("commissionOverview")){
                         myApp.setOpenCommissionsMap(server.getFreeCommissions());
                     }
                     else{
@@ -418,16 +419,16 @@ public class CommissioningOverview extends AppCompatActivity {
                     }
                 }
                 else{
+                    Log.i("CommissionTask:" , "Server");
                     Server server = new Server();
-                    if(screen.equals("")){
+                    if(screen.equals("commissionOverview")){
                         myApp.setOpenCommissionsMap(server.getFreeCommissions());
                     }
                     else{
+                        Log.i("CommissionTask:" , "Commissionen");
                         myApp.setPickerCommissionsMap(server.getCommissions(myApp.getEmployee()));
                     }
                 }
-
-
                 return true;
             }
             return null;

@@ -56,6 +56,8 @@ public class ServerMockImple implements ServerInterface {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        Commission commission = new Commission(90001,1);
+        commissionMap.put(commission.getId(),commission);
         return commissionMap;
     }
 
@@ -99,16 +101,25 @@ public class ServerMockImple implements ServerInterface {
         //String code = "3662168005845";
         String[] codes = {"3662168005845","4035300705214","4052400035317"};
         Random rand = new Random();
-        for(int j = 0; j< rand.nextInt(10-1)+1; j++){
-           int articelCode = 5000 + j + (j*1000);
-            int codeRand = rand.nextInt(3-0);
-            String code = codes[codeRand];
-            StorageLocation location = new StorageLocation(String.valueOf(rand.nextInt(70-1)+1));
-            Article article = new Article(code/*String.valueOf(articelCode)*/, "Tolle Beschreibung des Artikels" + j);
-            article.setQuantityOnStock(rand.nextInt(100 - 5) + 5);
-            article.setQuantityOnCommit(rand.nextInt(10 - 1) + 1);
-            article.setStorageLocation(location);
-            articleHashMap.put(articelCode, article);
+        if(id != 90000){
+            for(int j = 0; j< rand.nextInt(10-1)+1; j++){
+                int articelCode = 5000 + j + (j*1000);
+                int codeRand = rand.nextInt(3-0);
+                String code = codes[codeRand];
+                StorageLocation location = new StorageLocation(String.valueOf(rand.nextInt(70-1)+1));
+                Article article = new Article(code/*String.valueOf(articelCode)*/, "Tolle Beschreibung des Artikels" + j);
+                article.setQuantityOnStock(rand.nextInt(100 - 5) + 5);
+                article.setQuantityOnCommit(rand.nextInt(10 - 1) + 1);
+                article.setStorageLocation(location);
+                articleHashMap.put(articelCode, article);
+            }
+        }
+        else{
+            Article article = new Article("T-A", "TestArticle");
+            article.setQuantityOnStock(100);
+            article.setQuantityOnCommit(20);
+            article.setStorageLocation(new StorageLocation("Lager5"));
+            articleHashMap.put(1, article);
         }
         //commission.setArticleHashMap(articleHashMap);
         return  articleHashMap;

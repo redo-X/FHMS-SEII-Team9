@@ -11,6 +11,8 @@ import android.widget.Toast;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import warehouse.fh_muenster.de.warehouse.Server.Config;
+
 public class Scanner extends AppCompatActivity {
     static int run = 0;
     @Override
@@ -18,7 +20,16 @@ public class Scanner extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scanner);
         if(run == 0){
-        new IntentIntegrator(this).initiateScan(); // `this` is the current Activity
+            if(Config.isMock()){
+                Intent output = new Intent();
+                String code = "T-A";
+                output.putExtra("code", code);
+                setResult(RESULT_OK, output);
+                finish();
+            }
+            else {
+                new IntentIntegrator(this).initiateScan(); // `this` is the current Activity
+            }
             run++;
         }
     }
