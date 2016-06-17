@@ -3,7 +3,9 @@ package warehouse.fh_muenster.de.warehouse;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import warehouse.fh_muenster.de.warehouse.Server.Config;
 import warehouse.fh_muenster.de.warehouse.Server.Server;
+import warehouse.fh_muenster.de.warehouse.Server.ServerMockImple;
 
 /**
  * Created by Marco on 16.06.2016.
@@ -18,8 +20,16 @@ class StockAmendmentTask extends AsyncTask<String, Integer, Boolean> {
         String artikelCode = params[0];
         String menge = params[1];
 
-        Server server = new Server();
-        server.commitStock(artikelCode, Integer.valueOf(menge));
+
+        if(Config.isMock()){
+            ServerMockImple server = new ServerMockImple();
+            server.commitStock(artikelCode, Integer.valueOf(menge));
+        }
+        else{
+            Server server = new Server();
+            server.commitStock(artikelCode, Integer.valueOf(menge));
+        }
+
 
         return true;
     }

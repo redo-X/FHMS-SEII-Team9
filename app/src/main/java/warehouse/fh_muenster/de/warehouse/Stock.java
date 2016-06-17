@@ -26,6 +26,7 @@ import android.widget.Toast;
 import java.util.HashMap;
 import java.util.Map;
 
+import warehouse.fh_muenster.de.warehouse.Server.Config;
 import warehouse.fh_muenster.de.warehouse.Server.Server;
 import warehouse.fh_muenster.de.warehouse.Server.ServerMockImple;
 
@@ -77,8 +78,15 @@ public class Stock extends AppCompatActivity {
             }
 
             int id = params[0];
-            Server server = new Server();
-            hm2 = server.getArticles(id);
+            if(Config.isMock()){
+                ServerMockImple server = new ServerMockImple();
+                hm2 = server.getArticles(id);
+            }
+            else{
+                Server server = new Server();
+                hm2 = server.getArticles(id);
+            }
+
             return hm2;
         }
 

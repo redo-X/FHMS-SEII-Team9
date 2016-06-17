@@ -10,6 +10,7 @@ import java.util.HashMap;
 import warehouse.fh_muenster.de.warehouse.Commission;
 import warehouse.fh_muenster.de.warehouse.Employee;
 import warehouse.fh_muenster.de.warehouse.R;
+import warehouse.fh_muenster.de.warehouse.Server.Config;
 import warehouse.fh_muenster.de.warehouse.Server.Server;
 import warehouse.fh_muenster.de.warehouse.Server.ServerMockImple;
 import warehouse.fh_muenster.de.warehouse.WarehouseApplication;
@@ -30,8 +31,16 @@ class StockOutTask extends AsyncTask<Integer, Integer, Boolean> {
         int istMenge = params[2];
 
         Log.i("StockOutTask: ","PositionId "+String.valueOf(posistionCommissionId) + " sessionId: " +sessionId + " istMenge: " + istMenge);
-        Server server = new Server();
-        server.commitCommissionMessage(sessionId, posistionCommissionId, istMenge, "");
+
+        if(Config.isMock()){
+            ServerMockImple server = new ServerMockImple();
+            server.commitCommissionMessage(sessionId, posistionCommissionId, istMenge, "");
+        }
+        else{
+            Server server = new Server();
+            server.commitCommissionMessage(sessionId, posistionCommissionId, istMenge, "");
+        }
+
 
 
         return true;
