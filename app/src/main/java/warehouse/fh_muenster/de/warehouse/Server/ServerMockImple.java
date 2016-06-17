@@ -85,6 +85,9 @@ public class ServerMockImple implements ServerInterface {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        Commission commission = new Commission(90000,1);
+        commissionMap.put(commission.getId(),commission);
     return commissionMap;
     }
 

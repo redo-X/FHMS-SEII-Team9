@@ -29,7 +29,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 /**
  * <a href="http://d.android.com/tools/testing/testing_android.html">Testing Fundamentals</a>
  */
-public class LoginTest {
+public class EspressoTest {
 
     private Context mockContext;
 
@@ -87,6 +87,26 @@ public class LoginTest {
             Intents.init();
             onView(withId(R.id.loginScann_btn)).perform(click());
             intended(hasComponent(Scanner.class.getName()));
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        finally {
+            Intents.release();
+        }
+    }
+
+    @Test
+    public void testStartCommission(){
+        try {
+            Intents.init();
+            onView(withId(R.id.mitarbeiterNr_txt))
+                    .perform(typeText("1"), closeSoftKeyboard());
+            onView(withId(R.id.password_txt))
+                    .perform(typeText("geheim"), closeSoftKeyboard());
+            onView(withId(R.id.login_btn)).perform(click());
+            onView(withId(100)).perform(click());
+            intended(hasComponent(CommissionArtikel.class.getName()));
         }
         catch (Exception e){
             e.printStackTrace();
