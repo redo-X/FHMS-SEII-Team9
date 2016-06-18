@@ -1,11 +1,13 @@
 package warehouse.fh_muenster.de.warehouse;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Handler;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -57,7 +59,43 @@ public class StockAmendment extends AppCompatActivity {
             public void onClick(View view) {
                 EditText neueMenge_txt = (EditText) findViewById(R.id.quantity_txt);
                 String neueMengeString = neueMenge_txt.getText().toString();
+
                 try {
+                    int menge = Integer.valueOf(neueMengeString);
+                    int iquantity = Integer.valueOf(quantity);
+                    if ((menge != 0) && (iquantity + menge >= 0)){
+                        AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+                        builder.setMessage(getResources().getString(R.string.dialog_box_question))
+                                .setPositiveButton(getResources().getString(R.string.dialog_box_ok), dialogClickListener)
+                                .setNegativeButton(getResources().getString(R.string.dialog_box_cancel), dialogClickListener).show();
+                    } else {
+                        Helper.showToast(getResources().getString(R.string.toast_commissionArtikel_wrongInput), getApplicationContext());
+                    }
+                } catch (NumberFormatException e) {
+                    Helper.showToast(getResources().getString(R.string.toast_commissionArtikel_wrongInput), getApplicationContext());
+                }
+            }
+        });
+
+        //Drawer Menu
+        mListLayout = (ListView) findViewById(R.id.navList);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mActivityTitle = getTitle().toString();
+
+        addDrawerItems();
+        setupDrawer();
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+    }
+
+    DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            switch (which) {
+                case DialogInterface.BUTTON_POSITIVE:
+                    EditText neueMenge_txt = (EditText) findViewById(R.id.quantity_txt);
+                    String neueMengeString = neueMenge_txt.getText().toString();
                     int menge = Integer.valueOf(neueMengeString);
                     StockAmendmentTask stockAmendmentTask = new StockAmendmentTask();
                     WarehouseApplication myApp = (WarehouseApplication) getApplication();
@@ -68,25 +106,18 @@ public class StockAmendment extends AppCompatActivity {
 
                     Helper.showToast(getResources().getString(R.string.toast_stockAmendment_success), getApplicationContext());
                     finishActivity = true;
-                } catch (NumberFormatException e) {
-                    Helper.showToast(getResources().getString(R.string.toast_commissionArtikel_wrongInput), getApplicationContext());
+                    break;
+                case DialogInterface.BUTTON_NEGATIVE:
+                    Helper.showToast(getResources().getString(R.string.toast_canceled), getApplicationContext());
                     finishActivity = false;
-                }
-                if (finishActivity) {
-                    finish();
-                }
+                    break;
             }
-        });
+            if (finishActivity) {
+                finish();
+            }
+        }
+    };
 
-        //Drawer Menu
-        mListLayout = (ListView) findViewById(R.id.navList);
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mActivityTitle = getTitle().toString();
-        addDrawerItems();
-        setupDrawer();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
-    }
 
     //@Override
     //public void onBackPressed() {
