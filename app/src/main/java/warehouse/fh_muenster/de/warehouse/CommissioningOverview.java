@@ -206,7 +206,9 @@ public class CommissioningOverview extends AppCompatActivity {
                     WarehouseApplication myApp = (WarehouseApplication) getApplication();
                     myApp.addCommissionToPicker(commission.getId());
                     AllocateCommissionTask allocateCommissionTask = new AllocateCommissionTask();
-                    allocateCommissionTask.execute(commission.getId(), myApp.getEmployee().getEmployeeNr(),myApp.getEmployee().getSessionId());
+                    Employee employee = myApp.getEmployee();
+
+                    allocateCommissionTask.execute(commission.getId(), employee.getEmployeeNr(),employee.getSessionId());
                     removeTableRows();
                     myApp.removeCommissionFromOpen(commission.getId());
                     printTable(myApp.getOpenCommissionsMap().size(), screen);

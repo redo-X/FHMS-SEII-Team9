@@ -12,7 +12,7 @@ class AllocateCommissionTask extends AsyncTask<Integer, Integer, Boolean> {
 
     @Override
     protected Boolean doInBackground(Integer... params) {
-        if (params.length != 2) {
+        if (params.length != 3) {
             return null;
         }
         int commissionId = params[0];

@@ -14,7 +14,7 @@ class StockAmendmentTask extends AsyncTask<String, Integer, Boolean> {
 
     @Override
     protected Boolean doInBackground(String... params) {
-        if (params.length != 2) {
+        if (params.length != 3) {
             return null;
         }
         String artikelCode = params[0];

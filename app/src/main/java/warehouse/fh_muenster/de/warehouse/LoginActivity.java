@@ -105,14 +105,14 @@ public class LoginActivity extends AppCompatActivity {
             }
             String password = params[1];
             Employee employee = new Employee();
-            if(Config.isMock()){
+            /*if(Config.isMock()){
                 ServerMockImple server = new ServerMockImple();
                 employee = server.login(employeeNr, password);
             }
-            else{
+            else{*/
                 Server server = new Server();
                 employee = server.login(employeeNr, password);
-            }
+            //}
 
             return employee;
 
@@ -135,7 +135,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
     }
-    private class CommissionTask extends AsyncTask<Employee, Integer, HashMap<Integer,Commission>> {
+    private class CommissionTask extends AsyncTask<Employee, Integer, Boolean> {
         WarehouseApplication myApp;
         //ProgressDialog dialog;
 
@@ -143,10 +143,11 @@ public class LoginActivity extends AppCompatActivity {
             this.myApp = myApp;
         }
 
+
         @Override
-        protected HashMap<Integer,Commission> doInBackground(Employee... params) {
+        protected Boolean doInBackground(Employee... params) {
             if (params.length != 1) {
-                return null;
+                return false;
             }
             Employee employee = params[0];
             HashMap<Integer,Commission> commissionHashMap = new HashMap<>();
@@ -172,12 +173,13 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             myApp.setPickerCommissionsMap(commissionHashMap);
-            return commissionHashMap;
+
+            return true;
         }
 
         @Override
-        protected void onPostExecute(HashMap<Integer,Commission> result) {
-            if (result != null) {
+        protected void onPostExecute(Boolean v) {
+
                 dialog.dismiss();
 
                 Helper.showToast(getResources().getString(R.string.toast_loginActivity_loginSuccess) + " " + myApp.getEmployee().getEmployeeNr(), getApplicationContext());
@@ -187,9 +189,6 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(i);
                 // Beim Klick auf den Back Button wird der Login Screen nicht mehr aufgerufen sondern die app beendet
                 finish();
-            }
-            else {
-            }
         }
     }
 }
