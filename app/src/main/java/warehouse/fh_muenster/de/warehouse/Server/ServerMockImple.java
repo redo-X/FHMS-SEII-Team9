@@ -165,4 +165,9 @@ public class ServerMockImple implements ServerInterface {
         aHashMap.put(article.getCode(),article);
         return aHashMap;
     }
+
+    @Override
+    public boolean createArticle(int sessionId, String articleCode, String articleName, String lagerort) {
+        return true;
+    }
 }

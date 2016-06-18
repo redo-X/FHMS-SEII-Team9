@@ -103,4 +103,13 @@ public interface ServerInterface {
      */
     public HashMap<String, Article> getArticles(int sessionId);
 
+    /**
+     * Legt einen neuen Artikle auf dem Server an.
+     * @param sessionId Session Id des Mitarbiters
+     * @param articleCode Artikle Code des Artikels der gespeichert werden soll
+     * @param articleName Name des Artikles der gespeichert werden soll
+     * @param lagerort Lagerort des Artikels
+     * @return true wenn der Artikle gespeichert werden kann sonst false
+     */
+    public boolean createArticle(int sessionId, String articleCode, String articleName, String lagerort);
 }

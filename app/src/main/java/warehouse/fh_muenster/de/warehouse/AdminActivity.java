@@ -77,7 +77,8 @@ public class AdminActivity extends AppCompatActivity {
                 boolean result = false;
                 WarehouseApplication myApp = (WarehouseApplication) getApplication();
                 if (Config.isMock()) {
-
+                    ServerMockImple server = new ServerMockImple();
+                    result = server.createArticle(myApp.getEmployee().getSessionId(), code, name, lagerort);
                 } else {
                     Server server = new Server();
                     result = server.createArticle(myApp.getEmployee().getSessionId(), code, name, lagerort);
