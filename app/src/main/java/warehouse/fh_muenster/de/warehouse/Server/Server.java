@@ -76,6 +76,22 @@ public class Server implements ServerInterface {
         }
     }
 
+    public boolean createArticle(int sessionId, String articleCode, String articleName, String lagerort) {
+        String METHOD_NAME = "createArticle";
+        SoapObject response = null;
+        boolean result = false;
+        try {
+            response = executeSoapAction(ARTICLE_URL, METHOD_NAME, sessionId, articleCode, articleName, lagerort);
+            int resultCode = Integer.valueOf(((SoapPrimitive) response.getProperty("resultCode")).getValue().toString());
+            if (resultCode == 0) {
+                result = true;
+            }
+        } catch (SoapFault e) {
+
+        }
+        return result;
+    }
+
     @Override
     public HashMap<Integer, Article> getPositionToCommission(int sessionId, int id) {
         HashMap<Integer, Article> result = new HashMap<>();
@@ -110,6 +126,9 @@ public class Server implements ServerInterface {
                     //article.setPositionCommissionId(commissionPositionId);
                     result.put(commissionPositionId, article);
                 }
+            }
+            else {
+                result = null;
             }
         } catch (SoapFault e) {
             //throw new NoSessionException(e.getMessage());

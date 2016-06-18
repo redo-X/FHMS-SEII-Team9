@@ -20,7 +20,7 @@ public enum Role {
     public static Role fromInt(int code) {
         switch (code) {
             case 2:
-                return Kommissionierer;
+                return Administrator;
             case 1:
                 return Lagerist;
             default:

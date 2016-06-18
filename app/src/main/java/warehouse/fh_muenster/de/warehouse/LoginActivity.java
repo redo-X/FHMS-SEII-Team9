@@ -105,14 +105,14 @@ public class LoginActivity extends AppCompatActivity {
             }
             String password = params[1];
             Employee employee = new Employee();
-            /*if(Config.isMock()){
+            if(Config.isMock()){
                 ServerMockImple server = new ServerMockImple();
                 employee = server.login(employeeNr, password);
             }
-            else{*/
+            else{
                 Server server = new Server();
                 employee = server.login(employeeNr, password);
-            //}
+            }
 
             return employee;
 
@@ -180,15 +180,24 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Boolean v) {
 
-                dialog.dismiss();
+            dialog.dismiss();
 
-                Helper.showToast(getResources().getString(R.string.toast_loginActivity_loginSuccess) + " " + myApp.getEmployee().getEmployeeNr(), getApplicationContext());
+            Helper.showToast(getResources().getString(R.string.toast_loginActivity_loginSuccess) + " " + myApp.getEmployee().getEmployeeNr(), getApplicationContext());
 
+            if(Role.Administrator.equals(myApp.getEmployee().getRole())){
+                Intent i = new Intent(getApplicationContext(), AdminActivity.class);
+                startActivity(i);
+                // Beim Klick auf den Back Button wird der Login Screen nicht mehr aufgerufen sondern die app beendet
+                finish();
+            }
+            else{
                 Intent i = new Intent(getApplicationContext(), CommissioningOverview.class);
                 i.putExtra("screen", "myCommission");
                 startActivity(i);
                 // Beim Klick auf den Back Button wird der Login Screen nicht mehr aufgerufen sondern die app beendet
                 finish();
+            }
+
         }
     }
 }

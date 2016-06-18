@@ -166,6 +166,8 @@ public class CommissionArtikel extends AppCompatActivity {
 
         getPositiontoCommissionTask task = new getPositiontoCommissionTask(commission.getId());
         task.execute();
+
+
     }
 
     private void setNextArticle(EditText kommissionierteMenge_txt){
@@ -390,12 +392,16 @@ public class CommissionArtikel extends AppCompatActivity {
                 TextView ueberschrift = (TextView) findViewById(R.id.commission_id_label);
                 ueberschrift.setText(getResources().getString(R.string.commissionArtikel_headline1) + " " + String.valueOf(id) + " " +
                         getResources().getString(R.string.commissionArtikel_headline2));
+
+
                 setTableRows();
                 //artikelanzahlLabel.setText("Artikel " + artikelZaehler +  " von " + artikelGesamt);
 
                 dialog.dismiss();
             }
             else {
+                Helper.showToast("Artikel konnten nicht geladen werden",getApplicationContext());
+                finish();
             }
         }
     }

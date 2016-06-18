@@ -25,7 +25,8 @@
         <activity android:name=".Stock" />
         <activity android:name=".StockOut" />
         <activity android:name=".StockAmendment" />
-        <activity android:name=".Scanner"></activity>
+        <activity android:name=".Scanner" />
+        <activity android:name=".AdminActivity"></activity>
     </application>
 
 </manifest>

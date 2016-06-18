@@ -7,7 +7,9 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="warehouse.fh_muenster.de.warehouse.LoginActivity">
+    tools:context="warehouse.fh_muenster.de.warehouse.LoginActivity"
+    android:scaleType="centerCrop"
+    >
 
     <EditText
         android:id="@+id/mitarbeiterNr_txt"
