@@ -2,6 +2,7 @@ package warehouse.fh_muenster.de.warehouse;
 
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,11 +16,13 @@ import warehouse.fh_muenster.de.warehouse.Server.ServerMockImple;
 
 public class AdminActivity extends AppCompatActivity {
 
+    private boolean doubleBackToExitPressedOnce = false;
+
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == 1){
-            if(resultCode == RESULT_OK){
+        if (requestCode == 1) {
+            if (resultCode == RESULT_OK) {
                 EditText articleCodeTxt = (EditText) findViewById(R.id.admin_article_code);
-                String code =  data.getExtras().getString("code");
+                String code = data.getExtras().getString("code");
                 articleCodeTxt.setText(code);
                 Scanner.setRun(0);
             }
@@ -37,7 +40,7 @@ public class AdminActivity extends AppCompatActivity {
         final Button article_save = (Button) findViewById(R.id.admin_article_save);
         final ImageButton scanner = (ImageButton) findViewById(R.id.admin_article_scann);
 
-        article_save.setOnClickListener(new View.OnClickListener(){
+        article_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 EditText articleCodeTxt = (EditText) findViewById(R.id.admin_article_code);
@@ -48,11 +51,11 @@ public class AdminActivity extends AppCompatActivity {
                 String articleLagerort = articleLagerortTxt.getText().toString();
 
                 SaveArticleTask saveArticleTask = new SaveArticleTask();
-                saveArticleTask.execute(articleCode,articleName,articleLagerort);
+                saveArticleTask.execute(articleCode, articleName, articleLagerort);
             }
 
         });
-        scanner.setOnClickListener(new View.OnClickListener(){
+        scanner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), Scanner.class);
@@ -73,12 +76,11 @@ public class AdminActivity extends AppCompatActivity {
                 String lagerort = params[2];
                 boolean result = false;
                 WarehouseApplication myApp = (WarehouseApplication) getApplication();
-                if(Config.isMock()){
+                if (Config.isMock()) {
 
-                }
-                else {
+                } else {
                     Server server = new Server();
-                    result = server.createArticle(myApp.getEmployee().getSessionId(),code,name,lagerort);
+                    result = server.createArticle(myApp.getEmployee().getSessionId(), code, name, lagerort);
                 }
                 return result;
 
@@ -95,6 +97,36 @@ public class AdminActivity extends AppCompatActivity {
                 Helper.showToast("Fehler Artikle konnte nicht gespeichert werden!", getApplicationContext());
             }
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+
+            WarehouseApplication myApp = (WarehouseApplication) getApplication();
+
+            LogoutTask logoutTask = new LogoutTask();
+            logoutTask.execute(myApp.getEmployee().getSessionId());
+
+            myApp.setOpenCommissionsMap(null);
+            myApp.setPickerCommissionsMap(null);
+            myApp.setEmployee(null);
+
+            Helper.showToast(getResources().getString(R.string.toast_logout), getApplicationContext());
+            return;
+        }
+        this.doubleBackToExitPressedOnce = true;
+
+        Helper.showToast(getResources().getString(R.string.toast_exit), getApplicationContext());
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce = false;
+            }
+        }, 2000);
     }
 
 }

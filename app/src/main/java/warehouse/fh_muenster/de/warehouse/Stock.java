@@ -58,8 +58,6 @@ public class Stock extends AppCompatActivity {
         setupDrawer();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-
-
     }
 
     private class StockAllItemsTask extends AsyncTask<Integer, Integer, HashMap<String, Article>> {
@@ -107,11 +105,6 @@ public class Stock extends AppCompatActivity {
     private void printTable() {
         TableLayout table = (TableLayout) findViewById(R.id.stock_table_layout);
 
-        // Setzte die Tabellen Überschrift
-        //HashMap<Integer, Article> hm = new HashMap<Integer, Article>();
-        //ServerMockImple server = new ServerMockImple();
-        //hm = server.getAllArticle();
-
         int i = 0;
         for (Map.Entry<String, Article> entry : hm.entrySet()) {
             String articleNr = entry.getKey();
@@ -156,13 +149,6 @@ public class Stock extends AppCompatActivity {
 
         aendernbutton.setText(getResources().getString(R.string.stock_table_head_alter));
 
-        //try {
-        //    aendernbutton.setId(Integer.valueOf(i));
-        //    Log.i("buttonid", i);
-        //} catch (Exception e) {
-        //    Log.i("buttonid", e.getMessage());
-        //}
-
         if (i == "90000") {
             aendernbutton.setText("Test");
         }
@@ -200,7 +186,6 @@ public class Stock extends AppCompatActivity {
             Helper.showToast(getResources().getString(R.string.toast_logout), getApplicationContext());
             return;
         }
-
         this.doubleBackToExitPressedOnce = true;
 
         Helper.showToast(getResources().getString(R.string.toast_exit), getApplicationContext());

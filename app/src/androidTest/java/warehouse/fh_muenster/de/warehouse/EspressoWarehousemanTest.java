@@ -146,6 +146,8 @@ public class EspressoWarehousemanTest {
             onView(withId(R.id.quantity_txt))
                     .perform(typeText("10"), closeSoftKeyboard());
             onView(withId(R.id.button_alter)).perform(click());
+            onView(withText("Menge wirklich ändern?")).check(matches(isDisplayed()));
+            onView(withId(android.R.id.button1)).perform(click());
             intended(hasComponent(Stock.class.getName()));
         } catch (Exception e) {
             e.printStackTrace();

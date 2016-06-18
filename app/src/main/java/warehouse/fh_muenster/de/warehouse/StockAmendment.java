@@ -4,7 +4,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
-import android.os.Handler;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
@@ -24,7 +23,6 @@ import java.util.List;
 
 public class StockAmendment extends AppCompatActivity {
 
-    private boolean doubleBackToExitPressedOnce = false;
     private String id;
     private String storageLocation;
     private String quantity;
