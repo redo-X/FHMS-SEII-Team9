@@ -26,6 +26,11 @@ public class ServerMockImple implements ServerInterface {
             user.setRole(Role.Lagerist);
             return user;
         }
+        else if(employeeNr == 3 && password.equals("geheim")){
+            Employee user = new Employee(3, "geheim");
+            user.setRole(Role.Administrator);
+            return user;
+        }
         else{
             return null;
         }
