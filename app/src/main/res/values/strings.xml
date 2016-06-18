@@ -5,6 +5,13 @@
     <string name="loginActivity_password">Passwort</string>
     <string name="loginActivity_button_login">Login</string>
 
+    <string name="admin_text_headline">Admin</string>
+    <string name="admin_text_change">Neuen Artikel anlegen</string>
+    <string name="admin_hint_code">Artikelcode eingeben</string>
+    <string name="admin_hint_name">Artikelnamen eingeben</string>
+    <string name="admin_hint_location">Lagerort eingeben</string>
+    <string name="admin_button_save">Artikel speichern</string>
+
     <string name="commissioningOverview_table_head_kommissionierungen">Kommissionierungen</string>
     <string name="commissioningOverview_table_head_kommissions_nr">Kommissions Nr.</string>
     <string name="commissioningOverview_table_head_artikelAnzahl">Artikel Anzahl</string>
