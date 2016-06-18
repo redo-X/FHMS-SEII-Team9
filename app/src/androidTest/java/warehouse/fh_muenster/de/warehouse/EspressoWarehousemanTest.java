@@ -1,6 +1,7 @@
 package warehouse.fh_muenster.de.warehouse;
 
 import android.content.Context;
+import android.support.test.espresso.Espresso;
 import android.support.test.espresso.contrib.DrawerActions;
 import android.support.test.espresso.intent.Intents;
 import android.support.test.rule.ActivityTestRule;
@@ -162,8 +163,8 @@ public class EspressoWarehousemanTest {
             onView(withId(R.id.password_txt))
                     .perform(typeText("geheim"), closeSoftKeyboard());
             onView(withId(R.id.login_btn)).perform(click());
-            onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
-            onView(withText("Logout")).perform(click());
+            Espresso.pressBack();
+            Espresso.pressBack();
             intended(hasComponent(LoginActivity.class.getName()));
         } catch (Exception e) {
             e.printStackTrace();
@@ -172,5 +173,44 @@ public class EspressoWarehousemanTest {
         }
     }
 
+    @Test
+    public void testLogoutInStock() {
+        try {
+            Intents.init();
+            onView(withId(R.id.mitarbeiterNr_txt))
+                    .perform(typeText("2"), closeSoftKeyboard());
+            onView(withId(R.id.password_txt))
+                    .perform(typeText("geheim"), closeSoftKeyboard());
+            onView(withId(R.id.login_btn)).perform(click());
+            onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
+            onView(withText("Lagerbestände")).perform(click());
+            Espresso.pressBack();
+            Espresso.pressBack();
+            intended(hasComponent(LoginActivity.class.getName()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            Intents.release();
+        }
+    }
 
+    @Test
+    public void testLogoutInStockFail() {
+        try {
+            Intents.init();
+            onView(withId(R.id.mitarbeiterNr_txt))
+                    .perform(typeText("2"), closeSoftKeyboard());
+            onView(withId(R.id.password_txt))
+                    .perform(typeText("geheim"), closeSoftKeyboard());
+            onView(withId(R.id.login_btn)).perform(click());
+            onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
+            onView(withText("Lagerbestände")).perform(click());
+            Espresso.pressBack();
+            intended(hasComponent(Stock.class.getName()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            Intents.release();
+        }
+    }
 }
