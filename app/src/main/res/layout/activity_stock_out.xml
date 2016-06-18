@@ -52,5 +52,6 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentStart="true"
-        android:text="@string/stockOut_button_report" />
+        android:text="@string/stockOut_button_report"
+        style="?android:attr/borderlessButtonStyle"/>
 </RelativeLayout>

@@ -11,6 +11,7 @@
     android:scaleType="centerCrop"
     android:background="@mipmap/bg2">
 
+
     <EditText
         android:id="@+id/mitarbeiterNr_txt"
         android:layout_width="wrap_content"
@@ -50,7 +51,8 @@
         android:layout_below="@+id/password_txt"
         android:layout_gravity="bottom"
         android:layout_marginTop="52dp"
-        android:text="@string/loginActivity_button_login" />
+        android:text="@string/loginActivity_button_login"
+        style="?android:attr/borderlessButtonStyle"/>
 
     <ImageButton
         android:id="@+id/loginScann_btn"
@@ -59,7 +61,17 @@
         android:layout_alignEnd="@+id/password_txt"
         android:layout_alignRight="@+id/password_txt"
         android:layout_alignTop="@+id/mitarbeiterNr_txt"
-        android:src="@android:drawable/ic_menu_camera" />
+        android:src="@android:drawable/ic_menu_camera"
+        style="?android:attr/borderlessButtonStyle"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Warehouser"
+        android:id="@+id/textView4"
+        android:layout_above="@+id/loginScann_btn"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>

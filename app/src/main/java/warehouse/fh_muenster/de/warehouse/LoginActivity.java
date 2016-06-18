@@ -65,10 +65,16 @@ public class LoginActivity extends AppCompatActivity {
                 // Einlesen der Werte aus der LoginActivity
                 EditText mitarbiterNr_txt = (EditText) findViewById(R.id.mitarbeiterNr_txt);
                 EditText password_tet = (EditText) findViewById(R.id.password_txt);
-                WarehouseApplication myApp = (WarehouseApplication) getApplication();
-                LoginTask login = new LoginTask(v.getContext(), myApp);
-                // Ausführen des Login Vorganges
-                login.execute(mitarbiterNr_txt.getText().toString(), password_tet.getText().toString());
+                if(mitarbiterNr_txt.getText().toString().equals("")){
+                    Helper.showToast("Bitte Login daten eingeben",getApplicationContext());
+                }
+                else {
+                    WarehouseApplication myApp = (WarehouseApplication) getApplication();
+                    LoginTask login = new LoginTask(v.getContext(), myApp);
+                    // Ausführen des Login Vorganges
+                    login.execute(mitarbiterNr_txt.getText().toString(), password_tet.getText().toString());
+                }
+
             }
 
         });

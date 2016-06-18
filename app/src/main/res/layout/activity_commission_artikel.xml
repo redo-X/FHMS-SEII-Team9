@@ -158,7 +158,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/commissionArtikel_table_head_underage" />
+                    android:text="@string/commissionArtikel_table_head_underage"
+                    style="?android:attr/borderlessButtonStyle"/>
 
             </TableRow>
 
@@ -175,7 +176,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/scrollView"
-        android:text="@string/commissionArtikel_table_head_forward" />
+        android:text="@string/commissionArtikel_table_head_forward"
+        style="?android:attr/borderlessButtonStyle"/>
 
     <ImageButton
         android:id="@+id/commission_articel_scann_btn"
@@ -186,6 +188,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/weiter_btn"
-        android:src="@android:drawable/ic_menu_camera" />
+        android:src="@android:drawable/ic_menu_camera"
+        style="?android:attr/borderlessButtonStyle"/>
 
 </RelativeLayout>

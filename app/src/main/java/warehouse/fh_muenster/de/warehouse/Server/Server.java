@@ -54,17 +54,22 @@ public class Server implements ServerInterface {
             request.setPassword(password);
 
             response = executeSoapAction(SESSION_URL, METHOD_NAME, employeeNr, password);
-
-            if (response != null) {
-                int sessionId = Integer.parseInt(response.getPrimitivePropertySafelyAsString("sessionId"));
-                int role = Integer.parseInt(response.getPrimitivePropertySafelyAsString("role"));
-                if (sessionId != 0) {
-                    result = new Employee(employeeNr, sessionId);
-                    result.setRole(Role.fromInt(role));
-                    return result;
-                } else {
-                    return null;
+            int resultCode = Integer.valueOf(((SoapPrimitive) response.getProperty("resultCode")).getValue().toString());
+            if (resultCode == 0) {
+                if (response != null) {
+                    int sessionId = Integer.parseInt(response.getPrimitivePropertySafelyAsString("sessionId"));
+                    int role = Integer.parseInt(response.getPrimitivePropertySafelyAsString("role"));
+                    if (sessionId != 0) {
+                        result = new Employee(employeeNr, sessionId);
+                        result.setRole(Role.fromInt(role));
+                        return result;
+                    } else {
+                        return null;
+                    }
                 }
+            }
+            else {
+                return null;
             }
         } catch (SoapFault e) {
             return null;

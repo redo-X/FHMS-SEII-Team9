@@ -71,7 +71,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Artikle speichern" />
+                    android:text="Artikle speichern"
+                    style="?android:attr/borderlessButtonStyle"/>
             </TableRow>
 
             <TableRow android:layout_marginBottom="15dp">
@@ -79,7 +80,8 @@
                     android:id="@+id/admin_article_scann"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@android:drawable/ic_menu_camera" />
+                    android:src="@android:drawable/ic_menu_camera"
+                    style="?android:attr/borderlessButtonStyle"/>
             </TableRow>
 
         </TableLayout>

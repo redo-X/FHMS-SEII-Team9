@@ -184,6 +184,7 @@ public class CommissioningOverview extends AppCompatActivity {
             annehmen_btn.setText(getResources().getString(R.string.commissioningOverview_button_accept));
         }
         annehmen_btn.setId(i);
+        ;
         if (screen.equals("myCommission")) {
             //Erzeugt den StartenButton Listener
             annehmen_btn.setOnClickListener(new View.OnClickListener() {
