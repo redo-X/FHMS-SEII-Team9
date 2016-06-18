@@ -3,6 +3,7 @@ package warehouse.fh_muenster.de.warehouse;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
+import android.os.SystemClock;
 import android.support.test.espresso.Espresso;
 import android.support.test.espresso.action.ViewActions;
 import android.support.test.espresso.contrib.DrawerActions;
@@ -13,6 +14,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.test.ApplicationTestCase;
 
 import static android.support.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu;
+import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.intent.Intents.intended;
@@ -64,7 +66,7 @@ public class EspressoAdminTest {
             onView(withId(R.id.password_txt))
                     .perform(typeText("geheim"), closeSoftKeyboard());
             onView(withId(R.id.login_btn)).perform(click());
-            intended(hasComponent(CommissioningOverview.class.getName()));
+            intended(hasComponent(AdminActivity.class.getName()));
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -77,18 +79,12 @@ public class EspressoAdminTest {
      */
     @Test
     public void testLoginFail() {
-        try {
-            onView(withId(R.id.mitarbeiterNr_txt))
-                    .perform(typeText("3"), closeSoftKeyboard());
-            onView(withId(R.id.password_txt))
-                    .perform(typeText("Kennwort"), closeSoftKeyboard());
-            onView(withId(R.id.login_btn)).perform(click());
-            onView(withId(R.id.login_btn)).check(matches(isDisplayed()));
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            Intents.release();
-        }
+        onView(withId(R.id.mitarbeiterNr_txt))
+                .perform(typeText("3"), closeSoftKeyboard());
+        onView(withId(R.id.password_txt))
+                .perform(typeText("Kennwort"), closeSoftKeyboard());
+        onView(withId(R.id.login_btn)).perform(click());
+        onView(withId(R.id.login_btn)).check(matches(isDisplayed()));
     }
 
     /**
@@ -96,21 +92,14 @@ public class EspressoAdminTest {
      */
     @Test
     public void testLogoutInAdmin() {
-        try {
-            Intents.init();
+
             onView(withId(R.id.mitarbeiterNr_txt))
                     .perform(typeText("3"), closeSoftKeyboard());
             onView(withId(R.id.password_txt))
                     .perform(typeText("geheim"), closeSoftKeyboard());
             onView(withId(R.id.login_btn)).perform(click());
-            Espresso.pressBack();
-            Espresso.pressBack();
-            intended(hasComponent(LoginActivity.class.getName()));
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            Intents.release();
-        }
+            pressBack();
+            pressBack();
     }
 
     /**
@@ -125,8 +114,8 @@ public class EspressoAdminTest {
             onView(withId(R.id.password_txt))
                     .perform(typeText("geheim"), closeSoftKeyboard());
             onView(withId(R.id.login_btn)).perform(click());
-            Espresso.pressBack();
-            intended(hasComponent(Stock.class.getName()));
+            pressBack();
+            intended(hasComponent(AdminActivity.class.getName()));
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

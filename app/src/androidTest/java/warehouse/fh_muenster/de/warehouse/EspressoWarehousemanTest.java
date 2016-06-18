@@ -65,18 +65,12 @@ public class EspressoWarehousemanTest {
      */
     @Test
     public void testLoginFail() {
-        try {
-            onView(withId(R.id.mitarbeiterNr_txt))
-                    .perform(typeText("2"), closeSoftKeyboard());
-            onView(withId(R.id.password_txt))
-                    .perform(typeText("falschesPasswort"), closeSoftKeyboard());
-            onView(withId(R.id.login_btn)).perform(click());
-            onView(withId(R.id.login_btn)).check(matches(isDisplayed()));
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            Intents.release();
-        }
+        onView(withId(R.id.mitarbeiterNr_txt))
+                .perform(typeText("2"), closeSoftKeyboard());
+        onView(withId(R.id.password_txt))
+                .perform(typeText("falschesPasswort"), closeSoftKeyboard());
+        onView(withId(R.id.login_btn)).perform(click());
+        onView(withId(R.id.login_btn)).check(matches(isDisplayed()));
     }
 
     /**
