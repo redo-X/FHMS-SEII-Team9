@@ -16,14 +16,11 @@ import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static android.support.test.espresso.action.ViewActions.typeText;
-import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.intent.Intents.intended;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static android.support.test.espresso.matcher.ViewMatchers.withTagKey;
-import static android.support.test.espresso.matcher.ViewMatchers.withTagValue;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
 /**
@@ -37,15 +34,15 @@ public class EspressoWarehousemanTest {
     public ActivityTestRule<LoginActivity> mActivityRule = new ActivityTestRule<>(
             LoginActivity.class);
 
-    /**
-     * Checks if the Login is successful
-     */
     @Before
     public void setMock() {
         Config.setIsMock(true);
         Config.setIsMockScanner(true);
     }
 
+    /**
+     * Testet, ob der Login für den Lageristen funktioniert.
+     */
     @Test
     public void testLogin() {
         try {
@@ -64,27 +61,17 @@ public class EspressoWarehousemanTest {
     }
 
     /**
-     * Checks if the Login Fail with wrong user data
+     * Tests, ob der Login für den Lageristen mit einem falschen Kennwort fehlschlägt.
      */
     @Test
     public void testLoginFail() {
-        onView(withId(R.id.mitarbeiterNr_txt))
-                .perform(typeText("2"), closeSoftKeyboard());
-        onView(withId(R.id.password_txt))
-                .perform(typeText("falschesPasswort"), closeSoftKeyboard());
-        onView(withId(R.id.login_btn)).perform(click());
-        onView(withId(R.id.login_btn)).check(matches(isDisplayed()));
-    }
-
-    /**
-     * Checks if the Scanner start by clicking the Scanner Button
-     */
-    @Test
-    public void testScanner() {
         try {
-            Intents.init();
-            onView(withId(R.id.loginScann_btn)).perform(click());
-            intended(hasComponent(Scanner.class.getName()));
+            onView(withId(R.id.mitarbeiterNr_txt))
+                    .perform(typeText("2"), closeSoftKeyboard());
+            onView(withId(R.id.password_txt))
+                    .perform(typeText("falschesPasswort"), closeSoftKeyboard());
+            onView(withId(R.id.login_btn)).perform(click());
+            onView(withId(R.id.login_btn)).check(matches(isDisplayed()));
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -92,6 +79,9 @@ public class EspressoWarehousemanTest {
         }
     }
 
+    /**
+     * Testet, ob der Lagerist über das Menu auf die Lagerbestände zugreifen kann.
+     */
     @Test
     public void testStartStock() {
         try {
@@ -111,6 +101,9 @@ public class EspressoWarehousemanTest {
         }
     }
 
+    /**
+     * Testet, ob der Lagerist auf einen Artikel in den Lagerbeständen klicken kann.
+     */
     @Test
     public void testStartStockAmendment() {
         try {
@@ -131,6 +124,9 @@ public class EspressoWarehousemanTest {
         }
     }
 
+    /**
+     * Testet, ob der Lagerist eine Menge ändern kann.
+     */
     @Test
     public void testAddStockQuantity() {
         try {
@@ -156,25 +152,9 @@ public class EspressoWarehousemanTest {
         }
     }
 
-    @Test
-    public void testLogout() {
-        try {
-            Intents.init();
-            onView(withId(R.id.mitarbeiterNr_txt))
-                    .perform(typeText("2"), closeSoftKeyboard());
-            onView(withId(R.id.password_txt))
-                    .perform(typeText("geheim"), closeSoftKeyboard());
-            onView(withId(R.id.login_btn)).perform(click());
-            Espresso.pressBack();
-            Espresso.pressBack();
-            intended(hasComponent(LoginActivity.class.getName()));
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            Intents.release();
-        }
-    }
-
+    /**
+     * Testet, ob man sich mit einem Doppelklick auf die Zurück-Taste aus den Lagerbeständen ausloggen kann.
+     */
     @Test
     public void testLogoutInStock() {
         try {
@@ -196,6 +176,9 @@ public class EspressoWarehousemanTest {
         }
     }
 
+    /**
+     * Testet, ob sich der Nutzer bei einfachem Klick auf die Zurück-Taste nicht auslogt.
+     */
     @Test
     public void testLogoutInStockFail() {
         try {
