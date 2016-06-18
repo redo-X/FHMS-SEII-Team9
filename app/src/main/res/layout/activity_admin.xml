@@ -7,7 +7,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="warehouse.fh_muenster.de.warehouse.AdminActivity">
+    tools:context="warehouse.fh_muenster.de.warehouse.AdminActivity"
+    android:background="@mipmap/bg2">
 
     <ScrollView
         android:layout_width="wrap_content"

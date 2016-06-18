@@ -9,7 +9,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="warehouse.fh_muenster.de.warehouse.LoginActivity"
     android:scaleType="centerCrop"
-    >
+    android:background="@mipmap/bg2">
 
     <EditText
         android:id="@+id/mitarbeiterNr_txt"
