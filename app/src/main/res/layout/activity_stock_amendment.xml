@@ -76,23 +76,29 @@
             android:id="@+id/input_storageLocation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/input_quantity"
-            android:layout_alignStart="@+id/input_quantity"
+            android:layout_marginTop="23dp"
+            android:scrollHorizontally="false"
+            android:singleLine="true"
+            android:text="100000"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_marginRight="34dp"
+            android:layout_marginEnd="34dp"
             android:layout_below="@+id/headline_txt"
-            android:layout_marginTop="22dp"
-            android:text="0"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:layout_alignRight="@+id/headline_txt"
+            android:layout_alignEnd="@+id/headline_txt" />
 
         <TextView
             android:id="@+id/input_quantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/input_storageLocation"
-            android:layout_marginTop="10dp"
-            android:text="0"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:scrollHorizontally="false"
+            android:singleLine="true"
+            android:text="100000"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_alignBaseline="@+id/menge_txt"
+            android:layout_alignBottom="@+id/menge_txt"
+            android:layout_alignLeft="@+id/input_storageLocation"
+            android:layout_alignStart="@+id/input_storageLocation" />
 
     </RelativeLayout>
 

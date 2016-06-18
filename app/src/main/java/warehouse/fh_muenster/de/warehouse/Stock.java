@@ -11,6 +11,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +22,6 @@ import android.widget.ListView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -112,7 +112,6 @@ public class Stock extends AppCompatActivity {
         //ServerMockImple server = new ServerMockImple();
         //hm = server.getAllArticle();
 
-
         int i = 0;
         for (Map.Entry<String, Article> entry : hm.entrySet()) {
             String articleNr = entry.getKey();
@@ -156,6 +155,17 @@ public class Stock extends AppCompatActivity {
         final Button aendernbutton = new Button(this);
 
         aendernbutton.setText(getResources().getString(R.string.stock_table_head_alter));
+
+        //try {
+        //    aendernbutton.setId(Integer.valueOf(i));
+        //    Log.i("buttonid", i);
+        //} catch (Exception e) {
+        //    Log.i("buttonid", e.getMessage());
+        //}
+
+        if (i == "90000") {
+            aendernbutton.setText("Test");
+        }
 
         aendernbutton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {

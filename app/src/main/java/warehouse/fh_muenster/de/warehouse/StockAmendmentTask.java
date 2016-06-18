@@ -21,16 +21,13 @@ class StockAmendmentTask extends AsyncTask<String, Integer, Boolean> {
         String menge = params[1];
         String sessionId = params[2];
 
-
-        if(Config.isMock()){
+        if (Config.isMock()) {
             ServerMockImple server = new ServerMockImple();
-            server.commitStock(Integer.valueOf(sessionId),artikelCode, Integer.valueOf(menge));
-        }
-        else{
+            server.commitStock(Integer.valueOf(sessionId), artikelCode, Integer.valueOf(menge));
+        } else {
             Server server = new Server();
-            server.commitStock(Integer.valueOf(sessionId),artikelCode, Integer.valueOf(menge));
+            server.commitStock(Integer.valueOf(sessionId), artikelCode, Integer.valueOf(menge));
         }
-
 
         return true;
     }

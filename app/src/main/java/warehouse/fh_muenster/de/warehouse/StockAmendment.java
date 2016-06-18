@@ -17,7 +17,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -32,6 +31,7 @@ public class StockAmendment extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
     private String mActivityTitle;
+    private boolean finishActivity = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,11 +61,20 @@ public class StockAmendment extends AppCompatActivity {
                     int menge = Integer.valueOf(neueMengeString);
                     StockAmendmentTask stockAmendmentTask = new StockAmendmentTask();
                     WarehouseApplication myApp = (WarehouseApplication) getApplication();
-                    stockAmendmentTask.execute(id, String.valueOf(menge),String.valueOf(myApp.getEmployee().getSessionId()));
+                    stockAmendmentTask.execute(id, String.valueOf(menge), String.valueOf(myApp.getEmployee().getSessionId()));
+
+                    Intent newActivity = new Intent(getApplicationContext(), Stock.class);
+                    startActivity(newActivity);
+
+                    Helper.showToast(getResources().getString(R.string.toast_stockAmendment_success), getApplicationContext());
+                    finishActivity = true;
                 } catch (NumberFormatException e) {
                     Helper.showToast(getResources().getString(R.string.toast_commissionArtikel_wrongInput), getApplicationContext());
+                    finishActivity = false;
                 }
-
+                if (finishActivity) {
+                    finish();
+                }
             }
         });
 

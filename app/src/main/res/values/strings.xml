@@ -38,7 +38,7 @@
     <string name="stock_table_head_amount">Menge</string>
     <string name="stock_table_head_alter">Ändern</string>
 
-    <string name="stockAmendment_button_alter">Ändern</string>
+    <string name="stockAmendment_button_alter">Menge ändern</string>
     <string name="stockAmendment_text_headline">Menge ändern für Artikel</string>
     <string name="stockAmendment_text_storageLocation">Lagerort</string>
     <string name="stockAmendment_text_quantity">Menge</string>
@@ -69,6 +69,7 @@
     <string name="toast_commissionArtikel_wrongInput">Eingegebene Menge ist nicht gültig</string>
     <string name="toast_commissionArtikel_wrongQuantity">Zu kommissionierende Mengen stimmen nicht überein</string>
     <string name="toast_stockOut_success">Fehlmenge gemeldet</string>
+    <string name="toast_stockAmendment_success">Menge erfolgreich geändert</string>
 
     <string name="dialog_wait">Bitte warten</string>
     <string name="dialog_load">Daten werden geladen</string>

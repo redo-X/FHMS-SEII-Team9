@@ -158,7 +158,7 @@ public class ServerMockImple implements ServerInterface {
             article.setStorageLocation(location);
             aHashMap.put(String.valueOf(articelCode), article);
         }
-        Article article = new Article("T-A", "Tolle Beschreibung des Artikels");
+        Article article = new Article("90000", "Tolle Beschreibung des Artikels");
         article.setQuantityOnStock(100);
         article.setQuantityOnCommit(20);
         article.setStorageLocation(new StorageLocation("Lager5"));
