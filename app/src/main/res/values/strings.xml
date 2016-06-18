@@ -59,6 +59,7 @@
     <string name="toast_exit">Bitte drücken Sie erneut die Zurück Taste um die App zu beenden</string>
     <string name="toast_commissionExitNotAllowed">Kommission kann nicht abgebrochen werden</string>
     <string name="toast_wrongInput">Ungültige Eingabe</string>
+    <string name="toast_canceled">Abgebrochen</string>
 
     <string name="toast_loginActivity_loginSuccess">Eingeloggt als</string>
     <string name="toast_loginActivity_loginFail">Login fehlgeschlagen</string>
@@ -74,4 +75,8 @@
     <string name="dialog_wait">Bitte warten</string>
     <string name="dialog_load">Daten werden geladen</string>
     <string name="dialog_article">Artikel werden geladen</string>
+
+    <string name="dialog_box_question">Menge wirklich ändern?</string>
+    <string name="dialog_box_ok">Bestätigen</string>
+    <string name="dialog_box_cancel">Abbrechen</string>
 </resources>
