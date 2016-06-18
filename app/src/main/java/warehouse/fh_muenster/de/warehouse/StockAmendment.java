@@ -63,7 +63,7 @@ public class StockAmendment extends AppCompatActivity {
                 try {
                     int menge = Integer.valueOf(neueMengeString);
                     int iquantity = Integer.valueOf(quantity);
-                    if ((menge != 0) && (iquantity + menge >= 0)){
+                    if ((menge != 0) && (iquantity + menge >= 0)) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
                         builder.setMessage(getResources().getString(R.string.dialog_box_question))
                                 .setPositiveButton(getResources().getString(R.string.dialog_box_ok), dialogClickListener)
@@ -118,41 +118,11 @@ public class StockAmendment extends AppCompatActivity {
         }
     };
 
-
-    //@Override
-    //public void onBackPressed() {
-    //    Intent newActivity = new Intent(getApplicationContext(), Stock.class);
-    //    StockAmendment.this.startActivity(newActivity);
-    //     finish();
-    //}
-
     @Override
     public void onBackPressed() {
-        if (doubleBackToExitPressedOnce) {
-            super.onBackPressed();
-            return;
-        }
-
-        this.doubleBackToExitPressedOnce = true;
-        Helper.showToast(getResources().getString(R.string.toast_exit), getApplicationContext());
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                doubleBackToExitPressedOnce = false;
-
-                WarehouseApplication myApp = (WarehouseApplication) getApplication();
-
-                LogoutTask logoutTask = new LogoutTask();
-                logoutTask.execute(myApp.getEmployee().getSessionId());
-
-                myApp.setOpenCommissionsMap(null);
-                myApp.setPickerCommissionsMap(null);
-                myApp.setEmployee(null);
-
-                Helper.showToast(getResources().getString(R.string.toast_logout), getApplicationContext());
-            }
-        }, 2000);
+        Intent newActivity = new Intent(getApplicationContext(), Stock.class);
+        StockAmendment.this.startActivity(newActivity);
+        finish();
     }
 
     //Drawer Menu
