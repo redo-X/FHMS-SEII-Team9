@@ -32,17 +32,17 @@ public class Server implements ServerInterface {
      * The WSDL URL.
      */
 
-
-
+// Laptop
+/*
     private static final String SESSION_URL = "http://10.70.28.97:8080/WarehouseService-ejb-1.0.0/SessionManagementIntegration";
     private static final String COMMISSION_URL = "http://10.70.28.97:8080/WarehouseService-ejb-1.0.0/CommissionServiceIntegration";
     private static final String ARTICLE_URL = "http://10.70.28.97:8080/WarehouseService-ejb-1.0.0/ArticleManagementIntegration";
-
-            /*
+*/
+    //Cluster
     private static final String SESSION_URL = "http://10.60.64.39:8080/WarehouseService-ejb-1.0.0/SessionManagementIntegration";
     private static final String COMMISSION_URL = "http://10.60.64.39:8080/WarehouseService-ejb-1.0.0/CommissionServiceIntegration";
     private static final String ARTICLE_URL = "http://10.60.64.39:8080/WarehouseService-ejb-1.0.0/ArticleManagementIntegration";
-*/
+
     @Override
     public Employee login(int employeeNr, String password) {
         Employee result = null;

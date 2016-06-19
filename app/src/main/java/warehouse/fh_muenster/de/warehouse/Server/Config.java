@@ -4,7 +4,7 @@ package warehouse.fh_muenster.de.warehouse.Server;
  * Created by Thomas on 17.06.2016.
  */
 public class Config {
-    static boolean isMock = true;
+    static boolean isMock = false;
     static boolean isMockScanner = false;
     public static boolean isMock() {
         return isMock;
