@@ -39,7 +39,8 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentStart="true"
-            android:text="@string/stockAmendment_button_alter" />
+            android:text="@string/stockAmendment_button_alter"
+            style="?android:attr/borderlessButtonStyle"/>
 
         <TextView
             android:id="@+id/headline_txt"
