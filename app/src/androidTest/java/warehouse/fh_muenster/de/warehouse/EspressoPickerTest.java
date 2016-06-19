@@ -48,7 +48,7 @@ public class EspressoPickerTest {
             LoginActivity.class);
 
     /**
-     * Checks if the Login is successful
+     * Testet, ob der Login funktioniert.
      */
     @Before
     public void setMock(){
@@ -58,7 +58,7 @@ public class EspressoPickerTest {
 
     @Test
     /**
-     * Testet ob der Login erfolgreich durchgeführt werden kann
+     * Testet, ob der Login erfolgreich durchgeführt werden kann.
      */
     public void testLogin(){
         try {
@@ -79,7 +79,7 @@ public class EspressoPickerTest {
     }
 
     /**
-     * Testet ob der Login mit falschen benutzerdaten fehlschlägt
+     * Testet, ob der Login mit falschen Benutzerdaten fehlschlägt.
      */
     @Test
     public void testLoginFail(){
@@ -93,7 +93,7 @@ public class EspressoPickerTest {
 
 
     /**
-     * Testet ob die Scanner Activity startet
+     * Testet, ob die Scanner-Activity startet.
      */
     @Test
     public void testScanner(){
@@ -112,7 +112,7 @@ public class EspressoPickerTest {
 
     @Test
     /**
-     * Testet ob eine Kommission mit der Id 90000 gestartet wird
+     * Testet, ob eine Kommission mit der Id 90000 gestartet wird.
      */
     public void testStartCommission(){
         try {
@@ -135,7 +135,7 @@ public class EspressoPickerTest {
 
     @Test
     /**
-     * Testet ob durch das Menü die offenen Kommissionen angzeigt werden können
+     * Testet, ob durch das Menü die offenen Kommissionen angzeigt werden können.
      */
     public void testOpenCommissions(){
         try {
@@ -158,7 +158,7 @@ public class EspressoPickerTest {
     }
     @Test
     /**
-     * Testet ob der Logout über das Menü funktionoert
+     * Testet, ob der Logout über das Menü funktioniert.
      */
     public void testLogout(){
         try {
@@ -183,7 +183,7 @@ public class EspressoPickerTest {
 
     @Test
     /**
-     * Testet ob eine kommission komplett durchgeführt werden kann
+     * Testet, ob eine Kommission komplett durchgeführt werden kann.
      */
     public void testStartCommissionFinished(){
         try {
@@ -209,7 +209,7 @@ public class EspressoPickerTest {
     }
     @Test
     /**
-     * Testet ob eine Kommission angenommen werden kann
+     * Testet, ob eine Kommission angenommen werden kann.
      */
     public void testAcceptCommission(){
             onView(withId(R.id.mitarbeiterNr_txt))
@@ -226,7 +226,7 @@ public class EspressoPickerTest {
 
     @Test
     /**
-     * Testet ob eine Fehlmenge übsendert werden kann
+     * Testet, ob eine Fehlmenge übersendet werden kann.
      */
     public void testStockOut(){
         try {

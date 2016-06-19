@@ -60,6 +60,10 @@ public class Stock extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
     }
 
+    /**
+     * AsyncTask
+     * Holt sich alle Lagerbestände vom Server.
+     */
     private class StockAllItemsTask extends AsyncTask<Integer, Integer, HashMap<String, Article>> {
         ProgressDialog dialog;
         HashMap<String, Article> hm2;
@@ -102,6 +106,9 @@ public class Stock extends AppCompatActivity {
         }
     }
 
+    /**
+     * Erstellt eine Tabelle mit allen Lagerbeständen.
+     */
     private void printTable() {
         TableLayout table = (TableLayout) findViewById(R.id.stock_table_layout);
 
@@ -114,12 +121,12 @@ public class Stock extends AppCompatActivity {
             TableRow row = new TableRow(this);
 
             // Erzeugen der Spalten
-            TextView kommessionSpalte = createTextView(String.valueOf(articleNr));
+            TextView lagerSpalte = createTextView(String.valueOf(articleNr));
             TextView artikelSpalte = createTextView(String.valueOf(article.getQuantityOnStock()));
             Button annehmen_btn = createButton(articleNr);
 
             //Hinzufügen der Spalten
-            row.addView(kommessionSpalte);
+            row.addView(lagerSpalte);
             row.addView(artikelSpalte);
             row.addView(annehmen_btn);
             row = designRow(i, row);
@@ -144,6 +151,11 @@ public class Stock extends AppCompatActivity {
         return row;
     }
 
+    /**
+     * Erstellt je einen Button pro Artikel zum Ändern der Menge.
+     * @param i
+     * @return
+     */
     private Button createButton(final String i) {
         final Button aendernbutton = new Button(this);
 
@@ -166,10 +178,12 @@ public class Stock extends AppCompatActivity {
                 finish();
             }
         });
-
         return aendernbutton;
     }
 
+    /**
+     * Bei Doppelklick auf die Zurücktaste wird der Nutzer ausgelogt.
+     */
     @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
@@ -200,7 +214,9 @@ public class Stock extends AppCompatActivity {
         }, 2000);
     }
 
-    //Drawer Menu
+    /**
+     * Erstellt das Menü zur Navigation für den Lageristen.
+     */
     private void addDrawerItems() {
         final WarehouseApplication myApp = (WarehouseApplication) getApplication();
 

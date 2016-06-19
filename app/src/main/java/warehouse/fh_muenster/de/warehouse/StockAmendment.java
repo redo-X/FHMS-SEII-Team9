@@ -53,6 +53,12 @@ public class StockAmendment extends AppCompatActivity {
 
         final Button alter_button = (Button) findViewById(R.id.button_alter);
 
+        /**
+         * Der Button erstellt eine Dialogbox, mit der bestätigt werden muss, ob die eingegebene Menge
+         * wirklich geändert werden soll.
+         * Ungültige Eingaben wie eine 0, gar keine Eingabe oder eine negative Zahl, die mehr Artikel
+         * abziehen würde, als vorhanden sind, werden abgefangen.
+         */
         alter_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 EditText neueMenge_txt = (EditText) findViewById(R.id.quantity_txt);
@@ -79,14 +85,17 @@ public class StockAmendment extends AppCompatActivity {
         mListLayout = (ListView) findViewById(R.id.navList);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mActivityTitle = getTitle().toString();
-
         addDrawerItems();
         setupDrawer();
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
     }
 
+    /**
+     * Erstellt eine Dialogbox, die bestätigt werden muss, wenn man die Menge ändern möchte.
+     * Bei Erfolg wird die StockAmendmentTask-Klasse aufgerufen, Artikelcode, neue Menge und
+     * sessionID übergeben und wieder die allgemeine Lagerübersicht aufgerufen.
+     */
     DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialog, int which) {
@@ -116,6 +125,10 @@ public class StockAmendment extends AppCompatActivity {
         }
     };
 
+    /**
+     * Bei einem Klick auf die Zurücktaste wird der aktuelle Artikel geschlossen und wieder die
+     * allgemeine Lagerübersicht geöffnet.
+     */
     @Override
     public void onBackPressed() {
         Intent newActivity = new Intent(getApplicationContext(), Stock.class);
@@ -123,7 +136,9 @@ public class StockAmendment extends AppCompatActivity {
         finish();
     }
 
-    //Drawer Menu
+    /**
+     * Erstellt das Menü zur Navigation für den Lageristen.
+     */
     private void addDrawerItems() {
         final WarehouseApplication myApp = (WarehouseApplication) getApplication();
 

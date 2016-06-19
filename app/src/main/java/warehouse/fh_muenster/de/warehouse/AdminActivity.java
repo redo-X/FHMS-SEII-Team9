@@ -19,7 +19,7 @@ public class AdminActivity extends AppCompatActivity {
     private boolean doubleBackToExitPressedOnce = false;
 
     /**
-     * Liefert das Ergeniss vom Scanner
+     * Liefert das Ergebnis vom Scanner
      * @param requestCode gescannter Code
      */
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -103,7 +103,7 @@ public class AdminActivity extends AppCompatActivity {
         }
 
         /**
-         * Zeigt einn Toast abhänig vom Result an
+         * Zeigt einen Toast abhängig vom Result an
          * @param result
          */
         @Override

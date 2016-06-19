@@ -22,8 +22,8 @@
 
     <string name="commissionArtikel_table_head_input">Blub</string>
     <string name="commissionArtikel_table_head_Quantity">Artikelmenge</string>
-    <string name="commissionArtikel_table_head_itemCode">Artikel Code:</string>
-    <string name="commissionArtikel_table_head_itemName">Artikel Name:</string>
+    <string name="commissionArtikel_table_head_itemCode">Artikel-Code:</string>
+    <string name="commissionArtikel_table_head_itemName">Artikel-Name:</string>
     <string name="commissionArtikel_table_head_stockLocation">Lagerort:</string>
     <string name="commissionArtikel_table_head_targetQuantity">Soll Menge:</string>
     <string name="commissionArtikel_table_head_commissionQuantity">Kommissionsmenge:</string>

@@ -296,7 +296,7 @@ public class CommissionArtikel extends AppCompatActivity {
     private class ProgressUpdateTask extends AsyncTask<Integer, Integer, Boolean> {
 
         /**
-         * Updated die Kommission
+         * Aktualisiert die Kommission
          * @param params 2 Integer, 1: Position des Artikels in der Kommission, 2: Kommissionierte Menge
          * @return
          */

@@ -12,6 +12,12 @@ import warehouse.fh_muenster.de.warehouse.Server.ServerMockImple;
  */
 class StockAmendmentTask extends AsyncTask<String, Integer, Boolean> {
 
+    /**
+     * Schickt eine Menge, die zur aktuellen Menge eines bestimmten Artikels hinzugefügt oder
+     * abgezogen werden soll, an den Server.
+     * Positive Werte werden hinzugefügt; negative Werte werden abgezogen.
+     * @param params 0: Artikelcode, 1: geänderte Menge, 2: sessionID
+     */
     @Override
     protected Boolean doInBackground(String... params) {
         if (params.length != 3) {
@@ -28,7 +34,6 @@ class StockAmendmentTask extends AsyncTask<String, Integer, Boolean> {
             Server server = new Server();
             server.commitStock(Integer.valueOf(sessionId), artikelCode, Integer.valueOf(menge));
         }
-
         return true;
     }
 
@@ -37,6 +42,7 @@ class StockAmendmentTask extends AsyncTask<String, Integer, Boolean> {
         if (result != null) {
 
         } else {
+
         }
     }
 }

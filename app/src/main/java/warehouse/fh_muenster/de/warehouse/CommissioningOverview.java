@@ -50,7 +50,7 @@ public class CommissioningOverview extends AppCompatActivity {
     private boolean finishActivity;
 
 
-    // Wenn Activity wieder in Vordergrund kommt
+    // Aktualisert, wenn Activity wieder in den Vordergrund kommt.
     @Override
     public void onResume() {
         super.onResume();
@@ -99,7 +99,7 @@ public class CommissioningOverview extends AppCompatActivity {
     }
 
     /**
-     * Fügt der Tabelle dynamisch neue Zeilen hinzu
+     * Fügt der Tabelle dynamisch neue Zeilen hinzu.
      */
     private void printTable(int anzahlKommessionen, String screen) {
         TableLayout table = (TableLayout) findViewById(R.id.table_layout);
@@ -126,12 +126,12 @@ public class CommissioningOverview extends AppCompatActivity {
             TableRow row = new TableRow(this);
 
             // Erzeugen der Spalten
-            TextView kommessionSpalte = createTextView(String.valueOf(kommissionsNr));
+            TextView kommissionSpalte = createTextView(String.valueOf(kommissionsNr));
             TextView artikelSpalte = createTextView(String.valueOf(menge));
             Button annehmen_btn = createButton(kommissionsNr, screen);
 
             //Hinzufügen der Spalten
-            row.addView(kommessionSpalte);
+            row.addView(kommissionSpalte);
             row.addView(artikelSpalte);
             row.addView(annehmen_btn);
             row = designRow(i, row);
@@ -141,7 +141,7 @@ public class CommissioningOverview extends AppCompatActivity {
     }
 
     /**
-     * Löscht alle zeilen aus der Tabelle
+     * Löscht alle Zeilen aus der Tabelle.
      */
     private void removeTableRows() {
         TableLayout table = (TableLayout) findViewById(R.id.table_layout);
@@ -152,7 +152,7 @@ public class CommissioningOverview extends AppCompatActivity {
     }
 
     /**
-     * Erzeugt die Benötigten TextView´s für die Tabelle
+     * Erzeugt die benötigten TextView´s für die Tabelle.
      * @param text
      * @return
      */
@@ -162,7 +162,7 @@ public class CommissioningOverview extends AppCompatActivity {
         return spalte;
     }
 
-    // Färbt die Zeilen der Tabelle ein
+    // Färbt die Zeilen der Tabelle ein.
     private TableRow designRow(int i, TableRow row) {
         if (i % 2 == 0) {
             row.setBackgroundColor(0x50CCCCCC);
@@ -254,7 +254,11 @@ public class CommissioningOverview extends AppCompatActivity {
         }, 2000);
     }
 
-    //Drawer Menu
+    /**
+     * Erstellt das Menü zur Navigation.
+     * Lageristen können zugreifen auf: "Meine Kommissionen", "Offene Kommissionen", "Lagerbestände", "Logout"
+     * Kommissionierer können zugreifen auf: "Meine Kommissionen", "Offene Kommissionen", "Logout"
+     */
     private void addDrawerItems() {
         final WarehouseApplication myApp = (WarehouseApplication) getApplication();
         final Employee employee = myApp.getEmployee();

@@ -11,7 +11,7 @@ import warehouse.fh_muenster.de.warehouse.Server.Server;
 class AllocateCommissionTask extends AsyncTask<Integer, Integer, Boolean> {
 
     /**
-     * Weißt einem Mitarbiter eine Kommission zu
+     * Weist einem Mitarbiter eine Kommission zu
      * @param params 3 Integer werte, 1: Id der kommission, 2: Id des Mitarbeiters, 3: Session Id
      * @return
      */

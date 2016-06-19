@@ -13,7 +13,7 @@ public class Article {
     private StorageLocation storageLocation;
 
     /**
-     * Prüft ob der Letzte Article der Kommission erreicht wurde
+     * Prüft, ob der letzte Article der Kommission erreicht wurde
      * @param allArticleCount Gesamtanzahl aller Artikle der Kommission
      * @param currentArticleCount Aktuelle Artikle position
      * @return true wenn letzer Article sonst false
@@ -27,7 +27,7 @@ public class Article {
     }
 
     /**
-     * Prüft ob die Kommissionierte menge der zu Kommissionierenden Menge entspricht oder 0
+     * Prüft, ob die kommissionierte Menge der zu kommissionierenden Menge entspricht oder 0
      * @param quantitiyCommited Kommisionierte menge
      * @return true wenn 0 oder menge passend Kommissioniert sonst false
      */
