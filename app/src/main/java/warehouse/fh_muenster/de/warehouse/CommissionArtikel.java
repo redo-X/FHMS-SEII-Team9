@@ -37,7 +37,7 @@ public class CommissionArtikel extends AppCompatActivity {
 
 
     /**
-     * run if the Scanner returns a value
+     * Liefer das Ergeiss des Scanners
      * @param requestCode
      * @param resultCode
      * @param data
@@ -64,7 +64,9 @@ public class CommissionArtikel extends AppCompatActivity {
         Scanner.setRun(0);
     }
 
-
+    /**
+     * Verhindet das der Display sich dreht
+     */
     @Override
     public void onResume(){
         super.onResume();
@@ -84,12 +86,10 @@ public class CommissionArtikel extends AppCompatActivity {
         TextView ueberschrift = (TextView) findViewById(R.id.commission_id_label);
         TextView artikelanzahlLabel = (TextView) findViewById(R.id.commission_artikelAnzahl_label);
 
-        //final Server server = new Server();
-        // set PickerCommission with global saved data.
         myApp = (WarehouseApplication) getApplication();
         this.commission = myApp.getPickerCommissionById(id);
 
-        // Starts the Scanner
+        // Startet den Scanner
         scan_btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -102,14 +102,13 @@ public class CommissionArtikel extends AppCompatActivity {
 
         weiter_btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                // Get the commission quantity of the picker
+                // Speichert die Kommissionierte Menge
                 EditText kommissionierteMenge_txt = (EditText) findViewById(R.id.commission_artikel_artikel_commession_edit);
                 String kommissionierteMengeString = kommissionierteMenge_txt.getText().toString();
                 try{
                     Vibrator v = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
                     int kommissionierteMenge = Integer.valueOf(kommissionierteMengeString);
-                    // if quantity 0 or the exact quantity to commit
-                    //if(kommissionierteMenge == article.getQuantityOnCommit() || kommissionierteMenge == 0){
+                    // Wenn die richtige Menge oder 0 Kommissioniert wurde
                     if(article.isCommissionQuantityOkay(kommissionierteMenge)){
                         if(kommissionierteMenge != 0){
                             committedArticle++;
@@ -124,6 +123,7 @@ public class CommissionArtikel extends AppCompatActivity {
                         }
                         else{
                             double progress = committedArticle / artikelGesamt;
+                            // Entfernen der kommission wenn fertig
                             if(progress == 1){
                                 myApp.getPickerCommissionsMap().remove(commission.getId());
                             }
@@ -131,7 +131,6 @@ public class CommissionArtikel extends AppCompatActivity {
                             v.vibrate(50);
                             ProgressUpdateTask updateTask = new ProgressUpdateTask();
                             updateTask.execute(article.getPositionCommissionId(),kommissionierteMenge);
-                            //updateTask.execute(0);
                             EndCommissionTask endCommissionTask = new EndCommissionTask();
                             endCommissionTask.execute(0);
                             finish();
@@ -139,7 +138,6 @@ public class CommissionArtikel extends AppCompatActivity {
                         double progress = committedArticle / artikelGesamt;
                         commission.setProgress(progress);
                         ProgressUpdateTask updateTask = new ProgressUpdateTask();
-                        //updateTask.execute(article.getPositionCommissionId(),kommissionierteMenge);
                         setTableRowsInvisible();
                     }
                     else{
@@ -170,12 +168,19 @@ public class CommissionArtikel extends AppCompatActivity {
 
     }
 
+    /**
+     * Setzen des nächsten Artikels
+     * @param kommissionierteMenge_txt
+     */
     private void setNextArticle(EditText kommissionierteMenge_txt){
         artikelZaehler++;
         kommissionierteMenge_txt.setText("");
         setTableRows();
     }
 
+    /**
+     * Erstellen der Tabelle
+     */
     private void setTableRows(){
         Article artikelArray[];
         artikelArray = mapToArray();
@@ -207,8 +212,10 @@ public class CommissionArtikel extends AppCompatActivity {
 
     }
 
+    /**
+     * Setzt tabellen Zeilen die vorm Scann nicht benötigt werden unsichtbar
+     */
     private void setTableRowsInvisible(){
-        TextView artikelanzahlLabel = (TextView) findViewById(R.id.commission_artikelAnzahl_label);
         TextView lagerbestand = (TextView) findViewById(R.id.commission_artikel_artikel_soll);
         TextView kommissionsMenge = (TextView) findViewById(R.id.commission_artikel_artikel_commession);
         TextView sollMengeLabel = (TextView) findViewById(R.id.comission_articel_soll_menge_label);
@@ -218,7 +225,6 @@ public class CommissionArtikel extends AppCompatActivity {
         Button weiter = (Button) findViewById(R.id.weiter_btn);
         ImageButton scan  = (ImageButton) findViewById(R.id.commission_articel_scann_btn);
 
-        //artikelanzahlLabel.setVisibility(View.INVISIBLE);
         lagerbestand.setVisibility(View.INVISIBLE);
         kommissionsMenge.setVisibility(View.INVISIBLE);
         sollMengeLabel.setVisibility(View.INVISIBLE);
@@ -230,6 +236,9 @@ public class CommissionArtikel extends AppCompatActivity {
 
     }
 
+    /**
+     * Setzt Zeilen in der Tabelle sichtbar die nach dem Scann benötigt werden
+     */
     private void setTableRowsVisible(){
         TextView artikelanzahlLabel = (TextView) findViewById(R.id.commission_artikelAnzahl_label);
         TextView lagerbestand = (TextView) findViewById(R.id.commission_artikel_artikel_soll);
@@ -254,6 +263,10 @@ public class CommissionArtikel extends AppCompatActivity {
 
     }
 
+    /**
+     * Wandelt die Artikel HashMap in ein Array um
+     * @return Artikel array
+     */
     private Article[] mapToArray(){
         Article articleArray[] = new Article[artikelGesamt];
         int i = 0;
@@ -264,15 +277,10 @@ public class CommissionArtikel extends AppCompatActivity {
         }
         return articleArray;
     }
-/*
-    private void showToast(String text){
-        Context context = getApplicationContext();
-        int duration = Toast.LENGTH_SHORT;
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
-    }
-*/
 
+    /**
+     * Verhindert die Drehung des Displays
+     */
     private void disableOrientationChangeInRunningConfig() {
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
@@ -287,6 +295,11 @@ public class CommissionArtikel extends AppCompatActivity {
 
     private class ProgressUpdateTask extends AsyncTask<Integer, Integer, Boolean> {
 
+        /**
+         * Updated die Kommission
+         * @param params 2 Integer, 1: Position des Artikels in der Kommission, 2: Kommissionierte Menge
+         * @return
+         */
         @Override
         protected Boolean doInBackground(Integer... params) {
 
@@ -326,15 +339,6 @@ public class CommissionArtikel extends AppCompatActivity {
             }
             return null;
         }
-        /*
-        if(Config.isMock()){
-                        ServerMockImple server = new ServerMockImple();
-                    }
-                    else{
-                        Server server = new Server();
-                    }
-         */
-
 
         @Override
         protected void onPostExecute(Boolean result) {
@@ -361,12 +365,16 @@ public class CommissionArtikel extends AppCompatActivity {
                     getResources().getString(R.string.dialog_load), true);
         }
 
+        /**
+         * Holt alle Artikel zu einer Kommission
+         * @param params
+         * @return HashMap mit allen Artikeln
+         */
         @Override
         protected HashMap<Integer, Article> doInBackground(Integer... params) {
             if (params.length != 0) {
                 return null;
             }
-
             if(Config.isMock()){
                 ServerMockImple server = new ServerMockImple();
                 map = server.getPositionToCommission(myApp.getEmployee().getSessionId(),commissionId);
@@ -408,6 +416,11 @@ public class CommissionArtikel extends AppCompatActivity {
 
     private class EndCommissionTask extends AsyncTask<Integer, Integer, Boolean> {
 
+        /**
+         * Beendet die Kommission
+         * @param params
+         * @return
+         */
         @Override
         protected Boolean doInBackground(Integer... params) {
 

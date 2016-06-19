@@ -18,6 +18,10 @@ public class AdminActivity extends AppCompatActivity {
 
     private boolean doubleBackToExitPressedOnce = false;
 
+    /**
+     * Liefert das Ergeniss vom Scanner
+     * @param requestCode gescannter Code
+     */
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
@@ -43,13 +47,14 @@ public class AdminActivity extends AppCompatActivity {
         article_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Einlesen der Werte
                 EditText articleCodeTxt = (EditText) findViewById(R.id.admin_article_code);
                 String articleCode = articleCodeTxt.getText().toString();
                 EditText articleNameTxt = (EditText) findViewById(R.id.admin_article_name);
                 String articleName = articleNameTxt.getText().toString();
                 EditText articleLagerortTxt = (EditText) findViewById(R.id.admin_article_lagerort);
                 String articleLagerort = articleLagerortTxt.getText().toString();
-
+                // Speichern des Artikels
                 SaveArticleTask saveArticleTask = new SaveArticleTask();
                 saveArticleTask.execute(articleCode, articleName, articleLagerort);
             }
@@ -58,6 +63,7 @@ public class AdminActivity extends AppCompatActivity {
         scanner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Starten des Scanners
                 Intent i = new Intent(getApplicationContext(), Scanner.class);
                 startActivityForResult(i, 1);
             }
@@ -66,11 +72,13 @@ public class AdminActivity extends AppCompatActivity {
     }
 
 
-
-
-
     private class SaveArticleTask extends AsyncTask<String, Integer, Boolean> {
 
+        /**
+         * Speichert einen neuen Artikel auf dem Server
+         * @param params 3 Strings, 1: Artikelcode, 2: Artikelname, 3: Lagerort
+         * @return Liefert im Erfolgsfall true, sonst false
+         */
         @Override
         protected Boolean doInBackground(String... params) {
 
@@ -94,6 +102,10 @@ public class AdminActivity extends AppCompatActivity {
             }
         }
 
+        /**
+         * Zeigt einn Toast abhänig vom Result an
+         * @param result
+         */
         @Override
         protected void onPostExecute(Boolean result) {
             if (result == true) {
@@ -104,6 +116,9 @@ public class AdminActivity extends AppCompatActivity {
             }
         }
 
+        /**
+         * Setzt die Eingabefelder leer
+         */
         private void removeInput(){
             EditText articleCodeTxt = (EditText) findViewById(R.id.admin_article_code);
             EditText articleNameTxt = (EditText) findViewById(R.id.admin_article_name);

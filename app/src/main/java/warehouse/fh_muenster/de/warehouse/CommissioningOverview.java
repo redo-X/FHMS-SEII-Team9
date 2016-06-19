@@ -140,7 +140,9 @@ public class CommissioningOverview extends AppCompatActivity {
         }
     }
 
-    // Löscht alle zeilen aus der Tabelle
+    /**
+     * Löscht alle zeilen aus der Tabelle
+     */
     private void removeTableRows() {
         TableLayout table = (TableLayout) findViewById(R.id.table_layout);
         int rows = table.getChildCount() - 2;
@@ -151,7 +153,6 @@ public class CommissioningOverview extends AppCompatActivity {
 
     /**
      * Erzeugt die Benötigten TextView´s für die Tabelle
-     *
      * @param text
      * @return
      */
@@ -184,7 +185,7 @@ public class CommissioningOverview extends AppCompatActivity {
             annehmen_btn.setText(getResources().getString(R.string.commissioningOverview_button_accept));
         }
         annehmen_btn.setId(i);
-
+        annehmen_btn.setBackgroundColor(Color.TRANSPARENT);
         if (screen.equals("myCommission")) {
             //Erzeugt den StartenButton Listener
             annehmen_btn.setOnClickListener(new View.OnClickListener() {

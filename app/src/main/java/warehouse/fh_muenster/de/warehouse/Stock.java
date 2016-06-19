@@ -148,6 +148,7 @@ public class Stock extends AppCompatActivity {
         final Button aendernbutton = new Button(this);
 
         aendernbutton.setText(getResources().getString(R.string.stock_table_head_alter));
+        aendernbutton.setBackgroundColor(Color.TRANSPARENT);
 
         if (i == "90000") {
             aendernbutton.setText("Test");

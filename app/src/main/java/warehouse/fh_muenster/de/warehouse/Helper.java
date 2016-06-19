@@ -8,6 +8,11 @@ import android.widget.Toast;
  */
 public class Helper {
 
+    /**
+     * Zeigt einen Toast an
+     * @param text Anzuzeigender Text
+     * @param context
+     */
     public static void showToast(String text, Context context){
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
