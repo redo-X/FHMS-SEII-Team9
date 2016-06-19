@@ -65,6 +65,10 @@ public class AdminActivity extends AppCompatActivity {
         });
     }
 
+
+
+
+
     private class SaveArticleTask extends AsyncTask<String, Integer, Boolean> {
 
         @Override
@@ -94,10 +98,21 @@ public class AdminActivity extends AppCompatActivity {
         protected void onPostExecute(Boolean result) {
             if (result == true) {
                 Helper.showToast("Artikle erfolgreich gespeichert!", getApplicationContext());
+                removeInput();
             } else {
                 Helper.showToast("Fehler Artikle konnte nicht gespeichert werden!", getApplicationContext());
             }
         }
+
+        private void removeInput(){
+            EditText articleCodeTxt = (EditText) findViewById(R.id.admin_article_code);
+            EditText articleNameTxt = (EditText) findViewById(R.id.admin_article_name);
+            EditText articleLagerortTxt = (EditText) findViewById(R.id.admin_article_lagerort);
+            articleCodeTxt.setText("");
+            articleNameTxt.setText("");
+            articleLagerortTxt.setText("");
+        }
+
     }
 
     @Override
